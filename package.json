@@ -1,0 +1,44 @@
+{
+  "private": true,
+  "homepage": "https://create-react-app-redux.now.sh",
+  "scripts": {
+    "deploy": "now && now alias",
+    "start": "react-scripts start",
+    "now-start": "serve -s ./build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "precommit": "pretty-quick --staged"
+  },
+  "devDependencies": {
+    "prettier": "2.6.2",
+    "react-scripts": "5.0.1"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.7.1",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.6.1",
+    "@mui/material": "^5.6.1",
+    "axios": "^0.26.1",
+    "connected-react-router": "4.5.0",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "react-jwt": "^1.1.4",
+    "react-redux": "8.0.0",
+    "react-router": "6.3.0",
+    "react-router-dom": "6.3.0",
+    "redux": "4.1.2",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "2.4.1",
+    "sanitize.css": "11.0.1",
+    "serve": "10.1.2",
+    "socket.io-client": "^2.3.0"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
