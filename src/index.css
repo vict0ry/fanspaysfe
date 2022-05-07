@@ -11,6 +11,10 @@ a {
     width: 20px;
 }
 
+.flag-select__option__label {
+    color: black;
+}
+
 ::-webkit-scrollbar-track {
     background-color: transparent;
 }

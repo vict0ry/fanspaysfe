@@ -16,20 +16,25 @@ import MoreIcon from '@mui/icons-material/MoreVert'
 import { Link } from 'react-router-dom'
 import { SearchInput } from '../components/SearchInput'
 import { useDispatch, useSelector } from 'react-redux'
-import { logoutUser } from '../modules/user.action'
+import { logoutUser } from '../redux/user.action'
+import LocalAtmIcon from '@mui/icons-material/LocalAtm'
+import { useTranslation } from 'react-i18next'
+import { NotificationsMenu } from './components/NotificationsMenu'
+import { MessagesMenu } from './components/MessagesMenu'
 
 
-export default function PrimarySearchAppBar() {
+export default function SearchBar() {
   let connected = false
   const dispatch = useDispatch()
   const loggedUser = useSelector(state => state.user)
+  const { t } = useTranslation()
 
 
   useEffect(() => {
     const io = require('socket.io-client')
     const socket = io('http://localhost:3003')
     socket.on('connect', () => {
-      console.log(socket.id) // "G5p5..."
+      console.log(socket.id)
     })
     socket.emit('pikachu', 'ahoj')
     socket.emit('setup', loggedUser)
@@ -172,46 +177,35 @@ export default function PrimarySearchAppBar() {
           <SearchInput />
           <Box sx={{ flexGrow: 1 }} />
           {!loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-            <Link to={'/register'}>Register</Link>
+            <Link to={'/register'}>{t('NAVBAR.REGISTER')}</Link>
           </Box> : ''}
+
           <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-            <Link to={'/'}>Home Page</Link>
+            <Link to={'/'}>{t('NAVBAR.HOME_PAGE')}</Link>
           </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-            <Link to={'/profile'}>Profile</Link>
+            <Link to={'/profile'}>{t('NAVBAR.PROFILE')}</Link>
           </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-            <Link to={'/messages'}>Messages</Link>
-          </Box>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-            <Link to={'/users'}>Users</Link>
+            <Link to={'/users'}>{t('NAVBAR.USERS')}</Link>
           </Box>
           {!loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-            <Link to={'/login'}>login</Link>
+            <Link to={'/login'}>{t('NAVBAR.LOGIN')}</Link>
+          </Box> : ''}
+          {loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+            <LocalAtmIcon /> {loggedUser.userData.balance} Kč
           </Box> : ''}
           {loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
             <div onClick={() => {
               localStorage.clear()
               dispatch(logoutUser())
-            }}>logout
+            }}>{t('NAVBAR.LOGOUT')}
             </div>
           </Box> : ''}
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <MessagesMenu />
+            <NotificationsMenu />
             <IconButton
               size="large"
               edge="end"

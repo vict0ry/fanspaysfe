@@ -1,0 +1,52 @@
+{
+  "BE_THE_FIRST_ONE": "Buďte první",
+  "COMMON": {
+    "BUY": "Koupit",
+    "SEND": "Odeslat",
+    "SIGNUP": "Registrace",
+    "SIGNIN": "Přihlasit se",
+    "ADD_PRODUCT": "Přidat produkt",
+    "ADD_STORY": "Přidat přispěvek",
+    "EDIT": "Editovat",
+    "SEND_MESSAGE": "Odeslat zpravu",
+    "STORIES": "Přispěvky",
+    "SHOP": "Obchod",
+    "SEARCH": "Hledání",
+    "SAVE": "Uložit",
+    "FOLLOWERS": "Sledující",
+    "MESSAGE": "Zprava",
+    "FOLLOWING": "Sleduju",
+    "PRICE_SETTINGS": "Nastavení cen",
+    "ABOUT_ME": "O mně",
+    "PARAMETERS": "Parametry",
+    "DESCRIPTION": "Popis",
+    "LAST_ACTIVE": "Naposledy aktivní",
+    "SUBSCRIBE_TO_SEE": "Chcete-li zobrazit příspěvky uživatelů, přihlaste se k odběru",
+    "NOTHING_HERE_YET": "Tady zatím nic neni...",
+    "USER_PRODUCTS": "Produkty uživatele",
+    "UNSUBSCRIBE": "Odhlasit odběr",
+    "SEND_TIP": "Poslat dýško"
+  },
+  "PROFILE": {
+    "TIP_AMOUNT": "Výše dýška"
+  },
+  "NAVBAR": {
+    "HOME_PAGE": "Hlavní stranka",
+    "PROFILE": "Můj profil",
+    "MESSAGES": "Zpravy",
+    "USERS": "Uživatele",
+    "LOGIN": "Přihlášení",
+    "LOGOUT": "Odhlásit se",
+    "REGISTER": "Registrace"
+  },
+  "REGISTER": {
+    "FIRST_NAME": "Jméno",
+    "LAST_NAME": "Příjmení",
+    "LOGIN": "Login",
+    "EMAIL": "E-mail",
+    "USERNAME": "Uživatelské jméno",
+    "PASSWORD": "Heslo",
+    "REPEAT_PASSWORD": "Zopakujte heslo",
+    "ALREADY_HAVE_ACCOUNT": "Již u nás mate svůj účet"
+  }
+}

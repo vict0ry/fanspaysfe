@@ -14,13 +14,15 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { connect, useSelector } from 'react-redux'
-import { registerUser } from '../modules/user.action'
+import { registerUser } from '../redux/user.action'
 import { useNavigate } from 'react-router'
+import { useTranslation } from 'react-i18next'
 
 
 const theme = createTheme()
 
 function Register(props) {
+  const { t } = useTranslation()
   const loggedUser = useSelector(state => state.user)
   let navigate = useNavigate()
 
@@ -53,7 +55,7 @@ function Register(props) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            {t('COMMON.SIGNUP')}
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -64,7 +66,7 @@ function Register(props) {
                   required
                   fullWidth
                   id="firstName"
-                  label="First Name"
+                  label={t('REGISTER.FIRST_NAME')}
                   autoFocus
                 />
               </Grid>
@@ -73,7 +75,7 @@ function Register(props) {
                   required
                   fullWidth
                   id="lastName"
-                  label="Last Name"
+                  label={t('REGISTER.LAST_NAME')}
                   name="lastName"
                   autoComplete="family-name"
                 />
@@ -83,8 +85,8 @@ function Register(props) {
                   required
                   fullWidth
                   id="username"
-                  label="User Name"
                   name="username"
+                  label={t('REGISTER.USERNAME')}
                   autoComplete="username"
                 />
               </Grid>
@@ -93,7 +95,7 @@ function Register(props) {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label={t('REGISTER.EMAIL')}
                   name="email"
                   autoComplete="email"
                 />
@@ -103,7 +105,7 @@ function Register(props) {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label={t('REGISTER.PASSWORD')}
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -114,7 +116,7 @@ function Register(props) {
                   required
                   fullWidth
                   name="repeat-password"
-                  label="Repeat password"
+                  label={t('REGISTER.REPEAT_PASSWORD')}
                   type="password"
                   id="repeat-password"
                   autoComplete="repeat-password"
@@ -137,9 +139,9 @@ function Register(props) {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                Already have an account?
+                {t('REGISTER.ALREADY_HAVE_ACCOUNT')}?
                 <Link style={{ marginLeft: 3, cursor: 'pointer' }} to={'/login'} variant="body2">
-                  Sign in
+                  {t('COMMON.SIGNIN')}
                 </Link>
               </Grid>
             </Grid>

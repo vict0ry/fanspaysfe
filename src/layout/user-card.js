@@ -2,11 +2,13 @@ import * as React from 'react'
 import { styled } from '@mui/material/styles'
 import Card from '@mui/material/Card'
 import CardMedia from '@mui/material/CardMedia'
-import CardActions from '@mui/material/CardActions'
 import IconButton from '@mui/material/IconButton'
+import CardActions from '@mui/material/CardActions'
+import SendTipModal from '../pages/profile/modals/SendTipModal'
+import { SubscribeButton } from '../pages/profile/components/SubscribeButton'
 import Button from '@mui/material/Button'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import Link from '@mui/material/Link'
+import { t } from 'i18next'
 
 styled((props) => {
   const { expand, ...other } = props
@@ -18,24 +20,28 @@ styled((props) => {
     duration: theme.transitions.duration.shortest
   })
 }))
+const avatar = (image) => `http://localhost:3003` + image
 export default function ProfileCard({ profileUser }) {
-  const loggedUser = useSelector(state => state.user)
-
-  const isFollowing = () => {
-    return profileUser?.followers?.includes(loggedUser?.userData._id)
-  }
 
   return (
-    <Card sx={{ maxWidth: 345, maxHeight: 420 }}>
+    <Card sx={{ maxWidth: 250, maxHeight: 420, height: 'fit-content' }}>
       <CardMedia
         component="img"
         height="250"
-        image="https://demo.youdate.website/content/cache/stock/men/conor-sexton-434549-unsplash.jpg/4ac4b30045e9ba84f647a3d1a98d6284.jpg"
+        image={avatar(profileUser?.profilePic)}
         alt="Paella dish"
       />
 
-      <CardActions sx={{ justifyContent: 'space-around', display: 'flex' }} disableSpacing>
-        <Link to={'/messages/' + profileUser?._id}><Button variant={'outlined'}>Send message</Button></Link>
+      <CardActions sx={{ justifyContent: ' space-around', display: ' flex', flexDirection: ' column' }} disableSpacing>
+        <div>
+          <Link to={'/messages/' + profileUser?._id}>
+            <Button
+              variant={'outlined'}>{t('COMMON.SEND_MESSAGE')}
+            </Button>
+          </Link>
+          <SendTipModal recipient={profileUser} />
+        </div>
+        <SubscribeButton />
       </CardActions>
     </Card>
   )

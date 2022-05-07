@@ -18,9 +18,7 @@ export const chatsLoaded = (data) => {
 
 export const loadChatMessages = (chatId) => {
   return dispatch => {
-    debugger;
     return axios.get('/api/chats/' + chatId + '/messages').then(data => {
-      debugger;
         return dispatch(messagesLoaded({
           data: data.data,
           chatId

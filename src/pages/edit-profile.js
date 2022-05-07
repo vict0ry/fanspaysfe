@@ -9,6 +9,10 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
+import { UserPricesFormTab } from '../components/userPricesFormTab'
+import { UserParametersTab } from '../components/UserParametersTab'
+import { t } from 'i18next'
+import { AddCreditCard } from '../components/AddCreditCard'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props
@@ -42,15 +46,14 @@ export function EditProfile(props) {
   useEffect(() => {
     console.log('herewego')
     setUserForm(loggedUser.userData)
-  },[])
-  debugger;
+  }, [])
   const username = useParams().username || loggedUser.userData._id
   const handleFormChange = (evt) => {
-    const value = evt.target.value;
+    const value = evt.target.value
     setUserForm({
       ...userForm,
       [evt.target.name]: value
-    });
+    })
   }
 
   function a11yProps(index) {
@@ -79,7 +82,23 @@ export function EditProfile(props) {
       console.log('done')
     })
   }
+  const [state, setState] = useState({ img: 'https://demo.youdate.website/content/cache/stock/men/conor-sexton-434549-unsplash.jpg/4ac4b30045e9ba84f647a3d1a98d6284.jpg' })
 
+
+  function handleImageChange(event) {
+    setState({ img: URL.createObjectURL(event.target.files[0]) })
+    const formData = new FormData()
+    formData.append('croppedImage', event.target.files[0])
+
+    axios({
+      method: 'post',
+      url: '/api/users/profilePicture',
+      data: formData,
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }, () => {
+      console.log('avatr uploaded')
+    })
+  }
 
   return <div>
     <Box sx={{ 'mt': 2 }}>
@@ -93,10 +112,10 @@ export function EditProfile(props) {
           aria-label="Vertical tabs example"
           sx={{ borderRight: 1, borderColor: 'divider' }}
         >
-          <Tab label="About me" {...a11yProps(0)} />
-          <Tab label="Security" {...a11yProps(1)} />
-          <Tab label="Packages" {...a11yProps(2)} />
-          <Tab label="Gallery" {...a11yProps(3)} />
+          <Tab label={t('COMMON.ABOUT_ME')} {...a11yProps(0)} />
+          <Tab label={t('COMMON.PRICE_SETTINGS')} {...a11yProps(1)} />
+          <Tab label={t('COMMON.PARAMETERS')} {...a11yProps(2)} />
+          <Tab label={t('CREDIT_CARDS')} {...a11yProps(3)} />
 
         </Tabs>
         <div>
@@ -105,7 +124,7 @@ export function EditProfile(props) {
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={12}>
                   <img style={{ width: 100, marginRight: 20 }}
-                       src="https://demo.youdate.website/content/cache/stock/men/conor-sexton-434549-unsplash.jpg/4ac4b30045e9ba84f647a3d1a98d6284.jpg"
+                       src={state.img}
                        alt="" />
                   <Button
                     variant="contained"
@@ -113,6 +132,7 @@ export function EditProfile(props) {
                   >
                     Upload avatar
                     <input
+                      onChange={handleImageChange}
                       type="file"
                       hidden
                     />
@@ -176,18 +196,18 @@ export function EditProfile(props) {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Save
+                {t('COMMON.SAVE')}
               </Button>
             </Box>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            Item Two
+            <UserPricesFormTab />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            Item Three
+            <UserParametersTab />
           </TabPanel>
           <TabPanel value={value} index={3}>
-            Gallery
+            <AddCreditCard />
           </TabPanel>
         </div>
 

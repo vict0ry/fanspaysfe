@@ -22,9 +22,18 @@
     "@mui/material": "^5.6.1",
     "axios": "^0.26.1",
     "connected-react-router": "4.5.0",
+    "i18next": "^21.6.16",
+    "i18next-browser-languagedetector": "^6.1.4",
+    "i18next-http-backend": "^1.4.0",
+    "i18next-scanner": "^3.1.0",
     "react": "18.0.0",
+    "react-bell-chat": "^1.0.51",
+    "react-comments-section": "^1.0.7",
+    "react-credit-cards": "^0.8.3",
     "react-dom": "18.0.0",
+    "react-i18next": "^11.16.7",
     "react-jwt": "^1.1.4",
+    "react-leaf-polls": "^1.1.2",
     "react-redux": "8.0.0",
     "react-router": "6.3.0",
     "react-router-dom": "6.3.0",
@@ -33,7 +42,8 @@
     "redux-thunk": "2.4.1",
     "sanitize.css": "11.0.1",
     "serve": "10.1.2",
-    "socket.io-client": "^2.3.0"
+    "socket.io-client": "^2.3.0",
+    "swagger-ui-express": "^4.3.0"
   },
   "browserslist": [
     ">0.2%",

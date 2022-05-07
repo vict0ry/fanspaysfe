@@ -8,10 +8,10 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { loadChatMessages, loadChats, sendMessage } from '../../modules/messages.action'
+import { loadChatMessages, loadChats, sendMessage } from '../../redux/messages.action'
 import axios from 'axios'
 import { SocketContext } from '../../context/socket'
-import ImageIcon from '@mui/icons-material/Image'
+import { t } from 'i18next'
 
 const messageElement = React.createRef()
 
@@ -29,26 +29,24 @@ export function Messages() {
   }, [])
 
   const onNotificationRecieve = () => {
-    alert('notif reciived')
-    debugger;
     dispatch(loadChatMessages(selectedChatId)).then(scrollMessagesDown)
   }
 
 
   const meStyle = {
-    float: 'right',
-    display: 'inline-block',
     background: '#d1e3ff',
     padding: '20px',
     borderRadius: '20px',
+    display: 'flex',
+    flexDirection: 'column',
     textAlign: 'right'
   }
   const sendersStyle = {
-    float: 'left',
-    display: 'inline-block',
     background: '#e2e2e2',
     padding: '20px',
     borderRadius: '20px',
+    display: 'flex',
+    flexDirection: 'column',
     textAlign: 'left'
   }
 
@@ -58,21 +56,11 @@ export function Messages() {
         dispatch(loadChats())
       })
     }
-    // if (!chatList?.map(i => i.users).find(i => {
-    //   return i[0]._id === userid
-    // }) && userid) {
-    //   axios.post('/api/chats/', {
-    //     users: [userid]
-    //   }).then(chat => {
-    //     console.log(chat)
-    //   })
-    // }
   }, [])
 
   function handleAddMessage() {
     dispatch(sendMessage(userMessage)).then(scrollMessagesDown)
     setUserMessage('')
-    debugger;
     socket.emit('notification received', selectedChatId)
   }
 
@@ -87,17 +75,39 @@ export function Messages() {
     setUserMessage(value)
   }
 
+  const isSender = (i) => {
+    return i.sender?._id === loggedUser.userData?._id
+  }
+
   return (
     <div style={{ display: 'flex', marginTop: 20 }}>
       <FolderList />
       <Paper>
+        <strong style={{ padding: 20 }}>Chat with Victor Eliot</strong>
         <Box ref={messageElement} style={{ maxHeight: '300px', minWidth: '100vh', overflow: 'auto' }}>
-          <div style={{ display: 'inline-flex', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
             {selectedChatMessages.length ? selectedChatMessages.map((i, id) => {
-              return <div key={id} style={i.sender?._id === loggedUser.userData?._id ? meStyle : sendersStyle}>
-                {i.content}
-              </div>
-            }) : <strong style={{ padding: '20px' }}>No messages yet</strong>}
+              return (
+                <div>
+                  <div style={isSender(i) ? { display: 'flex', flexDirection: 'row-reverse', marginBottom: 10 } : {
+                    display: 'flex',
+                    flexDirection: 'row'
+                  }}
+                       className="userPlusMessage">
+                    <div className="user">
+                      <img
+                        style={{ width: 60, borderRadius: '100%', margin: '0 10px' }}
+                        src="https://demo.youdate.website/content/cache/stock/men/conor-sexton-434549-unsplash.jpg/4ac4b30045e9ba84f647a3d1a98d6284.jpg"
+                        alt="" />
+                    </div>
+                    <div key={id} style={isSender(i) ? meStyle : sendersStyle}>
+                      {i.content}
+                      <span style={{ fontSize: '12px', color: 'gray' }}>06.00 AM</span>
+                    </div>
+                  </div>
+                </div>
+              )
+            }) : <strong style={{ padding: '20px' }}>{t('COMMON.NOTHING_HERE_YET')}</strong>}
           </div>
 
         </Box>

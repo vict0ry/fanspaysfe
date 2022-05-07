@@ -7,6 +7,15 @@ import Box from '@mui/material/Box'
 import CardHeader from '@mui/material/CardHeader'
 import { Divider } from '@mui/material'
 import { Link } from 'react-router-dom'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import LinkIcon from '@mui/icons-material/Link'
+import DateRangeIcon from '@mui/icons-material/DateRange'
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+import ScaleIcon from '@mui/icons-material/Scale'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import HeightIcon from '@mui/icons-material/Height'
+import MonitorWeightIcon from '@mui/icons-material/MonitorWeight'
+import { useTranslation } from 'react-i18next'
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props
@@ -20,46 +29,48 @@ const ExpandMore = styled((props) => {
 }))
 
 export default function AboutCard(props) {
-  const fullName = props.user.profileUser?.firstName + ' ' + props.user.profileUser?.lastName
+  const fullName = props.user?.profileUser?.firstName + ' ' + props?.user?.profileUser?.lastName
+  const { t } = useTranslation()
 
   return (<div>
-      <Card sx={{ maxWidth: '1fr' }}>
-        <Link to={'/edit'} style={{ padding: 10, float: 'right', color: 'blue', cursor: 'pointer' }}>Editovat</Link>
-        <CardHeader title={fullName}>
-
-        </CardHeader>
+      <Card>
+        <Link to={'/edit'}
+              style={{ padding: 10, float: 'right', color: 'blue', cursor: 'pointer' }}>{t('COMMON.EDIT')}</Link>
+        <CardHeader subheader={'@' + props?.user?.profileUser?.username} subtitle={'ahoj'} title={fullName} />
         <CardContent>
-          <div>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Box sx={{ display: 'inline-flex', flexDirection: 'column', textAlign: 'left' }}>
-                <div>
-                  <strong>Sex: </strong>
-                  <p>Secret</p>
-                </div>
-                <div>
-                  <strong>I'm looking for: </strong>
-                  <p>Woman</p>
-                </div>
-              </Box>
-              <Box sx={{ display: 'inline-flex', flexDirection: 'column', textAlign: 'left' }}>
-                <div>
-                  <strong>Status: </strong>
-                  <p>Seeing someone</p>
-                </div>
-                <div>
-                  <strong>Aged: </strong>
-                  <p>25-26</p>
-                </div>
-              </Box>
+          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+            <Box>
+              <DateRangeIcon /> Uživatel se připojil srpen 2021
             </Box>
-          </div>
-          <Divider />
+            <Box>
+              <LocationOnIcon /> Prague, Czech republic
+            </Box>
+            <Box>
+              <LinkIcon /> <Link to={'https://cbdsvet.cz'} style={{ color: 'black' }}>https://cbdsvet.cz</Link>
+            </Box>
+            <Box>
+              <CalendarMonthIcon /> Narozeny 11.05.1993
+            </Box>
+            <Box>
+              <ScaleIcon /> Horoskop : Byk
+            </Box>
+            <Box>
+              <AccessTimeIcon /> {t('COMMON.LAST_ACTIVE')} : 10 minutes
+            </Box>
+            <Box>
+              <MonitorWeightIcon /> Vaha : 50kg
+            </Box>
+            <Box>
+              <HeightIcon /> Vyska : 180cm
+            </Box>
+          </Box>
           <Box sx={{ textAlign: 'left', marginTop: 2 }}>
-            <strong>Description:</strong>
-            <p>{props.user.profileUser?.description}</p>
+            <strong>{t('COMMON.DESCRIPTION')}:</strong>
+            <p>{props.user?.profileUser?.description}</p>
           </Box>
           <Divider />
         </CardContent>
-      </Card></div>
+      </Card>
+  </div>
   )
 }

@@ -12,13 +12,15 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import axios from 'axios'
-import { registerUser } from '../modules/user.action'
+import { registerUser, userLoggedIn } from '../redux/user.action'
+import { decodeToken } from 'react-jwt'
 
 const theme = createTheme()
 const Login = (props) => {
   console.log(props)
+  const dispatch = useDispatch()
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -26,7 +28,9 @@ const Login = (props) => {
     new FormData(event.currentTarget).forEach((value, key) => (data[key] = value))
 
     axios.post('/login', { ...data }).then(token => {
-      registerUser(token)
+      localStorage.setItem('user', token.data)
+      const user = decodeToken(token.data)
+      return dispatch(userLoggedIn(user))
     })
   }
 
