@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal'
@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@mui/material/Grid'
 import axios from 'axios'
 import Card from '@mui/material/Card'
-import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
@@ -33,22 +32,40 @@ export default function AddProductModal() {
   const [products, setProducts] = useState([])
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+  const [state, setState] = useState([])
+  const inputFile = useRef(null)
 
   useEffect(() => {
     axios.get('/api/shop').then(products => {
       setProducts(products.data)
     })
   }, [])
+  let onFileUploadChange = (event) => {
+    const objectUrlImgs = [...event.target.files].map(i => {
+      return {
+        img: i
+      }
+    })
+    setState(objectUrlImgs)
+  }
+
+  const formData = new FormData()
 
   const submitForm = (event) => {
     event.preventDefault()
     const { price, description, name } = event.target.elements
-    const data = {
-      price: Number(price.value),
-      description: description.value,
-      name: name.value
-    }
-    return axios.post('/api/shop', data).then(() => {
+    formData.append('price', price.value)
+    formData.append('description', description.value)
+    formData.append('name', name.value)
+    state.forEach(file => {
+      formData.append('images[]', file.img)
+    })
+    return axios({
+      method: 'post',
+      url: '/api/shop',
+      data: formData,
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }).then(() => {
       console.log('done')
     })
 
@@ -67,12 +84,6 @@ export default function AddProductModal() {
           {products.map(product => {
             return <div>
               <Card sx={{ maxWidth: 345 }}>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image="https://demo.youdate.website/content/cache/stock/men/conor-sexton-434549-unsplash.jpg/4ac4b30045e9ba84f647a3d1a98d6284.jpg"
-                  alt="green iguana"
-                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     {product.name}
@@ -99,9 +110,6 @@ export default function AddProductModal() {
       >
         <Box component="form" noValidate onSubmit={submitForm} sx={style}>
           <Grid item xs={12}>
-            <img style={{ width: 100, marginRight: 20 }}
-                 src="https://demo.youdate.website/content/cache/stock/men/conor-sexton-434549-unsplash.jpg/4ac4b30045e9ba84f647a3d1a98d6284.jpg"
-                 alt="" />
             <Button
               variant="contained"
               component="label"
@@ -109,7 +117,10 @@ export default function AddProductModal() {
               {t('SHOP.ADD_PRODUCT_IMAGE')}
               <input
                 type="file"
-                hidden
+                multiple
+                accept='.png,.jpg,.jpeg'
+                onChange={onFileUploadChange}
+                ref={inputFile} style={{ display: 'none' }}
               />
             </Button>
           </Grid>

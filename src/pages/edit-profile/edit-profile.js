@@ -9,10 +9,12 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import { UserPricesFormTab } from '../components/userPricesFormTab'
-import { UserParametersTab } from '../components/UserParametersTab'
+import { UserPricesFormTab } from '../../components/userPricesFormTab'
+import { UserParametersTab } from '../../components/UserParametersTab'
 import { t } from 'i18next'
-import { AddCreditCard } from '../components/AddCreditCard'
+import { AddCreditCard } from '../../components/AddCreditCard'
+import { EasyDatePicker } from './components/easyDatePicker'
+import { TabContacts } from '../../components/TabContacts'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props
@@ -45,6 +47,7 @@ export function EditProfile(props) {
 
   useEffect(() => {
     console.log('herewego')
+    debugger;
     setUserForm(loggedUser.userData)
   }, [])
   const username = useParams().username || loggedUser.userData._id
@@ -115,7 +118,8 @@ export function EditProfile(props) {
           <Tab label={t('COMMON.ABOUT_ME')} {...a11yProps(0)} />
           <Tab label={t('COMMON.PRICE_SETTINGS')} {...a11yProps(1)} />
           <Tab label={t('COMMON.PARAMETERS')} {...a11yProps(2)} />
-          <Tab label={t('CREDIT_CARDS')} {...a11yProps(3)} />
+          <Tab label={t('PROFILE.CREDIT_CARDS')} {...a11yProps(3)} />
+          <Tab label={t('COMMON.CONTACTS')} {...a11yProps(4)} />
 
         </Tabs>
         <div>
@@ -147,7 +151,7 @@ export function EditProfile(props) {
                     value={userForm.firstName}
                     onChange={handleFormChange}
                     id="firstName"
-                    label="First Name"
+                    label={t('COMMON.FIRST_NAME')}
                     autoFocus
                   />
                 </Grid>
@@ -156,7 +160,7 @@ export function EditProfile(props) {
                     required
                     fullWidth
                     id="lastName"
-                    label="Last Name"
+                    label={t('COMMON.LAST_NAME')}
                     onChange={handleFormChange}
                     value={userForm.lastName}
                     name="lastName"
@@ -168,7 +172,7 @@ export function EditProfile(props) {
                     required
                     fullWidth
                     id="username"
-                    label="User Name"
+                    label={t('COMMON.USERNAME')}
                     value={userForm.username}
                     onChange={handleFormChange}
                     name="username"
@@ -181,13 +185,16 @@ export function EditProfile(props) {
                     required
                     fullWidth
                     id="description"
-                    label="description"
+                    label={t('COMMON.DESCRIPTION')}
                     onChange={handleFormChange}
                     value={userForm.description}
                     name="description"
                     minRows={3}
                     autoComplete="description"
                   />
+                </Grid>
+                <Grid item xs={12}>
+                  <EasyDatePicker />
                 </Grid>
               </Grid>
               <Button
@@ -208,6 +215,9 @@ export function EditProfile(props) {
           </TabPanel>
           <TabPanel value={value} index={3}>
             <AddCreditCard />
+          </TabPanel>
+          <TabPanel value={value} index={4}>
+            <TabContacts />
           </TabPanel>
         </div>
 

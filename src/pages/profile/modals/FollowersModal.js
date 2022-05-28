@@ -72,7 +72,7 @@ export default function FollowersModal({ profileUser }) {
             {t('COMMON.FOLLOWERS')} : (<b>{followersData?.followers?.length}</b>)
           </div>
           <div>
-            {t('COMMON.FOLLOWING')} : (<b>{followersData?.following?.length}</b>)s
+            {t('COMMON.FOLLOWING')} : (<b>{followersData?.following?.length}</b>)
           </div>
         </Paper>
       </div> : ''}

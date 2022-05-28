@@ -17,12 +17,13 @@ import { Users } from './pages/users'
 import axios from 'axios'
 import { persistStore } from 'redux-persist'
 import { socket, SocketContext } from './context/socket'
-import { EditProfile } from './pages/edit-profile'
+import { EditProfile } from './pages/edit-profile/edit-profile'
 import { Home } from './pages/home'
 import { I18nextProvider } from 'react-i18next'
 import i18n from './i18n'
 import { Shop } from './pages/Shop'
 import MainLayout from './layout/main-layout'
+import { Customer } from './pages/customer/customer'
 
 const target = document.querySelector('#root')
 axios.defaults.baseURL = 'http://localhost:3003/'
@@ -45,6 +46,7 @@ root.render(
                 <Route path="profile" element={<Profile />} />
                 <Route path="profile/:username" element={<Profile />} />
                 <Route path="edit" element={<EditProfile />} />
+                <Route path="customer" element={<Customer />} />
                 <Route path="register" element={<Register />} />
                 <Route path="login" element={<Login />} />
                 <Route path="messages" element={<Messages />} />

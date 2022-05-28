@@ -61,8 +61,8 @@ export default function AddPostModal() {
       data: formData,
       headers: { 'Content-Type': 'multipart/form-data' }
     }).then(post => {
-      dispatch(postAdded(post.data));
-      handleClose();
+      dispatch(postAdded(post.data))
+      handleClose()
     })
   }
 
@@ -73,7 +73,6 @@ export default function AddPostModal() {
       }
     })
     setState(objectUrlImgs)
-
   }
   return (
     <div>

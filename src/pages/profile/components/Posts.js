@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import AddPostModal from '../modals/AddPostModal'
 import { useDispatch, useSelector } from 'react-redux'
-import { likePost, loadPosts, removePost } from '../../../redux/posts.action'
+import { commentPost, likePost, loadPosts, removePost } from '../../../redux/posts.action'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { t } from 'i18next'
 import CommentIcon from '@mui/icons-material/Comment'
@@ -17,6 +17,8 @@ import TextField from '@mui/material/TextField'
 import SendTipModal from '../modals/SendTipModal'
 import { MiniUser } from './MiniUser'
 import Box from '@mui/material/Box'
+import SendIcon from '@mui/icons-material/Send'
+import { Comment } from './Comment'
 
 export const Posts = ({ profileUser }) => {
   const dispatch = useDispatch()
@@ -40,8 +42,16 @@ export const Posts = ({ profileUser }) => {
     setLikedPosts(filteredLikedPosts)
     dispatch(likePost(postId))
   }
+
+  const [comment, setComment] = useState('')
+  const handleCommentChange = (e) => {
+    setComment(e.target.value)
+  }
+  const handleAddComment = (postId) => {
+    dispatch(commentPost(postId, comment))
+    setComment('')
+  }
   const [isHidden, setIsHidden] = useState(true)
-  console.log(postMessages)
   return (
     <div>
       <AddPostModal />
@@ -55,9 +65,9 @@ export const Posts = ({ profileUser }) => {
           <Paper sx={{
             ':hover': {
               boxShadow: 5
-            }
-          }}
-                 style={{ padding: 5, marginTop: 10 }}>
+            },
+            padding: '10px 20px', marginTop: 2
+          }}>
             <DeleteIcon onClick={() => handlePostRemove(message._id)}
                         style={{ float: 'right', color: 'gray', cursor: 'pointer' }} />
             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -105,12 +115,25 @@ export const Posts = ({ profileUser }) => {
                 <SendTipModal recipient={profileUser} />
               </div>
             </CardActions>
+            {!message?.likes?.length ? t('BE_THE_FIRST_ONE') : message?.likes?.length + ' likes'} - {message?.comments?.length} comments
+            - 100kč
+            dýško
+            <Box sx={{ marginTop: 5, display: isHidden ? 'none' : 'block', maxHeight: '300px', overflowY: 'scroll' }}>
+              <Divider />
+              {message?.comments?.map(comment => {
+                return <Comment comment={comment} />
+              })}
+            </Box>
             <Divider />
-            {!message?.likes?.length ? t('BE_THE_FIRST_ONE') : message?.likes?.length + ' likes'} - 0 comments - 100kč dýško
-            <div style={{ marginTop: 5, display: isHidden ? 'none' : 'block' }}>
-              Comments :
-              <TextField style={{ width: '100%' }} multiline> </TextField>
-            </div>
+            <Box sx={{ display: 'flex', mt: 2, justifyAlign: 'center', alignItems: 'center' }}>
+              <img style={{ width: '40px', height: '40px', marginRight: '10px', borderRadius: '100%' }}
+                   src={'http://localhost:3003' + loggedUser.userData.profilePic} alt="" />
+              <TextField
+                value={comment}
+                onChange={(e) => handleCommentChange(e)}
+                style={{ width: '100%' }} multiline> </TextField>
+              <SendIcon onClick={() => handleAddComment(message._id)} style={{ marginLeft: '10px' }} />
+            </Box>
           </Paper>
         </div>
       })}

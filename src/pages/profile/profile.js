@@ -12,9 +12,12 @@ import AddProductModal from './modals/AddProductModal'
 import { t } from 'i18next'
 import { SubscribeButton } from './components/SubscribeButton'
 import { loadProfile } from '../../redux/profile.action'
-import FollowersModal from './modals/FollowersModal'
 import { TabPanel } from '../../components/TabPanel'
+import './profile.css'
+import { Link } from 'react-router-dom'
 import { MiniUser } from './components/MiniUser'
+import FollowersModal from './modals/FollowersModal'
+
 
 export const NotSubscribed = () => {
   return <Paper sx={{
@@ -58,53 +61,82 @@ export function Profile(props) {
 
   return <div>
     <Box sx={{ 'mt': 2 }}>
-      <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', gap: 2 }}>
-        <ProfileCard profileUser={user?.profileUser} />
-        <AboutCard user={user} />
-        <div>
-          <FollowersModal profileUser={user?.profileUser} />
-          <Paper style={{
-            padding: 5,
-            justifyContent: 'center',
-            marginTop: 10,
-            display: 'flex',
-            alignItems: 'center',
-            justifyAlign: 'center'
-          }}>
-            <SubscribeButton />
-          </Paper>
-          <Paper style={{
-            padding: 5,
-            justifyContent: 'center',
-            marginTop: 10,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyAlign: 'center'
-          }}>
-            <h3>You may also like :</h3>
-            <div style={{ flexDirection: 'column', marginTop: 10 }}>
-              <MiniUser user={loggedUser.userData} />
-              <MiniUser user={loggedUser.userData} />
-              <MiniUser user={loggedUser.userData} />
-              <MiniUser user={loggedUser.userData} />
-            </div>
-          </Paper>
-        </div>
-        <div></div>
-        <div>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-              <Tab label={t('COMMON.STORIES')} {...a11yProps(0)} />
-              <Tab label={t('COMMON.USER_PRODUCTS')} {...a11yProps(1)} />
-            </Tabs>
+      <Box className="profileGrid" sx={{
+        display: 'grid', gridTemplateColumns: {
+          sm: '1fr 1fr 3fr',
+          xs: '1fr'
+        }, gap: 2
+      }} xs={{
+        display: 'none'
+      }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', color: 'black' }}>
+          <Box style={{ marginBottom: '10px' }}>
+            <MiniUser user={user?.profileUser} />
+            <span style={{ color: 'gray' }}> Balance : 100,-</span>
           </Box>
-          <TabPanel value={value} index={0}>
-            {!isUserSubscribed() ? <NotSubscribed /> : <Posts profileUser={user?.profileUser} />}
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <AddProductModal />
-          </TabPanel>
+          <Link style={{ color: 'black', padding: '5px 0' }} to={'/'}>My page</Link>
+          <Link style={{ color: 'black', padding: '5px 0' }} to={'/edit'}>Edit Profile</Link>
+          <Link style={{ color: 'black', padding: '5px 0' }} to={'/'}>Messages</Link>
+          <Link style={{ color: 'black', padding: '5px 0' }} to={'/'}>Marketplace</Link>
+          <Link style={{
+            color: 'black', padding: '5px 0',
+            ':hover': {
+              background: 'red',
+              display: 'none'
+            }
+          }} to={'/'}>Transactions</Link>
+        </Box>
+        <div>
+          <ProfileCard profileUser={user?.profileUser} />
+          <div style={{marginTop: '10px'}}>
+            <FollowersModal profileUser={user?.profileUser} />
+            <Paper style={{
+              padding: 5,
+              justifyContent: 'center',
+              marginTop: 10,
+              display: 'flex',
+              alignItems: 'center',
+              justifyAlign: 'center'
+            }}>
+              <SubscribeButton />
+            </Paper>
+            <Paper style={{
+              padding: 5,
+              justifyContent: 'center',
+              marginTop: 10,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyAlign: 'center'
+            }}>
+              <h3>You may also like :</h3>
+              <div style={{ flexDirection: 'column', marginTop: 10 }}>
+                <MiniUser user={loggedUser.userData} />
+                <MiniUser user={loggedUser.userData} />
+                <MiniUser user={loggedUser.userData} />
+                <MiniUser user={loggedUser.userData} />
+              </div>
+            </Paper>
+          </div>
+        </div>
+        <div>
+          <AboutCard user={user} />
+          <div>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                <Tab label={t('COMMON.STORIES')} {...a11yProps(0)} />
+                <Tab label={t('COMMON.USER_PRODUCTS')} {...a11yProps(1)} />
+                <Tab label={t('COMMON.USER_VIDEOS')} {...a11yProps(1)} />
+                <Tab label={t('COMMON.USER_DEMANDS')} {...a11yProps(1)} />
+              </Tabs>
+            </Box>
+            <TabPanel value={value} index={0}>
+              {!isUserSubscribed() ? <NotSubscribed /> : <Posts profileUser={user?.profileUser} />}
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <AddProductModal />
+            </TabPanel>
+          </div>
         </div>
 
       </Box>

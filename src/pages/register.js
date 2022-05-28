@@ -66,7 +66,7 @@ function Register(props) {
                   required
                   fullWidth
                   id="firstName"
-                  label={t('REGISTER.FIRST_NAME')}
+                  label={t('COMMON.FIRST_NAME')}
                   autoFocus
                 />
               </Grid>
@@ -75,7 +75,7 @@ function Register(props) {
                   required
                   fullWidth
                   id="lastName"
-                  label={t('REGISTER.LAST_NAME')}
+                  label={t('COMMON.LAST_NAME')}
                   name="lastName"
                   autoComplete="family-name"
                 />
@@ -86,7 +86,7 @@ function Register(props) {
                   fullWidth
                   id="username"
                   name="username"
-                  label={t('REGISTER.USERNAME')}
+                  label={t('COMMON.USERNAME')}
                   autoComplete="username"
                 />
               </Grid>
@@ -95,7 +95,7 @@ function Register(props) {
                   required
                   fullWidth
                   id="email"
-                  label={t('REGISTER.EMAIL')}
+                  label={t('COMMON.EMAIL')}
                   name="email"
                   autoComplete="email"
                 />
@@ -105,7 +105,7 @@ function Register(props) {
                   required
                   fullWidth
                   name="password"
-                  label={t('REGISTER.PASSWORD')}
+                  label={t('COMMON.PASSWORD')}
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -116,7 +116,7 @@ function Register(props) {
                   required
                   fullWidth
                   name="repeat-password"
-                  label={t('REGISTER.REPEAT_PASSWORD')}
+                  label={t('COMMON.REPEAT_PASSWORD')}
                   type="password"
                   id="repeat-password"
                   autoComplete="repeat-password"

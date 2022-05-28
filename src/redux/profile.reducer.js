@@ -1,7 +1,8 @@
-import { PROFILE_LOADED } from './constants'
+import { PROFILE_LOADED, PROFILE_SUBSCRIBED } from './constants'
 
 const initialState = {
-  profile: undefined
+  profile: undefined,
+  subscribed: false
 }
 
 export default (state = initialState, action) => {
@@ -10,6 +11,17 @@ export default (state = initialState, action) => {
       return {
         ...state,
         profile: action.data
+      }
+    case PROFILE_SUBSCRIBED:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          profileUser: {
+            ...state.profile.profileUser,
+            followers: action.followers
+          }
+        }
       }
     default:
       return state

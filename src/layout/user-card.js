@@ -5,10 +5,13 @@ import CardMedia from '@mui/material/CardMedia'
 import IconButton from '@mui/material/IconButton'
 import CardActions from '@mui/material/CardActions'
 import SendTipModal from '../pages/profile/modals/SendTipModal'
-import { SubscribeButton } from '../pages/profile/components/SubscribeButton'
 import Button from '@mui/material/Button'
-import Link from '@mui/material/Link'
 import { t } from 'i18next'
+import { Link } from 'react-router-dom'
+import Box from '@mui/material/Box'
+import ContactSupportIcon from '@mui/icons-material/ContactSupport'
+import Divider from '@mui/material/Divider'
+import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred'
 
 styled((props) => {
   const { expand, ...other } = props
@@ -24,7 +27,7 @@ const avatar = (image) => `http://localhost:3003` + image
 export default function ProfileCard({ profileUser }) {
 
   return (
-    <Card sx={{ maxWidth: 250, maxHeight: 420, height: 'fit-content' }}>
+    <Card sx={{ maxWidth: 250, height: 'fit-content' }}>
       <CardMedia
         component="img"
         height="250"
@@ -33,15 +36,26 @@ export default function ProfileCard({ profileUser }) {
       />
 
       <CardActions sx={{ justifyContent: ' space-around', display: ' flex', flexDirection: ' column' }} disableSpacing>
-        <div>
+        <Box sx={{ marginTop: '5px' }}>
           <Link to={'/messages/' + profileUser?._id}>
             <Button
               variant={'outlined'}>{t('COMMON.SEND_MESSAGE')}
             </Button>
           </Link>
-          <SendTipModal recipient={profileUser} />
-        </div>
-        <SubscribeButton />
+        </Box>
+        <Divider sx={{ pt: 2 }} />
+        <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
+          <SendTipModal recipient={profileUser}>Send tip</SendTipModal>
+        </Box>
+        <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
+          <ContactSupportIcon /> Ask question
+        </Box>
+        <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
+          <ReportGmailerrorredIcon /> Report user
+        </Box>
+        <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
+          <ContactSupportIcon /> Ask question
+        </Box>
       </CardActions>
     </Card>
   )

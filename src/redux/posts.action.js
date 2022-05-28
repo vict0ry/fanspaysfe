@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { POST_ADDED, POSTS_DELETED, POSTS_LOADED } from './constants'
+import { COMMENT_ADDED, LIKE_ADDED, POST_ADDED, POSTS_DELETED, POSTS_LOADED, REPLY_COMMENT_ADDED } from './constants'
 
 export const loadPosts = (userId) => {
   return (dispatch) => {
@@ -22,6 +22,33 @@ export const likePost = (postId) => {
     })
   }
 }
+export const commentPost = (postId, comment) => {
+  return (dispatch, getState) => {
+    return axios.put('/api/posts/' + postId + '/comment', {
+      postId,
+      comment
+    }).then(({ data }) => {
+      dispatch(commentAdded(postId, data))
+    })
+  }
+}
+export const replyComment = (commentId, comment) => {
+  return (dispatch, getState) => {
+    return axios.put('/api/comments/' + commentId, {
+      comment
+    }).then(res => {
+      dispatch(replyCommentAdded(commentId, res));
+    })
+  }
+}
+export const likeComment = (postId, commentId) => {
+  return (dispatch, getState) => {
+    return axios.put('/api/comments/' + commentId + '/like').then(({ data }) => {
+      dispatch(likeAdded(postId, data))
+    })
+  }
+}
+
 
 export const postsLoaded = (data) => {
   return {
@@ -42,6 +69,20 @@ export const postAdded = (post) => {
   return {
     type: POST_ADDED,
     post
+  }
+}
+
+export const commentAdded = (postId, comment) => {
+  return {
+    type: COMMENT_ADDED,
+    data: { postId, comment }
+  }
+}
+
+export const replyCommentAdded = (commentId, comment) => {
+  return {
+    type: REPLY_COMMENT_ADDED,
+    data: { commentId, comment }
   }
 }
 

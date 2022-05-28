@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { PROFILE_LOADED } from './constants'
+import { PROFILE_LOADED, PROFILE_SUBSCRIBED } from './constants'
 import { loadPosts } from './posts.action'
 
 export const loadProfile = (username) => {
@@ -9,9 +9,20 @@ export const loadProfile = (username) => {
     })
   })
 }
+export const toggleSubscribe = (id) => {
+  return dispatch => axios.put(`/api/users/${id}/follow`).then(res => {
+    dispatch(profileSubscribed(res.data.followers))
+  })
+}
 export const profileLoaded = (data) => {
   return {
     type: PROFILE_LOADED,
     data
+  }
+}
+export const profileSubscribed = (followers) => {
+  return {
+    type: PROFILE_SUBSCRIBED,
+    followers
   }
 }

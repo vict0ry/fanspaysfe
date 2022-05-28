@@ -12,6 +12,8 @@ import { loadChatMessages, loadChats, sendMessage } from '../../redux/messages.a
 import axios from 'axios'
 import { SocketContext } from '../../context/socket'
 import { t } from 'i18next'
+import ImageIcon from '@mui/icons-material/Image'
+import SendTipModal from '../profile/modals/SendTipModal'
 
 const messageElement = React.createRef()
 
@@ -112,10 +114,25 @@ export function Messages() {
 
         </Box>
         <Toolbar sx={{ display: 'flex' }}>
-          <TextField onChange={() => handleMessageOnKeyDown(event.target.value)}
-                     value={userMessage}
-                     sx={{ width: '100%', padding: '0', marginLeft: 0 }} id="outlined-basic" label="Message"
-                     variant="outlined" />
+          <Box sx={{ width: '100%' }}>
+            <TextField onChange={() => handleMessageOnKeyDown(event.target.value)}
+                       value={userMessage}
+                       sx={{ width: '100%', padding: '0', marginLeft: 0 }} id="outlined-basic" label="Message"
+                       variant="outlined" />
+            <ImageIcon onClick={() => {
+            }} style={{ color: '#5c9edf', cursor: 'pointer' }}>
+
+            </ImageIcon>
+            <SendTipModal user={loggedUser.userData} />
+            <input
+              type="file"
+              multiple
+              accept='.png,.jpg,.jpeg'
+              onChange={() => {
+              }}
+              style={{ display: 'none' }}
+            />
+          </Box>
           <Button
             disabled={!userMessage.length}
             onClick={() => handleAddMessage()}

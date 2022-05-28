@@ -1,11 +1,14 @@
 import Button from '@mui/material/Button'
 import React from 'react'
-import { useSelector } from 'react-redux'
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
 import { t } from 'i18next'
+import { toggleSubscribe } from '../../../redux/profile.action'
 
 export const SubscribeButton = () => {
-  const userProfile = useSelector(state => state.profile.profile)
+  const dispatch = useDispatch()
+  const userProfile = useSelector(state => {
+    return state.profile.profile
+  })
   const loggedUser = useSelector(state => state.user)
   const isSubscribed = () => {
     return userProfile?.profileUser?.followers?.includes(loggedUser.userData._id)
@@ -15,9 +18,7 @@ export const SubscribeButton = () => {
   }
 
   function handleFollow() {
-    axios.put(`/api/users/${userProfile.profileUser?._id}/follow`).then(res => {
-      console.log(res)
-    })
+    dispatch(toggleSubscribe(userProfile.profileUser?._id))
   }
 
   return <div style={{ display: 'flex' }}>

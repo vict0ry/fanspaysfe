@@ -7,8 +7,6 @@ import Card from '@mui/material/Card'
 import CardMedia from '@mui/material/CardMedia'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
-import CardActions from '@mui/material/CardActions'
-import { MiniUser } from './profile/components/MiniUser'
 import { useSelector } from 'react-redux'
 import ProfileCard from '../layout/user-card'
 
@@ -28,7 +26,7 @@ export const Shop = () => {
               image="https://demo.youdate.website/content/cache/stock/men/conor-sexton-434549-unsplash.jpg/4ac4b30045e9ba84f647a3d1a98d6284.jpg"
               alt="green iguana"
             />
-            <Box sx={{display: 'grid', gridTemplateColumns: '1fr 1fr', marginTop: 1, gap: 1}}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', marginTop: 1, gap: 1 }}>
               <CardMedia
                 component="img"
                 height="140"
@@ -36,11 +34,11 @@ export const Shop = () => {
                 alt="green iguana"
               />
               <CardMedia
-              component="img"
-              height="140"
-              image="https://demo.youdate.website/content/cache/stock/men/conor-sexton-434549-unsplash.jpg/4ac4b30045e9ba84f647a3d1a98d6284.jpg"
-              alt="green iguana"
-            />
+                component="img"
+                height="140"
+                image="https://demo.youdate.website/content/cache/stock/men/conor-sexton-434549-unsplash.jpg/4ac4b30045e9ba84f647a3d1a98d6284.jpg"
+                alt="green iguana"
+              />
             </Box>
             <CardContent>
               <Typography variant="body2" color="text.secondary">
@@ -48,10 +46,10 @@ export const Shop = () => {
               </Typography>
             </CardContent>
           </Card>
-          <ProfileCard style={{marginTop: '10px'}} profileUser={user} />
+          <ProfileCard style={{ marginTop: '10px' }} profileUser={user} />
         </div>
         <Card sx={{ padding: 2, height: 'fit-content' }}>
-          <h3>Popis:</h3>
+          <h3>{t('COMMON.DESCRIPTION')}:</h3>
           Pokud by se pro stejný účel použil smysluplný text, bylo by těžké hodnotit pouze
           vzhled, aniž by se
           pozorovatel nechal svést ke čtení obsahu. Pokud by byl naopak použit nesmyslný, ale pravidelný text (např.

@@ -15,7 +15,6 @@ export const UserParametersTab = () => {
         <Grid item xs={12} sm={12}>
           <TextField
             name="weight"
-            helperText="Please enter your weight"
             required
             fullWidth
             id="weight"
@@ -27,7 +26,6 @@ export const UserParametersTab = () => {
         <Grid item xs={12} sm={12}>
           <TextField
             name="firstMessagePrice"
-            helperText="Please enter your weight"
             required
             fullWidth
             id="firstMessagePrice"

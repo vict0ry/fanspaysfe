@@ -3,12 +3,35 @@ import Badge from '@mui/material/Badge'
 import MailIcon from '@mui/icons-material/Mail'
 import Popover from '@mui/material/Popover'
 import * as React from 'react'
+import { useEffect } from 'react'
 import { Paper } from '@mui/material'
 import Divider from '@mui/material/Divider'
 import Box from '@mui/material/Box'
 import { t } from 'i18next'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
+export const UserMessages = ({ user, description }) => {
+  return <div style={{ display: 'flex', marginBottom: 20 }} className="user-info">
+    <div className="avatar-wrapper" style={{ marginRight: '5px' }}>
+      <img
+        style={{ borderRadius: '100%' }}
+        src={'http://localhost:3003' + user?.profilePic}
+        alt=""
+        width={'50px'}
+      />
+    </div>
+    <div style={{ display: 'flex', flexDirection: 'column' }}
+         className="user-metadata">
+      <div style={{ fontSize: '0.8rem', color: 'gray' }}>@{user?.username}</div>
+      <div style={{ fontSize: '1rem', color: 'black' }}>
+        {user?.firstName + ' ' + user?.lastName}
+      </div>
+      <div className="description"
+           style={{ color: 'gray', maxWidth: '250px' }}>{description?.substring(0, 45) + '...'}</div>
+    </div>
+  </div>
+}
 export const MessagesMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
 
@@ -20,6 +43,14 @@ export const MessagesMenu = () => {
     setAnchorEl(null)
   }
 
+  const [chatList, setChatList] = React.useState([])
+
+  useEffect(() => {
+    axios.get('/api/chats/').then(data => {
+      setChatList(data.data)
+    })
+  }, [])
+
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popover-messages' : undefined
   return <div>
@@ -30,7 +61,7 @@ export const MessagesMenu = () => {
       aria-label="show 17 new mesages"
       color="inherit"
     >
-      <Badge badgeContent={17} color="error">
+      <Badge badgeContent={chatList.length} color="error">
         <MailIcon />
       </Badge>
     </IconButton>
@@ -50,12 +81,11 @@ export const MessagesMenu = () => {
           boxShadow: 5
         }
       }}>
-        <div>
-          Uzivatel vas pridal do slacku
-        </div>
-        <div>
-          Uzivatel vas pridal do slacku
-        </div>
+        {chatList?.map(chat => {
+          return <div>
+            <UserMessages user={chat?.latestMessage?.sender} description={chat?.latestMessage?.content} />
+          </div>
+        })}
         <Divider />
         <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
           <Link style={{ color: 'black' }} to={'/messages'}>{t('NAVBAR.MESSAGES')}</Link>

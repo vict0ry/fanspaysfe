@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
 import TextField from '@mui/material/TextField'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import IconButton from '@mui/material/IconButton'
@@ -26,17 +26,16 @@ const style = {
   p: 4
 }
 
-export default function SendTipModal({ recipient }) {
-  const dispatch = useDispatch()
+export default function SendTipModal({ recipient, children }) {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-  const inputFile = useRef(null)
   const { username } = useParams()
   const loggedUser = useSelector(state => state.user)
   const { t } = useTranslation()
   const isAllowed = () => {
-    return !(!username || username === loggedUser?.userData?.username)
+    return true
+    // return !(!username || username === loggedUser?.userData?.username)
   }
   const submitForm = (event) => {
     event.preventDefault()
@@ -51,14 +50,15 @@ export default function SendTipModal({ recipient }) {
 
 
   function handleCreditSend(recipient) {
+    debugger;
     axios.post('/api/credit', {
-      description: 'description',
-      amount: 200,
+      description: formData.description,
+      amount: +formData.amount,
       recipient: recipient._id,
       sender: loggedUser.userData._id
     }).then(_ => {
       axios.get('/api/credit').then(response => {
-        console.log(response)
+        setOpen(false)
       })
     })
   }
@@ -66,9 +66,12 @@ export default function SendTipModal({ recipient }) {
   return (
     <div>
       {isAllowed() ?
-        <IconButton onClick={handleOpen} aria-label="tip">
-          <MonetizationOnIcon />
-        </IconButton> : ''}
+        <Box sx={{ display: 'flex', justifyAlign: 'center', alignItems: 'center', cursor: 'pointer' }}
+             onClick={handleOpen}>
+          <IconButton aria-label="tip">
+            <MonetizationOnIcon />
+          </IconButton> {children}
+        </Box> : ''}
       <Modal
         open={open}
         onClose={handleClose}

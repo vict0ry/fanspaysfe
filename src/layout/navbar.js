@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography'
 import Badge from '@mui/material/Badge'
 import MenuItem from '@mui/material/MenuItem'
 import Menu from '@mui/material/Menu'
-import MenuIcon from '@mui/icons-material/Menu'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
@@ -16,11 +15,13 @@ import MoreIcon from '@mui/icons-material/MoreVert'
 import { Link } from 'react-router-dom'
 import { SearchInput } from '../components/SearchInput'
 import { useDispatch, useSelector } from 'react-redux'
-import { logoutUser } from '../redux/user.action'
 import LocalAtmIcon from '@mui/icons-material/LocalAtm'
 import { useTranslation } from 'react-i18next'
 import { NotificationsMenu } from './components/NotificationsMenu'
 import { MessagesMenu } from './components/MessagesMenu'
+import { Container } from '@mui/material'
+import { logoutUser } from '../redux/user.action'
+import { MiniUser } from '../pages/profile/components/MiniUser'
 
 
 export default function SearchBar() {
@@ -96,8 +97,30 @@ export default function SearchBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {loggedUser.userData ?
+        <MenuItem>
+          <MiniUser user={loggedUser.userData}></MiniUser>
+        </MenuItem>
+        : ''}
+      <MenuItem onClick={handleMenuClose}>
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+          <Link style={{ color: 'black' }} to={'/profile'}>{t('NAVBAR.PROFILE')}</Link>
+        </Box>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+          <Link style={{ color: 'black' }} to={'/customer'}>{t('NAVBAR.CREDIT_MANAGEMENT')}</Link>
+        </Box>
+      </MenuItem>
+      <MenuItem>
+        {loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+          <div onClick={() => {
+            localStorage.clear()
+            dispatch(logoutUser())
+          }}>{t('NAVBAR.LOGOUT')}
+          </div>
+        </Box> : ''}
+      </MenuItem>
     </Menu>
   )
 
@@ -154,86 +177,80 @@ export default function SearchBar() {
   )
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            SeznamSE.cz
-          </Typography>
-          <SearchInput />
-          <Box sx={{ flexGrow: 1 }} />
-          {!loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-            <Link to={'/register'}>{t('NAVBAR.REGISTER')}</Link>
-          </Box> : ''}
+    <div>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="sticky">
+          <Container maxWidth="lg">
+            <Toolbar>
+              {/*<IconButton*/}
+              {/*  size="large"*/}
+              {/*  edge="start"*/}
+              {/*  color="inherit"*/}
+              {/*  aria-label="open drawer"*/}
+              {/*  sx={{ mr: 2 }}*/}
+              {/*>*/}
+              {/*  <MenuIcon />*/}
+              {/*</IconButton>*/}
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ display: { xs: 'none', sm: 'block' } }}
+              >
+                NONAME.cz
+              </Typography>
+              <SearchInput />
+              <Box sx={{ flexGrow: 1 }} />
+              {!loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+                <Link to={'/register'}>{t('NAVBAR.REGISTER')}</Link>
+              </Box> : ''}
 
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-            <Link to={'/'}>{t('NAVBAR.HOME_PAGE')}</Link>
-          </Box>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-            <Link to={'/profile'}>{t('NAVBAR.PROFILE')}</Link>
-          </Box>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-            <Link to={'/users'}>{t('NAVBAR.USERS')}</Link>
-          </Box>
-          {!loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-            <Link to={'/login'}>{t('NAVBAR.LOGIN')}</Link>
-          </Box> : ''}
-          {loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-            <LocalAtmIcon /> {loggedUser.userData.balance} Kč
-          </Box> : ''}
-          {loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-            <div onClick={() => {
-              localStorage.clear()
-              dispatch(logoutUser())
-            }}>{t('NAVBAR.LOGOUT')}
-            </div>
-          </Box> : ''}
+              <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+                <Link to={'/'}>{t('NAVBAR.HOME_PAGE')}</Link>
+              </Box>
+              <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+                <Link to={'/users'}>{t('NAVBAR.USERS')}</Link>
+              </Box>
+              {!loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+                <Link to={'/login'}>{t('NAVBAR.LOGIN')}</Link>
+              </Box> : ''}
+              {loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+                <LocalAtmIcon /> {loggedUser.userData.balance} Kč
+              </Box> : ''}
 
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <MessagesMenu />
-            <NotificationsMenu />
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
-    </Box>
+              <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                <MessagesMenu />
+                <NotificationsMenu />
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </Box>
+              <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                <IconButton
+                  size="large"
+                  aria-label="show more"
+                  aria-controls={mobileMenuId}
+                  aria-haspopup="true"
+                  onClick={handleMobileMenuOpen}
+                  color="inherit"
+                >
+                  <MoreIcon />
+                </IconButton>
+              </Box>
+            </Toolbar>
+          </Container>
+        </AppBar>
+        {renderMobileMenu}
+        {renderMenu}
+      </Box>
+    </div>
   )
 }
