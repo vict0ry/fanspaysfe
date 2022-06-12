@@ -47,15 +47,15 @@ export default function ProfileCard({ profileUser }) {
         <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
           <SendTipModal recipient={profileUser}>Send tip</SendTipModal>
         </Box>
-        <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
-          <ContactSupportIcon /> Ask question
-        </Box>
-        <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
-          <ReportGmailerrorredIcon /> Report user
-        </Box>
-        <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
-          <ContactSupportIcon /> Ask question
-        </Box>
+        {/*<Box sx={{ marginTop: '5px', color: '#626d7a' }}>*/}
+        {/*  <ContactSupportIcon /> Ask question*/}
+        {/*</Box>*/}
+        {/*<Box sx={{ marginTop: '5px', color: '#626d7a' }}>*/}
+        {/*  <ReportGmailerrorredIcon /> Report user*/}
+        {/*</Box>*/}
+        {/*<Box sx={{ marginTop: '5px', color: '#626d7a' }}>*/}
+        {/*  <ContactSupportIcon /> Ask question*/}
+        {/*</Box>*/}
       </CardActions>
     </Card>
   )

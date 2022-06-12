@@ -17,6 +17,8 @@ import './profile.css'
 import { Link } from 'react-router-dom'
 import { MiniUser } from './components/MiniUser'
 import FollowersModal from './modals/FollowersModal'
+import { loadPosts } from '../../redux/posts.action'
+import Alert from '@mui/material/Alert'
 
 
 export const NotSubscribed = () => {
@@ -40,11 +42,13 @@ export function Profile(props) {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(loadProfile(username))
+    dispatch(loadPosts(username || loggedUser.userData._id))
   }, [])
+  const posts = useSelector(state => state.posts.posts)
   const user = useSelector(state => state.profile.profile)
 
   const handleChange = (event, newValue) => {
-    setValue(newValue)
+    setSelectedTab(newValue)
   }
   const isUserSubscribed = () => {
     return user?.profileUser?.followers?.includes(loggedUser.userData._id)
@@ -57,9 +61,14 @@ export function Profile(props) {
     }
   }
 
-  const [value, setValue] = React.useState(0)
+  const [selectedTab, setSelectedTab] = React.useState(0)
 
   return <div>
+    <Alert severity="info" sx={{marginTop: '20px'}}>
+      <div>This is an info alert — check it out!</div>
+      <div>This is an info alert — check it out!</div>
+      <div>This is an info alert — check it out!</div>
+    </Alert>
     <Box sx={{ 'mt': 2 }}>
       <Box className="profileGrid" sx={{
         display: 'grid', gridTemplateColumns: {
@@ -72,23 +81,23 @@ export function Profile(props) {
         <Box sx={{ display: 'flex', flexDirection: 'column', color: 'black' }}>
           <Box style={{ marginBottom: '10px' }}>
             <MiniUser user={user?.profileUser} />
-            <span style={{ color: 'gray' }}> Balance : 100,-</span>
+            <span style={{ color: 'gray' }}> {t('COMMON.BALANCE')} : 100,-</span>
           </Box>
-          <Link style={{ color: 'black', padding: '5px 0' }} to={'/'}>My page</Link>
-          <Link style={{ color: 'black', padding: '5px 0' }} to={'/edit'}>Edit Profile</Link>
-          <Link style={{ color: 'black', padding: '5px 0' }} to={'/'}>Messages</Link>
-          <Link style={{ color: 'black', padding: '5px 0' }} to={'/'}>Marketplace</Link>
+          <Link style={{ color: 'black', padding: '5px 0' }} to={'/'}>{t('USERMENU.MY_PAGE')}</Link>
+          <Link style={{ color: 'black', padding: '5px 0' }} to={'/edit'}>{t('USERMENU.EDIT_PROFILE')}</Link>
+          <Link style={{ color: 'black', padding: '5px 0' }} to={'/'}>{t('USERMENU.MESSAGES')}</Link>
+          <Link style={{ color: 'black', padding: '5px 0' }} to={'/'}>{t('USERMENU.MARKETPLACE')}</Link>
           <Link style={{
             color: 'black', padding: '5px 0',
             ':hover': {
               background: 'red',
               display: 'none'
             }
-          }} to={'/'}>Transactions</Link>
+          }} to={'/'}>{t('USERMENU.TRANSACTIONS')}</Link>
         </Box>
         <div>
           <ProfileCard profileUser={user?.profileUser} />
-          <div style={{marginTop: '10px'}}>
+          <div style={{ marginTop: '10px' }}>
             <FollowersModal profileUser={user?.profileUser} />
             <Paper style={{
               padding: 5,
@@ -100,40 +109,25 @@ export function Profile(props) {
             }}>
               <SubscribeButton />
             </Paper>
-            <Paper style={{
-              padding: 5,
-              justifyContent: 'center',
-              marginTop: 10,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyAlign: 'center'
-            }}>
-              <h3>You may also like :</h3>
-              <div style={{ flexDirection: 'column', marginTop: 10 }}>
-                <MiniUser user={loggedUser.userData} />
-                <MiniUser user={loggedUser.userData} />
-                <MiniUser user={loggedUser.userData} />
-                <MiniUser user={loggedUser.userData} />
-              </div>
-            </Paper>
           </div>
         </div>
         <div>
-          <AboutCard user={user} />
+          <AboutCard user={user.profileUser} postsLength={posts.length} />
           <div>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-              <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+              <Tabs value={selectedTab} onChange={handleChange} aria-label="basic tabs example">
                 <Tab label={t('COMMON.STORIES')} {...a11yProps(0)} />
                 <Tab label={t('COMMON.USER_PRODUCTS')} {...a11yProps(1)} />
                 <Tab label={t('COMMON.USER_VIDEOS')} {...a11yProps(1)} />
                 <Tab label={t('COMMON.USER_DEMANDS')} {...a11yProps(1)} />
               </Tabs>
             </Box>
-            <TabPanel value={value} index={0}>
-              {!isUserSubscribed() ? <NotSubscribed /> : <Posts profileUser={user?.profileUser} />}
+            <TabPanel value={selectedTab} index={0}>
+              {!isUserSubscribed() ?
+                <NotSubscribed /> :
+                <Posts posts={posts} profileUser={user?.profileUser} />}
             </TabPanel>
-            <TabPanel value={value} index={1}>
+            <TabPanel value={selectedTab} index={1}>
               <AddProductModal />
             </TabPanel>
           </div>

@@ -50,7 +50,6 @@ export default function SendTipModal({ recipient, children }) {
 
 
   function handleCreditSend(recipient) {
-    debugger;
     axios.post('/api/credit', {
       description: formData.description,
       amount: +formData.amount,

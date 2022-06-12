@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import Paper from '@mui/material/Paper'
+import React, { useState } from 'react'
 import CardActions from '@mui/material/CardActions'
 import IconButton from '@mui/material/IconButton'
 import FavoriteIcon from '@mui/icons-material/Favorite'
@@ -7,8 +6,7 @@ import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import AddPostModal from '../modals/AddPostModal'
 import { useDispatch, useSelector } from 'react-redux'
-import { commentPost, likePost, loadPosts, removePost } from '../../../redux/posts.action'
-import DeleteIcon from '@mui/icons-material/Delete'
+import { commentPost, likePost, removePost } from '../../../redux/posts.action'
 import { t } from 'i18next'
 import CommentIcon from '@mui/icons-material/Comment'
 import { useParams } from 'react-router'
@@ -19,19 +17,21 @@ import { MiniUser } from './MiniUser'
 import Box from '@mui/material/Box'
 import SendIcon from '@mui/icons-material/Send'
 import { Comment } from './Comment'
+import FbImageLibrary from '../../../components/react-fb-image-grid'
+import Card from '@mui/material/Card'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
+import CardHeader from '@mui/material/CardHeader'
+import Avatar from '@mui/material/Avatar'
+import red from '@mui/material/colors/red'
 
-export const Posts = ({ profileUser }) => {
+
+export const Posts = ({ profileUser, posts }) => {
   const dispatch = useDispatch()
   const { username } = useParams()
   const loggedUser = useSelector(state => state.user)
-  useEffect(() => {
-    dispatch(loadPosts(username || loggedUser.userData._id))
-  }, [])
-  const posts = useSelector(state => state.posts)
   const [likedPosts, setLikedPosts] = useState([])
 
 
-  const postMessages = posts.posts
   const avatar = (image) => `http://localhost:3003` + image
   const handlePostRemove = (postId) => {
     dispatch(removePost(postId))
@@ -56,40 +56,44 @@ export const Posts = ({ profileUser }) => {
     <div>
       <AddPostModal />
 
-      {!postMessages.length ? t('COMMON.NOTHING_HERE_YET') : postMessages?.map((message, index) => {
+      {!posts.length ? t('COMMON.NOTHING_HERE_YET') : posts?.map((message, index) => {
         function colorBasedLike(message) {
           return !message?.likes?.includes(loggedUser.userData._id) ? 'gray' : 'red'
         }
 
         return <div key={index}>
-          <Paper sx={{
+          <Card sx={{
             ':hover': {
               boxShadow: 5
             },
             padding: '10px 20px', marginTop: 2
           }}>
-            <DeleteIcon onClick={() => handlePostRemove(message._id)}
-                        style={{ float: 'right', color: 'gray', cursor: 'pointer' }} />
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <MiniUser user={message.postedBy} />
-            </div>
-            <Divider />
+            <CardHeader
+              action={
+                <IconButton aria-label="settings">
+                  <MoreVertIcon />
+                </IconButton>
+              }
+              avatar={
+                <Avatar sx={{width: '55px', height: '55px'}} aria-label="recipe">
+                  <img style={{width: '100%'}} src={'http://localhost:3003' + message.postedBy.profilePic} />
+                </Avatar>
+              }
+              title={message.postedBy.firstName + ' ' + message.postedBy.lastName}
+              subheader={message.postedBy.username}
+            >
+            </CardHeader>
+            {/*<DeleteIcon onClick={() => handlePostRemove(message._id)}*/}
+            {/*            style={{ float: 'right', color: 'gray', cursor: 'pointer' }} />*/}
             <CardContent>
               <Typography variant="body1">
                 {message.content}
               </Typography>
               <div className="post-pictures">
-                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1 }}>
-                  {message?.pictures?.map(i => {
-                    const imgUrl = 'http://localhost:3003' + i
-                    return <img style={{
-                      maxHeight: '300px',
-                      backgroundSize: 'cover',
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover'
-                    }} src={imgUrl} alt="" />
-                  })}
+                <Box>
+                  <FbImageLibrary images={message?.pictures?.map(i => {
+                    return 'http://localhost:3003' + i
+                  })} />
                 </Box>
               </div>
             </CardContent>
@@ -134,7 +138,7 @@ export const Posts = ({ profileUser }) => {
                 style={{ width: '100%' }} multiline> </TextField>
               <SendIcon onClick={() => handleAddComment(message._id)} style={{ marginLeft: '10px' }} />
             </Box>
-          </Paper>
+          </Card>
         </div>
       })}
     </div>

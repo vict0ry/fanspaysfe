@@ -11,6 +11,7 @@ import axios from 'axios'
 import { postAdded } from '../../../redux/posts.action'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
+import Grid from '@mui/material/Grid'
 
 const style = {
   position: 'absolute',
@@ -91,11 +92,14 @@ export default function AddPostModal() {
                      minRows={3}
                      sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label="Message"
                      variant="outlined" />
-          {state?.map(s => {
-            return <div>
-              <img style={{ maxHeight: '300px' }} src={URL.createObjectURL(s?.img)} />
-            </div>
-          })}
+          <Grid sx={{ maxHeight: '500px', overflowY: 'scroll', marginTop: '20px' }} container spacing={1}>
+            {state?.map(s => {
+              return <Grid item xs={4} sm={4}>
+                <img style={{ maxWidth: '100%' }} src={URL.createObjectURL(s?.img)} />
+              </Grid>
+            })}
+          </Grid>
+
           <div className="action" style={{ marginTop: 10 }}>
             <ImageIcon onClick={onFileUploadClick} style={{ color: '#5c9edf', cursor: 'pointer' }}>
 

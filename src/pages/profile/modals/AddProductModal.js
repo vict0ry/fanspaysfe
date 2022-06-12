@@ -81,9 +81,9 @@ export default function AddProductModal() {
       {isAllowed() ? <Button variant="contained" onClick={handleOpen}>{t('COMMON.ADD_PRODUCT')}</Button> : ''}
       <div style={{ marginTop: 10 }}>
         {products.length ? <div>
-          {products.map(product => {
-            return <div>
-              <Card sx={{ maxWidth: 345 }}>
+          <Grid container spacing={1}>
+            {products.map(product => {
+              return <Grid item xs={12} sm={6}><Card>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     {product.name}
@@ -96,10 +96,9 @@ export default function AddProductModal() {
                   <Button variant={'contained'} style={{ float: 'right' }} size="small">Koupit</Button>
                   <div style={{ fontWeight: 'bold', color: 'green' }}>{product.price} Kč</div>
                 </CardActions>
-              </Card>
-            </div>
-          })}
-
+              </Card></Grid>
+            })}
+          </Grid>
         </div> : t('COMMON.NOTHING_HERE_YET')}
       </div>
       <Modal

@@ -22,17 +22,12 @@ export const TabContacts = () => {
       .map((state) => ({ label: state.name, value: state.id, ...state }))
   const updatedCities = (stateId) => {
     const getCitiesById = City.getCitiesOfCountry
-    debugger;
     const cities = [...new Set(getCitiesById(stateId))]
       .map((city) => ({ label: city.name, value: city.id, ...city }))
-    debugger;
     return cities
 
   }
 
-  useEffect(() => {
-    debugger;
-  }, [])
 
   const [country, setCountry] = useState('')
   const [city, setCity] = useState('')
@@ -40,7 +35,6 @@ export const TabContacts = () => {
 
   const handleCountryChange = (newValue) => {
     setCountry(newValue)
-    debugger;
     setCities(updatedCities(newValue.isoCode))
   }
   const handleCityChange = (newValue) => {

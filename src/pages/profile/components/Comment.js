@@ -39,7 +39,6 @@ export const Comment = ({ comment, isSubComment }) => {
   const handleAddComment = (id) => {
     dispatch(replyComment(id, commentMessage))
     setCommentMessage('')
-    debugger;
     console.log('commentMessage', commentMessage)
   }
   return <Box sx={{

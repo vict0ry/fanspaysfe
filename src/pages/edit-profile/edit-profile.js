@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import axios from 'axios'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Typography from '@mui/material/Typography'
@@ -15,6 +15,7 @@ import { t } from 'i18next'
 import { AddCreditCard } from '../../components/AddCreditCard'
 import { EasyDatePicker } from './components/easyDatePicker'
 import { TabContacts } from '../../components/TabContacts'
+import { loadProfile } from '../../redux/profile.action'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props
@@ -38,19 +39,25 @@ function TabPanel(props) {
 
 export function EditProfile(props) {
   const loggedUser = useSelector(state => state.user)
+
+  const username = useParams().username || loggedUser?.userData?._id
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(loadProfile(username))
+  }, [])
+  const { profileUser } = useSelector(state => state.profile.profile)
+
   const [userForm, setUserForm] = useState({
     firstName: '',
     lastName: '',
     username: '',
-    description: ''
+    description: '',
+    birthDate: ''
   })
 
   useEffect(() => {
-    console.log('herewego')
-    debugger;
-    setUserForm(loggedUser.userData)
+    setUserForm(profileUser)
   }, [])
-  const username = useParams().username || loggedUser.userData._id
   const handleFormChange = (evt) => {
     const value = evt.target.value
     setUserForm({
@@ -67,25 +74,36 @@ export function EditProfile(props) {
   }
 
   const [value, setValue] = useState(0)
+  const [birthDate, setBirthDate] = useState(0)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
 
+  const chosenAgeCallback = (dateIsoString) => {
+    setBirthDate(dateIsoString)
+  }
+
   const submitForm = (event) => {
     event.preventDefault()
-    const { username, firstName, lastName, description } = event.target.elements
+    const {
+      username,
+      firstName,
+      lastName,
+      description
+    } = event.target.elements
     const data = {
       username: username.value,
       firstName: firstName.value,
       lastName: lastName.value,
-      description: description.value
+      description: description.value,
+      birthDate: birthDate
     }
     return axios.put('/api/users/updateprofile', data).then(() => {
       console.log('done')
     })
   }
-  const [state, setState] = useState({ img: 'https://demo.youdate.website/content/cache/stock/men/conor-sexton-434549-unsplash.jpg/4ac4b30045e9ba84f647a3d1a98d6284.jpg' })
+  const [state, setState] = useState({ img: '/noavatar.png' })
 
 
   function handleImageChange(event) {
@@ -134,7 +152,7 @@ export function EditProfile(props) {
                     variant="contained"
                     component="label"
                   >
-                    Upload avatar
+                    {t('PROFILE.UPLOAD_AVATAR')}
                     <input
                       onChange={handleImageChange}
                       type="file"
@@ -194,7 +212,9 @@ export function EditProfile(props) {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <EasyDatePicker />
+                  <EasyDatePicker
+                    valueDate={userForm.birthDate}
+                    chosenAgeCallback={chosenAgeCallback.bind(this)} />
                 </Grid>
               </Grid>
               <Button

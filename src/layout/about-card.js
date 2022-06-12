@@ -13,8 +13,10 @@ import ScaleIcon from '@mui/icons-material/Scale'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import { useTranslation } from 'react-i18next'
 import { t } from 'i18next'
+import moment from 'moment'
+import { getZodiac } from '../helper'
 
-const ProfileStatistics = ({ followers = 500, following = 100, posts = 20, products = 4, video = 1, likes = 200 }) => {
+const ProfileStatistics = ({ followers = 0, following = 0, posts = 0, products = 0, video = 0, likes = 0 }) => {
   const TextNumber = ({ number, text }) => {
     return <Box style={{ textAlign: 'center' }}>
       <Box sx={{ fontSize: '1.5rem', fontWeight: 'bold' }} className="number">
@@ -37,15 +39,19 @@ const ProfileStatistics = ({ followers = 500, following = 100, posts = 20, produ
 }
 
 
-export default function AboutCard(props) {
-  const fullName = props.user?.profileUser?.firstName + ' ' + props.user?.profileUser?.lastName
+export default function AboutCard({user, postsLength}) {
+  const fullName = user?.firstName + ' ' + user?.lastName
   const { t } = useTranslation()
-  debugger;
+  const parsedDate = moment(user.birthDate, 'YYYY-MM-DD')
+  const parsedDay = parsedDate.get('day')
+  const parsedMonth = parsedDate.format('MMMM')
+  const parsedYear = parsedDate.get('year')
+
 
   return (<div>
       <Card sx={{ maxWidth: '1fr', gridColumn: 'unset' }}>
         <div style={{ padding: 10, float: 'right', color: 'green', cursor: 'pointer' }}>{t('COMMON.ONLINE')}</div>
-        <CardHeader subheader={'@' + props?.user?.profileUser?.username} subtitle={'ahoj'} title={fullName} />
+        <CardHeader subheader={'@' + user?.username} subtitle={'ahoj'} title={fullName} />
         <CardContent>
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
             <Box>
@@ -58,22 +64,23 @@ export default function AboutCard(props) {
               <LinkIcon /> <Link to={'https://cbdsvet.cz'} style={{ color: 'black' }}>https://cbdsvet.cz</Link>
             </Box>
             <Box>
-              <CalendarMonthIcon /> {t('PROFILE.BIRTH_DATE')} 11.05.1993
+              <CalendarMonthIcon /> {t('PROFILE.BIRTH_DATE')} {new Date(parsedDate).toLocaleDateString('cs-CZ')}
             </Box>
             <Box>
-              <ScaleIcon /> {t('PROFILE.ZODIAC')} : Byk
+              <ScaleIcon /> {t('PROFILE.ZODIAC')} : {t(getZodiac(parsedDay, parsedMonth))}
             </Box>
             <Box>
               <AccessTimeIcon /> {t('COMMON.LAST_ACTIVE')} : 10 minutes
             </Box>
           </Box>
           <Divider style={{ marginTop: '20px' }} />
-          <ProfileStatistics followers={props.user.profileUser.followers.length}
-                             following={props.user.profileUser.following.length} />
+          <ProfileStatistics followers={user.followers.length}
+                             posts={postsLength}
+                             following={user.following.length} />
           <Divider />
           <Box sx={{ textAlign: 'left', marginTop: 2 }}>
             <strong>{t('COMMON.DESCRIPTION')}:</strong>
-            <p>{props.user?.profileUser?.description}</p>
+            <p>{user.description}</p>
           </Box>
         </CardContent>
       </Card>
