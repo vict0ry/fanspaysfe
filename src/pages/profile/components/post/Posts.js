@@ -4,25 +4,24 @@ import IconButton from '@mui/material/IconButton'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
-import AddPostModal from '../modals/AddPostModal'
+import AddPostModal from '../../modals/AddPostModal'
 import { useDispatch, useSelector } from 'react-redux'
-import { commentPost, likePost, removePost } from '../../../redux/posts.action'
+import { commentPost, likePost } from '../../../../redux/posts.action'
 import { t } from 'i18next'
 import CommentIcon from '@mui/icons-material/Comment'
 import { useParams } from 'react-router'
 import Divider from '@mui/material/Divider'
 import TextField from '@mui/material/TextField'
-import SendTipModal from '../modals/SendTipModal'
-import { MiniUser } from './MiniUser'
+import SendTipModal from '../../modals/SendTipModal'
 import Box from '@mui/material/Box'
 import SendIcon from '@mui/icons-material/Send'
 import { Comment } from './Comment'
-import FbImageLibrary from '../../../components/react-fb-image-grid'
+import FbImageLibrary from '../../../../components/react-fb-image-grid'
 import Card from '@mui/material/Card'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
 import CardHeader from '@mui/material/CardHeader'
 import Avatar from '@mui/material/Avatar'
 import red from '@mui/material/colors/red'
+import PostMenu from './PostMenu'
 
 
 export const Posts = ({ profileUser, posts }) => {
@@ -33,9 +32,6 @@ export const Posts = ({ profileUser, posts }) => {
 
 
   const avatar = (image) => `http://localhost:3003` + image
-  const handlePostRemove = (postId) => {
-    dispatch(removePost(postId))
-  }
   const handleLikePost = (postId) => {
     const hasLike = likedPosts.includes(postId)
     const filteredLikedPosts = hasLike ? likedPosts.filter(i => i !== postId) : [...likedPosts, postId]
@@ -71,12 +67,12 @@ export const Posts = ({ profileUser, posts }) => {
             <CardHeader
               action={
                 <IconButton aria-label="settings">
-                  <MoreVertIcon />
+                  <PostMenu postId={message._id} />
                 </IconButton>
               }
               avatar={
-                <Avatar sx={{width: '55px', height: '55px'}} aria-label="recipe">
-                  <img style={{width: '100%'}} src={'http://localhost:3003' + message.postedBy.profilePic} />
+                <Avatar sx={{ width: '55px', height: '55px' }} aria-label="recipe">
+                  <img style={{ width: '100%' }} src={'http://localhost:3003' + message.postedBy.profilePic} />
                 </Avatar>
               }
               title={message.postedBy.firstName + ' ' + message.postedBy.lastName}

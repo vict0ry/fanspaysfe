@@ -9,9 +9,7 @@ import Button from '@mui/material/Button'
 import { t } from 'i18next'
 import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
-import ContactSupportIcon from '@mui/icons-material/ContactSupport'
 import Divider from '@mui/material/Divider'
-import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred'
 
 styled((props) => {
   const { expand, ...other } = props

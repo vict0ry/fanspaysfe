@@ -52,11 +52,15 @@ export function EditProfile(props) {
     lastName: '',
     username: '',
     description: '',
-    birthDate: ''
+    birthDate: '',
+    profilePic: ''
   })
 
   useEffect(() => {
     setUserForm(profileUser)
+    if (profileUser.profilePic) {
+      setAvatar({ img: 'http://localhost:3003' + profileUser.profilePic })
+    }
   }, [])
   const handleFormChange = (evt) => {
     const value = evt.target.value
@@ -103,11 +107,11 @@ export function EditProfile(props) {
       console.log('done')
     })
   }
-  const [state, setState] = useState({ img: '/noavatar.png' })
+  const [avatar, setAvatar] = useState({ img: '/noavatar.png' })
 
 
   function handleImageChange(event) {
-    setState({ img: URL.createObjectURL(event.target.files[0]) })
+    setAvatar({ img: URL.createObjectURL(event.target.files[0]) })
     const formData = new FormData()
     formData.append('croppedImage', event.target.files[0])
 
@@ -146,7 +150,7 @@ export function EditProfile(props) {
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={12}>
                   <img style={{ width: 100, marginRight: 20 }}
-                       src={state.img}
+                       src={avatar.img}
                        alt="" />
                   <Button
                     variant="contained"

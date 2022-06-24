@@ -2,6 +2,11 @@
   "BE_THE_FIRST_ONE": "Buďte první",
   "COMMON": {
     "FIRST_NAME": "Jméno",
+    "PREVIEW_IMAGE": "Náhled obrázku",
+    "BALANCE": "Zůstatek",
+    "DAY": "Den",
+    "MONTH": "Měsíc",
+    "YEAR": "Rok",
     "LAST_NAME": "Příjmení",
     "LOGIN": "Login",
     "EMAIL": "E-mail",
@@ -52,7 +57,16 @@
     "POSTS": "Prispěvky",
     "VIDEO": "Video",
     "LIKES": "lajku",
-    "PRODUCTS": "Produkty"
+    "PRODUCTS": "Produkty",
+    "UPLOAD_AVATAR": "Nahrát avatar"
+  },
+  "USERMENU": {
+    "MY_PAGE": "Moje stranka",
+    "USER_RATING": "Hodnocení",
+    "EDIT_PROFILE": "Editovat profil",
+    "MESSAGES": "Zpravy",
+    "MARKETPLACE": "Marketplace",
+    "TRANSACTIONS": "Transakce"
   },
   "NAVBAR": {
     "HOME_PAGE": "Hlavní stranka",
@@ -67,5 +81,8 @@
   "REGISTER": {
     "REPEAT_PASSWORD": "Zopakujte heslo",
     "ALREADY_HAVE_ACCOUNT": "Již u nás mate svůj účet"
+  },
+  "ZODIAC": {
+    "TAURUS": "Býk"
   }
 }

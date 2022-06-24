@@ -214,9 +214,6 @@ export default function SearchBar() {
               {!loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
                 <Link to={'/login'}>{t('NAVBAR.LOGIN')}</Link>
               </Box> : ''}
-              {loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-                <LocalAtmIcon /> {loggedUser.userData.balance} Kč
-              </Box> : ''}
 
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MessagesMenu />

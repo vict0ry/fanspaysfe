@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next'
 import { t } from 'i18next'
 import moment from 'moment'
 import { getZodiac } from '../helper'
+import { SocialIcon } from 'react-social-icons'
 
 const ProfileStatistics = ({ followers = 0, following = 0, posts = 0, products = 0, video = 0, likes = 0 }) => {
   const TextNumber = ({ number, text }) => {
@@ -39,7 +40,7 @@ const ProfileStatistics = ({ followers = 0, following = 0, posts = 0, products =
 }
 
 
-export default function AboutCard({user, postsLength}) {
+export default function AboutCard({ user, postsLength }) {
   const fullName = user?.firstName + ' ' + user?.lastName
   const { t } = useTranslation()
   const parsedDate = moment(user.birthDate, 'YYYY-MM-DD')
@@ -52,7 +53,9 @@ export default function AboutCard({user, postsLength}) {
       <Card sx={{ maxWidth: '1fr', gridColumn: 'unset' }}>
         <div style={{ padding: 10, float: 'right', color: 'green', cursor: 'pointer' }}>{t('COMMON.ONLINE')}</div>
         <CardHeader subheader={'@' + user?.username} subtitle={'ahoj'} title={fullName} />
+
         <CardContent>
+
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
             <Box>
               <DateRangeIcon /> {t('PROFILE.USER_FIRST_REGISTERED')} srpen 2021
@@ -72,6 +75,12 @@ export default function AboutCard({user, postsLength}) {
             <Box>
               <AccessTimeIcon /> {t('COMMON.LAST_ACTIVE')} : 10 minutes
             </Box>
+          </Box>
+          <Divider style={{ marginTop: '20px' }} />
+          <Box sx={{marginTop: '20px'}}>
+            <SocialIcon style={{marginLeft: '10px'}} url="https://twitter.com/jaketrent" />
+            <SocialIcon style={{marginLeft: '10px'}} url="https://facebook.com/jaketrent" />
+            <SocialIcon style={{marginLeft: '10px'}} url="https://instagram.com/jaketrent" />
           </Box>
           <Divider style={{ marginTop: '20px' }} />
           <ProfileStatistics followers={user.followers.length}

@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import AboutCard from '../../layout/about-card'
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router'
-import { Posts } from './components/Posts'
+import { Posts } from './components/post/Posts'
 import Paper from '@mui/material/Paper'
 import { useDispatch, useSelector } from 'react-redux'
 import Tabs from '@mui/material/Tabs'
@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom'
 import { MiniUser } from './components/MiniUser'
 import FollowersModal from './modals/FollowersModal'
 import { loadPosts } from '../../redux/posts.action'
-import Alert from '@mui/material/Alert'
+import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
 
 
 export const NotSubscribed = () => {
@@ -64,11 +64,6 @@ export function Profile(props) {
   const [selectedTab, setSelectedTab] = React.useState(0)
 
   return <div>
-    <Alert severity="info" sx={{marginTop: '20px'}}>
-      <div>This is an info alert — check it out!</div>
-      <div>This is an info alert — check it out!</div>
-      <div>This is an info alert — check it out!</div>
-    </Alert>
     <Box sx={{ 'mt': 2 }}>
       <Box className="profileGrid" sx={{
         display: 'grid', gridTemplateColumns: {
@@ -78,40 +73,24 @@ export function Profile(props) {
       }} xs={{
         display: 'none'
       }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', color: 'black' }}>
-          <Box style={{ marginBottom: '10px' }}>
-            <MiniUser user={user?.profileUser} />
-            <span style={{ color: 'gray' }}> {t('COMMON.BALANCE')} : 100,-</span>
-          </Box>
-          <Link style={{ color: 'black', padding: '5px 0' }} to={'/'}>{t('USERMENU.MY_PAGE')}</Link>
-          <Link style={{ color: 'black', padding: '5px 0' }} to={'/edit'}>{t('USERMENU.EDIT_PROFILE')}</Link>
-          <Link style={{ color: 'black', padding: '5px 0' }} to={'/'}>{t('USERMENU.MESSAGES')}</Link>
-          <Link style={{ color: 'black', padding: '5px 0' }} to={'/'}>{t('USERMENU.MARKETPLACE')}</Link>
-          <Link style={{
-            color: 'black', padding: '5px 0',
-            ':hover': {
-              background: 'red',
-              display: 'none'
-            }
-          }} to={'/'}>{t('USERMENU.TRANSACTIONS')}</Link>
-        </Box>
-        <div>
+        <SharedLeftMenu />
+        <Box>
           <ProfileCard profileUser={user?.profileUser} />
           <div style={{ marginTop: '10px' }}>
-            <FollowersModal profileUser={user?.profileUser} />
             <Paper style={{
               padding: 5,
               justifyContent: 'center',
-              marginTop: 10,
+              margin: '10px 0',
               display: 'flex',
               alignItems: 'center',
               justifyAlign: 'center'
             }}>
               <SubscribeButton />
             </Paper>
+            <FollowersModal profileUser={user?.profileUser} />
           </div>
-        </div>
-        <div>
+        </Box>
+        <Box>
           <AboutCard user={user.profileUser} postsLength={posts.length} />
           <div>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -131,7 +110,7 @@ export function Profile(props) {
               <AddProductModal />
             </TabPanel>
           </div>
-        </div>
+        </Box>
 
       </Box>
     </Box>
