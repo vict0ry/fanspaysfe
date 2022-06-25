@@ -22,6 +22,7 @@ import CardHeader from '@mui/material/CardHeader'
 import Avatar from '@mui/material/Avatar'
 import red from '@mui/material/colors/red'
 import PostMenu from './PostMenu'
+import { beURL } from '../../../../config'
 
 
 export const Posts = ({ profileUser, posts }) => {
@@ -31,7 +32,7 @@ export const Posts = ({ profileUser, posts }) => {
   const [likedPosts, setLikedPosts] = useState([])
 
 
-  const avatar = (image) => `http://localhost:3003` + image
+  const avatar = (image) => beURL + '/' + image
   const handleLikePost = (postId) => {
     const hasLike = likedPosts.includes(postId)
     const filteredLikedPosts = hasLike ? likedPosts.filter(i => i !== postId) : [...likedPosts, postId]
@@ -72,7 +73,7 @@ export const Posts = ({ profileUser, posts }) => {
               }
               avatar={
                 <Avatar sx={{ width: '55px', height: '55px' }} aria-label="recipe">
-                  <img style={{ width: '100%' }} src={'http://localhost:3003' + message.postedBy.profilePic} />
+                  <img style={{ width: '100%' }} src={beURL + '/' + message.postedBy.profilePic} />
                 </Avatar>
               }
               title={message.postedBy.firstName + ' ' + message.postedBy.lastName}
@@ -88,7 +89,7 @@ export const Posts = ({ profileUser, posts }) => {
               <div className="post-pictures">
                 <Box>
                   <FbImageLibrary images={message?.pictures?.map(i => {
-                    return 'http://localhost:3003' + i
+                    return beURL + '/' + i
                   })} />
                 </Box>
               </div>
@@ -127,7 +128,7 @@ export const Posts = ({ profileUser, posts }) => {
             <Divider />
             <Box sx={{ display: 'flex', mt: 2, justifyAlign: 'center', alignItems: 'center' }}>
               <img style={{ width: '40px', height: '40px', marginRight: '10px', borderRadius: '100%' }}
-                   src={'http://localhost:3003' + loggedUser.userData.profilePic} alt="" />
+                   src={beURL + '/' + loggedUser.userData.profilePic} alt="" />
               <TextField
                 value={comment}
                 onChange={(e) => handleCommentChange(e)}

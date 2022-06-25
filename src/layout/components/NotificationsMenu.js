@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { Paper } from '@mui/material'
 import axios from 'axios'
 import Divider from '@mui/material/Divider'
+import { beURL } from '../../config'
 
 export const UserNotification = ({ user, type }) => {
   let description
@@ -21,7 +22,7 @@ export const UserNotification = ({ user, type }) => {
     <div className="avatar-wrapper" style={{ marginRight: '5px' }}>
       <img
         style={{ borderRadius: '100%' }}
-        src={'http://localhost:3003' + user?.profilePic}
+        src={beURL + '/' + user?.profilePic}
         alt=""
         width={'50px'}
       />

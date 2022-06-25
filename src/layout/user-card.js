@@ -10,6 +10,7 @@ import { t } from 'i18next'
 import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
+import { beURL } from '../config'
 
 styled((props) => {
   const { expand, ...other } = props
@@ -21,7 +22,7 @@ styled((props) => {
     duration: theme.transitions.duration.shortest
   })
 }))
-const avatar = (image) => `http://localhost:3003` + image
+const avatar = (image) => beURL + '/' + image
 export default function ProfileCard({ profileUser }) {
 
   return (

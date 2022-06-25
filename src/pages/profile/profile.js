@@ -91,7 +91,7 @@ export function Profile(props) {
           </div>
         </Box>
         <Box>
-          <AboutCard user={user.profileUser} postsLength={posts.length} />
+          <AboutCard user={user?.profileUser} postsLength={posts.length} />
           <div>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <Tabs value={selectedTab} onChange={handleChange} aria-label="basic tabs example">

@@ -43,7 +43,7 @@ const ProfileStatistics = ({ followers = 0, following = 0, posts = 0, products =
 export default function AboutCard({ user, postsLength }) {
   const fullName = user?.firstName + ' ' + user?.lastName
   const { t } = useTranslation()
-  const parsedDate = moment(user.birthDate, 'YYYY-MM-DD')
+  const parsedDate = moment(user?.birthDate, 'YYYY-MM-DD')
   const parsedDay = parsedDate.get('day')
   const parsedMonth = parsedDate.format('MMMM')
   const parsedYear = parsedDate.get('year')
@@ -83,13 +83,13 @@ export default function AboutCard({ user, postsLength }) {
             <SocialIcon style={{marginLeft: '10px'}} url="https://instagram.com/jaketrent" />
           </Box>
           <Divider style={{ marginTop: '20px' }} />
-          <ProfileStatistics followers={user.followers.length}
+          <ProfileStatistics followers={user?.followers.length}
                              posts={postsLength}
-                             following={user.following.length} />
+                             following={user?.following.length} />
           <Divider />
           <Box sx={{ textAlign: 'left', marginTop: 2 }}>
             <strong>{t('COMMON.DESCRIPTION')}:</strong>
-            <p>{user.description}</p>
+            <p>{user?.description}</p>
           </Box>
         </CardContent>
       </Card>

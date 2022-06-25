@@ -10,13 +10,14 @@ import Box from '@mui/material/Box'
 import { t } from 'i18next'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { beURL } from '../../config'
 
 export const UserMessages = ({ user, description }) => {
   return <div style={{ display: 'flex', marginBottom: 20 }} className="user-info">
     <div className="avatar-wrapper" style={{ marginRight: '5px' }}>
       <img
         style={{ borderRadius: '100%' }}
-        src={'http://localhost:3003' + user?.profilePic}
+        src={beURL + '/' + user?.profilePic}
         alt=""
         width={'50px'}
       />

@@ -22,6 +22,7 @@ import { MessagesMenu } from './components/MessagesMenu'
 import { Container } from '@mui/material'
 import { logoutUser } from '../redux/user.action'
 import { MiniUser } from '../pages/profile/components/MiniUser'
+import { beURL } from '../config'
 
 
 export default function SearchBar() {
@@ -33,7 +34,7 @@ export default function SearchBar() {
 
   useEffect(() => {
     const io = require('socket.io-client')
-    const socket = io('http://localhost:3003')
+    const socket = io(beURL)
     socket.on('connect', () => {
       console.log(socket.id)
     })

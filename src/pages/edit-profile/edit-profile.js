@@ -59,7 +59,7 @@ export function EditProfile(props) {
   useEffect(() => {
     setUserForm(profileUser)
     if (profileUser.profilePic) {
-      setAvatar({ img: 'http://localhost:3003' + profileUser.profilePic })
+      setAvatar({ img: beURL + '/' + profileUser.profilePic })
     }
   }, [])
   const handleFormChange = (evt) => {

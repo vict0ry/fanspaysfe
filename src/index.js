@@ -24,9 +24,10 @@ import i18n from './i18n'
 import { Shop } from './pages/Shop'
 import MainLayout from './layout/main-layout'
 import { Customer } from './pages/customer/customer'
+import { beURL } from './config'
 
 const target = document.querySelector('#root')
-axios.defaults.baseURL = 'http://localhost:3003/'
+axios.defaults.baseURL = beURL
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('user')
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
