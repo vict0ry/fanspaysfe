@@ -25,6 +25,8 @@ import { Shop } from './pages/Shop'
 import MainLayout from './layout/main-layout'
 import { Customer } from './pages/customer/customer'
 import { beURL } from './config'
+import { ThemeProvider } from '@mui/material'
+import { createTheme } from '@mui/material/styles'
 
 const target = document.querySelector('#root')
 axios.defaults.baseURL = beURL
@@ -40,7 +42,21 @@ const PrivateWrapper = () => {
   return auth ? <Outlet /> : <Navigate to="/login" />;
 }
 
+const muiTheme = createTheme({
+  palette: {
+    text:{
+      primary: "#000"
+    },
+    primary: {
+      main: '#fff',
+      contrastText: '#000',
+      color: 'black'
+    },
+  },
+});
+
 root.render(
+  <ThemeProvider theme={muiTheme}>
   <I18nextProvider i18n={i18n}>
     <Provider store={store}>
       <SocketContext.Provider value={socket}>
@@ -87,4 +103,5 @@ root.render(
       </SocketContext.Provider>
     </Provider>
   </I18nextProvider>
+  </ThemeProvider>
 )
