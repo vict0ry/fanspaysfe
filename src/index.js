@@ -3,7 +3,7 @@ import * as ReactDOMClient from 'react-dom/client'
 import { Provider } from 'react-redux'
 import store, { history } from './store'
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Navigate, Routes, Outlet } from 'react-router-dom'
 
 import { PersistGate } from 'redux-persist/integration/react'
 
@@ -32,6 +32,13 @@ axios.defaults.headers.common['Authorization'] = localStorage.getItem('user')
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 const root = ReactDOMClient.createRoot(target)
+const PrivateWrapper = () => {
+  const auth = !!localStorage.getItem('user') || null; // determine if authorized, from context or however you're doing it
+
+  // If authorized, return an outlet that will render child elements
+  // If not, return element that will navigate to login page
+  return auth ? <Outlet /> : <Navigate to="/login" />;
+}
 
 root.render(
   <I18nextProvider i18n={i18n}>
@@ -41,18 +48,38 @@ root.render(
           <BrowserRouter history={history}>
             <Routes>
               <Route path="/" element={<MainLayout />}>
-                <Route path="/home" element={<Home />} />
-                <Route path="/shop/" element={<Shop />} />
-                <Route path="/shop/:username" element={<Shop />} />
-                <Route path="profile" element={<Profile />} />
-                <Route path="profile/:username" element={<Profile />} />
-                <Route path="edit" element={<EditProfile />} />
-                <Route path="customer" element={<Customer />} />
+                <Route element={<PrivateWrapper />}>
+                  <Route path="/home" element={<Home />} />
+                </Route>
+                <Route element={<PrivateWrapper />}>
+                  <Route path="/shop/" element={<Shop />} />
+                </Route>
+                <Route element={<PrivateWrapper />}>
+                  <Route path="/shop/:username" element={<Shop />} />
+                </Route>
+                <Route element={<PrivateWrapper />}>
+                  <Route path="profile" element={<Profile />} />
+                </Route>
+                <Route element={<PrivateWrapper />}>
+                  <Route path="profile/:username" element={<Profile />} />
+                </Route>
+                <Route element={<PrivateWrapper />}>
+                  <Route path="edit" element={<EditProfile />} />
+                </Route>
+                <Route element={<PrivateWrapper />}>
+                  <Route path="customer" element={<Customer />} />
+                </Route>
                 <Route path="register" element={<Register />} />
                 <Route path="login" element={<Login />} />
-                <Route path="messages" element={<Messages />} />
-                <Route path="messages/:userid" element={<Messages />} />
-                <Route path="users" element={<Users />} />
+                <Route element={<PrivateWrapper />}>
+                  <Route path="messages" element={<Messages />} />
+                </Route>
+                <Route element={<PrivateWrapper />}>
+                  <Route path="messages/:userid" element={<Messages />} />
+                </Route>
+                <Route element={<PrivateWrapper />}>
+                  <Route path="users" element={<Users />} />
+                </Route>
               </Route>
             </Routes>
           </BrowserRouter>

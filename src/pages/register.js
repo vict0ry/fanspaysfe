@@ -6,7 +6,6 @@ import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
-import Link from '@mui/material/Link'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
@@ -17,6 +16,7 @@ import { connect, useSelector } from 'react-redux'
 import { registerUser } from '../redux/user.action'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 
 const theme = createTheme()
