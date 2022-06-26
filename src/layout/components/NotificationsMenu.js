@@ -63,7 +63,6 @@ export const NotificationsMenu = () => {
       aria-describedby={id}
       onClick={handleClick}
       aria-label="show 17 new notifications"
-      color="inherit"
     >
       <Badge badgeContent={notifications.length} color="error">
         <NotificationsIcon />

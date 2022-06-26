@@ -27,6 +27,9 @@ import { Customer } from './pages/customer/customer'
 import { beURL } from './config'
 import { ThemeProvider } from '@mui/material'
 import { createTheme } from '@mui/material/styles'
+import { blue } from '@mui/material/colors'
+import red from '@mui/material/colors/red'
+import { customTheme, CustomThemeConfig } from './themeConfig'
 
 const target = document.querySelector('#root')
 axios.defaults.baseURL = beURL
@@ -35,28 +38,12 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 const root = ReactDOMClient.createRoot(target)
 const PrivateWrapper = () => {
-  const auth = !!localStorage.getItem('user') || null; // determine if authorized, from context or however you're doing it
-
-  // If authorized, return an outlet that will render child elements
-  // If not, return element that will navigate to login page
+  const auth = !!localStorage.getItem('user') || null;
   return auth ? <Outlet /> : <Navigate to="/login" />;
 }
 
-const muiTheme = createTheme({
-  palette: {
-    text:{
-      primary: "#000"
-    },
-    primary: {
-      main: '#fff',
-      contrastText: '#000',
-      color: 'black'
-    },
-  },
-});
-
 root.render(
-  <ThemeProvider theme={muiTheme}>
+  <ThemeProvider theme={CustomThemeConfig}>
   <I18nextProvider i18n={i18n}>
     <Provider store={store}>
       <SocketContext.Provider value={socket}>

@@ -25,6 +25,6 @@ export const SubscribeButton = () => {
     {!isSubscribed() ?
       <Button onClick={handleFollow} variant='contained' style={{ marginTop: 10 }}>Subscribe for 7$ in a
         month</Button> :
-      <Button onClick={handleFollow} variant='contained' style={{ marginTop: 10 }}>{t('COMMON.UNSUBSCRIBE')}</Button>}
+      <Button onClick={handleFollow} color="primary" variant='dashed' style={{ marginTop: 10 }}>{t('COMMON.UNSUBSCRIBE')}</Button>}
   </div>
 }

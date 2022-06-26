@@ -1,11 +1,6 @@
 body {
-    background: #f2f7ff !important;
+    background: #F7F5F9 !important;
 }
-
-a {
-    color: white;
-}
-
 /* custom scrollbar */
 ::-webkit-scrollbar {
     width: 20px;

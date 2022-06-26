@@ -38,7 +38,7 @@ export default function ProfileCard({ profileUser }) {
         <Box sx={{ marginTop: '5px' }}>
           <Link to={'/messages/' + profileUser?._id}>
             <Button
-              variant={'outlined'}>{t('COMMON.SEND_MESSAGE')}
+              variant={'gardient'}>{t('COMMON.SEND_MESSAGE')}
             </Button>
           </Link>
         </Box>

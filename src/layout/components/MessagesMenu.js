@@ -60,7 +60,6 @@ export const MessagesMenu = () => {
       aria-describedby={id}
       onClick={handleClick}
       aria-label="show 17 new mesages"
-      color="inherit"
     >
       <Badge badgeContent={chatList.length} color="error">
         <MailIcon />

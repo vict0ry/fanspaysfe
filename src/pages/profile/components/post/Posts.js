@@ -32,7 +32,7 @@ export const Posts = ({ profileUser, posts }) => {
   const [likedPosts, setLikedPosts] = useState([])
 
 
-  const avatar = (image) => beURL + '/' + image
+  const avatar = (image) => beURL + image
   const handleLikePost = (postId) => {
     const hasLike = likedPosts.includes(postId)
     const filteredLikedPosts = hasLike ? likedPosts.filter(i => i !== postId) : [...likedPosts, postId]
@@ -89,7 +89,7 @@ export const Posts = ({ profileUser, posts }) => {
               <div className="post-pictures">
                 <Box>
                   <FbImageLibrary images={message?.pictures?.map(i => {
-                    return beURL + '/' + i
+                    return beURL + i
                   })} />
                 </Box>
               </div>

@@ -83,14 +83,14 @@ export default function SendTipModal({ recipient, children }) {
             name={'amount'}
             type={'number'}
             sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('PROFILE.TIP_AMOUNT')}
-            variant="outlined" required />
+            variant="contained" required />
           <Divider />
           <TextField style={{ marginTop: 10 }}
                      name={'description'}
                      multiline
                      minRows={2}
                      sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('COMMON.MESSAGE')}
-                     variant="outlined" />
+                     variant="contained" />
 
           <Button onClick={() => handleCreditSend(recipient)}
                   disabled={!formData.amount}
