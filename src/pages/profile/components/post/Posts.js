@@ -128,7 +128,7 @@ export const Posts = ({ profileUser, posts }) => {
             <Divider />
             <Box sx={{ display: 'flex', mt: 2, justifyAlign: 'center', alignItems: 'center' }}>
               <img style={{ width: '40px', height: '40px', marginRight: '10px', borderRadius: '100%' }}
-                   src={beURL + '/' + loggedUser.userData.profilePic} alt="" />
+                   src={beURL + loggedUser.userData.profilePic} alt="" />
               <TextField
                 value={comment}
                 onChange={(e) => handleCommentChange(e)}
