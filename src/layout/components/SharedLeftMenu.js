@@ -19,7 +19,7 @@ export const SharedLeftMenu = () => {
     </Box>
     <div className="link">
       <img style={iconStyle} src="/images/icons/user.svg" alt="my page" />
-      <Link style={linkStyles} to={'/'}>{t('USERMENU.MY_PAGE')}</Link>
+      <Link style={linkStyles} to={'/profile/'}>{t('USERMENU.MY_PAGE')}</Link>
     </div>
     <div className="link">
       <img style={iconStyle} src="/images/icons/pencil.svg" alt="" />
@@ -27,7 +27,7 @@ export const SharedLeftMenu = () => {
     </div>
     <div className="link">
       <img style={iconStyle} src="/images/icons/chat-circle-dots.svg" alt="" />
-      <Link style={linkStyles} to={'/'}>{t('USERMENU.MESSAGES')}</Link>
+      <Link style={linkStyles} to={'/messages'}>{t('USERMENU.MESSAGES')}</Link>
     </div>
     <div className="link">
       <img style={iconStyle} src="/images/icons/shopping-cart.svg" alt="" />
@@ -35,7 +35,7 @@ export const SharedLeftMenu = () => {
     </div>
     <div className="link">
       <img style={iconStyle} src="/images/icons/wallet.svg" alt="" />
-      <Link style={linkStyles} to={'/'}>{t('USERMENU.TRANSACTIONS')}</Link>
+      <Link style={linkStyles} to={'/customer'}>{t('USERMENU.TRANSACTIONS')}</Link>
     </div>
   </Box>
 }

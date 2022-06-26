@@ -20,6 +20,7 @@ import { NotSubscribed } from './profile/profile'
 import axios from 'axios'
 import { postsLoaded } from '../redux/posts.action'
 import { useSelector } from 'react-redux'
+import Button from '@mui/material/Button'
 
 const UserCard = () => {
   return <Link to={'/'} style={{ cursor: 'pointer' }}>
@@ -44,7 +45,6 @@ export const Home = () => {
   useEffect(() => {
     const data = axios.get('/api/posts/').then(posts => {
       setPosts(posts.data);
-      debugger;
     })
   }, [])
   return <div>
@@ -75,6 +75,10 @@ export const Home = () => {
             <UserCard />
             <UserCard />
           </Paper>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '10px 0'}}>
+              <span>TOP autoru</span>
+              <Button variant="contained">{t('Chci do topu')}</Button>
+            </div>
           </div>
           <div>
             <Box className="profileGrid" sx={{
