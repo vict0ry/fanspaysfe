@@ -112,17 +112,6 @@ function Register(props) {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="repeat-password"
-                  label={t('COMMON.REPEAT_PASSWORD')}
-                  type="password"
-                  id="repeat-password"
-                  autoComplete="repeat-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
@@ -135,7 +124,7 @@ function Register(props) {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              {t('COMMON.SIGNUP')}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>

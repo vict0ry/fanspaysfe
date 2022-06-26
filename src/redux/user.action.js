@@ -9,7 +9,7 @@ export const registerUser = (data) => {
     }).then(token => {
       localStorage.setItem('user', token.data)
       const user = decodeToken(token.data)
-      return dispatch(userLoggedIn(user.data.profileUser))
+      return dispatch(userLoggedIn(user))
     })
   }
 }

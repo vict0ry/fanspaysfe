@@ -7,7 +7,7 @@ export const MiniUser = ({ user }) => {
       <div className="avatar-wrapper" style={{ marginRight: '5px' }}>
         <img
           style={{ borderRadius: '100%' }}
-          src={beURL + '/' + user?.profilePic}
+          src={beURL + user?.profilePic}
           alt=""
           width={'50px'}
         />
