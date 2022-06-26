@@ -25,16 +25,15 @@ const UserCard = () => {
   return <Link to={'/'} style={{ cursor: 'pointer' }}>
     <CardContent>
       <CardMedia
-        style={{borderRadius: '50px'}}
+        style={{borderRadius: '50%'}}
         component="img"
         image="https://demo.youdate.website/content/cache/stock/men/conor-sexton-434549-unsplash.jpg/4ac4b30045e9ba84f647a3d1a98d6284.jpg"
         alt="Paella dish"
       />
       <div style={{
         textAlign: 'center',
-        textDecoration: 'underline',
-        color: 'blue'
-      }}>Victor Eliot
+        color: 'black'
+      }}>Victor<br/>Eliot
       </div>
     </CardContent>
   </Link>
@@ -94,15 +93,11 @@ export const Home = () => {
                   margin: '10px 0',
                   display: 'column',
                   maxWidth: '200px',
+                  height: '100vh',
                   alignItems: 'center',
                   justifyAlign: 'center'
                 }}>
-                  <UserCard />
-                  <UserCard />
-                  <UserCard />
-                  <UserCard />
-                  <UserCard />
-                  <UserCard />
+
                 </Paper>
               </div>
             </Box>
