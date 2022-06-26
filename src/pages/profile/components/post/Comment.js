@@ -54,9 +54,9 @@ export const Comment = ({ comment, isSubComment }) => {
     <Divider sx={{ mt: 2 }} />
     <Box sx={{ display: 'flex' }}>
       <Box onClick={() => handleCommentLike(commentState)} sx={{ cursor: 'pointer' }} className="like-wrapper">
-        <IconButton style={{ color: commentState.likes.includes(user._id) ? 'red' : 'gray' }} aria-label="like">
+        <IconButton style={{ color: commentState.likes?.includes(user._id) ? 'red' : 'gray' }} aria-label="like">
           <FavoriteIcon />
-        </IconButton>{commentState.likes.length} Like
+        </IconButton>{commentState?.likes?.length} Like
       </Box>
       <Box sx={{ cursor: 'pointer' }} className="comment-wrapper" onClick={() => handleShowCommentBox()}>
         <IconButton aria-label="comments">

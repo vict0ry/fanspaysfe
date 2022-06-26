@@ -25,7 +25,7 @@ import PostMenu from './PostMenu'
 import { beURL } from '../../../../config'
 
 
-export const Posts = ({ profileUser, posts }) => {
+export const Posts = ({ profileUser, posts, disableAdd = false }) => {
   const dispatch = useDispatch()
   const { username } = useParams()
   const loggedUser = useSelector(state => state.user)
@@ -51,11 +51,18 @@ export const Posts = ({ profileUser, posts }) => {
   const [isHidden, setIsHidden] = useState(true)
   return (
     <div>
-      <AddPostModal />
+      { !disableAdd ? <AddPostModal /> : '' }
 
       {!posts.length ? t('COMMON.NOTHING_HERE_YET') : posts?.map((message, index) => {
         function colorBasedLike(message) {
           return !message?.likes?.includes(loggedUser.userData._id) ? 'gray' : 'red'
+        }
+        if (!message) {
+          debugger;
+        }
+        if (!message.postedBy) {
+          debugger;
+          return '';
         }
 
         return <div key={index}>
@@ -73,15 +80,13 @@ export const Posts = ({ profileUser, posts }) => {
               }
               avatar={
                 <Avatar sx={{ width: '55px', height: '55px' }} aria-label="recipe">
-                  <img style={{ width: '100%' }} src={beURL + message.postedBy.profilePic} />
+                  <img style={{ width: '100%' }} src={beURL + message.postedBy?.profilePic} />
                 </Avatar>
               }
               title={message.postedBy.firstName + ' ' + message.postedBy.lastName}
               subheader={message.postedBy.username}
             >
             </CardHeader>
-            {/*<DeleteIcon onClick={() => handlePostRemove(message._id)}*/}
-            {/*            style={{ float: 'right', color: 'gray', cursor: 'pointer' }} />*/}
             <CardContent>
               <Typography variant="body1">
                 {message.content}
