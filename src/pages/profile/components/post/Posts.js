@@ -27,7 +27,6 @@ import { beURL } from '../../../../config'
 
 export const Posts = ({ profileUser, posts, disableAdd = false }) => {
   const dispatch = useDispatch()
-  const { username } = useParams()
   const loggedUser = useSelector(state => state.user)
   const [likedPosts, setLikedPosts] = useState([])
 
@@ -58,10 +57,9 @@ export const Posts = ({ profileUser, posts, disableAdd = false }) => {
           return !message?.likes?.includes(loggedUser.userData._id) ? 'gray' : 'red'
         }
         if (!message) {
-          debugger;
+          return '';
         }
         if (!message.postedBy) {
-          debugger;
           return '';
         }
 
