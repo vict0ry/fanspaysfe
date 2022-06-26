@@ -117,8 +117,7 @@ export function Messages() {
           <Box sx={{ width: '100%' }}>
             <TextField onChange={() => handleMessageOnKeyDown(event.target.value)}
                        value={userMessage}
-                       sx={{ width: '100%', padding: '0', marginLeft: 0 }} id="outlined-basic" label="Message"
-                       variant="contained" />
+                       sx={{ width: '100%', padding: '0', marginLeft: 0 }} id="outlined-basic" label="Message" />
             <ImageIcon onClick={() => {
             }} style={{ color: '#5c9edf', cursor: 'pointer' }}>
 
@@ -136,7 +135,7 @@ export function Messages() {
           <Button
             disabled={!userMessage.length}
             onClick={() => handleAddMessage()}
-            sx={{ padding: 0, marginLeft: '5px' }} variant="contained">Send</Button>
+            sx={{ padding: 0, color: 'white', marginLeft: '5px' }} variant="contained">Send</Button>
         </Toolbar>
       </Paper>
     </div>

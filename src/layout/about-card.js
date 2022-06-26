@@ -44,9 +44,9 @@ export const InfoIcon = ({title, icon, afterIcon}) => {
     display: 'flex', borderRadius: '8px', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
     background: 'rgba(247, 245, 249, 0.5)', width: '168px', height: '80px'}}>
     <div style={{color: '#5D5E65', fontWeight: 700, fontSize: '14px'}}>{title} </div>
-    <div style={{marginTop: '5px'}}>
-      <img src={icon} />
-      <span style={{marginLeft: '5px'}} style={{fontWeight: '700'}}>{afterIcon}
+    <div style={{marginTop: '10px', display: 'flex', alignItems: 'center'}}>
+      <div style={{marginRight: '10px'}}><img src={icon} /></div>
+      <span style={{fontWeight: '700'}}>{afterIcon}
       </span>
     </div>
   </Box>
@@ -74,7 +74,7 @@ export default function AboutCard({ user, postsLength }) {
             <InfoIcon afterIcon={new Date(parsedDate).toLocaleDateString('cs-CZ')} icon={'/images/icons/gift.svg'} title={t('PROFILE.BIRTH_DATE')}></InfoIcon>
             <InfoIcon afterIcon={t(getZodiac(parsedDay, parsedMonth))} icon={'/images/icons/zodiac-aries.svg'} title={t('PROFILE.ZODIAC')}></InfoIcon>
             <InfoIcon afterIcon={t('10 minutes')} icon={'/images/icons/time.svg'} title= {t('COMMON.LAST_ACTIVE')}></InfoIcon>
-            <InfoIcon afterIcon={t('10 minutes')} icon={'/images/icons/map-pin.svg'} title= {t('COMMON.LAST_ACTIVE')}></InfoIcon>
+            <InfoIcon afterIcon={t('Male')} icon={'/images/icons/map-pin.svg'} title= {t('COMMON.SEX')}></InfoIcon>
           </Box>
 
           <Box sx={{ textAlign: 'left', marginTop: 2 }}>
