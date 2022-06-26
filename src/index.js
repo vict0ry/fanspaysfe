@@ -48,9 +48,7 @@ root.render(
           <BrowserRouter history={history}>
             <Routes>
               <Route path="/" element={<MainLayout />}>
-                <Route element={<PrivateWrapper />}>
-                  <Route path="/home" element={<Home />} />
-                </Route>
+                <Route path="/" element={<Home />} />
                 <Route element={<PrivateWrapper />}>
                   <Route path="/shop/" element={<Shop />} />
                 </Route>

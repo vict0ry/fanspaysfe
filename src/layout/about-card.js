@@ -41,10 +41,14 @@ const ProfileStatistics = ({ followers = 0, following = 0, posts = 0, products =
 
 export const InfoIcon = ({title, icon, afterIcon}) => {
   return <Box style={{
-    display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
+    display: 'flex', borderRadius: '8px', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
     background: 'rgba(247, 245, 249, 0.5)', width: '168px', height: '80px'}}>
-    <div style={{color: '#5D5E65', fontSize: '14px'}}>{title} </div>
-    <div><img src={icon} /><span style={{fontWeight: '700'}}>{afterIcon}</span></div>
+    <div style={{color: '#5D5E65', fontWeight: 700, fontSize: '14px'}}>{title} </div>
+    <div style={{marginTop: '5px'}}>
+      <img src={icon} />
+      <span style={{marginLeft: '5px'}} style={{fontWeight: '700'}}>{afterIcon}
+      </span>
+    </div>
   </Box>
 }
 
@@ -58,41 +62,33 @@ export default function AboutCard({ user, postsLength }) {
 
 
   return (<div>
-      <Card sx={{ maxWidth: '1fr',width: '590px', height: '360px', gridColumn: 'unset' }}>
+      <Card sx={{ maxWidth: '1fr',width: '590px', gridColumn: 'unset' }}>
         <div style={{ padding: 10, float: 'right', color: 'green', cursor: 'pointer' }}>{t('COMMON.ONLINE')}</div>
         <CardHeader subheader={'@' + user?.username} subtitle={'ahoj'} title={fullName} />
 
         <CardContent>
 
-          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 2 }}>
             <InfoIcon afterIcon={'srpen 2021'} icon={'/images/icons/calendar.svg'} title={t('PROFILE.USER_FIRST_REGISTERED')}></InfoIcon>
             <InfoIcon afterIcon={'Praha'} icon={'/images/icons/map-pin.svg'} title={t('Location')}></InfoIcon>
-
-            <Box>
-              <LinkIcon /> <Link to={'https://cbdsvet.cz'} style={{ color: 'black' }}>https://cbdsvet.cz</Link>
-            </Box>
-            <Box>
-              <CalendarMonthIcon /> {t('PROFILE.BIRTH_DATE')} {new Date(parsedDate).toLocaleDateString('cs-CZ')}
-            </Box>
-            <Box>
-              <ScaleIcon /> {t('PROFILE.ZODIAC')} : {t(getZodiac(parsedDay, parsedMonth))}
-            </Box>
-            <Box>
-              <AccessTimeIcon /> {t('COMMON.LAST_ACTIVE')} : 10 minutes
-            </Box>
+            <InfoIcon afterIcon={new Date(parsedDate).toLocaleDateString('cs-CZ')} icon={'/images/icons/gift.svg'} title={t('PROFILE.BIRTH_DATE')}></InfoIcon>
+            <InfoIcon afterIcon={t(getZodiac(parsedDay, parsedMonth))} icon={'/images/icons/zodiac-aries.svg'} title={t('PROFILE.ZODIAC')}></InfoIcon>
+            <InfoIcon afterIcon={t('10 minutes')} icon={'/images/icons/time.svg'} title= {t('COMMON.LAST_ACTIVE')}></InfoIcon>
+            <InfoIcon afterIcon={t('10 minutes')} icon={'/images/icons/map-pin.svg'} title= {t('COMMON.LAST_ACTIVE')}></InfoIcon>
           </Box>
-          <Divider style={{ marginTop: '20px' }} />
-          <Divider style={{ marginTop: '20px' }} />
-          <ProfileStatistics followers={user?.followers.length}
-                             posts={postsLength}
-                             following={user?.following.length} />
-          <Divider />
+
           <Box sx={{ textAlign: 'left', marginTop: 2 }}>
             <strong>{t('COMMON.DESCRIPTION')}:</strong>
             <p>{user?.description}</p>
           </Box>
         </CardContent>
       </Card>
+
+    <Card sx={{ maxWidth: '1fr',width: '590px', marginTop: '10px', gridColumn: 'unset' }}>
+      <ProfileStatistics followers={user?.followers.length}
+                         posts={postsLength}
+                         following={user?.following.length} />
+    </Card>
     </div>
   )
 }

@@ -190,7 +190,9 @@ export default function SearchBar() {
               {/*>*/}
               {/*  <MenuIcon />*/}
               {/*</IconButton>*/}
-              <img src="/logo.svg" alt="" width={'150px'} />
+              <Link to={'/'}>
+                <img src="/logo.svg" alt="" width={'150px'} />
+              </Link>
               <SearchInput />
               <Box sx={{ flexGrow: 1 }} />
               {!loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
