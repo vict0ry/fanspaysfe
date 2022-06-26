@@ -154,7 +154,6 @@ export default function SearchBar() {
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
-          color="inherit"
         >
           <Badge badgeContent={17} color="error">
             <NotificationsIcon />
@@ -168,7 +167,6 @@ export default function SearchBar() {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
         >
           <AccountCircle />
         </IconButton>
@@ -192,14 +190,7 @@ export default function SearchBar() {
               {/*>*/}
               {/*  <MenuIcon />*/}
               {/*</IconButton>*/}
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ display: { xs: 'none', sm: 'block' } }}
-              >
-                NONAME.cz
-              </Typography>
+              <img src="/logo.svg" alt="" width={'150px'} />
               <SearchInput />
               <Box sx={{ flexGrow: 1 }} />
               {!loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
@@ -226,7 +217,6 @@ export default function SearchBar() {
                   aria-controls={menuId}
                   aria-haspopup="true"
                   onClick={handleProfileMenuOpen}
-                  color="inherit"
                 >
                   <AccountCircle />
                 </IconButton>
@@ -238,7 +228,6 @@ export default function SearchBar() {
                   aria-controls={mobileMenuId}
                   aria-haspopup="true"
                   onClick={handleMobileMenuOpen}
-                  color="inherit"
                 >
                   <MoreIcon />
                 </IconButton>
