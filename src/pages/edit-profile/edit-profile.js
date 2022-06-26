@@ -16,6 +16,7 @@ import { AddCreditCard } from '../../components/AddCreditCard'
 import { EasyDatePicker } from './components/easyDatePicker'
 import { TabContacts } from '../../components/TabContacts'
 import { loadProfile } from '../../redux/profile.action'
+import { beURL } from '../../config'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props

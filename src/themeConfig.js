@@ -1,7 +1,11 @@
 import { createTheme } from '@mui/material/styles'
 
 export const CustomThemeConfig = createTheme({
-  components: {
+  typography: {
+    fontFamily: 'Manrope, sans-serif',
+    textDecoration: 'none'
+  },
+      components: {
     MuiButton: {
       variants: [
         {

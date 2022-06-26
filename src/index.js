@@ -26,10 +26,7 @@ import MainLayout from './layout/main-layout'
 import { Customer } from './pages/customer/customer'
 import { beURL } from './config'
 import { ThemeProvider } from '@mui/material'
-import { createTheme } from '@mui/material/styles'
-import { blue } from '@mui/material/colors'
-import red from '@mui/material/colors/red'
-import { customTheme, CustomThemeConfig } from './themeConfig'
+import { CustomThemeConfig } from './themeConfig'
 
 const target = document.querySelector('#root')
 axios.defaults.baseURL = beURL

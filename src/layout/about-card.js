@@ -39,6 +39,14 @@ const ProfileStatistics = ({ followers = 0, following = 0, posts = 0, products =
   </Box>
 }
 
+export const InfoIcon = ({title, icon, afterIcon}) => {
+  return <Box style={{
+    display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
+    background: 'rgba(247, 245, 249, 0.5)', width: '168px', height: '80px'}}>
+    <div style={{color: '#5D5E65', fontSize: '14px'}}>{title} </div>
+    <div><img src={icon} /><span style={{fontWeight: '700'}}>{afterIcon}</span></div>
+  </Box>
+}
 
 export default function AboutCard({ user, postsLength }) {
   const fullName = user?.firstName + ' ' + user?.lastName
@@ -50,19 +58,16 @@ export default function AboutCard({ user, postsLength }) {
 
 
   return (<div>
-      <Card sx={{ maxWidth: '1fr', gridColumn: 'unset' }}>
+      <Card sx={{ maxWidth: '1fr',width: '590px', height: '360px', gridColumn: 'unset' }}>
         <div style={{ padding: 10, float: 'right', color: 'green', cursor: 'pointer' }}>{t('COMMON.ONLINE')}</div>
         <CardHeader subheader={'@' + user?.username} subtitle={'ahoj'} title={fullName} />
 
         <CardContent>
 
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-            <Box>
-              <DateRangeIcon /> {t('PROFILE.USER_FIRST_REGISTERED')} srpen 2021
-            </Box>
-            <Box>
-              <LocationOnIcon /> Prague, Czech republic
-            </Box>
+            <InfoIcon afterIcon={'srpen 2021'} icon={'/images/icons/calendar.svg'} title={t('PROFILE.USER_FIRST_REGISTERED')}></InfoIcon>
+            <InfoIcon afterIcon={'Praha'} icon={'/images/icons/map-pin.svg'} title={t('Location')}></InfoIcon>
+
             <Box>
               <LinkIcon /> <Link to={'https://cbdsvet.cz'} style={{ color: 'black' }}>https://cbdsvet.cz</Link>
             </Box>
@@ -77,11 +82,6 @@ export default function AboutCard({ user, postsLength }) {
             </Box>
           </Box>
           <Divider style={{ marginTop: '20px' }} />
-          <Box sx={{marginTop: '20px'}}>
-            <SocialIcon style={{marginLeft: '10px'}} url="https://twitter.com/jaketrent" />
-            <SocialIcon style={{marginLeft: '10px'}} url="https://facebook.com/jaketrent" />
-            <SocialIcon style={{marginLeft: '10px'}} url="https://instagram.com/jaketrent" />
-          </Box>
           <Divider style={{ marginTop: '20px' }} />
           <ProfileStatistics followers={user?.followers.length}
                              posts={postsLength}

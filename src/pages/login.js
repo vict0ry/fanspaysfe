@@ -31,6 +31,8 @@ const Login = (props) => {
       localStorage.setItem('user', token.data)
       const user = decodeToken(token.data)
       return dispatch(userLoggedIn(user))
+    }).then(i => {
+      window.location.replace("/profile");
     })
   }
 
@@ -73,10 +75,6 @@ const Login = (props) => {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
@@ -86,11 +84,11 @@ const Login = (props) => {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link to="/" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+              {/*<Grid item xs>*/}
+              {/*  <Link to="/" variant="body2">*/}
+              {/*    Forgot password?*/}
+              {/*  </Link>*/}
+              {/*</Grid>*/}
               <Grid item>
                 <Link to={"/register"} variant="body2">
                   {'Don\'t have an account? Sign Up'}

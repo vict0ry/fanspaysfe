@@ -73,7 +73,7 @@ export const Posts = ({ profileUser, posts }) => {
               }
               avatar={
                 <Avatar sx={{ width: '55px', height: '55px' }} aria-label="recipe">
-                  <img style={{ width: '100%' }} src={beURL + '/' + message.postedBy.profilePic} />
+                  <img style={{ width: '100%' }} src={beURL + message.postedBy.profilePic} />
                 </Avatar>
               }
               title={message.postedBy.firstName + ' ' + message.postedBy.lastName}

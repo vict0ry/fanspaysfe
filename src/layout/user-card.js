@@ -22,7 +22,7 @@ styled((props) => {
     duration: theme.transitions.duration.shortest
   })
 }))
-const avatar = (image) => beURL + '/' + image
+const avatar = (image) => beURL + image
 export default function ProfileCard({ profileUser }) {
 
   return (
@@ -31,14 +31,14 @@ export default function ProfileCard({ profileUser }) {
         component="img"
         height="250"
         image={avatar(profileUser?.profilePic)}
-        alt="Paella dish"
+        alt="Avatar"
       />
 
       <CardActions sx={{ justifyContent: ' space-around', display: ' flex', flexDirection: ' column' }} disableSpacing>
         <Box sx={{ marginTop: '5px' }}>
           <Link to={'/messages/' + profileUser?._id}>
             <Button
-              variant={'gardient'}>{t('COMMON.SEND_MESSAGE')}
+              variant="contained">{t('COMMON.SEND_MESSAGE')}
             </Button>
           </Link>
         </Box>
@@ -46,15 +46,6 @@ export default function ProfileCard({ profileUser }) {
         <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
           <SendTipModal recipient={profileUser}>Send tip</SendTipModal>
         </Box>
-        {/*<Box sx={{ marginTop: '5px', color: '#626d7a' }}>*/}
-        {/*  <ContactSupportIcon /> Ask question*/}
-        {/*</Box>*/}
-        {/*<Box sx={{ marginTop: '5px', color: '#626d7a' }}>*/}
-        {/*  <ReportGmailerrorredIcon /> Report user*/}
-        {/*</Box>*/}
-        {/*<Box sx={{ marginTop: '5px', color: '#626d7a' }}>*/}
-        {/*  <ContactSupportIcon /> Ask question*/}
-        {/*</Box>*/}
       </CardActions>
     </Card>
   )

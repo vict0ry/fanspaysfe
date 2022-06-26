@@ -1,5 +1,6 @@
 body {
     background: #F7F5F9 !important;
+    font-family: 'Manrope', sans-serif;
 }
 /* custom scrollbar */
 ::-webkit-scrollbar {
@@ -24,3 +25,8 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background-color: #a8bbbf;
 }
+a:-webkit-any-link {
+    text-decoration: none;
+    cursor: pointer;
+}
+
