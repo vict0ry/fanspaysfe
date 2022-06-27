@@ -17,6 +17,7 @@ import { EasyDatePicker } from './components/easyDatePicker'
 import { TabContacts } from '../../components/TabContacts'
 import { loadProfile } from '../../redux/profile.action'
 import { beURL } from '../../config'
+import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props
@@ -129,8 +130,12 @@ export function EditProfile(props) {
   return <div>
     <Box sx={{ 'mt': 2 }}>
 
-      <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 2 }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr 3fr', gap: 2 }}>
+        <div>
+          <SharedLeftMenu />
+        </div>
         <Tabs
+          style={{background:'white'}}
           orientation="vertical"
           variant="scrollable"
           value={value}
@@ -138,14 +143,14 @@ export function EditProfile(props) {
           aria-label="Vertical tabs example"
           sx={{ borderRight: 1, borderColor: 'divider' }}
         >
-          <Tab label={t('COMMON.ABOUT_ME')} {...a11yProps(0)} />
-          <Tab label={t('COMMON.PRICE_SETTINGS')} {...a11yProps(1)} />
-          <Tab label={t('COMMON.PARAMETERS')} {...a11yProps(2)} />
-          <Tab label={t('PROFILE.CREDIT_CARDS')} {...a11yProps(3)} />
-          <Tab label={t('COMMON.CONTACTS')} {...a11yProps(4)} />
+          <Tab label={<div><img src="/images/icons/user.svg" alt="about me" /> {t('COMMON.ABOUT_ME')}</div>} {...a11yProps(0)} />
+          <Tab label={<div><img src="/images/icons/currency-dollar.svg" alt="price settings" /> {t('COMMON.PRICE_SETTINGS')}</div>} {...a11yProps(1)} />
+          <Tab label={<div><img src="/images/icons/settings.svg" alt="price settings" /> {t('COMMON.PARAMETERS')}</div>} {...a11yProps(2)} />
+          <Tab label={<div><img src="/images/icons/bank-card.svg" alt="price settings" /> {t('PROFILE.CREDIT_CARDS')}</div>} {...a11yProps(3)} />
+          <Tab label={<div><img src="/images/icons/account.svg" alt="price settings" />{t('COMMON.CONTACTS')}</div>} {...a11yProps(4)} />
 
         </Tabs>
-        <div>
+        <div style={{background: 'white'}}>
           <TabPanel value={value} index={0}>
             <Box component="form" noValidate onSubmit={submitForm} sx={{ mt: 3 }}>
               <Grid container spacing={2}>

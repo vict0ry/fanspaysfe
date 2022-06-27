@@ -14,6 +14,7 @@ import { SocketContext } from '../../context/socket'
 import { t } from 'i18next'
 import ImageIcon from '@mui/icons-material/Image'
 import SendTipModal from '../profile/modals/SendTipModal'
+import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
 
 const messageElement = React.createRef()
 
@@ -82,7 +83,8 @@ export function Messages() {
   }
 
   return (
-    <div style={{ display: 'flex', marginTop: 20 }}>
+    <div style={{ display: 'grid', marginTop: 20, gridTemplateColumns: '1fr 1fr 3fr' }}>
+      <SharedLeftMenu />
       <FolderList />
       <Paper>
         <strong style={{ padding: 20 }}>Chat with Victor Eliot</strong>
