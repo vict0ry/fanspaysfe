@@ -43,7 +43,6 @@ export const Home = () => {
   const [posts, setPosts] = useState([]);
   const user = useSelector(state => state.profile.profile)
   useEffect(() => {
-    debugger;
     const data = axios.get('/api/posts?followingOnly=true').then(posts => {
       setPosts(posts.data);
     })

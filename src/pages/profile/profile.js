@@ -42,7 +42,6 @@ export function Profile(props) {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(loadProfile(username))
-    dispatch(loadPosts(username || loggedUser.userData._id))
   }, [])
   const posts = useSelector(state => state.posts.posts)
   const user = useSelector(state => state.profile.profile)

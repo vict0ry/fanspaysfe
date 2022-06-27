@@ -3,6 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { Link } from 'react-router-dom'
 
 export default function StickyFooter() {
     return (
@@ -10,7 +11,6 @@ export default function StickyFooter() {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                minHeight: '100vh',
             }}
         >
             <CssBaseline/>
@@ -22,14 +22,17 @@ export default function StickyFooter() {
                     mt: 'auto',
                     backgroundColor: (theme) =>
                         theme.palette.mode === 'light'
-                            ? theme.palette.grey[200]
+                            ? '#ECE9F1'
                             : theme.palette.grey[800],
                 }}
             >
-                <Container maxWidth="sm">
-                    <Typography variant="body1">
-                        My sticky footer can be found here.
-                    </Typography>
+                <Container style={{display: 'block', justifyContent: 'center'}} maxWidth="xl">
+                  <Link style={{marginRight: '20px'}} to={'/'}>
+                    <img src="/logo.svg" alt="" width={'150px'} />
+                  </Link>
+                   <Link style={{marginRight: '20px'}} to={'/'}>About us</Link>
+                    <Link style={{marginRight: '20px'}} to={'/'}>Bloggers</Link>
+                    <Link style={{marginRight: '20px'}} to={'/'}>Porducts</Link>
                 </Container>
             </Box>
         </Box>

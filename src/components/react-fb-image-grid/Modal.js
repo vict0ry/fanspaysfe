@@ -33,7 +33,6 @@ class ModalComponent extends Component {
   render() {
     const { images, currentImageIndex } = this.state
     const { onClose, index } = this.props
-    debugger;
 
     return (
       <Lightbox
