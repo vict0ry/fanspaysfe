@@ -1,3 +1,89 @@
 {
-  "Home Page": "Home Page"
+  "BE_THE_FIRST_ONE": "Be first",
+  "COMMON": {
+    "SEX": "sex",
+    "FIRST_NAME": "Frist name",
+    "PREVIEW_IMAGE": "Image preview",
+    "BALANCE": "Balance",
+    "DAY": "Day",
+    "MONTH": "Month",
+    "YEAR": "Year",
+    "LAST_NAME": "Last name",
+    "LOGIN": "Login",
+    "EMAIL": "E-mail",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "BUY": "Buy",
+    "ADD_CARD": "Add card",
+    "ONLINE": "Online",
+    "USER_VIDEOS": "User videos",
+    "USER_DEMANDS": "User demands",
+    "SEND": "Send",
+    "SIGNUP": "Registration",
+    "SIGNIN": "Sign in",
+    "ADD_PRODUCT": "Add product",
+    "ADD_STORY": "Add story",
+    "EDIT": "Edit",
+    "SEND_MESSAGE": "Send message",
+    "STORIES": "Stories",
+    "SHOP": "Shop",
+    "SEARCH": "Search",
+    "SAVE": "Save",
+    "FOLLOWERS": "Followers",
+    "MESSAGE": "Message",
+    "FOLLOWING": "Following",
+    "PRICE_SETTINGS": "Price settings",
+    "PRICE": "Price",
+    "ABOUT_ME": "About me",
+    "PARAMETERS": "Parameters",
+    "DESCRIPTION": "Description",
+    "LAST_ACTIVE": "Last active",
+    "SUBSCRIBE_TO_SEE": "You have to subscribe to see the post",
+    "NOTHING_HERE_YET": "Nothing is here yet...",
+    "USER_PRODUCTS": "User products",
+    "UNSUBSCRIBE": "Unsubscribe",
+    "SEND_TIP": "Send tip",
+    "CONTACTS": "Contacts"
+  },
+  "SHOP": {
+    "ADD_PRODUCT_IMAGE": "Add product image",
+    "PRODUCT_NAME": "Add product name"
+  },
+  "PROFILE": {
+    "TIP_AMOUNT": "Tip amout",
+    "CREDIT_CARDS": "Credit cards",
+    "BIRTH_DATE": "Birth date",
+    "USER_FIRST_REGISTERED": "User first registered",
+    "ZODIAC": "Zodiac",
+    "POSTS": "Posts",
+    "VIDEO": "Video",
+    "LIKES": "Likes",
+    "PRODUCTS": "Products",
+    "UPLOAD_AVATAR": "Upload avatar"
+  },
+  "USERMENU": {
+    "MY_PAGE": "My page",
+    "USER_RATING": "User rating",
+    "EDIT_PROFILE": "Edit profile",
+    "MESSAGES": "Messages",
+    "MARKETPLACE": "Marketplace",
+    "TRANSACTIONS": "Transactions"
+  },
+  "NAVBAR": {
+    "HOME_PAGE": "Home page",
+    "PROFILE": "My profile",
+    "MESSAGES": "Messages",
+    "CREDIT_MANAGEMENT": "Credit management",
+    "USERS": "Users",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "REGISTER": "Registration"
+  },
+  "REGISTER": {
+    "REPEAT_PASSWORD": "Repeat password",
+    "ALREADY_HAVE_ACCOUNT": "Already have account"
+  },
+  "ZODIAC": {
+    "TAURUS": "Taurus"
+  }
 }
