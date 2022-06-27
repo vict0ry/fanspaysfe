@@ -23,6 +23,7 @@ import Avatar from '@mui/material/Avatar'
 import red from '@mui/material/colors/red'
 import PostMenu from './PostMenu'
 import { beURL } from '../../../../config'
+import { Link } from 'react-router-dom'
 
 
 export const Posts = ({ profileUser, posts, disableAdd = false }) => {
@@ -81,7 +82,7 @@ export const Posts = ({ profileUser, posts, disableAdd = false }) => {
                   <img style={{ width: '100%' }} src={beURL + message.postedBy?.profilePic} />
                 </Avatar>
               }
-              title={message.postedBy.firstName + ' ' + message.postedBy.lastName}
+              title={<Link to={'/profile/' + message.postedBy.username}>{message.postedBy.firstName + ' ' + message.postedBy.lastName}</Link>}
               subheader={message.postedBy.username}
             >
             </CardHeader>
