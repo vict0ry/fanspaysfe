@@ -48,7 +48,7 @@ export const Posts = ({ profileUser, posts, disableAdd = false }) => {
     dispatch(commentPost(postId, comment))
     setComment('')
   }
-  const [isHidden, setIsHidden] = useState(true)
+  const [isHidden, setIsHidden] = useState(false)
   return (
     <div>
       { !disableAdd ? <AddPostModal /> : '' }

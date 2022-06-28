@@ -12,6 +12,7 @@ import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 import { MiniUser } from '../components/MiniUser'
 import axios from 'axios'
+import { t } from 'i18next'
 
 const style = {
   position: 'absolute',
@@ -20,22 +21,23 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  height: 350,
+  height: 250,
   bgcolor: 'background.paper',
   boxShadow: 24,
   p: 4
 }
 
-export default function SendTipModal({ recipient, children }) {
-  const [open, setOpen] = React.useState(false)
+export default function AddRemoveBalance({ recipient, children }) {
+  const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
   const { username } = useParams()
   const loggedUser = useSelector(state => state.user)
   const { t } = useTranslation()
   const isAllowed = () => {
-    return true
-    // return !(!username || username === loggedUser?.userData?.username)
+    if (loggedUser.userData.role === 'admin') {
+      return true;
+    } return false;
   }
   const submitForm = (event) => {
     event.preventDefault()
@@ -49,8 +51,8 @@ export default function SendTipModal({ recipient, children }) {
   }
 
 
-  function handleCreditSend(recipient) {
-    axios.post('/api/credit', {
+  function handleAddRemoveCredit(recipient) {
+    axios.post('/api/credit/addremove', {
       description: formData.description,
       amount: +formData.amount,
       recipient: recipient._id,
@@ -63,22 +65,10 @@ export default function SendTipModal({ recipient, children }) {
   }
 
   return (
-    <>
+    <div>
       {isAllowed() ?
-        <Box sx={{ display: 'flex',
-          justifyAlign: 'center',
-          alignItems: 'center',
-          cursor: 'pointer',
-          width: 180,
-          borderRadius: 8,
-          borderWidth: '2px',
-          borderStyle: 'solid',
-          borderImage: 'linear-gradient(to right, #4776E6, #8E54E9) 1',
-          pl: 4,
-          color: 'black',
-          height: 40}}
-             onClick={handleOpen}>
-          <img src='/images/icons/copper-coin.svg'/> <span style={{marginLeft: 10}}>{children}</span>
+        <Box sx={{ display: 'flex', marginTop: '10px', justifyAlign: 'center', alignItems: 'center', cursor: 'pointer' }}>
+          <Button onClick={handleOpen} variant="contained">{t('ADD / Remove balance')}</Button>
         </Box> : ''}
       <Modal
         open={open}
@@ -87,7 +77,6 @@ export default function SendTipModal({ recipient, children }) {
         aria-describedby="modal-modal-description"
       >
         <Box component={'form'} onChange={formChange} onSubmit={submitForm} sx={style}>
-          <MiniUser user={recipient} />
           <TextField
             name={'amount'}
             type={'number'}
@@ -97,15 +86,14 @@ export default function SendTipModal({ recipient, children }) {
                      name={'description'}
                      multiline
                      minRows={2}
-                     sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('COMMON.MESSAGE')} />
+                     sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('COMMON.MESSAGE')}/>
 
-          <Button onClick={() => handleCreditSend(recipient)}
+          <Button onClick={() => handleAddRemoveCredit(recipient)}
                   disabled={!formData.amount}
                   variant="contained"
-                  style={{ margin: '10px 0', float: 'right' }}>{t('COMMON.SEND')}</Button>
-
+                  style={{ marginTop: 10, float: 'right' }}>{t('COMMON.SEND')}</Button>
         </Box>
       </Modal>
-    </>
+    </div>
   )
 }

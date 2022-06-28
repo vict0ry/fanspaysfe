@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 import { beURL } from '../config'
+import AddRemoveBalance from '../pages/profile/modals/AddRemoveBalance'
 
 styled((props) => {
   const { expand, ...other } = props
@@ -55,6 +56,7 @@ export default function ProfileCard({ profileUser }) {
             </Button>
           </Link>
         </Box>
+        <AddRemoveBalance recipient={profileUser} />
         <Divider sx={{ pt: 2 }} />
         <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
           <SendTipModal recipient={profileUser}>SEND TIP</SendTipModal>
