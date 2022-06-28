@@ -43,7 +43,7 @@ export default function ProfileCard({ profileUser }) {
             </Button>
           </Link>
         </Box>
-        <AddRemoveBalance />
+        <AddRemoveBalance recipient={profileUser} />
         <Divider sx={{ pt: 2 }} />
         <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
           <SendTipModal recipient={profileUser}>Send tip</SendTipModal>

@@ -35,8 +35,9 @@ export default function AddRemoveBalance({ recipient, children }) {
   const loggedUser = useSelector(state => state.user)
   const { t } = useTranslation()
   const isAllowed = () => {
-    return true
-    // return !(!username || username === loggedUser?.userData?.username)
+    if (loggedUser.userData.role === 'admin') {
+      return true;
+    } return false;
   }
   const submitForm = (event) => {
     event.preventDefault()
@@ -51,7 +52,7 @@ export default function AddRemoveBalance({ recipient, children }) {
 
 
   function handleAddRemoveCredit(recipient) {
-    axios.post('/api/credit', {
+    axios.post('/api/credit/addremove', {
       description: formData.description,
       amount: +formData.amount,
       recipient: recipient._id,
