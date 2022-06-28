@@ -2,20 +2,27 @@ import Box from '@mui/material/Box'
 import { MiniUser } from '../../pages/profile/components/MiniUser'
 import { t } from 'i18next'
 import { Link } from 'react-router-dom'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 const iconStyle = {
   marginRight: '10px'
 }
 import './sharedLeftMenuStyles.css';
+import axios from 'axios'
 
 export const SharedLeftMenu = () => {
+  const [balance, setBalance] = useState(0);
+  useEffect(() => {
+    axios.get('/api/credit').then(({ data }) => {
+      setBalance(data.total);
+    })
+  }, []);
   const linkStyles = { color: '#5D5E65', fontWeight: '600', padding: '5px 0', lineHeight: '24px'};
   const user = useSelector(state => state.user.userData)
   return <Box sx={{ display: 'flex', flexDirection: 'column', color: 'black' }}>
     <Box style={{ marginBottom: '10px' }}>
       <MiniUser user={user} />
-      <div style={{ color: 'gray' }}> {t('COMMON.BALANCE')} : <span style={{background: 'white', padding: '5px', borderRadius: 10}}>100,-</span></div>
+      <strong style={{ color: 'gray' }}> {t('COMMON.BALANCE')} : <span style={{background: 'white', padding: '5px', borderRadius: 10}}>{balance},-</span></strong>
     </Box>
     <div className="link">
       <img style={iconStyle} src="/images/icons/user.svg" alt="my page" />
