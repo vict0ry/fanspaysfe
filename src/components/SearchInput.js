@@ -14,7 +14,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }))
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
+  color: 'rgba(93, 94, 101, 1)',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -29,9 +29,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: 'rgba(247, 245, 249, 1)',
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25)
+    backgroundColor: 'rgba(247, 245, 249, 1)',
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -44,7 +44,7 @@ const Search = styled('div')(({ theme }) => ({
 export const SearchInput = () => {
   return (<Search>
     <SearchIconWrapper>
-      <SearchIcon />
+      <SearchIcon style={{ color: 'rgba(93, 94, 101, 1)' }} />
     </SearchIconWrapper>
     <StyledInputBase
       placeholder="Search…"

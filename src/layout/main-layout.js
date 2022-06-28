@@ -6,7 +6,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 const MainLayout = ({ props }) => {
-  return (<div>
+  return (
+    <div>
     <SearchBar />
     <Container maxWidth="lg">
       <Outlet />

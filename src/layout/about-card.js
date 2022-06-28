@@ -16,10 +16,11 @@ import { t } from 'i18next'
 import moment from 'moment'
 import { getZodiac } from '../helper'
 import { SocialIcon } from 'react-social-icons'
+import Grid from '@mui/material/Grid'
 
 const ProfileStatistics = ({ followers = 0, following = 0, posts = 0, products = 0, video = 0, likes = 0 }) => {
   const TextNumber = ({ number, text }) => {
-    return <Box style={{ textAlign: 'center' }}>
+    return <Box style={{  textAlign: 'center' }}>
       <Box sx={{ fontSize: '1.5rem', fontWeight: 'bold' }} className="number">
         {number}
       </Box>
@@ -29,7 +30,11 @@ const ProfileStatistics = ({ followers = 0, following = 0, posts = 0, products =
     </Box>
   }
   return <Box className={'numbers-wrapper'}
-              sx={{ display: 'flex', justifyContent: 'space-around', margin: '30px 0' }}>
+              sx={{ display: {md: 'flex', xs: 'grid'},
+                justifyContent: 'space-around',
+                margin: '30px 0',
+                gridTemplateColumns: '1fr 1fr 1fr',
+              }}>
     <TextNumber number={followers} text={t('COMMON.FOLLOWERS')} />
     <TextNumber number={following} text={t('COMMON.FOLLOWING')} />
     <TextNumber number={posts} text={t('PROFILE.POSTS')} />
@@ -62,13 +67,13 @@ export default function AboutCard({ user, postsLength }) {
 
 
   return (<div>
-      <Card sx={{ maxWidth: '1fr',width: '590px', gridColumn: 'unset' }}>
+      <Card sx={{ maxWidth: '1fr',width: { md: '590px', xs: '390px' }, gridColumn: 'unset' }}>
         <div style={{ padding: 10, float: 'right', color: 'green', cursor: 'pointer' }}>{t('COMMON.ONLINE')}</div>
         <CardHeader subheader={'@' + user?.username} subtitle={'ahoj'} title={fullName} />
 
         <CardContent>
 
-          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 2 }}>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { md: '1fr 1fr 1fr', xs: '1fr 1fr' }, gap: 2 }}>
             <InfoIcon afterIcon={'srpen 2021'} icon={'/images/icons/calendar.svg'} title={t('PROFILE.USER_FIRST_REGISTERED')}></InfoIcon>
             <InfoIcon afterIcon={'Praha'} icon={'/images/icons/map-pin.svg'} title={t('Location')}></InfoIcon>
             <InfoIcon afterIcon={new Date(parsedDate).toLocaleDateString('cs-CZ')} icon={'/images/icons/gift.svg'} title={t('PROFILE.BIRTH_DATE')}></InfoIcon>
@@ -84,7 +89,7 @@ export default function AboutCard({ user, postsLength }) {
         </CardContent>
       </Card>
 
-    <Card sx={{ maxWidth: '1fr',width: '590px', marginTop: '10px', gridColumn: 'unset' }}>
+    <Card sx={{ maxWidth: '1fr',width: {md: '590px', xs: '390px'}, marginTop: '10px', gridColumn: 'unset' }}>
       <ProfileStatistics followers={user?.followers.length}
                          posts={postsLength}
                          following={user?.following.length} />

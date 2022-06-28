@@ -75,19 +75,19 @@ export function Profile(props) {
         <SharedLeftMenu />
         <Box>
           <ProfileCard profileUser={user?.profileUser} />
-          <div style={{ marginTop: '10px' }}>
-            <Paper style={{
-              padding: 5,
-              justifyContent: 'center',
-              margin: '10px 0',
-              display: 'flex',
-              alignItems: 'center',
-              justifyAlign: 'center'
-            }}>
-              <SubscribeButton />
-            </Paper>
-            <FollowersModal profileUser={user?.profileUser} />
-          </div>
+          {/*<div style={{ marginTop: '10px' }}>*/}
+          {/*  <Paper style={{*/}
+          {/*    padding: 5,*/}
+          {/*    justifyContent: 'center',*/}
+          {/*    margin: '10px 0',*/}
+          {/*    display: 'flex',*/}
+          {/*    alignItems: 'center',*/}
+          {/*    justifyAlign: 'center'*/}
+          {/*  }}>*/}
+          {/*    <SubscribeButton />*/}
+          {/*  </Paper>*/}
+          {/*  <FollowersModal profileUser={user?.profileUser} />*/}
+          {/*</div>*/}
         </Box>
         <Box>
           <AboutCard user={user?.profileUser} postsLength={posts.length} />
