@@ -63,13 +63,22 @@ export default function SendTipModal({ recipient, children }) {
   }
 
   return (
-    <div>
+    <>
       {isAllowed() ?
-        <Box sx={{ display: 'flex', justifyAlign: 'center', alignItems: 'center', cursor: 'pointer' }}
+        <Box sx={{ display: 'flex',
+          justifyAlign: 'center',
+          alignItems: 'center',
+          cursor: 'pointer',
+          width: 180,
+          borderRadius: 8,
+          borderWidth: '2px',
+          borderStyle: 'solid',
+          borderImage: 'linear-gradient(to right, #4776E6, #8E54E9) 1',
+          pl: 4,
+          color: 'black',
+          height: 40}}
              onClick={handleOpen}>
-          <IconButton aria-label="tip">
-            <MonetizationOnIcon />
-          </IconButton> {children}
+          <img src='/images/icons/copper-coin.svg'/> <span style={{marginLeft: 10}}>{children}</span>
         </Box> : ''}
       <Modal
         open={open}
@@ -97,6 +106,6 @@ export default function SendTipModal({ recipient, children }) {
 
         </Box>
       </Modal>
-    </div>
+    </>
   )
 }

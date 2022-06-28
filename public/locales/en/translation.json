@@ -43,7 +43,8 @@
     "USER_PRODUCTS": "User products",
     "UNSUBSCRIBE": "Unsubscribe",
     "SEND_TIP": "Send tip",
-    "CONTACTS": "Contacts"
+    "CONTACTS": "Contacts",
+    "BECAME_FUN": "BECAME FUN"
   },
   "SHOP": {
     "ADD_PRODUCT_IMAGE": "Add product image",
@@ -67,7 +68,12 @@
     "EDIT_PROFILE": "Edit profile",
     "MESSAGES": "Messages",
     "MARKETPLACE": "Marketplace",
-    "TRANSACTIONS": "Transactions"
+    "TRANSACTIONS": "Transactions",
+    "FINANCE": "My Finance",
+    "QUERIES": "Queries",
+    "FEEDS": "Feeds",
+    "BOOKMARKS": "Saved",
+    "SETTINGS": "Settings"
   },
   "NAVBAR": {
     "HOME_PAGE": "Home page",

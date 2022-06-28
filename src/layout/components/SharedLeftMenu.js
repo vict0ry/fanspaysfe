@@ -19,7 +19,7 @@ export const SharedLeftMenu = () => {
   }, []);
   const linkStyles = { color: '#5D5E65', fontWeight: '600', padding: '5px 0', lineHeight: '24px'};
   const user = useSelector(state => state.user.userData)
-  return <Box sx={{ display: 'flex', flexDirection: 'column', color: 'black' }}>
+  return <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column', color: 'black' }}>
     <Box style={{ marginBottom: '10px' }}>
       <MiniUser user={user} />
       <strong style={{ color: 'gray' }}> {t('COMMON.BALANCE')} : <span style={{background: 'white', padding: '5px', borderRadius: 10}}>{balance},-</span></strong>
@@ -29,20 +29,40 @@ export const SharedLeftMenu = () => {
       <Link style={linkStyles} to={'/profile/'}>{t('USERMENU.MY_PAGE')}</Link>
     </div>
     <div className="link">
-      <img style={iconStyle} src="/images/icons/pencil.svg" alt="" />
-      <Link style={linkStyles} to={'/edit'}>{t('USERMENU.EDIT_PROFILE')}</Link>
+      <img style={iconStyle} src="/images/icons/wallet.svg" alt="my finance" />
+      <Link style={linkStyles} to={'/'}>{t('USERMENU.FINANCE')}</Link>
     </div>
     <div className="link">
-      <img style={iconStyle} src="/images/icons/chat-circle-dots.svg" alt="" />
+      <img style={iconStyle} src="/images/icons/chats-circle.svg" alt="" />
       <Link style={linkStyles} to={'/messages'}>{t('USERMENU.MESSAGES')}</Link>
     </div>
+    <div className="link">
+      <img style={iconStyle} src="/images/icons/chat-circle-dots.svg" alt="queries" />
+      <Link style={linkStyles} to={'/'}>{t('USERMENU.QUERIES')}</Link>
+    </div>
+    <div className="link">
+      <img style={iconStyle} src="/images/icons/speakerphone.svg" alt="feeds" />
+      <Link style={linkStyles} to={'/'}>{t('USERMENU.FEEDS')}</Link>
+    </div>
+    {/*<div className="link">*/}
+    {/*  <img style={iconStyle} src="/images/icons/pencil.svg" alt="" />*/}
+    {/*  <Link style={linkStyles} to={'/edit'}>{t('USERMENU.EDIT_PROFILE')}</Link>*/}
+    {/*</div>*/}
     <div className="link">
       <img style={iconStyle} src="/images/icons/shopping-cart.svg" alt="" />
       <Link style={linkStyles} to={'/'}>{t('USERMENU.MARKETPLACE')}</Link>
     </div>
     <div className="link">
-      <img style={iconStyle} src="/images/icons/wallet.svg" alt="" />
+      <img style={iconStyle} src="/images/icons/money.svg" alt="" />
       <Link style={linkStyles} to={'/customer'}>{t('USERMENU.TRANSACTIONS')}</Link>
+    </div>
+    <div className="link">
+      <img style={iconStyle} src="/images/icons/bookmark.svg" alt="" />
+      <Link style={linkStyles} to={'/'}>{t('USERMENU.BOOKMARKS')}</Link>
+    </div>
+    <div className="link">
+      <img style={iconStyle} src="/images/icons/settings.svg" alt="" />
+      <Link style={linkStyles} to={'/'}>{t('USERMENU.SETTINGS')}</Link>
     </div>
   </Box>
 }
