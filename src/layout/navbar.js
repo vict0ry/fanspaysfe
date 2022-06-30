@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -123,6 +123,7 @@ export default function SearchBar() {
           <div onClick={() => {
             localStorage.clear()
             dispatch(logoutUser())
+            window.location.replace("/");
           }}>{t('NAVBAR.LOGOUT')}
           </div>
         </Box> : ''}
@@ -181,6 +182,15 @@ export default function SearchBar() {
       </MenuItem>
     </Menu>
   );
+  const { i18n } = useTranslation();
+  const [language, setLanguage] = useState("EN");
+
+  const handleChangeLanguage = (evt) => {
+    debugger;
+    const lang = evt.target.value;
+    console.log(lang);
+    i18n.changeLanguage(lang);
+  }
 
   return (
     <>
@@ -211,9 +221,10 @@ export default function SearchBar() {
                   sx={{height: '50%', mt: 2.5, border:'none', width: '100%'}}
                   IconComponent={LanguageIcon}
                   defaultValue={'EN'}
+                  onChange={handleChangeLanguage}
                   >
                   <MenuItem value={'EN'}>EN</MenuItem>
-                  <MenuItem value={'CS'}>CS</MenuItem>
+                  <MenuItem value={'CS'}>CZ</MenuItem>
                   <MenuItem value={'RU'}>RU</MenuItem>
                 </Select>
                 </FormControl>

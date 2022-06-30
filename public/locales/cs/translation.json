@@ -1,3 +1,89 @@
 {
-  "Test": "Ahoj"
+  "BE_THE_FIRST_ONE": "Buďte první",
+  "COMMON": {
+    "SEX": "Pohlaví",
+    "FIRST_NAME": "Jméno",
+    "PREVIEW_IMAGE": "Náhled obrázku",
+    "BALANCE": "Zůstatek",
+    "DAY": "Den",
+    "MONTH": "Měsíc",
+    "YEAR": "Rok",
+    "LAST_NAME": "Příjmení",
+    "LOGIN": "Login",
+    "EMAIL": "E-mail",
+    "USERNAME": "Uživatelské jméno",
+    "PASSWORD": "Heslo",
+    "BUY": "Koupit",
+    "ADD_CARD": "Přidat kartu",
+    "ONLINE": "Online",
+    "USER_VIDEOS": "Video uživatele",
+    "USER_DEMANDS": "Poptavky",
+    "SEND": "Odeslat",
+    "SIGNUP": "Registrace",
+    "SIGNIN": "Přihlasit se",
+    "ADD_PRODUCT": "Přidat produkt",
+    "ADD_STORY": "Přidat přispěvek",
+    "EDIT": "Editovat",
+    "SEND_MESSAGE": "Odeslat zpravu",
+    "STORIES": "Přispěvky",
+    "SHOP": "Obchod",
+    "SEARCH": "Hledání",
+    "SAVE": "Uložit",
+    "FOLLOWERS": "Sledující",
+    "MESSAGE": "Zprava",
+    "FOLLOWING": "Sleduju",
+    "PRICE_SETTINGS": "Nastavení cen",
+    "PRICE": "Cena",
+    "ABOUT_ME": "O mně",
+    "PARAMETERS": "Parametry",
+    "DESCRIPTION": "Popis",
+    "LAST_ACTIVE": "Naposledy aktivní",
+    "SUBSCRIBE_TO_SEE": "Chcete-li zobrazit příspěvky uživatelů, přihlaste se k odběru",
+    "NOTHING_HERE_YET": "Zatim nebylo nic pridane...",
+    "USER_PRODUCTS": "Produkty uživatele",
+    "UNSUBSCRIBE": "Odhlasit odběr",
+    "SEND_TIP": "Poslat dýško",
+    "CONTACTS": "Kontakty"
+  },
+  "SHOP": {
+    "ADD_PRODUCT_IMAGE": "Přidat obrázek produktu",
+    "PRODUCT_NAME": "Přidat název produktu"
+  },
+  "PROFILE": {
+    "TIP_AMOUNT": "Výše dýška",
+    "CREDIT_CARDS": "Kreditní karty",
+    "BIRTH_DATE": "Datum narození",
+    "USER_FIRST_REGISTERED": "Uživatel se připojil",
+    "ZODIAC": "Horoskop",
+    "POSTS": "Prispěvky",
+    "VIDEO": "Video",
+    "LIKES": "lajku",
+    "PRODUCTS": "Produkty",
+    "UPLOAD_AVATAR": "Nahrát avatar"
+  },
+  "USERMENU": {
+    "MY_PAGE": "Moje stranka",
+    "USER_RATING": "Hodnocení",
+    "EDIT_PROFILE": "Upravit profil",
+    "MESSAGES": "Zpravy",
+    "MARKETPLACE": "Marketplace",
+    "TRANSACTIONS": "Transakce"
+  },
+  "NAVBAR": {
+    "HOME_PAGE": "Hlavní stranka",
+    "PROFILE": "Můj profil",
+    "MESSAGES": "Zpravy",
+    "CREDIT_MANAGEMENT": "Sprava kreditu",
+    "USERS": "Uživatele",
+    "LOGIN": "Přihlášení",
+    "LOGOUT": "Odhlásit se",
+    "REGISTER": "Registrace"
+  },
+  "REGISTER": {
+    "REPEAT_PASSWORD": "Zopakujte heslo",
+    "ALREADY_HAVE_ACCOUNT": "Již u nás mate svůj účet"
+  },
+  "ZODIAC": {
+    "TAURUS": "Býk"
+  }
 }

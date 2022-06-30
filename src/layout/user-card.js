@@ -12,6 +12,7 @@ import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 import { beURL } from '../config'
 import AddRemoveBalance from '../pages/profile/modals/AddRemoveBalance'
+import { SubscribeButton } from '../pages/profile/components/SubscribeButton'
 
 styled((props) => {
   const { expand, ...other } = props
@@ -37,7 +38,7 @@ export default function ProfileCard({ profileUser }) {
     </Box>
   }
   return (
-    <Card sx={{ maxWidth: { xs: 312, md: 250 }, ml:{xs: 5, md: 0}, height: 'fit-content' }}>
+    <Card sx={{ maxWidth: { xs: 500, md: 500 }, ml:{xs: 5, md: 0}, height: 'fit-content' }}>
       <CardMedia
         component="img"
         height="250"
@@ -46,15 +47,16 @@ export default function ProfileCard({ profileUser }) {
       />
       <CardActions sx={{ justifyContent: ' space-around', display: ' flex', flexDirection: ' column' }} disableSpacing>
         <Box sx={{ marginTop: '5px' }}>
-          <TextNumber number={profileUser?.followers.length} text={t('COMMON.FOLLOWERS')} />
+          <TextNumber number={profileUser?.followers?.length} text={t('COMMON.FOLLOWERS')} />
         </Box>
         <Box sx={{ marginTop: '15px' }}>
           <Link to={'/messages/' + profileUser?._id}>
             <Button
               sx={{width: 180}}
-              variant="contained">{t('COMMON.BECAME_FUN')}
+              variant="contained">{t('COMMON.SEND_MESSAGE')}
             </Button>
           </Link>
+          <SubscribeButton />
         </Box>
         <AddRemoveBalance recipient={profileUser} />
         <Divider sx={{ pt: 2 }} />

@@ -9,6 +9,7 @@ export const SubscribeButton = () => {
   const userProfile = useSelector(state => {
     return state.profile.profile
   })
+  debugger;
   const loggedUser = useSelector(state => state.user)
   const isSubscribed = () => {
     return userProfile?.profileUser?.followers?.includes(loggedUser.userData._id)
@@ -23,7 +24,7 @@ export const SubscribeButton = () => {
 
   return <div style={{ display: 'flex' }}>
     {!isSubscribed() ?
-      <Button onClick={handleFollow} variant='contained' style={{ marginTop: 10 }}>Subscribe for 7$ in a
+      <Button onClick={handleFollow} variant='contained' style={{ marginTop: 10 }}>Subscribe for {userProfile?.profileUser.subscribtionPrice} in a
         month</Button> :
       <Button onClick={handleFollow} color="primary" variant='dashed' style={{ marginTop: 10 }}>{t('COMMON.UNSUBSCRIBE')}</Button>}
   </div>

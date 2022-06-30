@@ -6,6 +6,8 @@ import React from 'react'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import { t } from 'i18next'
+import axios from 'axios'
+import { Wish } from './Wish'
 
 export const SubscriptionSettingsCard = () => {
   return (
@@ -48,10 +50,20 @@ export const UserPricesFormTab = () => {
             marginTop: '10px',
             marginLeft: '15px',
             padding: '5px 10px', borderRadius: '10px', border: '1px dashed #4776E6'}}>
-            <img src="/images/icons/plus.svg" alt="add" /><span style={{color: '#4776E6', marginLeft: '5px'}}>Add new</span>
+            <img src="/images/icons/plus.svg" alt="add" />
+            <span onClick={() => {
+              debugger;
+              axios.put('/api/users/subscribtionPrice', {
+                price: 300
+              });
+            }} style={{color: '#4776E6', marginLeft: '5px'}}>Add new</span>
           </div>
           <Grid item xs={12} sm={12}>
+            <Grid item xs={3} sm={3}>
+              <Wish />
+            </Grid>
             <Grid item xs={12} sm={12}>
+
               <FormControlLabel control={<Checkbox defaultChecked />}
                                 label="Disable sending messages users without credit" />
             </Grid>

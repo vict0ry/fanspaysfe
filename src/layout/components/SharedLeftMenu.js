@@ -62,7 +62,7 @@ export const SharedLeftMenu = () => {
     </div>
     <div className="link">
       <img style={iconStyle} src="/images/icons/settings.svg" alt="" />
-      <Link style={linkStyles} to={'/'}>{t('USERMENU.SETTINGS')}</Link>
+      <Link style={linkStyles} to={'/edit'}>{t('USERMENU.SETTINGS')}</Link>
     </div>
   </Box>
 }

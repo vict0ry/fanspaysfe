@@ -1,4 +1,6 @@
 import './home-not-logged.css';
+import { t } from 'i18next'
+import { Link } from '@mui/icons-material'
 export const HomeNotLogged = () => {
     return (
       <div>
@@ -14,22 +16,22 @@ export const HomeNotLogged = () => {
                 </a>
                 <nav className="menu">
                   <ul>
-                    <li><a href="#">О нас</a></li>
-                    <li><a href="#">Тарифы</a></li>
-                    <li><a href="#">Блогеры</a></li>
-                    <li><a href="#">Продукты</a></li>
-                    <li className="has-child"><a href="#">Больше</a></li>
+                    <li><a href="#">{t('О нас')}</a></li>
+                    <li><a href="#">{t('Тарифы')}</a></li>
+                    <li><a href="#">{t('Блогеры')}</a></li>
+                    <li><a href="#">{t('Продукты')}</a></li>
+                    <li className="has-child"><a href="#">{t('Больше')}</a></li>
                   </ul>
                 </nav>
               </div>
               <div className="header-wrap__right">
                 <nav className="menu">
                   <ul>
-                    <li><a href="#">О нас</a></li>
-                    <li><a href="#">Тарифы</a></li>
-                    <li><a href="#">Блогеры</a></li>
-                    <li><a href="#">Продукты</a></li>
-                    <li className="has-child"><a href="#">Больше</a></li>
+                    <li><a href="#">{t('О нас')}</a></li>
+                    <li><a href="#">{t('Тарифы')}</a></li>
+                    <li><a href="#">{t('Блогеры')}</a></li>
+                    <li><a href="#">{t('Продукты')}</a></li>
+                    <li className="has-child"><a href="#">{t('Больше')}</a></li>
                   </ul>
                 </nav>
                 <div className="languages">
@@ -45,8 +47,8 @@ export const HomeNotLogged = () => {
                     </svg>
                   </div>
                 </div>
-                <button className="btn btn-primary">Войти</button>
-                <button className="btn">Зарегистрироваться</button>
+                <a href={'/login'} className="btn btn-primary">{t('login')}</a>
+                <a href={'/register'} className="btn">{t('register')}</a>
               </div>
               <div className="header-wrap__menu">
                 <span /><span /><span />
@@ -628,10 +630,10 @@ export const HomeNotLogged = () => {
                 <picture><source srcSet="http://localhost:3000/images/home-page-not-logged/uploads/31.webp" type="image/webp" /><img src="http://localhost:3000/images/home-page-not-logged/uploads/31.png" alt="img" /></picture>
               </div>
               <div className="callback-wrap__content">
-                <div className="title">Станьте автором или поддержите творчество</div>
+                <div className="title">{t('HOME.BECOME_AUTHOR')} {t('COMMON.OR')} {t('поддержите творчество')}</div>
                 <form className="form">
                   <input required type="email" placeholder="Введите E-mail" />
-                  <button type="submit" className="btn btn-black">Войти</button>
+                  <button type="submit" className="btn btn-black">{t('COMMON.LOGIN')}</button>
                 </form>
               </div>
             </div>
@@ -646,11 +648,10 @@ export const HomeNotLogged = () => {
                 </div>
                 <nav className="nav">
                   <ul>
-                    <li><a href="#">О нас</a></li>
-                    <li><a href="#">Тарифы</a></li>
-                    <li><a href="#">Блогеры</a></li>
-                    <li><a href="#">Продукты</a></li>
-                    <li><a href="#">Больше</a></li>
+                    <li><a href="#">{t('О нас')}</a></li>
+                    <li><a href="#">{t('Тарифы')}</a></li>
+                    <li><a href="#">{t('Блогеры')}</a></li>
+                    <li><a href="#">{t('Продукты')}</a></li>
                   </ul>
                 </nav>
               </div>

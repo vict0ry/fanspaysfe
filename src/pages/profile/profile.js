@@ -19,6 +19,9 @@ import { MiniUser } from './components/MiniUser'
 import FollowersModal from './modals/FollowersModal'
 import { loadPosts } from '../../redux/posts.action'
 import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
+import { Wish } from '../../components/Wish'
+import { Divider } from '@mui/material'
+import Card from '@mui/material/Card'
 
 
 export const NotSubscribed = () => {
@@ -52,7 +55,7 @@ export function Profile(props) {
     setSelectedTab(newValue)
   }
   const isUserSubscribed = () => {
-    return user?.profileUser?.followers?.includes(loggedUser.userData._id)
+    return user?.profileUser?.followers?.includes(loggedUser?.userData?._id)
   }
 
   function a11yProps(index) {
@@ -68,15 +71,25 @@ export function Profile(props) {
     <Box sx={{ 'mt': 2 }}>
       <Box className="profileGrid" sx={{
         display: 'grid', gridTemplateColumns: {
-          sm: '1fr 1fr 3fr',
+          sm: '1fr 1.4fr 3fr',
           xs: '1fr'
         }, gap: 2
       }} xs={{
         display: 'none'
       }}>
         <SharedLeftMenu />
-        <Box>
+        <Box style={{margin: '10px 0'}}>
           <ProfileCard profileUser={user?.profileUser} />
+          <Card sx={{  p: {xs: 2},
+            maxWidth: { xs: 400, md: 400 },
+            ml:{xs: 5, md: 0},
+            mt: {xs: 2}, height: 'fit-content' }}>
+            <p style={{fontSize: '18px', margin:'0', fontWeight: 'bold'}}>Wishes</p>
+            <Divider style={{marginBottom: '10px'}} />
+            <Wish title={'Iphone 8 PRO'} from={300} to={800} style={{margin: '10px 0'}} />
+            <Divider style={{margin: '10px 0'}} />
+            <Wish title={'Ray ban sunglass'} from={0} to={400} style={{margin: '10px 0'}} />
+          </Card>
           {/*<div style={{ marginTop: '10px' }}>*/}
           {/*  <Paper style={{*/}
           {/*    padding: 5,*/}

@@ -90,9 +90,9 @@ export default function AboutCard({ user, postsLength }) {
       </Card>
 
     <Card sx={{ maxWidth: '1fr',width: {md: '590px', xs: '390px'}, marginTop: '10px', gridColumn: 'unset' }}>
-      <ProfileStatistics followers={user?.followers.length}
+      <ProfileStatistics followers={user?.followers?.length}
                          posts={postsLength}
-                         following={user?.following.length} />
+                         following={user?.following?.length} />
     </Card>
     </div>
   )

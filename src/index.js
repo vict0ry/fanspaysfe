@@ -39,6 +39,10 @@ const PrivateWrapper = () => {
   const auth = !!localStorage.getItem('user') || null;
   return auth ? <Outlet /> : <Navigate to="/login" />;
 }
+const LoginDisallow = () => {
+  const auth = !!localStorage.getItem('user') || null;
+  return !auth ? <Outlet /> : <Navigate to="/" />;
+}
 
 root.render(
   <ThemeProvider theme={CustomThemeConfig}>
@@ -73,8 +77,12 @@ root.render(
                 <Route element={<PrivateWrapper />}>
                   <Route path="customer" element={<Customer />} />
                 </Route>
-                <Route path="register" element={<Register />} />
-                <Route path="login" element={<Login />} />
+                <Route element={<LoginDisallow />}>
+                  <Route path="register" element={<Register />} />
+                </Route>
+                <Route element={<LoginDisallow />}>
+                  <Route path="login" element={<Login />} />
+                </Route>
                 <Route element={<PrivateWrapper />}>
                   <Route path="messages" element={<Messages />} />
                 </Route>
