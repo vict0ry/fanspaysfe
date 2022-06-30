@@ -22,7 +22,7 @@ export const SubscribeButton = () => {
     dispatch(toggleSubscribe(userProfile.profileUser?._id))
   }
 
-  return <div style={{ display: 'flex' }}>
+  return <div style={{ display: 'flex', justifyAlign: 'center' }}>
     {!isSubscribed() ?
       <Button onClick={handleFollow} variant='contained' style={{ marginTop: 10 }}>Subscribe for {userProfile?.profileUser.subscribtionPrice} in a
         month</Button> :
