@@ -19,7 +19,7 @@ export const SharedLeftMenu = () => {
   }, []);
   const linkStyles = { color: '#5D5E65', fontWeight: '600', padding: '5px 0', lineHeight: '24px'};
   const user = useSelector(state => state.user.userData)
-  return <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column', color: 'black' }}>
+  return <Box sx={{ width: 140, display: { xs: 'none', md: 'flex' }, flexDirection: 'column', color: 'black' }}>
     <Box style={{ marginBottom: '10px' }}>
       <MiniUser user={user} />
       <strong style={{ color: 'gray' }}> {t('COMMON.BALANCE')} : <span style={{background: 'white', padding: '5px', borderRadius: 10}}>{balance},-</span></strong>
@@ -30,7 +30,7 @@ export const SharedLeftMenu = () => {
     </div>
     <div className="link">
       <img style={iconStyle} src="/images/icons/wallet.svg" alt="my finance" />
-      <Link style={linkStyles} to={'/'}>{t('USERMENU.FINANCE')}</Link>
+      <Link style={linkStyles} to={'/finance'}>{t('USERMENU.FINANCE')}</Link>
     </div>
     <div className="link">
       <img style={iconStyle} src="/images/icons/chats-circle.svg" alt="" />
@@ -50,7 +50,7 @@ export const SharedLeftMenu = () => {
     {/*</div>*/}
     <div className="link">
       <img style={iconStyle} src="/images/icons/shopping-cart.svg" alt="" />
-      <Link style={linkStyles} to={'/'}>{t('USERMENU.MARKETPLACE')}</Link>
+      <Link style={linkStyles} to={'/shop/'}>{t('USERMENU.MARKETPLACE')}</Link>
     </div>
     <div className="link">
       <img style={iconStyle} src="/images/icons/money.svg" alt="" />

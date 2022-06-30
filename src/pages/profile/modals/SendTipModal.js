@@ -26,7 +26,7 @@ const style = {
   p: 4
 }
 
-export default function SendTipModal({ recipient, children }) {
+export default function SendTipModal({ recipient, children, postModal }) {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -71,8 +71,7 @@ export default function SendTipModal({ recipient, children }) {
           cursor: 'pointer',
           width: 180,
           borderRadius: 8,
-          borderWidth: '2px',
-          borderStyle: 'solid',
+          border: postModal ? 'none' : '2px solid',
           borderImage: 'linear-gradient(to right, #4776E6, #8E54E9) 1',
           pl: 4,
           color: 'black',

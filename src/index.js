@@ -18,6 +18,7 @@ import axios from 'axios'
 import { persistStore } from 'redux-persist'
 import { socket, SocketContext } from './context/socket'
 import { EditProfile } from './pages/edit-profile/edit-profile'
+import {Finance} from './pages/Finance/finance'
 import { Home } from './pages/home'
 import { I18nextProvider } from 'react-i18next'
 import i18n from './i18n'
@@ -56,6 +57,9 @@ root.render(
                 </Route>
                 <Route element={<PrivateWrapper />}>
                   <Route path="/shop/:username" element={<Shop />} />
+                </Route>
+                <Route element={<PrivateWrapper />}>
+                  <Route path="/finance" element={<Finance />} />
                 </Route>
                 <Route element={<PrivateWrapper />}>
                   <Route path="profile" element={<Profile />} />

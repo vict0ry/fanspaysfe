@@ -40,9 +40,11 @@ export function Profile(props) {
   const loggedUser = useSelector(state => state.user)
   const username = useParams().username || loggedUser?.userData?._id
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(loadProfile(username))
   }, [])
+
   const posts = useSelector(state => state.posts.posts)
   const user = useSelector(state => state.profile.profile)
 
@@ -92,6 +94,7 @@ export function Profile(props) {
         <Box>
           <AboutCard user={user?.profileUser} postsLength={posts.length} />
           <div>
+
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <Tabs value={selectedTab} onChange={handleChange} aria-label="basic tabs example">
                 <Tab label={t('COMMON.STORIES')} {...a11yProps(0)} />

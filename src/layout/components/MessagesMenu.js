@@ -62,7 +62,7 @@ export const MessagesMenu = () => {
       aria-label="show 17 new mesages"
     >
       <Badge badgeContent={chatList.length} color="error">
-        <MailIcon />
+        <img src='/images/icons/message.svg'/>
       </Badge>
     </IconButton>
     <Popover
