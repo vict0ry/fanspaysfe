@@ -117,7 +117,7 @@ export const Posts = ({ profileUser, posts, disableAdd = false }) => {
                 </IconButton>
               </div>
               <div style={{ cursor: 'pointer' }}>
-                <SendTipModal recipient={profileUser} />
+                <SendTipModal postModal={true} recipient={profileUser} >Send tip</SendTipModal>
               </div>
             </CardActions>
             {!message?.likes?.length ? t('BE_THE_FIRST_ONE') : message?.likes?.length + ' likes'} - {message?.comments?.length} comments
