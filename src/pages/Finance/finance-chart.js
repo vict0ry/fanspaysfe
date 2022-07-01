@@ -10,6 +10,14 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
+import Select from '@mui/material/Select'
+import CardContent from '@mui/material/CardContent'
 
 
 ChartJS.register(
@@ -51,5 +59,24 @@ export const data = {
 };
 
 export const FinanceChart =  () =>  {
-  return <Line options={options} data={data} />;
+  return (
+    <Box sx={{width: '60%'}}>
+      <Card>
+        <CardActions sx={{display: 'flex', justifyContent: 'space-between'}}>
+          <Typography variant={'h6'}>Incoming Funds</Typography>
+          <Box>
+            <FormControl fullWidth>
+              <InputLabel sx={{mt: 0.5}} id="weeks-id">
+                <img style={{paddingRight: 10, marginTop: 0, width: 21, height: 21}} src='/images/icons/calendar.svg'/>Weeks</InputLabel>
+              <Select labelId={"weeks-id"} sx={{width: 150, height: 30, mt: 2, background:"white"}}>
+              </Select>
+            </FormControl>
+          </Box>
+        </CardActions>
+        <CardContent>
+          <Line options={options} data={data} />
+        </CardContent>
+      </Card>
+    </Box>
+    );
 }

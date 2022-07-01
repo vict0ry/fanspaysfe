@@ -15,7 +15,8 @@ export const Shop = () => {
   return <div>
     <Box sx={{ 'mt': 2 }}>
       <Box className="profileGrid" sx={{
-        display: 'grid', gridTemplateColumns: {
+        display: 'grid',
+        gridTemplateColumns: {
           sm: '1fr 3fr',
           xs: '1fr'
         }, gap: 2
