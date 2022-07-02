@@ -18,7 +18,6 @@ import axios from 'axios'
 import { persistStore } from 'redux-persist'
 import { socket, SocketContext } from './context/socket'
 import { EditProfile } from './pages/edit-profile/edit-profile'
-import {Finance} from './pages/Finance/finance'
 import { Home } from './pages/home'
 import { I18nextProvider } from 'react-i18next'
 import i18n from './i18n'
@@ -28,7 +27,6 @@ import { Customer } from './pages/customer/customer'
 import { beURL } from './config'
 import { ThemeProvider } from '@mui/material'
 import { CustomThemeConfig } from './themeConfig'
-import SuccessSnackbar from './components/SuccessSnackbar'
 
 const target = document.querySelector('#root')
 axios.defaults.baseURL = beURL
@@ -40,10 +38,6 @@ const PrivateWrapper = () => {
   const auth = !!localStorage.getItem('user') || null;
   return auth ? <Outlet /> : <Navigate to="/login" />;
 }
-const LoginDisallow = () => {
-  const auth = !!localStorage.getItem('user') || null;
-  return !auth ? <Outlet /> : <Navigate to="/" />;
-}
 
 root.render(
   <ThemeProvider theme={CustomThemeConfig}>
@@ -54,17 +48,12 @@ root.render(
           <BrowserRouter history={history}>
             <Routes>
               <Route path="/" element={<MainLayout />}>
-                <Route element={<PrivateWrapper />}>
-                  <Route path="/" element={<Home />} />
-                </Route>
+                <Route path="/" element={<Home />} />
                 <Route element={<PrivateWrapper />}>
                   <Route path="/shop/" element={<Shop />} />
                 </Route>
                 <Route element={<PrivateWrapper />}>
                   <Route path="/shop/:username" element={<Shop />} />
-                </Route>
-                <Route element={<PrivateWrapper />}>
-                  <Route path="/finance" element={<Finance />} />
                 </Route>
                 <Route element={<PrivateWrapper />}>
                   <Route path="profile" element={<Profile />} />
@@ -78,12 +67,8 @@ root.render(
                 <Route element={<PrivateWrapper />}>
                   <Route path="customer" element={<Customer />} />
                 </Route>
-                <Route element={<LoginDisallow />}>
-                  <Route path="register" element={<Register />} />
-                </Route>
-                <Route element={<LoginDisallow />}>
-                  <Route path="login" element={<Login />} />
-                </Route>
+                <Route path="register" element={<Register />} />
+                <Route path="login" element={<Login />} />
                 <Route element={<PrivateWrapper />}>
                   <Route path="messages" element={<Messages />} />
                 </Route>

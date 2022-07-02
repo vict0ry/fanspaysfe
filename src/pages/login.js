@@ -13,7 +13,7 @@ import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { connect, useDispatch } from 'react-redux'
 import axios from 'axios'
-import { registerUser, userLoggedIn } from '../redux/actions/user.action'
+import { registerUser, userLoggedIn } from '../redux/user.action'
 import { decodeToken } from 'react-jwt'
 import { Link } from 'react-router-dom'
 

@@ -1,7 +1,7 @@
 import ProfileCard from '../../layout/user-card'
 import Box from '@mui/material/Box'
 import AboutCard from '../../layout/about-card'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router'
 import { Posts } from './components/post/Posts'
 import Paper from '@mui/material/Paper'
@@ -11,16 +11,14 @@ import Tab from '@mui/material/Tab'
 import AddProductModal from './modals/AddProductModal'
 import { t } from 'i18next'
 import { SubscribeButton } from './components/SubscribeButton'
-import { loadProfile } from '../../redux/actions/profile.action'
+import { loadProfile } from '../../redux/profile.action'
 import { TabPanel } from '../../components/TabPanel'
 import './profile.css'
+import { Link } from 'react-router-dom'
+import { MiniUser } from './components/MiniUser'
+import FollowersModal from './modals/FollowersModal'
+import { loadPosts } from '../../redux/posts.action'
 import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
-import { Wish } from '../../components/Wish'
-import { Divider } from '@mui/material'
-import Card from '@mui/material/Card'
-import axios from 'axios'
-import { showSuccessSnackbar } from '../../redux/actions/snackbar.actions'
-import { AddWishModal } from '../../components/AddWishModal'
 
 
 export const NotSubscribed = () => {
@@ -42,21 +40,18 @@ export function Profile(props) {
   const loggedUser = useSelector(state => state.user)
   const username = useParams().username || loggedUser?.userData?._id
   const dispatch = useDispatch()
-  const [wishes, setWishes] = useState();
-
+  useEffect(() => {
+    dispatch(loadProfile(username))
+    dispatch(loadPosts(username || loggedUser.userData._id))
+  }, [])
   const posts = useSelector(state => state.posts.posts)
   const user = useSelector(state => state.profile.profile)
-  useEffect(() => {
-    axios.get('/api/wish/' + user.profileUser._id).then(wishes => {
-      setWishes(wishes.data);
-    })
-    dispatch(loadProfile(username))
-  }, [])
+
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue)
   }
   const isUserSubscribed = () => {
-    return user?.profileUser?.followers?.includes(loggedUser?.userData?._id)
+    return user?.profileUser?.followers?.includes(loggedUser.userData._id)
   }
 
   function a11yProps(index) {
@@ -72,33 +67,32 @@ export function Profile(props) {
     <Box sx={{ 'mt': 2 }}>
       <Box className="profileGrid" sx={{
         display: 'grid', gridTemplateColumns: {
-          sm: '1fr 1.4fr 3fr',
+          sm: '1fr 1fr 3fr',
           xs: '1fr'
         }, gap: 2
       }} xs={{
         display: 'none'
       }}>
         <SharedLeftMenu />
-        <Box style={{margin: '10px 0'}}>
+        <Box>
           <ProfileCard profileUser={user?.profileUser} />
-          <Card sx={{  p: {xs: 2},
-            maxWidth: { xs: 400, md: 400 },
-            ml:{xs: 5, md: 0},
-            mt: {xs: 2}, height: 'fit-content' }}>
-            <p style={{fontSize: '18px', margin:'0', fontWeight: 'bold'}}>Wishes</p>
-            <Divider style={{marginBottom: '10px'}} />
-            { wishes?.length ? wishes.map(wish => {
-              return <div>
-                <Wish title={wish.name} id={wish._id} from={300} to={wish.amount} style={{margin: '10px 0'}} />
-                <Divider style={{margin: '10px 0'}} />
-              </div>
-            }) : <AddWishModal></AddWishModal> }
-          </Card>
+          <div style={{ marginTop: '10px' }}>
+            <Paper style={{
+              padding: 5,
+              justifyContent: 'center',
+              margin: '10px 0',
+              display: 'flex',
+              alignItems: 'center',
+              justifyAlign: 'center'
+            }}>
+              <SubscribeButton />
+            </Paper>
+            <FollowersModal profileUser={user?.profileUser} />
+          </div>
         </Box>
         <Box>
           <AboutCard user={user?.profileUser} postsLength={posts.length} />
           <div>
-
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <Tabs value={selectedTab} onChange={handleChange} aria-label="basic tabs example">
                 <Tab label={t('COMMON.STORIES')} {...a11yProps(0)} />

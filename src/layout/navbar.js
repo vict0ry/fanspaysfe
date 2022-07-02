@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -20,18 +20,12 @@ import { useTranslation } from 'react-i18next'
 import { NotificationsMenu } from './components/NotificationsMenu'
 import { MessagesMenu } from './components/MessagesMenu'
 import { Container } from '@mui/material'
-import { logoutUser } from '../redux/actions/user.action'
+import { logoutUser } from '../redux/user.action'
 import { MiniUser } from '../pages/profile/components/MiniUser'
 import { beURL } from '../config'
-import Select from '@mui/material/Select'
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import LanguageIcon from '@mui/icons-material/Language';
-import { makeStyles } from '@material-ui/styles';
 
 
 export default function SearchBar() {
-
   let connected = false
   const dispatch = useDispatch()
   const loggedUser = useSelector(state => state.user)
@@ -66,6 +60,7 @@ export default function SearchBar() {
 
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
+
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
 
@@ -123,7 +118,6 @@ export default function SearchBar() {
           <div onClick={() => {
             localStorage.clear()
             dispatch(logoutUser())
-            window.location.replace("/");
           }}>{t('NAVBAR.LOGOUT')}
           </div>
         </Box> : ''}
@@ -131,19 +125,19 @@ export default function SearchBar() {
     </Menu>
   )
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const mobileMenuId = 'primary-search-account-menu-mobile'
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
         vertical: 'top',
-        horizontal: 'right',
+        horizontal: 'right'
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
         vertical: 'top',
-        horizontal: 'right',
+        horizontal: 'right'
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
@@ -160,7 +154,6 @@ export default function SearchBar() {
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
-          color="inherit"
         >
           <Badge badgeContent={17} color="error">
             <NotificationsIcon />
@@ -174,63 +167,38 @@ export default function SearchBar() {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
         >
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
       </MenuItem>
     </Menu>
-  );
-  const { i18n } = useTranslation();
-  const [language, setLanguage] = useState("EN");
-
-  const handleChangeLanguage = (evt) => {
-    const lang = evt.target.value;
-    i18n.changeLanguage(lang);
-  }
+  )
 
   return (
-    <>
+    <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="sticky">
+          <Container maxWidth="lg">
             <Toolbar>
-              <Box
-                component="img"
-                sx={{
-                  content: {
-                    xs: `url('/mobileLogo.svg')`, //img src from xs up to md
-                    md: `url('/logo.svg')`,  //img src from md and up
-                  },
-                  width: {
-                    xs: '150px',
-                    md: '150px',
-                  },
-                }}
-                alt="Logo"
-              />
-              <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+              {/*<IconButton*/}
+              {/*  size="large"*/}
+              {/*  edge="start"*/}
+              {/*  color="inherit"*/}
+              {/*  aria-label="open drawer"*/}
+              {/*  sx={{ mr: 2 }}*/}
+              {/*>*/}
+              {/*  <MenuIcon />*/}
+              {/*</IconButton>*/}
+              <Link to={'/'}>
+                <img src="/logo.svg" alt="" width={'150px'} />
+              </Link>
               <SearchInput />
-              </Box>
-              <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-                <FormControl fullWidth>
-                <Select
-                  variant={'outlined'}
-                  sx={{height: '50%', mt: 2.5, border:'none', width: '100%'}}
-                  IconComponent={LanguageIcon}
-                  defaultValue={'EN'}
-                  onChange={handleChangeLanguage}
-                  >
-                  <MenuItem value={'EN'}>EN</MenuItem>
-                  <MenuItem value={'CS'}>CZ</MenuItem>
-                  <MenuItem value={'RU'}>RU</MenuItem>
-                </Select>
-                </FormControl>
-              </Box>
               <Box sx={{ flexGrow: 1 }} />
               {!loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
                 <Link to={'/register'}>{t('NAVBAR.REGISTER')}</Link>
               </Box> : ''}
+
               <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
                 <Link to={'/'}>{t('NAVBAR.HOME_PAGE')}</Link>
               </Box>
@@ -240,12 +208,10 @@ export default function SearchBar() {
               {!loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
                 <Link to={'/login'}>{t('NAVBAR.LOGIN')}</Link>
               </Box> : ''}
-              <MessagesMenu />
-              <NotificationsMenu />
+
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                <Typography sx={{ color:'black'}}  variant={'h6'}>{loggedUser?.userData?.username}</Typography>
-              </Box>
-                <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                <MessagesMenu />
+                <NotificationsMenu />
                 <IconButton
                   size="large"
                   edge="end"
@@ -254,14 +220,9 @@ export default function SearchBar() {
                   aria-haspopup="true"
                   onClick={handleProfileMenuOpen}
                 >
-                  <img
-                    style={{ borderRadius: '100%' }}
-                    src={beURL + loggedUser?.userData?.profilePic}
-                    alt=""
-                    width={'50px'}
-                  />
+                  <AccountCircle />
                 </IconButton>
-                </Box>
+              </Box>
               <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                 <IconButton
                   size="large"
@@ -270,21 +231,15 @@ export default function SearchBar() {
                   aria-haspopup="true"
                   onClick={handleMobileMenuOpen}
                 >
-                  <img
-                    style={{ borderRadius: '100%' }}
-                    src={beURL + loggedUser?.userData?.profilePic}
-                    alt=""
-                    width={'50px'}
-                  />
+                  <MoreIcon />
                 </IconButton>
               </Box>
             </Toolbar>
-
+          </Container>
         </AppBar>
         {renderMobileMenu}
         {renderMenu}
       </Box>
-    </>
+    </div>
   )
 }
-

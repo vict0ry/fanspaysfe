@@ -4,18 +4,15 @@ import { Outlet } from 'react-router-dom'
 import StickyFooter from './sticky-footer'
 import React from 'react'
 import { connect } from 'react-redux'
-import SuccessSnackbar from '../components/SuccessSnackbar'
 
 const MainLayout = ({ props }) => {
-  return (
-    <div>
+  return (<div>
     <SearchBar />
-    <Container maxWidth="lg">
-      <Outlet />
-    </Container>
+      <Container maxWidth="lg">
+        <Outlet />
+      </Container>
     <StickyFooter />
-      <SuccessSnackbar />
-    </div>)
+  </div>)
 }
 const mapStateToProps = state => {
   console.log(state.router.location)

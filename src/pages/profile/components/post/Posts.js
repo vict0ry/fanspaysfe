@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import AddPostModal from '../../modals/AddPostModal'
 import { useDispatch, useSelector } from 'react-redux'
-import { commentPost, likePost } from '../../../../redux/actions/posts.action'
+import { commentPost, likePost } from '../../../../redux/posts.action'
 import { t } from 'i18next'
 import CommentIcon from '@mui/icons-material/Comment'
 import { useParams } from 'react-router'
@@ -23,7 +23,6 @@ import Avatar from '@mui/material/Avatar'
 import red from '@mui/material/colors/red'
 import PostMenu from './PostMenu'
 import { beURL } from '../../../../config'
-import { Link } from 'react-router-dom'
 
 
 export const Posts = ({ profileUser, posts, disableAdd = false }) => {
@@ -48,7 +47,7 @@ export const Posts = ({ profileUser, posts, disableAdd = false }) => {
     dispatch(commentPost(postId, comment))
     setComment('')
   }
-  const [isHidden, setIsHidden] = useState(false)
+  const [isHidden, setIsHidden] = useState(true)
   return (
     <div>
       { !disableAdd ? <AddPostModal /> : '' }
@@ -82,7 +81,7 @@ export const Posts = ({ profileUser, posts, disableAdd = false }) => {
                   <img style={{ width: '100%' }} src={beURL + message.postedBy?.profilePic} />
                 </Avatar>
               }
-              title={<Link to={'/profile/' + message.postedBy.username}>{message.postedBy.firstName + ' ' + message.postedBy.lastName}</Link>}
+              title={message.postedBy.firstName + ' ' + message.postedBy.lastName}
               subheader={message.postedBy.username}
             >
             </CardHeader>
@@ -117,7 +116,7 @@ export const Posts = ({ profileUser, posts, disableAdd = false }) => {
                 </IconButton>
               </div>
               <div style={{ cursor: 'pointer' }}>
-                <SendTipModal postModal={true} recipient={profileUser} >Send tip</SendTipModal>
+                <SendTipModal recipient={profileUser} />
               </div>
             </CardActions>
             {!message?.likes?.length ? t('BE_THE_FIRST_ONE') : message?.likes?.length + ' likes'} - {message?.comments?.length} comments

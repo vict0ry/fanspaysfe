@@ -5,7 +5,7 @@ export const CustomThemeConfig = createTheme({
     fontFamily: 'Manrope, sans-serif',
     textDecoration: 'none'
   },
-      components: {
+  components: {
     MuiButton: {
       variants: [
         {
@@ -25,6 +25,6 @@ export const CustomThemeConfig = createTheme({
           backgroundColor: "white"
         }
       }
-    },
+    }
   }
 });

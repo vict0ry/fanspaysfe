@@ -8,7 +8,7 @@ import { Divider } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import SendIcon from '@mui/icons-material/Send'
 import { useDispatch, useSelector } from 'react-redux'
-import { replyComment } from '../../../../redux/actions/posts.action'
+import { replyComment } from '../../../../redux/posts.action'
 import axios from 'axios'
 
 export const Comment = ({ comment, isSubComment }) => {
