@@ -1,7 +1,7 @@
 import ProfileCard from '../../layout/user-card'
 import Box from '@mui/material/Box'
 import AboutCard from '../../layout/about-card'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { Posts } from './components/post/Posts'
 import Paper from '@mui/material/Paper'
@@ -11,17 +11,16 @@ import Tab from '@mui/material/Tab'
 import AddProductModal from './modals/AddProductModal'
 import { t } from 'i18next'
 import { SubscribeButton } from './components/SubscribeButton'
-import { loadProfile } from '../../redux/profile.action'
+import { loadProfile } from '../../redux/actions/profile.action'
 import { TabPanel } from '../../components/TabPanel'
 import './profile.css'
-import { Link } from 'react-router-dom'
-import { MiniUser } from './components/MiniUser'
-import FollowersModal from './modals/FollowersModal'
-import { loadPosts } from '../../redux/posts.action'
 import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
 import { Wish } from '../../components/Wish'
 import { Divider } from '@mui/material'
 import Card from '@mui/material/Card'
+import axios from 'axios'
+import { showSuccessSnackbar } from '../../redux/actions/snackbar.actions'
+import { AddWishModal } from '../../components/AddWishModal'
 
 
 export const NotSubscribed = () => {
@@ -43,14 +42,16 @@ export function Profile(props) {
   const loggedUser = useSelector(state => state.user)
   const username = useParams().username || loggedUser?.userData?._id
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(loadProfile(username))
-  }, [])
+  const [wishes, setWishes] = useState();
 
   const posts = useSelector(state => state.posts.posts)
   const user = useSelector(state => state.profile.profile)
-
+  useEffect(() => {
+    axios.get('/api/wish/' + user.profileUser._id).then(wishes => {
+      setWishes(wishes.data);
+    })
+    dispatch(loadProfile(username))
+  }, [])
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue)
   }
@@ -86,23 +87,13 @@ export function Profile(props) {
             mt: {xs: 2}, height: 'fit-content' }}>
             <p style={{fontSize: '18px', margin:'0', fontWeight: 'bold'}}>Wishes</p>
             <Divider style={{marginBottom: '10px'}} />
-            <Wish title={'Iphone 8 PRO'} from={300} to={800} style={{margin: '10px 0'}} />
-            <Divider style={{margin: '10px 0'}} />
-            <Wish title={'Ray ban sunglass'} from={0} to={400} style={{margin: '10px 0'}} />
+            { wishes?.length ? wishes.map(wish => {
+              return <div>
+                <Wish title={wish.name} id={wish._id} from={300} to={wish.amount} style={{margin: '10px 0'}} />
+                <Divider style={{margin: '10px 0'}} />
+              </div>
+            }) : <AddWishModal></AddWishModal> }
           </Card>
-          {/*<div style={{ marginTop: '10px' }}>*/}
-          {/*  <Paper style={{*/}
-          {/*    padding: 5,*/}
-          {/*    justifyContent: 'center',*/}
-          {/*    margin: '10px 0',*/}
-          {/*    display: 'flex',*/}
-          {/*    alignItems: 'center',*/}
-          {/*    justifyAlign: 'center'*/}
-          {/*  }}>*/}
-          {/*    <SubscribeButton />*/}
-          {/*  </Paper>*/}
-          {/*  <FollowersModal profileUser={user?.profileUser} />*/}
-          {/*</div>*/}
         </Box>
         <Box>
           <AboutCard user={user?.profileUser} postsLength={posts.length} />

@@ -1,4 +1,4 @@
-import { CHATS_LOADED, LOADED_CHAT_MESSAGES, MESSAGES_LOADED } from './constants'
+import { CHATS_LOADED, LOADED_CHAT_MESSAGES, MESSAGES_LOADED } from '../constants'
 
 const initialState = {
   selectedChatId: undefined,

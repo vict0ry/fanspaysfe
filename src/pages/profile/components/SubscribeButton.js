@@ -2,7 +2,7 @@ import Button from '@mui/material/Button'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { t } from 'i18next'
-import { toggleSubscribe } from '../../../redux/profile.action'
+import { toggleSubscribe } from '../../../redux/actions/profile.action'
 
 export const SubscribeButton = () => {
   const dispatch = useDispatch()

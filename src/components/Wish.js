@@ -1,7 +1,8 @@
 import Button from '@mui/material/Button'
 import { t } from 'i18next'
+import axios from 'axios'
 
-export const Wish = ({title, from=0, to}) => {
+export const Wish = ({title, from=0, to, id}) => {
   const width = (100/to)*from;
   return (<div style={{
     display: 'flex', flexDirection:'column',
@@ -12,7 +13,9 @@ export const Wish = ({title, from=0, to}) => {
         alignItems: 'center',
         justifyContent: 'space-between',
         fontSize: '16px', color: '#5D5E65'}}><span>{from} of {to}$</span>
-          <img
+          <img onClick={() => {
+            axios.delete('/api/wish/' + id);
+          }}
         src="/images/icons/edit-button.svg"
         alt="edit" />
       </div>

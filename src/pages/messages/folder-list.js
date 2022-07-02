@@ -5,7 +5,7 @@ import * as React from 'react'
 import { useContext, useEffect } from 'react'
 import { Paper } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { loadChatMessages, loadChats } from '../../redux/messages.action'
+import { loadChatMessages, loadChats } from '../../redux/actions/messages.action'
 import { SocketContext } from '../../context/socket'
 
 export const FolderList = () => {

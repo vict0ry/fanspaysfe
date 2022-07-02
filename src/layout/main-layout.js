@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom'
 import StickyFooter from './sticky-footer'
 import React from 'react'
 import { connect } from 'react-redux'
+import SuccessSnackbar from '../components/SuccessSnackbar'
 
 const MainLayout = ({ props }) => {
   return (
@@ -13,7 +14,8 @@ const MainLayout = ({ props }) => {
       <Outlet />
     </Container>
     <StickyFooter />
-  </div>)
+      <SuccessSnackbar />
+    </div>)
 }
 const mapStateToProps = state => {
   console.log(state.router.location)

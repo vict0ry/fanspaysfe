@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { CHATS_LOADED, MESSAGES_LOADED } from './constants'
+import { CHATS_LOADED, MESSAGES_LOADED } from '../constants'
 
 export const loadChats = () => {
   return (dispatch) => {

@@ -1,4 +1,4 @@
-import { COMMENT_ADDED, POST_ADDED, POSTS_DELETED, POSTS_LOADED } from './constants'
+import { COMMENT_ADDED, POST_ADDED, POSTS_DELETED, POSTS_LOADED } from '../constants'
 
 const initialState = {
   posts: []

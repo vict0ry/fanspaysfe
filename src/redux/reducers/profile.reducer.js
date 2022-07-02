@@ -1,4 +1,4 @@
-import { PROFILE_LOADED, PROFILE_SUBSCRIBED } from './constants'
+import { PROFILE_LOADED, PROFILE_SUBSCRIBED } from '../constants'
 
 const initialState = {
   profile: undefined,

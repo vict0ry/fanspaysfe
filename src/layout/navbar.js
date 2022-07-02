@@ -20,7 +20,7 @@ import { useTranslation } from 'react-i18next'
 import { NotificationsMenu } from './components/NotificationsMenu'
 import { MessagesMenu } from './components/MessagesMenu'
 import { Container } from '@mui/material'
-import { logoutUser } from '../redux/user.action'
+import { logoutUser } from '../redux/actions/user.action'
 import { MiniUser } from '../pages/profile/components/MiniUser'
 import { beURL } from '../config'
 import Select from '@mui/material/Select'
@@ -186,9 +186,7 @@ export default function SearchBar() {
   const [language, setLanguage] = useState("EN");
 
   const handleChangeLanguage = (evt) => {
-    debugger;
     const lang = evt.target.value;
-    console.log(lang);
     i18n.changeLanguage(lang);
   }
 

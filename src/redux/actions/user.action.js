@@ -1,4 +1,4 @@
-import { USER_LOGGED_IN, USER_LOGOUT } from './constants'
+import { USER_LOGGED_IN, USER_LOGOUT } from '../constants'
 import axios from 'axios'
 import { decodeToken } from 'react-jwt'
 

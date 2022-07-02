@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { PROFILE_LOADED, PROFILE_SUBSCRIBED } from './constants'
+import { PROFILE_LOADED, PROFILE_SUBSCRIBED } from '../constants'
 import { loadPosts } from './posts.action'
 
 export const loadProfile = (username) => {

@@ -28,6 +28,7 @@ import { Customer } from './pages/customer/customer'
 import { beURL } from './config'
 import { ThemeProvider } from '@mui/material'
 import { CustomThemeConfig } from './themeConfig'
+import SuccessSnackbar from './components/SuccessSnackbar'
 
 const target = document.querySelector('#root')
 axios.defaults.baseURL = beURL

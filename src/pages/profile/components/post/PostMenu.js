@@ -2,7 +2,7 @@ import * as React from 'react'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
-import { removePost } from '../../../../redux/posts.action'
+import { removePost } from '../../../../redux/actions/posts.action'
 import { useDispatch } from 'react-redux'
 
 export default function PostMenu({ postId }) {

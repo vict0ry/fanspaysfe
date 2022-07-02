@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { COMMENT_ADDED, LIKE_ADDED, POST_ADDED, POSTS_DELETED, POSTS_LOADED, REPLY_COMMENT_ADDED } from './constants'
+import { COMMENT_ADDED, LIKE_ADDED, POST_ADDED, POSTS_DELETED, POSTS_LOADED, REPLY_COMMENT_ADDED } from '../constants'
 
 export const loadPosts = (userId) => {
   return (dispatch) => {
