@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box'
-import { MiniUser } from '../pages/profile/components/MiniUser'
 import TextField from '@mui/material/TextField'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'

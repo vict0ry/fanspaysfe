@@ -53,7 +53,7 @@ export function Profile(props) {
     return false;
   }
   useEffect(() => {
-    axios.get('/api/wish/' + user.profileUser._id).then(wishes => {
+    axios.get('/api/wish/' + user?.profileUser?._id).then(wishes => {
       setWishes(wishes.data);
     })
     dispatch(loadProfile(username))
