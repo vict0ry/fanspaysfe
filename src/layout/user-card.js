@@ -25,7 +25,7 @@ styled((props) => {
   })
 }))
 const avatar = (image) => beURL + image
-export default function ProfileCard({ profileUser }) {
+export default function ProfileCard({ profileUser, myProfile }) {
 
   const TextNumber = ({ number, text }) => {
     return <Box style={{ textAlign: 'center' }}>
@@ -49,7 +49,7 @@ export default function ProfileCard({ profileUser }) {
         <Box sx={{ marginTop: '5px' }}>
           <TextNumber number={profileUser?.followers?.length} text={t('COMMON.FOLLOWERS')} />
         </Box>
-        <Box sx={{ marginTop: '15px' }}>
+        {!myProfile ? <div><Box sx={{ marginTop: '15px' }}>
           <Link to={'/messages/' + profileUser?._id}>
             <Button
               sx={{width: 180}}
@@ -58,11 +58,13 @@ export default function ProfileCard({ profileUser }) {
           </Link>
           <SubscribeButton />
         </Box>
-        <AddRemoveBalance recipient={profileUser} />
-        <Divider sx={{ pt: 2 }} />
-        <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
-          <SendTipModal recipient={profileUser}>SEND TIP</SendTipModal>
-        </Box>
+          <AddRemoveBalance recipient={profileUser} />
+          <Divider sx={{ pt: 2 }} />
+          <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
+            <SendTipModal recipient={profileUser}>SEND TIP</SendTipModal>
+          </Box>
+        </div>  : <Link to={'/edit'}><Button style={{marginTop: '10px'}} variant={'contained'}>{t('Edit profile')}</Button></Link> }
+
         <Box sx={{ width: 180, display: 'flex', justifyContent: 'space-between', mt: 2, pl: 2, pr: 2 }}>
           <img src='/images/icons/twitter.svg'/>
           <img src='/images/icons/instagram.svg'/>

@@ -19,7 +19,6 @@ import { Wish } from '../../components/Wish'
 import { Divider } from '@mui/material'
 import Card from '@mui/material/Card'
 import axios from 'axios'
-import { showSuccessSnackbar } from '../../redux/actions/snackbar.actions'
 import { AddWishModal } from '../../components/AddWishModal'
 
 
@@ -46,6 +45,13 @@ export function Profile(props) {
 
   const posts = useSelector(state => state.posts.posts)
   const user = useSelector(state => state.profile.profile)
+
+  const myProfile = () => {
+    if (!useParams().username || useParams().username === loggedUser?.userData?.username) {
+      return true;
+    }
+    return false;
+  }
   useEffect(() => {
     axios.get('/api/wish/' + user.profileUser._id).then(wishes => {
       setWishes(wishes.data);
@@ -80,7 +86,9 @@ export function Profile(props) {
       }}>
         <SharedLeftMenu />
         <Box style={{margin: '10px 0'}}>
-          <ProfileCard profileUser={user?.profileUser} />
+          <ProfileCard
+            myProfile={myProfile()}
+            profileUser={user?.profileUser} />
           <Card sx={{  p: {xs: 2},
             maxWidth: { xs: 400, md: 400 },
             ml:{xs: 5, md: 0},
@@ -89,14 +97,21 @@ export function Profile(props) {
             <Divider style={{marginBottom: '10px'}} />
             { wishes?.length ? wishes.map(wish => {
               return <div>
-                <Wish title={wish.name} id={wish._id} from={300} to={wish.amount} style={{margin: '10px 0'}} />
+                <Wish
+                  title={wish.name}
+                  id={wish._id}
+                  from={300}
+                  myProfile={myProfile()}
+                  to={wish.amount} style={{margin: '10px 0'}} />
                 <Divider style={{margin: '10px 0'}} />
               </div>
-            }) : <AddWishModal></AddWishModal> }
+            }) : <AddWishModal myProfile={myProfile()}></AddWishModal> }
           </Card>
         </Box>
         <Box>
-          <AboutCard user={user?.profileUser} postsLength={posts.length} />
+          <AboutCard
+            user={user?.profileUser}
+            postsLength={posts.length} />
           <div>
 
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -108,7 +123,7 @@ export function Profile(props) {
               </Tabs>
             </Box>
             <TabPanel value={selectedTab} index={0}>
-              {!isUserSubscribed() ?
+              {!isUserSubscribed() && !myProfile() ?
                 <NotSubscribed /> :
                 <Posts posts={posts} profileUser={user?.profileUser} />}
             </TabPanel>

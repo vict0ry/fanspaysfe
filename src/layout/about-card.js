@@ -3,20 +3,10 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Box from '@mui/material/Box'
 import CardHeader from '@mui/material/CardHeader'
-import { Divider } from '@mui/material'
-import { Link } from 'react-router-dom'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import LinkIcon from '@mui/icons-material/Link'
-import DateRangeIcon from '@mui/icons-material/DateRange'
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
-import ScaleIcon from '@mui/icons-material/Scale'
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import { useTranslation } from 'react-i18next'
 import { t } from 'i18next'
 import moment from 'moment'
 import { getZodiac } from '../helper'
-import { SocialIcon } from 'react-social-icons'
-import Grid from '@mui/material/Grid'
 
 const ProfileStatistics = ({ followers = 0, following = 0, posts = 0, products = 0, video = 0, likes = 0 }) => {
   const TextNumber = ({ number, text }) => {
@@ -57,7 +47,7 @@ export const InfoIcon = ({title, icon, afterIcon}) => {
   </Box>
 }
 
-export default function AboutCard({ user, postsLength }) {
+export default function AboutCard({ user, postsLength, disable }) {
   const fullName = user?.firstName + ' ' + user?.lastName
   const { t } = useTranslation()
   const parsedDate = moment(user?.birthDate, 'YYYY-MM-DD')

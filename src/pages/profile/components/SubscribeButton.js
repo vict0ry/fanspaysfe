@@ -9,7 +9,6 @@ export const SubscribeButton = () => {
   const userProfile = useSelector(state => {
     return state.profile.profile
   })
-  debugger;
   const loggedUser = useSelector(state => state.user)
   const isSubscribed = () => {
     return userProfile?.profileUser?.followers?.includes(loggedUser.userData._id)

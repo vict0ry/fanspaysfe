@@ -22,7 +22,7 @@ const style = {
   boxShadow: 24,
   p: 4
 }
-export const AddWishModal = () => {
+export const AddWishModal = ({myProfile}) => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -82,13 +82,13 @@ export const AddWishModal = () => {
 
       </Box>
     </Modal>
-    <div onClick={() => setOpen(true)} style={{background: '#E8EFFF',
+    {myProfile ? <div onClick={() => setOpen(true)} style={{background: '#E8EFFF',
       marginTop: '10px',
       maxWidth: '204px',
       textAlign: 'center',
       padding: '5px 10px', borderRadius: '10px', border: '1px dashed #4776E6'}}>
       <img src="/images/icons/plus.svg" alt="add" />
       <span style={{color: '#4776E6', marginLeft: '5px'}}>{t('Add new')}</span>
-    </div>
+    </div> : '' }
   </div>
 }

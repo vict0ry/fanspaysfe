@@ -2,7 +2,7 @@ import Button from '@mui/material/Button'
 import { t } from 'i18next'
 import axios from 'axios'
 
-export const Wish = ({title, from=0, to, id}) => {
+export const Wish = ({title, from=0, to, id, myProfile}) => {
   const width = (100/to)*from;
   return (<div style={{
     display: 'flex', flexDirection:'column',
@@ -33,7 +33,6 @@ export const Wish = ({title, from=0, to, id}) => {
     <div style={{textAlign: 'left'}}>
       <span style={{color: '#1A051D', fontSize: '14px', fontWeight: 'bold', textAlign: 'center'}}>{title}</span>
     </div>
-
-    <Button style={{margin: '10px 0'}} variant={'contained'}>{t('Support')}</Button>
+    {!myProfile ? <Button style={{margin: '10px 0'}} variant={'contained'}>{t('Support')}</Button> : ''}
   </div>);
 }
