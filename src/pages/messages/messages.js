@@ -263,7 +263,7 @@ export function Messages() {
         <div className="user">
           <img
             style={stylesMessage.avatar}
-            src={beURL + i.sender.profilePic}
+            src={beURL + i?.sender?.profilePic}
             alt="" />
         </div>
 
@@ -324,39 +324,22 @@ export function Messages() {
               <div style={styles.statusCircle}></div>
             </div></div>}
           </div>
-
           <div style={styles.headerRight}>
             <Button variant="contained">{t('Send request')}</Button>
             <div style={styles.chatController}>
               <MoreVertIcon />
             </div>
           </div>
-
-
-
         </Box>
-
-
-
         <Toolbar style={{ display: 'flex', flexDirection: "column", padding: 0}}>
-
-
           <Box style={styles.messages_cont}>
-
-
             {selectedChatMessages.length ? selectedChatMessages.map((i, id) => {
               return (
                 <Message i={i} id={id} />
               )
             }) : <strong style={{ padding: '20px' }}>{t('COMMON.NOTHING_HERE_YET')}</strong>}
 
-
-
-
-
           </Box>
-
-
 
           <Box style={styles.messagesController}>
 
@@ -366,8 +349,6 @@ export function Messages() {
                 <img src="/images/icons/attachment.svg" alt="" />
               </div>
             </div>
-
-
 
             <TextField onChange={() => handleMessageOnKeyDown(event.target.value)}
                        variant="standard"

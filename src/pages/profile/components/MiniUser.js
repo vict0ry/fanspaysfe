@@ -10,6 +10,7 @@ export const MiniUser = ({ user }) => {
           src={beURL + user?.profilePic}
           alt=""
           width={'50px'}
+          height={'50px'}
         />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }} className="user-metadata">
