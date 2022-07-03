@@ -23,8 +23,9 @@ export const SubscribeButton = () => {
 
   return <div style={{ display: 'flex', justifyAlign: 'center' }}>
     {!isSubscribed() ?
-      <Button onClick={handleFollow} variant='contained' style={{ marginTop: 10 }}>Subscribe for {userProfile?.profileUser.subscribtionPrice} in a
+      <Button onClick={handleFollow} variant='contained' style={{ marginTop: 10 }}>
+        Subscribe for {userProfile?.profileUser.subscribtionPrice} in a
         month</Button> :
-      <Button onClick={handleFollow} color="primary" variant='dashed' style={{ marginTop: 10 }}>{t('COMMON.UNSUBSCRIBE')}</Button>}
+      <Button onClick={handleFollow} color="primary" variant='contained' style={{ marginTop: 10 }}>{t('COMMON.UNSUBSCRIBE')}</Button>}
   </div>
 }

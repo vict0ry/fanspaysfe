@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
 import TextField from '@mui/material/TextField'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import IconButton from '@mui/material/IconButton'
@@ -13,6 +13,7 @@ import Button from '@mui/material/Button'
 import { MiniUser } from '../components/MiniUser'
 import axios from 'axios'
 import { t } from 'i18next'
+import { showSuccessSnackbar } from '../../../redux/actions/snackbar.actions'
 
 const style = {
   position: 'absolute',
@@ -29,6 +30,7 @@ const style = {
 
 export default function AddRemoveBalance({ recipient, children }) {
   const [open, setOpen] = useState(false)
+  const dispatch = useDispatch();
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
   const { username } = useParams()
@@ -58,17 +60,19 @@ export default function AddRemoveBalance({ recipient, children }) {
       recipient: recipient._id,
       sender: loggedUser.userData._id
     }).then(_ => {
-      axios.get('/api/credit').then(response => {
-        setOpen(false)
-      })
+      handleClose();
+      dispatch(showSuccessSnackbar("Success!"));
     })
   }
 
   return (
     <div>
       {isAllowed() ?
-        <Box sx={{ display: 'flex', marginTop: '10px', justifyAlign: 'center', alignItems: 'center', cursor: 'pointer' }}>
+        <Box sx={{ display: 'flex',
+          flexDirection: 'column',
+          marginTop: '10px', justifyAlign: 'center', alignItems: 'center', cursor: 'pointer' }}>
           <Button onClick={handleOpen} variant="contained">{t('ADD / Remove balance')}</Button>
+          <Button style={{margin: '10px 0', background: 'red'}} variant="contained">{t('Block user')}</Button>
         </Box> : ''}
       <Modal
         open={open}

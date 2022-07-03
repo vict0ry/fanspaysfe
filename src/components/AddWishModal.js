@@ -29,10 +29,7 @@ export const AddWishModal = ({myProfile}) => {
   const dispatch = useDispatch();
   const loggedUser = useSelector(state => state.user)
   const { t } = useTranslation()
-  const isAllowed = () => {
-    return true
-    // return !(!username || username === loggedUser?.userData?.username)
-  }
+
   const submitForm = (event) => {
     event.preventDefault()
     const { amount, name } = event.target.elements

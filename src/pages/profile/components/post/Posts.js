@@ -24,6 +24,7 @@ import red from '@mui/material/colors/red'
 import PostMenu from './PostMenu'
 import { beURL } from '../../../../config'
 import { Link } from 'react-router-dom'
+import { NotSubscribed } from '../../profile'
 
 
 export const Posts = ({ profileUser, posts, disableAdd = false }) => {
@@ -92,14 +93,14 @@ export const Posts = ({ profileUser, posts, disableAdd = false }) => {
               </Typography>
               <div className="post-pictures">
                 <Box>
-                  <FbImageLibrary images={message?.pictures?.map(i => {
+                  { message.not_subscribed ? <NotSubscribed /> : <FbImageLibrary images={message?.pictures?.map(i => {
                     return beURL + i
-                  })} />
+                  })} /> }
                 </Box>
               </div>
             </CardContent>
 
-            <CardActions disableSpacing>
+            { !message.not_subscribed ? <CardActions disableSpacing>
               <div style={{ cursor: 'pointer' }} onClick={() => {
                 const hasLike = message.likes.includes(loggedUser.userData._id)
                 message.likes = hasLike ? message.likes.filter(i => i !== loggedUser.userData._id) : [...message.likes, loggedUser.userData._id]
@@ -119,11 +120,12 @@ export const Posts = ({ profileUser, posts, disableAdd = false }) => {
               <div style={{ cursor: 'pointer' }}>
                 <SendTipModal postModal={true} recipient={profileUser} >Send tip</SendTipModal>
               </div>
-            </CardActions>
+            </CardActions> : '' }
             {!message?.likes?.length ? t('BE_THE_FIRST_ONE') : message?.likes?.length + ' likes'} - {message?.comments?.length} comments
             - 100kč
             dýško
-            <Box sx={{ marginTop: 5, display: isHidden ? 'none' : 'block', maxHeight: '300px', overflowY: 'scroll' }}>
+            { ! message.not_subscribed ? <div>
+              <Box sx={{ marginTop: 5, display: isHidden ? 'none' : 'block', maxHeight: '300px', overflowY: 'scroll' }}>
               <Divider />
               {message?.comments?.map(comment => {
                 return <Comment comment={comment} />
@@ -139,6 +141,7 @@ export const Posts = ({ profileUser, posts, disableAdd = false }) => {
                 style={{ width: '100%' }} multiline> </TextField>
               <SendIcon onClick={() => handleAddComment(message._id)} style={{ marginLeft: '10px' }} />
             </Box>
+            </div> : '' }
           </Card>
         </div>
       })}

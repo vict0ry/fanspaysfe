@@ -3,13 +3,10 @@ import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import React, { useEffect, useState } from 'react'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import { t } from 'i18next'
 import axios from 'axios'
 import { Wish } from './Wish'
 import { AddWishModal } from './AddWishModal'
-import { Divider } from '@mui/material'
 import { useSelector } from 'react-redux'
 
 export const SubscriptionSettingsCard = () => {
@@ -47,6 +44,24 @@ export const UserPricesFormTab = () => {
       }} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12}><strong style={{padding: '30px 0'}}>{t('Subscriptions')}</strong></Grid>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              style={{maxWidth: '500px', marginBottom: '20px'}}
+              name="price"
+              required
+              fullWidth
+              id="price"
+              label="Your price"
+              type="number"
+              autoFocus
+            />
+            <br/>
+            <Button onClick={() => {
+              axios.put('/api/users/subscribtionPrice', {
+                price: 300
+              });
+            }} variant={'outlined'}>Save</Button>
+          </Grid>
           <Grid item xs={4} sm={4}>
             <SubscriptionSettingsCard />
           </Grid>
@@ -62,11 +77,7 @@ export const UserPricesFormTab = () => {
             marginBottom: '40px',
             padding: '5px 10px', borderRadius: '10px', border: '1px dashed #4776E6'}}>
             <img src="/images/icons/plus.svg" alt="add" />
-            <span onClick={() => {
-              axios.put('/api/users/subscribtionPrice', {
-                price: 300
-              });
-            }} style={{color: '#4776E6', marginLeft: '5px'}}>Add new</span>
+            <span style={{color: '#4776E6', marginLeft: '5px'}}>Add new</span>
           </div>
         </Grid>
         <Grid container spacing={2}>
@@ -79,7 +90,7 @@ export const UserPricesFormTab = () => {
                 У вас еще нет желаний. Откройте сбор на свою мечту 💫
               </p></div> }
             <Grid item xs={12} sm={12}>
-              <AddWishModal></AddWishModal>
+              <AddWishModal myProfile={true}></AddWishModal>
             </Grid>
           </Grid>
       </Box>

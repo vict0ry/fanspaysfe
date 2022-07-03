@@ -23,17 +23,22 @@ import { AddWishModal } from '../../components/AddWishModal'
 
 
 export const NotSubscribed = () => {
-  return <Paper sx={{
+  return <Box sx={{
     padding: '20px',
-    ':hover': {
-      boxShadow: 5
-    }
+    textAlign: 'center',
+    background: '#F7F5F9',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column'
   }}>
-    <div>
-      {t('COMMON.SUBSCRIBE_TO_SEE')}
+    <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
+      <img src="/images/icons/lock.svg" alt="locked" />
+      <br/>
+      <div style={{maxWidth: '70%', textAlign: 'center'}}>{t('COMMON.SUBSCRIBE_TO_SEE')}</div>
     </div>
     <SubscribeButton />
-  </Paper>
+  </Box>
 }
 
 
@@ -47,10 +52,8 @@ export function Profile(props) {
   const user = useSelector(state => state.profile.profile)
 
   const myProfile = () => {
-    if (!useParams().username || useParams().username === loggedUser?.userData?.username) {
-      return true;
-    }
-    return false;
+    return !useParams().username || useParams().username === loggedUser?.userData?.username;
+
   }
   useEffect(() => {
     axios.get('/api/wish/' + user?.profileUser?._id).then(wishes => {
@@ -123,9 +126,7 @@ export function Profile(props) {
               </Tabs>
             </Box>
             <TabPanel value={selectedTab} index={0}>
-              {!isUserSubscribed() && !myProfile() ?
-                <NotSubscribed /> :
-                <Posts posts={posts} profileUser={user?.profileUser} />}
+                <Posts posts={posts} profileUser={user?.profileUser} />
             </TabPanel>
             <TabPanel value={selectedTab} index={1}>
               <AddProductModal />
