@@ -223,7 +223,7 @@ export default function SearchBar() {
                   >
                   <MenuItem value={'EN'}>EN</MenuItem>
                   <MenuItem value={'CS'}>CZ</MenuItem>
-                  <MenuItem value={'RU'}>RU</MenuItem>
+                  <MenuItem value={'RU'}>RUS</MenuItem>
                 </Select>
                 </FormControl>
               </Box>
