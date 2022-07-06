@@ -1,5 +1,5 @@
 import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
-import React from 'react'
+import React, {useState} from 'react'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -8,7 +8,10 @@ import { FinanceChart } from './finance-chart'
 import { FinanceStatistics } from './finance-statistics'
 import { NewFounds } from './new-founds'
 
+
 export const Finance = () => {
+
+
   return <>
     <Box sx={{ 'mt': 2 }}>
       <Box className="profileGrid" sx={{
