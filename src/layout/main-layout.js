@@ -15,7 +15,7 @@ const MainLayout = ({ props }) => {
   </div>)
 }
 const mapStateToProps = state => {
-  console.log(state.router.location)
+  // console.log(state.router.location)
   return state
 }
 export default connect(mapStateToProps)(MainLayout)

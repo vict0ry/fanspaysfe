@@ -16,9 +16,11 @@ import ImageIcon from '@mui/icons-material/Image'
 import SendTipModal from '../profile/modals/SendTipModal'
 import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
 import { Icon } from './Icon'
+import { Message } from './Message/Message'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
 
 const messageElement = React.createRef();
-
 
 
 const chatMessages = [
@@ -383,7 +385,93 @@ const chatMessages = [
     "createdAt": "2022-06-27T11:43:09.737Z",
     "updatedAt": "2022-06-27T11:43:09.737Z",
     "__v": 0
-  }
+  },
+  
+
+
+  {
+    "readBy": [],
+    "_id": "62b997cd9882bb4a0281a13c",
+    "sender": {
+        "profilePic": "/uploads/images/6cee2f689ac6ea20f963387ab1ed8be8.png",
+        "likes": [
+            "62bb379a0f040eec764b2155",
+            "62b9b4d272dbeba55f09d5a7"
+        ],
+        "comments": [],
+        "credit": [],
+        "retweets": [],
+        "following": [],
+        "followers": [
+            "6255811a5aadc81fd3081d5e",
+            "626e8bdf7cceb4644895b4d4",
+            "62b9b0df7f5d66a3cf3f5c1b",
+            "62b9c6ff772e16ac2cb47d0f",
+            "62baab04990135c315bde583",
+            "62bb392257aa48eccb262b43"
+        ],
+        "role": "user",
+        "_id": "5fff0e6b4d090d1488d580cc",
+        "firstName": "",
+        "lastName": "testerson",
+        "username": "test",
+        "email": "test@test.test",
+        "password": "$2b$10$QoT8Aj5esTfObrF2wfDfJOGBAGhwOFdYJIfm0wgL5JzEPQ6Pkhsma",
+        "createdAt": "2021-01-13T15:14:51.299Z",
+        "updatedAt": "2022-07-02T13:16:02.907Z",
+        "__v": 1,
+        "birthDate": "1965-07-31T21:00:00.000Z",
+        "description": "nejaky dlouhy poopossfkj dsak fskdjf kasdjf kasdjfk sajdfkj asdkf as",
+        "subscribtionPrice": 300
+    },
+    "content": "zxcxc",
+    "chat": "62874cdbd2e7014244c6622e",
+    "createdAt": "2022-07-06T11:22:11.772Z",
+    "updatedAt": "2022-07-06T16:44:12.291Z",
+    "__v": 0
+  },
+  {
+    "readBy": [
+        "62865cec899c743cf48c9f55",
+        "62865d31899c743cf48c9f7b"
+    ],
+    "_id": "628779e3a07c4c3c08a88d20",
+    "sender": {
+        "profilePic": "/uploads/images/31466738aa9cffdd021e24312a0e39ee.png",
+        "likes": [
+            "62868daec45895444c94ddd5",
+            "62877a26a07c4c3c08a88d7f",
+            "6287c4f8df2e914058cc8f10",
+            "628b9c10564f523b14c2366a"
+        ],
+        "comments": [],
+        "credit": [],
+        "retweets": [],
+        "following": [
+            "62865cec899c743cf48c9f55"
+        ],
+        "followers": [
+            "62865cec899c743cf48c9f55"
+        ],
+        "role": "user",
+        "_id": "62865d31899c743cf48c9f7b",
+        "firstName": "bame",
+        "lastName": "bame",
+        "username": "bame7",
+        "email": "bame@gmail.com",
+        "password": "$2b$10$7KIt3mmnHn1z6l0fOxWkc.6Hz98DMZM9MrNsNa1fXsPnNmP3K2LEm",
+        "createdAt": "2022-07-06T15:07:29.923Z",
+        "updatedAt": "2022-07-06T14:37:15.318Z",
+        "__v": 0
+    },
+    "content": "hello hello form abame",
+    "chat": "62874cdbd2e7014244c6622e",
+    "createdAt": "2022-07-06T12:22:11.772Z",
+    "updatedAt": "2022-07-06T16:44:12.291Z",
+    "__v": 0
+  },
+
+
 ]
 
 
@@ -414,6 +502,10 @@ export function Messages() {
     }
   }, [])
 
+  useEffect(() => {
+    setIsTodayRendered(false);
+  }, [chatMessages])
+
   function handleAddMessage() {
     dispatch(sendMessage(userMessage)).then(scrollMessagesDown)
     setUserMessage('')
@@ -424,7 +516,8 @@ export function Messages() {
     messageElement.current.scrollTop = messageElement.current.scrollHeight
   }
 
-  const [userMessage, setUserMessage] = useState('')
+  const [userMessage, setUserMessage] = useState('');
+  const [isTodayRendered, setIsTodayRendered] = useState(false);
 
 
   function handleMessageOnKeyDown(value) {
@@ -498,15 +591,17 @@ export function Messages() {
       borderRadius: 8,
       fontSize: 14,
       fontWeight: 700,
-      lineHeight: "100%"
+      lineHeight: "100%",
+      textTransform: 'none',
     },
     chatController: {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-around",
       alignItems: "center",
-      height: 24,
-      width: 24,
+      height: 37,
+      width: 37,
+      minWidth: "initial",
       marginLeft: 8,
       cursor: "pointer"
     },
@@ -537,125 +632,6 @@ export function Messages() {
       padding: "8px 24px 24px 24px",
       overflow: "scroll"
     }
-  }
-
-  const Message = ({i, id}) => {
-
-    const stylesMessage = {
-      myMessageCont: {
-        justifyContent: "end"
-      },
-      anotherMessageCont: {
-        justifyContent: "start"
-      },
-      messageCont: {
-        display: "flex",
-        paddingBottom: 16,
-
-      },
-      avatar: {
-        width: 32,
-        height: 32,
-        borderRadius: '50%',
-        marginRight: 8,
-
-        
-      },
-
-      messageCont2: {
-        display: "flex",
-        flexDirection: "column"
-      },
-      alignItemsEnd: {
-        alignItems: "end"
-      },
-      alignItemsStart: {
-        alignItems: "start"
-      },
-
-      messageInfo: {
-        display: "flex",
-        justifyContent: "space-between",
-        width: "100%"
-      },
-
-      nameAuthor: {
-        fontSize: 14,
-        fontWeight: 700,
-        color: "#000",
-        textAlign: "center"
-      },
-      timeMessage: {
-        fontSize: 14,
-        fontWeight: 500,
-        color: "#B3B3B3",
-        textAlign: "center"
-      },
-
-      message: {
-        padding: 12,
-        borderRadius: 8,
-        maxWidth: 390,
-        fontSize: 14,
-        fontWeight: 500,
-        color: "#1A051D",
-        
-      },
-
-      myMessage: {
-        background: '#d1e3ff',
-        textAlign: "right"
-      },
-      anotherMessage: {
-        background: '#e2e2e2',
-
-      },
-
-    }
-
-    const message = React.useRef(null);
-    const messageInfo = React.useRef(null);
-
-    React.useEffect(() => {
-      if(message.current.offsetWidth < 190){
-        const flexDirectionColumn = {flexDirection: "column", marginBottom: 8};
-        messageInfo.current.style = {...stylesMessage.messageInfo, ...flexDirectionColumn, ...isSender(i) ? stylesMessage.alignItemsEnd: stylesMessage.alignItemsStart}
-      }
-    }, [message.current])
-
-    return(
-        <div
-          style={{...stylesMessage.messageCont, ...isSender(i) ? stylesMessage.myMessageCont : stylesMessage.anotherMessageCont}}
-          className="userPlusMessage"
-        >
-
-          <div className="user">
-            <img
-              style={stylesMessage.avatar}
-              src="https://demo.youdate.website/content/cache/stock/men/conor-sexton-434549-unsplash.jpg/4ac4b30045e9ba84f647a3d1a98d6284.jpg"
-              alt="" />
-          </div>
-
-          <div key={id} style={{...stylesMessage.messageCont2, ...isSender(i) ? stylesMessage.alignItemsEnd: stylesMessage.alignItemsStart}}>
-
-            <div ref={messageInfo} style={{...stylesMessage.messageInfo}}>
-              <div style={stylesMessage.nameAuthor}>Аня Кошкина</div>
-              <div style={stylesMessage.timeMessage}>четверг, 4 июня</div>
-            </div>
-
-            <div ref={message} style={{...stylesMessage.message, ...isSender(i) ? stylesMessage.myMessage : stylesMessage.anotherMessage}}>
-              {i.content}
-            </div>
-
-          
-
-
-
-            {/* {i.content}
-            <span style={{ fontSize: '12px', color: 'gray' }}>06.00 AM</span> */}
-          </div>
-        </div>
-    );
   }
 
   return (
@@ -699,14 +675,14 @@ export function Messages() {
           </div>
 
           <div style={styles.headerRight}>
-            <div style={styles.sendRequest}>
+            <Button style={styles.sendRequest} >
                 Отправить запрос
-            </div>
-            <div style={styles.chatController}>
+            </Button>
+            <Button style={styles.chatController}>
               <div style={styles.point}></div>
               <div style={styles.point}></div>
               <div style={styles.point}></div>
-            </div>
+            </Button>
           </div>
 
 
@@ -718,14 +694,35 @@ export function Messages() {
         <Toolbar style={{ display: 'flex', flexDirection: "column", padding: 0}}>
 
 
-          <Box style={styles.messages_cont}>
-
-            {console.log(chatMessages)}
-
+          <List style={styles.messages_cont}>
 
             {chatMessages.length ? chatMessages.map((i, id) => {
+                // const now = new Date();
+                // const date = new Date(i.createdAt);
+
+                
+
+                // if (
+                //   !isTodayRendered && 
+                //   now.getFullYear() === date.getFullYear() &&
+                //   now.getMonth() === date.getMonth() &&
+                //   now.getDate() === date.getDate()
+                // ){
+                //   setIsTodayRendered(true);
+
+                //   return (
+                //       <ListItem style={{display: "flex", alignItems: "center", width: "100%", height: "50px", border: "1px solid #000"}}>
+                //         <div style={{flexGrow: 1, height: 1, color: "#ECE9F1"}}></div>
+                //         <div style={{fontSize: 14, fontWeight: 700}}>Сегодня</div>
+                //         <div style={{flexGrow: 1, height: 1, color: "#ECE9F1"}}></div>
+                //       </ListItem>
+                //       // <Message i={i} id={id} isSender={isSender} />
+                    
+                //   )
+                // }
+
                 return (
-                  <Message i={i} id={id} />
+                  <Message i={i} id={id} isSender={isSender} />
                 )
               }) : <strong style={{ padding: '20px' }}>{t('COMMON.NOTHING_HERE_YET')}</strong>}
 
@@ -733,18 +730,18 @@ export function Messages() {
 
 
 
-          </Box>
+          </List>
 
 
 
           <Box style={styles.messagesController}>
             
 
-            <div style={{padding: 8, cursor: "pointer"}}>
+            <Button style={{padding: 8, cursor: "pointer", minWidth: 0}}>
               <div style={{width: 24, height: 24}}>
                 <Icon name="attachment" />
               </div>
-            </div>
+            </Button>
 
 
 
@@ -757,17 +754,17 @@ export function Messages() {
             />
 
 
-            <div style={{padding: 8, cursor: "pointer"}}>
+            <Button style={{padding: 8, cursor: "pointer", minWidth: 0}}>
               <div style={{width: 24, height: 24}}>
                 <Icon name="emodji" />
               </div>
-            </div>
+            </Button>
 
-            <div style={{padding: 8, cursor: "pointer"}}>
+            <Button style={{padding: 8, cursor: "pointer", minWidth: 0}}>
               <div style={{width: 24, height: 24}}>
                 <Icon name="voice" />
               </div>
-            </div>
+            </Button>
 
 
 

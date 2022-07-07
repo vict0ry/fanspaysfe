@@ -90,7 +90,7 @@ export const FolderList = () => {
                 <div 
                   onClick={(e) => {
                     e.stopPropagation()
-                    console.log(e.target.style.height)
+                    // console.log(e.target.style.height)
                   }} 
                   style={{
                     fontSize: '0.8rem',

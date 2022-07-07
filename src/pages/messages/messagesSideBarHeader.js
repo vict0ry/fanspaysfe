@@ -3,6 +3,8 @@ import { Arrow } from "./arrowIcon";
 import { SearchInput } from "./SearchInput";
 import { Icon } from './Icon'
 import { create } from "@mui/material/styles/createTransitions";
+import { Button } from "@mui/material";
+import { textTransform } from "@mui/system";
 
 export const HeaderSideBar = ({amountMessages}) => {
 
@@ -55,7 +57,8 @@ export const HeaderSideBar = ({amountMessages}) => {
             width: "100%", borderRadius: 8, 
             fontSize: 16, 
             fontWeight: 600,
-            marginBottom: 16
+            marginBottom: 16,
+            textTransform: "none"
         }
     }
 
@@ -66,43 +69,52 @@ export const HeaderSideBar = ({amountMessages}) => {
             <div style={{...styles.header, ...{marginBottom: 16}}}>
                 <div style={styles.flex}>
                     <div style={styles.title}> Messages </div>
-                    <div style={styles.amountMessages}>{amountMessages}</div>
+                    <Button style={styles.amountMessages}>{amountMessages}</Button>
                 </div>
-                <Arrow 
-                    isArrowClicked={isArrowClicked}
-                    setIsArrowClicked={setIsArrowClicked}
-                />
+                <Button 
+                onClick={() => {
+                    setIsArrowClicked(!isArrowClicked);
+                }}>
+                    <Arrow 
+                        isArrowClicked={isArrowClicked}
+                        setIsArrowClicked={setIsArrowClicked}
+                    />
+                </Button>
             </div>
 
             <div style={styles.header}>
                 <SearchInput />
             </div>
 
-            {isArrowClicked && <div style={{...styles.header, ...styles.create, ...styles.createGroup}}>
-                <div style={{...styles.flex}}>
-                    <div style={{marginRight: 10}}>
-                        <Icon name="createGroup" />
+            {isArrowClicked && 
+                <Button style={{...styles.header, ...styles.create, ...styles.createGroup}}>
+                    <div style={{...styles.flex}}>
+                        <div style={{marginRight: 10}}>
+                            <Icon name="createGroup" />
+                        </div>
+                        <div>Создать группу</div>
                     </div>
-                    <div>Создать группу</div>
-                </div>
-                
-                <div>
-                    <Icon name="plus" color="#4776E6" />
-                </div>
-            </div>}
+                    
+                    <Button style={{minWidth: 0}}>
+                        <Icon name="plus" color="#4776E6" />
+                    </Button>
+                </Button>
+            }
 
-            {isArrowClicked && <div style={{...styles.header, ...styles.create, ...styles.createMailing}}>
-                <div style={{...styles.flex}}>
-                    <div style={{marginRight: 10}}>
-                        <Icon name="createMailing" />
+            {isArrowClicked && 
+                <Button style={{...styles.header, ...styles.create, ...styles.createMailing}}>
+                    <div style={{...styles.flex}}>
+                        <div style={{marginRight: 10}}>
+                            <Icon name="createMailing" />
+                        </div>
+                        <div>Создать рассылку</div>
                     </div>
-                    <div>Создать рассылку</div>
-                </div>
-                
-                <div>
-                    <Icon name="plus" color="#FFB800" />
-                </div>
-            </div>}
+                    
+                    <Button style={{minWidth: 0}}>
+                        <Icon name="plus" color="#FFB800" />
+                    </Button>
+                </Button>
+            }
 
         </div>
     );
