@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import axios from 'axios'
-import CheckoutForm from './checkout-form'
+import SetupForm from './SetupForm'
 
 
 // Make sure to call loadStripe outside of a component’s render to avoid
@@ -20,8 +20,9 @@ export default function Payment() {
     axios.post("/api/stripe/create", {
      items: [{ id: "xl-tshirt" }]
     })
-      .then((res) => setClientSecret(res.data.clientSecret))
-      // .then((data) => setClientSecret(data.clientSecret));
+      .then((res) => {
+        return setClientSecret(res.data.client_secret)
+      })
   }, []);
 
   const appearance = {
@@ -31,12 +32,13 @@ export default function Payment() {
     clientSecret,
     appearance,
   };
+  debugger;
 
   return (
     <div>
       {clientSecret  && (
-        <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm />
+        <Elements stripe={stripePromise} options={options}>
+          <SetupForm />
         </Elements>
       )}
     </div>

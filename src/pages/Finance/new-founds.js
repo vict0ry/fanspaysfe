@@ -7,6 +7,7 @@ import Button from '@mui/material/Button'
 import React, { useState } from 'react'
 import Modal from '@mui/material/Modal'
 import Payment from './payment'
+import axios from 'axios'
 
 
 export const NewFounds = () => {
@@ -65,6 +66,14 @@ export const NewFounds = () => {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
+
+                  <Button onClick={() => {
+                    axios.post("/api/stripe/pay").then(res => {
+                      debugger;
+                      return res;
+                    })
+                  }}>Pay me</Button>
+
                   <Payment/>
                 </Box>
               </Modal>

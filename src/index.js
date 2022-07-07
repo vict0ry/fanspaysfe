@@ -29,6 +29,7 @@ import { beURL } from './config'
 import { ThemeProvider } from '@mui/material'
 import { CustomThemeConfig } from './themeConfig'
 import SuccessSnackbar from './components/SuccessSnackbar'
+import PaymentStatus from './pages/Finance/Paymentstatus'
 
 const target = document.querySelector('#root')
 axios.defaults.baseURL = beURL
@@ -54,6 +55,7 @@ root.render(
           <BrowserRouter history={history}>
             <Routes>
               <Route path="/" element={<MainLayout />}>
+                <Route path={'/payment-status'} element={<PaymentStatus />}></Route>
                 <Route element={<PrivateWrapper />}>
                   <Route path="/" element={<Home />} />
                 </Route>
