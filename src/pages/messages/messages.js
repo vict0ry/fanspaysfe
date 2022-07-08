@@ -46,7 +46,7 @@ export function Messages() {
 
   useEffect(() => {
     setIsTodayRendered(false);
-  }, [chatMessages])
+  }, [])
 
   function handleAddMessage() {
     dispatch(sendMessage(userMessage)).then(scrollMessagesDown)
