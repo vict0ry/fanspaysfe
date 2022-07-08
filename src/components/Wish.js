@@ -13,11 +13,12 @@ export const Wish = ({title, from=0, to, id, myProfile}) => {
         alignItems: 'center',
         justifyContent: 'space-between',
         fontSize: '16px', color: '#5D5E65'}}><span>{from} of {to}$</span>
+        {myProfile ?
           <img onClick={() => {
             axios.delete('/api/wish/' + id);
           }}
         src="/images/icons/edit-button.svg"
-        alt="edit" />
+        alt="edit" /> : 'Collected' }
       </div>
     <div style={{
       position: 'relative',

@@ -92,11 +92,12 @@ export function Profile(props) {
           <ProfileCard
             myProfile={myProfile()}
             profileUser={user?.profileUser} />
-          <Card sx={{  p: {xs: 2},
+          { !wishes?.length && !myProfile() ? '' :
+            <Card sx={{  p: {xs: 2},
             maxWidth: { xs: 400, md: 400 },
             ml:{xs: 5, md: 0},
             mt: {xs: 2}, height: 'fit-content' }}>
-            <p style={{fontSize: '18px', margin:'0', fontWeight: 'bold'}}>Wishes</p>
+            <p style={{fontSize: '18px', margin:'0', fontWeight: 'bold'}}>{t('Wishes')}</p>
             <Divider style={{marginBottom: '10px'}} />
             { wishes?.length ? wishes.map(wish => {
               return <div>
@@ -109,7 +110,7 @@ export function Profile(props) {
                 <Divider style={{margin: '10px 0'}} />
               </div>
             }) : <AddWishModal myProfile={myProfile()}></AddWishModal> }
-          </Card>
+          </Card> }
         </Box>
         <Box>
           <AboutCard
