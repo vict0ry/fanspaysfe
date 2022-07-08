@@ -65,7 +65,7 @@ export const NotificationsMenu = () => {
       aria-label="show 17 new notifications"
     >
       <Badge badgeContent={notifications.length} color="error">
-        <img src='/images/icons/notification.svg'/>
+        <NotificationsIcon />
       </Badge>
     </IconButton>
     <Popover

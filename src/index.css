@@ -30,3 +30,8 @@ a:-webkit-any-link {
     cursor: pointer;
 }
 
+.balance {
+    background: -webkit-linear-gradient(0deg, #4776E6, #8E54E9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

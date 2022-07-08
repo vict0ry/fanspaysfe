@@ -44,6 +44,10 @@ export function Messages() {
     }
   }, [])
 
+  useEffect(() => {
+    setIsTodayRendered(false);
+  }, [chatMessages])
+
   function handleAddMessage() {
     dispatch(sendMessage(userMessage)).then(scrollMessagesDown)
     setUserMessage('')
@@ -54,7 +58,8 @@ export function Messages() {
     messageElement.current.scrollTop = messageElement.current.scrollHeight
   }
 
-  const [userMessage, setUserMessage] = useState('')
+  const [userMessage, setUserMessage] = useState('');
+  const [isTodayRendered, setIsTodayRendered] = useState(false);
 
 
   function handleMessageOnKeyDown(value) {

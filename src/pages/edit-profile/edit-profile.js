@@ -15,7 +15,7 @@ import { t } from 'i18next'
 import { AddCreditCard } from '../../components/AddCreditCard'
 import { EasyDatePicker } from './components/easyDatePicker'
 import { TabContacts } from '../../components/TabContacts'
-import { loadProfile } from '../../redux/actions/profile.action'
+import { loadProfile } from '../../redux/profile.action'
 import { beURL } from '../../config'
 import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
 

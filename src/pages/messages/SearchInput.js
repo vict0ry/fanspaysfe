@@ -1,4 +1,4 @@
-import { SearchIcon } from './SearchIcon'
+import { Icon } from './Icon'
 import * as React from 'react'
 import { alpha, styled } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
@@ -25,7 +25,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '130px'
+      width: '100%'
     }
   }
 }))
@@ -38,12 +38,9 @@ const Search = styled('div')(({ theme }) => ({
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25)
   },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
   width: '100%',
   [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto'
+    width: '100%'
   }
 }))
 
@@ -51,10 +48,11 @@ export const SearchInput = () => {
   return (
     <Search>
       <SearchIconWrapper>
-        <SearchIcon />
+        <Icon name="search" />
       </SearchIconWrapper>
       <StyledInputBase
         placeholder="Поиск"
+        fullWidth={true}
         inputProps={{ 'aria-label': 'search' }}
       />
     </Search>
