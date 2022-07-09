@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { loadChatMessages, loadChats } from '../../redux/messages.action'
 import { SocketContext } from '../../context/socket'
 import { HeaderSideBar } from './messagesSideBarHeader'
+import Box from '@mui/material/Box'
+import useWindowDimensions from '../../useWindowDimensions'
 
 export const FolderList = () => {
   const socket = useContext(SocketContext)
@@ -18,12 +20,13 @@ export const FolderList = () => {
   const chatList = useSelector(state => state.messages.chatList)
   const selectedChatId = useSelector(state => state.messages.selectedChatId)
 
+  const {height, width} = useWindowDimensions();
+
   const listStyles = {
     overflowY: 'scroll',
-    width: '100%',
-    minWidth: '300px',
+    width: 300,
     maxHeight: '800px',
-    position: "relative"
+    position: "relative",
   }
 
   const userNameStyle = {
@@ -51,65 +54,71 @@ export const FolderList = () => {
 
   return (
     <Paper>
-      <List style={listStyles}>
+
+      <List
+        style={{
+          ...listStyles,
+          ...width < 900 ? {width: 250} : {}
+        }}
+      >
 
         <ListItem style={listItemStyles}>
           <HeaderSideBar />
         </ListItem>
 
         {chatList?.map(({ users, latestMessage, _id }, index) => {
-          
+
           if(selectedChatId === _id){
             bgListItem.background = "#ECF0F1";
           }
 
           return (
-            <div key={index}>
-              <ListItem
-                onClick={() => {
-                  dispatch(loadChatMessages(_id))
-                  socket.emit('join room', _id)
+            <ListItem
+              onClick={() => {
+                dispatch(loadChatMessages(_id))
+                socket.emit('join room', _id)
+              }}
+              style={listItemStyles}
+              button
+              key={index}
+            >
+              <Box style={{display: "flex"}}>
+                <ListItemIcon>
+                  <img style={{ borderRadius: '50%' }}
+                      src="https://demo.youdate.website/content/cache/1/HYBzfofXl4m5Phvb0AfJZP_Tvw16XXWz.jpg/e5e917eef160043206fdd306dabfb4d9.jpg"
+                      alt="" />
+                </ListItemIcon>
+                <Box>
+                  <Box style={userNameStyle}>{users[0].firstName + ' ' + users[0].lastName}</Box>
+                  <Box style={usernameStyle}>
+                    @{users[0].username}
+                  </Box>
+                </Box>
+              </Box>
+              <Box
+                onClick={(e) => {
+                  // e.stopPropagation()
+                  // console.log(e.target.style.height)
                 }}
-                style={listItemStyles}
-                button 
-                key={users[0]}
+                style={{
+                  marginTop: 10,
+                  maxWidth: "100%",
+                  fontWeight: 500,
+                  fontSize: 14,
+                  color: "#000",
+                  lineHeight: "1.2em",
+                  height: "32px",
+                  overflow: "hidden"
+                }}
               >
-                <div style={{display: "flex"}}>
-                  <ListItemIcon>
-                    <img style={{ borderRadius: '50%' }}
-                        src="https://demo.youdate.website/content/cache/1/HYBzfofXl4m5Phvb0AfJZP_Tvw16XXWz.jpg/e5e917eef160043206fdd306dabfb4d9.jpg"
-                        alt="" />
-                  </ListItemIcon>
-                  <div>
-                    <div style={userNameStyle}>{users[0].firstName + ' ' + users[0].lastName}</div>
-                    <div style={usernameStyle}>
-                      @{users[0].username}
-                    </div>
-                  </div>
-                </div>
-                <div 
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    // console.log(e.target.style.height)
-                  }} 
-                  style={{
-                    fontSize: '0.8rem',
-                    color: 'gray',
-                    marginTop: 10,
-                    maxWidth: "100%",
-                    fontWeight: 500,
-                    fontSize: 14,
-                    color: "#000",
-                    lineHeight: "1.2em",
-                    height: "32px",
-                    overflow: "hidden"
-                  }}
-                >
-                  {"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eussf fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.".slice(0, 80)}...
-                </div>
-              </ListItem>
-            </div>
-
+                {latestMessage &&
+                  latestMessage.content.slice(0, 60)
+                }
+                {latestMessage && latestMessage.content.length > 60 &&
+                  "..."
+                }
+              </Box>
+            </ListItem>
           )
         })}
       </List>

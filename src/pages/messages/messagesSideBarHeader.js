@@ -5,6 +5,7 @@ import { Icon } from './Icon'
 import { create } from "@mui/material/styles/createTransitions";
 import { Button } from "@mui/material";
 import { textTransform } from "@mui/system";
+import Box from '@mui/material/Box';
 
 export const HeaderSideBar = ({amountMessages}) => {
 
@@ -65,12 +66,12 @@ export const HeaderSideBar = ({amountMessages}) => {
     const [isArrowClicked, setIsArrowClicked] = React.useState(false);
 
     return (
-        <div style={styles.main}>
-            <div style={{...styles.header, ...{marginBottom: 16}}}>
-                <div style={styles.flex}>
-                    <div style={styles.title}> Messages </div>
+        <Box style={styles.main}>
+            <Box style={{...styles.header, ...{marginBottom: 16}}}>
+                <Box style={styles.flex}>
+                    <Box style={styles.title}> Messages </Box>
                     <Button style={styles.amountMessages}>{amountMessages}</Button>
-                </div>
+                </Box>
                 <Button 
                 onClick={() => {
                     setIsArrowClicked(!isArrowClicked);
@@ -80,20 +81,21 @@ export const HeaderSideBar = ({amountMessages}) => {
                         setIsArrowClicked={setIsArrowClicked}
                     />
                 </Button>
-            </div>
+            </Box>
 
             <div style={styles.header}>
                 <SearchInput />
             </div>
 
+            {/*buttons for creating group and mailing*/}
             {isArrowClicked && 
                 <Button style={{...styles.header, ...styles.create, ...styles.createGroup}}>
-                    <div style={{...styles.flex}}>
-                        <div style={{marginRight: 10}}>
+                    <Box style={{...styles.flex}}>
+                        <Box style={{marginRight: 10}}>
                             <Icon name="createGroup" />
-                        </div>
-                        <div>Создать группу</div>
-                    </div>
+                        </Box>
+                        <Box>Создать группу</Box>
+                    </Box>
                     
                     <Button style={{minWidth: 0}}>
                         <Icon name="plus" color="#4776E6" />
@@ -101,21 +103,21 @@ export const HeaderSideBar = ({amountMessages}) => {
                 </Button>
             }
 
-            {isArrowClicked && 
+            {isArrowClicked &&
                 <Button style={{...styles.header, ...styles.create, ...styles.createMailing}}>
-                    <div style={{...styles.flex}}>
-                        <div style={{marginRight: 10}}>
+                    <Box style={{...styles.flex}}>
+                        <Box style={{marginRight: 10}}>
                             <Icon name="createMailing" />
-                        </div>
-                        <div>Создать рассылку</div>
-                    </div>
-                    
+                        </Box>
+                        <Box>Создать рассылку</Box>
+                    </Box>
+
                     <Button style={{minWidth: 0}}>
                         <Icon name="plus" color="#FFB800" />
                     </Button>
                 </Button>
             }
 
-        </div>
+        </Box>
     );
 }
