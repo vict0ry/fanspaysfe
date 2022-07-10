@@ -5,6 +5,7 @@ import StickyFooter from './sticky-footer'
 import React from 'react'
 import { connect } from 'react-redux'
 import SuccessSnackbar from '../components/SuccessSnackbar'
+import { SubscribeDialog } from '../components/SubscribeDialog'
 
 const MainLayout = ({ props }) => {
   return (
@@ -15,6 +16,7 @@ const MainLayout = ({ props }) => {
     </Container>
     <StickyFooter />
       <SuccessSnackbar />
+      <SubscribeDialog />
     </div>)
 }
 const mapStateToProps = state => {

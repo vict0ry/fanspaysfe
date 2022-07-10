@@ -1,6 +1,7 @@
 
 import React, {useState} from 'react';
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
+import Button from '@mui/material/Button'
 
 const SetupForm = () => {
   const stripe = useStripe();
@@ -37,9 +38,8 @@ const SetupForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>setup form</h2>
       <PaymentElement />
-      <button disabled={!stripe}>Submit</button>
+      <Button onClick={handleSubmit} variant={'contained'} disabled={!stripe}>Submit</Button>
       {/* Show error message to your customers */}
       {errorMessage && <div>{errorMessage}</div>}
     </form>
