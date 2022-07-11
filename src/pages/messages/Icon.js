@@ -186,10 +186,25 @@ export const Icon = ({name, color}) => {
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4.17422 5C3.31987 5 2.85896 6.00212 3.41496 6.65079L7.24074 11.1142C7.63984 11.5798 8.36016 11.5798 8.75926 11.1142L12.585 6.65079C13.141 6.00212 12.6801 5 11.8258 5H4.17422Z" fill="#5D5E65"/>
                 </svg>
-
-
-
-
+            break;
+        case "x":
+            image =
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.7661 4.23395C11.454 3.92202 10.9482 3.92202 10.6362 4.23395L8.005 6.86516L5.37379 4.23395C5.06026 3.93113 4.5619 3.93547 4.25369 4.24368C3.94547 4.55189 3.94114 5.05026 4.24396 5.36378L6.87517 7.995L4.24396 10.6262C4.03624 10.8268 3.95294 11.1239 4.02606 11.4033C4.09919 11.6826 4.31736 11.9008 4.59672 11.9739C4.87609 12.0471 5.17317 11.9638 5.37379 11.756L8.005 9.12483L10.6362 11.756C10.9497 12.0589 11.4481 12.0545 11.7563 11.7463C12.0645 11.4381 12.0689 10.9397 11.7661 10.6262L9.13484 7.995L11.7661 5.36378C12.078 5.05176 12.078 4.54597 11.7661 4.23395Z" fill="#4776E6"/>
+                </svg>
+            break;
+        case "arrowLeft":
+            image =
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="#4776E6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
+        case "arrowRight":
+            image =
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 18L15 12L9 6" stroke="#4776E6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
 
 
       default:
