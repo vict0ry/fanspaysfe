@@ -524,6 +524,8 @@ export function Messages() {
 
   const [uploadedImages, setUploadedImages] = useState([]);
 
+  const [folderListOpen, setFolderListOpen] = useState(true);
+
 
   function handleMessageOnKeyDown(value) {
     setUserMessage(value)
@@ -544,7 +546,7 @@ export function Messages() {
     },
     headerLeft: {
       display: "flex",
-      justifyContent: "center",
+      // justifyContent: "center",
       alignItems: "center"
     },
     headerRight: {
@@ -582,11 +584,11 @@ export function Messages() {
       height: 8,
       background: "#1FCC64",
       borderRadius: "50%",
-      marginLeft: 8
+      // marginLeft: 8
     },
 
     sendRequest: {
-      width: 170,
+      width: 160,
       height: 40,
       display: "flex",
       justifyContent: "center",
@@ -685,31 +687,33 @@ export function Messages() {
     }
   }
 
+  const openFolderList = {
+    width: 24,
+    height: 24,
+    transform: "rotate(90deg)",
+    transition: "300ms",
+    cursor: "pointer",
+    transformOrigin: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  }
+
+  if(folderListOpen){
+    openFolderList.transform = "rotate(90deg)";
+  } else {
+    openFolderList.transform = "rotate(-90deg)";
+  }
+
   // console.log(uploadedImages)
   const fileInput = React.useRef(null);
   const { height, width } = useWindowDimensions();
 
-  return (
-    <div
-      // style={{ display: 'grid', marginTop: 20, gridTemplateColumns: '1fr 1fr 3fr' }}
-      style={{display: "flex", marginTop: 20}}
-    >
-      <SharedLeftMenu />
-      <FolderList />
-      <Paper
-        // xl={{
-        //   width: 600,
-        //   display: "flex",
-        //   flexDirection: "column",
-        //   height: "100%"
-        // }}
-        // sm={{
-        //   width: 300,
-        //   display: "flex",
-        //   flexDirection: "column",
-        //   height: "100%"
-        // }}
 
+  const MessagesCont = () => {
+
+    return(
+      <Paper
         style={{
           width: 600,
           display: "flex",
@@ -721,12 +725,21 @@ export function Messages() {
 
 
         <Box
-          // ref={messageElement}
           style={styles.header}
         >
-
-
           <Box style={styles.headerLeft}>
+
+            {width < 600 && <Button
+              style={openFolderList}
+              onClick={() => {
+                setFolderListOpen(!folderListOpen);
+              }}
+            >
+              <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 7L7 1L1 7" stroke="#5D5E65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </Button>}
+
             <Box style={styles.avatar}>
               <img
                 style={{
@@ -745,20 +758,22 @@ export function Messages() {
               <Box style={styles.nickname}>@anncatjoy</Box>
             </Box>
             {true &&
-              <Box style={{height: "100%"}}>
-                <Box style={styles.status}>
-                  В сети
-                  <Box style={styles.statusCircle}></Box>
-                </Box>
+            <Box style={{height: "100%"}}>
+              <Box style={styles.status}>
+                {width > 600 &&
+                <span style={{marginRight: 8}}>В сети</span>
+                }
+                <Box style={styles.statusCircle}></Box>
               </Box>
+            </Box>
             }
           </Box>
 
           <Box style={styles.headerRight}>
             {width >= 1200 &&
-              <Button style={styles.sendRequest} >
-                  Отправить запрос
-              </Button>
+            <Button style={styles.sendRequest} >
+              Отправить запрос
+            </Button>
             }
             <ClickAwayListener
               onClickAway={() => {
@@ -766,35 +781,35 @@ export function Messages() {
               }}
             >
               <Button
-                  style={styles.chatController}
-                  onClick={(e) => {
-                    setHeaderMenuClicked(!headerMenuClicked);
-                  }}
+                style={styles.chatController}
+                onClick={(e) => {
+                  setHeaderMenuClicked(!headerMenuClicked);
+                }}
               >
                 <div style={styles.point}></div>
                 <div style={styles.point}></div>
                 <div style={styles.point}></div>
 
                 {headerMenuClicked &&
-                    <Box style={styles.chatControllerOpen}>
-                        {width < 1200 &&
-                          <Button style={{...styles.sendRequest, ...{width: "100%"}}}>
-                            Отправить запрос
-                          </Button>
-                        }
-                        <Button style={styles.chatControllerOpenItem} >
-                            <Box style={styles.chatControllerOpenImage}><Icon name="bell" /></Box>
-                            <Box>Отключить уведомления</Box>
-                        </Button>
-                        <Button style={styles.chatControllerOpenItem}>
-                            <Box style={styles.chatControllerOpenImage}><Icon name="block" /></Box>
-                            <Box>Заблокировать</Box>
-                        </Button>
-                        <Button style={styles.chatControllerOpenItem}>
-                            <Box style={styles.chatControllerOpenImage}><Icon name="flag" /></Box>
-                            <Box>Сообщить о нарушении</Box>
-                        </Button>
-                    </Box>
+                <Box style={styles.chatControllerOpen}>
+                  {width < 1200 &&
+                  <Button style={{...styles.sendRequest, ...{width: "100%"}}}>
+                    Отправить запрос
+                  </Button>
+                  }
+                  <Button style={styles.chatControllerOpenItem} >
+                    <Box style={styles.chatControllerOpenImage}><Icon name="bell" /></Box>
+                    <Box>Отключить уведомления</Box>
+                  </Button>
+                  <Button style={styles.chatControllerOpenItem}>
+                    <Box style={styles.chatControllerOpenImage}><Icon name="block" /></Box>
+                    <Box>Заблокировать</Box>
+                  </Button>
+                  <Button style={styles.chatControllerOpenItem}>
+                    <Box style={styles.chatControllerOpenImage}><Icon name="flag" /></Box>
+                    <Box>Сообщить о нарушении</Box>
+                  </Button>
+                </Box>
                 }
               </Button>
             </ClickAwayListener>
@@ -812,34 +827,34 @@ export function Messages() {
           <List style={styles.messages_cont}>
 
             {chatMessages.length ? chatMessages.map((i, id) => {
-                // const now = new Date();
-                // const date = new Date(i.createdAt);
+              // const now = new Date();
+              // const date = new Date(i.createdAt);
 
 
 
-                // if (
-                //   !isTodayRendered &&
-                //   now.getFullYear() === date.getFullYear() &&
-                //   now.getMonth() === date.getMonth() &&
-                //   now.getDate() === date.getDate()
-                // ){
-                //   setIsTodayRendered(true);
+              // if (
+              //   !isTodayRendered &&
+              //   now.getFullYear() === date.getFullYear() &&
+              //   now.getMonth() === date.getMonth() &&
+              //   now.getDate() === date.getDate()
+              // ){
+              //   setIsTodayRendered(true);
 
-                //   return (
-                //       <ListItem style={{display: "flex", alignItems: "center", width: "100%", height: "50px", border: "1px solid #000"}}>
-                //         <div style={{flexGrow: 1, height: 1, color: "#ECE9F1"}}></div>
-                //         <div style={{fontSize: 14, fontWeight: 700}}>Сегодня</div>
-                //         <div style={{flexGrow: 1, height: 1, color: "#ECE9F1"}}></div>
-                //       </ListItem>
-                //       // <Message i={i} id={id} isSender={isSender} />
+              //   return (
+              //       <ListItem style={{display: "flex", alignItems: "center", width: "100%", height: "50px", border: "1px solid #000"}}>
+              //         <div style={{flexGrow: 1, height: 1, color: "#ECE9F1"}}></div>
+              //         <div style={{fontSize: 14, fontWeight: 700}}>Сегодня</div>
+              //         <div style={{flexGrow: 1, height: 1, color: "#ECE9F1"}}></div>
+              //       </ListItem>
+              //       // <Message i={i} id={id} isSender={isSender} />
 
-                //   )
-                // }
+              //   )
+              // }
 
-                return (
-                  <Message i={i} id={id} isSender={isSender} />
-                )
-              }) : <strong style={{ padding: '20px' }}>{t('COMMON.NOTHING_HERE_YET')}</strong>}
+              return (
+                <Message i={i} id={id} isSender={isSender} />
+              )
+            }) : <strong style={{ padding: '20px' }}>{t('COMMON.NOTHING_HERE_YET')}</strong>}
 
 
 
@@ -866,56 +881,56 @@ export function Messages() {
                   <Icon name="attachment" />
 
                   {attachmentMenuClicked &&
-                    <Box style={styles.messageControllerOpen}>
-                      <Button
-                        style={styles.chatControllerOpenItem}
-                        onClick={(e) => {
-                          // e.stopPropagation();
-                          // console.log(fileInput)
-                          fileInput.current.click();
-                        }}
-                      >
-                        <Box style={styles.chatControllerOpenImage}><Icon name="imagePhoto" /></Box>
-                        <Box>Фото или видео</Box>
+                  <Box style={styles.messageControllerOpen}>
+                    <Button
+                      style={styles.chatControllerOpenItem}
+                      onClick={(e) => {
+                        // e.stopPropagation();
+                        // console.log(fileInput)
+                        fileInput.current.click();
+                      }}
+                    >
+                      <Box style={styles.chatControllerOpenImage}><Icon name="imagePhoto" /></Box>
+                      <Box>Фото или видео</Box>
 
-                      </Button>
-                      <Button
-                        style={styles.chatControllerOpenItem}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                        }}
-                      >
-                        <Box style={styles.chatControllerOpenImage}><Icon name="file" /></Box>
-                        <Box>Файл</Box>
-                      </Button>
-                      <Button
-                        style={styles.chatControllerOpenItem}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                        }}
-                      >
-                        <Box style={styles.chatControllerOpenImage}><Icon name="camera" /></Box>
-                        <Box>Камера</Box>
-                      </Button>
-                      <Button
-                        style={styles.chatControllerOpenItem}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                        }}
-                      >
-                        <Box style={styles.chatControllerOpenImage}><Icon name="tips" /></Box>
-                        <Box>Чаевые</Box>
-                      </Button>
-                      <Button
-                        style={styles.chatControllerOpenItem}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                        }}
-                      >
-                        <Box style={styles.chatControllerOpenImage}><Icon name="gift" /></Box>
-                        <Box>Подарки</Box>
-                      </Button>
-                    </Box>
+                    </Button>
+                    <Button
+                      style={styles.chatControllerOpenItem}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      <Box style={styles.chatControllerOpenImage}><Icon name="file" /></Box>
+                      <Box>Файл</Box>
+                    </Button>
+                    <Button
+                      style={styles.chatControllerOpenItem}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      <Box style={styles.chatControllerOpenImage}><Icon name="camera" /></Box>
+                      <Box>Камера</Box>
+                    </Button>
+                    <Button
+                      style={styles.chatControllerOpenItem}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      <Box style={styles.chatControllerOpenImage}><Icon name="tips" /></Box>
+                      <Box>Чаевые</Box>
+                    </Button>
+                    <Button
+                      style={styles.chatControllerOpenItem}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      <Box style={styles.chatControllerOpenImage}><Icon name="gift" /></Box>
+                      <Box>Подарки</Box>
+                    </Button>
+                  </Box>
                   }
                   <input
                     ref={fileInput}
@@ -937,12 +952,12 @@ export function Messages() {
 
 
             <TextField onChange={() => handleMessageOnKeyDown(event.target.value)}
-              variant="standard"
-              value={userMessage}
-              InputProps={{disableUnderline: true}}
-              hiddenLabel
-              sx={{ width: '100%', padding: '0', marginLeft: 0, border: "0" }}
-              id="outlined-basic"
+                       variant="standard"
+                       value={userMessage}
+                       InputProps={{disableUnderline: true}}
+                       hiddenLabel
+                       sx={{ width: '100%', padding: '0', marginLeft: 0, border: "0" }}
+                       id="outlined-basic"
             />
 
 
@@ -961,30 +976,65 @@ export function Messages() {
 
 
             {/* <ImageIcon onClick={() => {
-            }} style={{ color: '#5c9edf', cursor: 'pointer' }}>
+                }} style={{ color: '#5c9edf', cursor: 'pointer' }}>
 
-            </ImageIcon>
-            <SendTipModal user={loggedUser.userData} />
-            <input
-              type="file"
-              multiple
-              accept='.png,.jpg,.jpeg'
-              onChange={() => {
-              }}
-              style={{ display: 'none' }}
-            /> */}
+                </ImageIcon>
+                <SendTipModal user={loggedUser.userData} />
+                <input
+                  type="file"
+                  multiple
+                  accept='.png,.jpg,.jpeg'
+                  onChange={() => {
+                  }}
+                  style={{ display: 'none' }}
+                /> */}
 
 
           </Box>
 
           {/* <Button
-            disabled={!userMessage.length}
-            onClick={() => handleAddMessage()}
-            sx={{ padding: 0, color: 'white', marginLeft: '5px' }} variant="contained">Send
-          </Button> */}
+                disabled={!userMessage.length}
+                onClick={() => handleAddMessage()}
+                sx={{ padding: 0, color: 'white', marginLeft: '5px' }} variant="contained">Send
+              </Button> */}
 
         </Toolbar>
       </Paper>
+    )
+  }
+
+
+
+  return (
+    <div
+      // style={{ display: 'grid', marginTop: 20, gridTemplateColumns: '1fr 1fr 3fr' }}
+      style={{
+        ...{
+          display: "flex",
+          marginTop: 20,
+        },
+        ...folderListOpen && width < 600 ? {
+          flexDirection: "column"
+        } : {},
+        ...width < 600 ? {
+          height: "90vh"
+        }: {},
+      }}
+    >
+      <SharedLeftMenu />
+      {folderListOpen && width < 600 &&
+        <FolderList setFolderListOpen={setFolderListOpen} />
+      }
+      {!folderListOpen && width < 600 &&
+        <MessagesCont></MessagesCont>
+      }
+
+      {width >= 600 &&
+        <FolderList setFolderListOpen={setFolderListOpen} />
+      }
+      {width >= 600 &&
+        <MessagesCont></MessagesCont>
+      }
     </div>
   )
 }

@@ -84,7 +84,7 @@ export const HeaderSideBar = ({amountMessages}) => {
             </Box>
 
             <div style={styles.header}>
-                <SearchInput />
+                <SearchInput name="search" placeholder="Поиск" />
             </div>
 
             {/*buttons for creating group and mailing*/}

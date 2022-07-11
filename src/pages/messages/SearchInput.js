@@ -44,14 +44,14 @@ const Search = styled('div')(({ theme }) => ({
   }
 }))
 
-export const SearchInput = () => {
+export const SearchInput = ({name, placeholder}) => {
   return (
     <Search>
       <SearchIconWrapper>
-        <Icon name="search" />
+        <Icon name={name} />
       </SearchIconWrapper>
       <StyledInputBase
-        placeholder="Поиск"
+        placeholder={placeholder}
         fullWidth={true}
         inputProps={{ 'aria-label': 'search' }}
       />

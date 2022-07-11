@@ -11,7 +11,7 @@ import { HeaderSideBar } from './messagesSideBarHeader'
 import Box from '@mui/material/Box'
 import useWindowDimensions from '../../useWindowDimensions'
 
-export const FolderList = () => {
+export const FolderList = ({setFolderListOpen}) => {
   const socket = useContext(SocketContext)
   const dispatch = useDispatch()
   useEffect(() => {
@@ -24,7 +24,8 @@ export const FolderList = () => {
 
   const listStyles = {
     overflowY: 'scroll',
-    width: 300,
+    width: "100%",
+    minWidth: 300,
     maxHeight: '800px',
     position: "relative",
   }
@@ -52,16 +53,13 @@ export const FolderList = () => {
     background: "#fff"
   }
 
+
   return (
-    <Paper>
+    <Paper
+      width
+    >
 
-      <List
-        style={{
-          ...listStyles,
-          ...width < 900 ? {width: 250} : {}
-        }}
-      >
-
+      <List style={listStyles}>
         <ListItem style={listItemStyles}>
           <HeaderSideBar />
         </ListItem>
@@ -77,6 +75,7 @@ export const FolderList = () => {
               onClick={() => {
                 dispatch(loadChatMessages(_id))
                 socket.emit('join room', _id)
+                setFolderListOpen(false)
               }}
               style={listItemStyles}
               button
