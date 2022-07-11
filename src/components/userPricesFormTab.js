@@ -81,13 +81,13 @@ export const UserPricesFormTab = () => {
           </div>
         </Grid>
         <Grid container spacing={2}>
-              <Grid item xs={12} sm={12}><strong style={{padding: '30px 0'}}>{t('Wishes')}</strong></Grid>
+              <Grid item xs={12} sm={12}><strong style={{padding: '30px 0'}}>{t('PROFILE.WISHES')}</strong></Grid>
               { wishes?.length ? wishes.map(wish => {
                 return <Grid item xs={3} sm={3}>
                   <Wish title={wish.name} id={wish._id} from={300} to={wish.amount} style={{margin: '10px 0'}} />
                 </Grid>
               }) : <div><p>
-                У вас еще нет желаний. Откройте сбор на свою мечту 💫
+                {t('CONFIG.SETUP_WISH')}
               </p></div> }
             <Grid item xs={12} sm={12}>
               <AddWishModal myProfile={true}></AddWishModal>

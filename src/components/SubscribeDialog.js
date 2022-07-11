@@ -2,8 +2,7 @@ import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, S
 import Button from '@mui/material/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { forwardRef } from 'react'
-import { hideAttachCardDialog, showAttachCardDialog } from '../redux/actions/attachCardDialog.action'
-import { MiniUser } from '../pages/profile/components/MiniUser'
+import { hideAttachCardDialog } from '../redux/actions/attachCardDialog.action'
 import Payment from '../pages/Finance/payment'
 
   const Transition = forwardRef(function Transition(

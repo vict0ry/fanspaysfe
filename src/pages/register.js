@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom'
 import { Alert } from '@mui/material'
 import axios from 'axios'
 import { CircularProgress } from '@material-ui/core'
+import { EasyDatePicker } from './edit-profile/components/easyDatePicker'
 
 
 const theme = createTheme()
@@ -55,6 +56,9 @@ function Register(props) {
     axios.get('/validations/email/' + email).then(({data}) => {
       setValidEmail(data)
     })
+  }
+  const chosenAgeCallback = (age) => {
+    console.log(age)
   }
 
   return (
@@ -114,6 +118,12 @@ function Register(props) {
                   label={t('COMMON.USERNAME')}
                   autoComplete="username"
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <p style={{marginTop: 0}}>
+                  Choose your age:
+                </p>
+                <EasyDatePicker chosenAgeCallback={chosenAgeCallback.bind(this)}  />
               </Grid>
               { !validEmail ? <Alert severity="warning">This email is already in use</Alert> : '' }
               <Grid item xs={12}>
