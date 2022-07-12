@@ -102,8 +102,25 @@ const leftFilterStyles = {
       backgroundClip: "content-box",
       // outline: '1px solid slategrey'
     },
-    marginBottom: "24px",
-
+    marginBottom: "24px"
+  },
+  apply_btn: {
+    color: "#4776E6",
+    fontSize: 12,
+    fontWeight: 700,
+    textTransform: "none",
+    marginRight: 8,
+    background: "#E8EFFF",
+    borderRadius: 8,
+    padding: "10px 13px"
+  },
+  clear_btn: {
+    width: 36,
+    height: 36,
+    background: "#F7F5F9",
+    borderRadius: 8,
+    minHeight: 0,
+    minWidth: 0
   }
 }
 
@@ -246,6 +263,7 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
                       }}
                     />
                   }
+                  checked={checkedTags[category] === undefined || !checkedTags[category] ? false : true}
                   label={category}
                   sx={FormControlLabelStyles}
                 />
@@ -261,32 +279,10 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
         <SearchInput name="at" placeholder="Введите ник" />
       </Box>
       <Box style={{display: "flex", }}>
-        <Button
-          style={{
-            color: "#4776E6",
-            fontSize: 12,
-            fontWeight: 700,
-            textTransform: "none",
-            marginRight: 8,
-            background: "#E8EFFF",
-            borderRadius: 8,
-            padding: "10px 13px"
-          }}
-        >
+        <Button style={leftFilterStyles.apply_btn}>
           Применить фильтр
         </Button>
-
-        <Button
-          style={{
-            width: 36,
-            height: 36,
-            background: "#F7F5F9",
-            borderRadius: 8,
-            minHeight: 0,
-            minWidth: 0,
-
-          }}
-        >
+        <Button style={leftFilterStyles.clear_btn}>
           <Icon name="delete" />
         </Button>
       </Box>

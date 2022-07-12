@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 const MainLayout = ({ props }) => {
   return (<div>
     <SearchBar />
-      <Container maxWidth="lg">
+      <Container maxWidth="xl"> {/*lg*/}
         <Outlet />
       </Container>
     <StickyFooter />

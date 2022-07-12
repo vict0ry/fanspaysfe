@@ -63,7 +63,7 @@ const styles = {
 
 };
 
-const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags}) => {
+const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, setCheckedTags}) => {
   return(
     <Box style={styles.mainCont}>
       <Box style={{display: "flex"}}>
@@ -162,7 +162,12 @@ const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags}) 
                 <span style={{ marginRight: 2 }}>
                   {tag}
                 </span>
-                <ButtonBase>
+                <ButtonBase onClick={() => {
+                  setCheckedTags({
+                    ...checkedTags,
+                    [tag]: false
+                  });
+                }}>
                   <Icon name="x" />
                 </ButtonBase>
               </Box>
