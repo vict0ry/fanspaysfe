@@ -19,8 +19,9 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Alert } from '@mui/material'
 import axios from 'axios'
-import { CircularProgress } from '@material-ui/core'
+import { CircularProgress, FormLabel, Radio, RadioGroup } from '@material-ui/core'
 import { EasyDatePicker } from './edit-profile/components/easyDatePicker'
+import FormControl from '@mui/material/FormControl'
 
 
 const theme = createTheme()
@@ -39,12 +40,14 @@ function Register(props) {
     event.preventDefault()
     const data = {}
     new FormData(event.currentTarget).forEach((value, key) => (data[key] = value))
+    data.birthDate = age;
     props.loginUser(data)
   }
 
   const [validUsername, setValidUsername] = useState(true);
   const [validEmail, setValidEmail] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [age, setAge] = useState();
 
 
   const handleValidateUsername = (username) => {
@@ -58,7 +61,7 @@ function Register(props) {
     })
   }
   const chosenAgeCallback = (age) => {
-    console.log(age)
+    setAge(age);
   }
 
   return (
@@ -124,6 +127,21 @@ function Register(props) {
                   Choose your age:
                 </p>
                 <EasyDatePicker chosenAgeCallback={chosenAgeCallback.bind(this)}  />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl>
+                  <FormLabel id="gender-group">Gender</FormLabel>
+                  <RadioGroup
+                    aria-labelledby="gender-group"
+                    defaultValue="male"
+                    name="gender"
+                    row
+                  >
+                    <FormControlLabel value="female" control={<Radio />} label="Female" />
+                    <FormControlLabel value="male" control={<Radio />} label="Male" />
+                    <FormControlLabel value="other" control={<Radio />} label="Other" />
+                  </RadioGroup>
+                </FormControl>
               </Grid>
               { !validEmail ? <Alert severity="warning">This email is already in use</Alert> : '' }
               <Grid item xs={12}>
