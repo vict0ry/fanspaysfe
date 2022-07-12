@@ -11,7 +11,7 @@ const MainLayout = ({ props }) => {
   return (
     <div>
     <SearchBar />
-    <Container maxWidth="lg">
+    <Container maxWidth="sx">
       <Outlet />
     </Container>
     <StickyFooter />

@@ -11,7 +11,8 @@ const stylesGrid = {
     padding: 8,
     borderRadius: 8,
     alignItems: "center",
-    cursor: "pointer"
+    cursor: "pointer",
+    overflow: "hidden"
   },
   image: {
     width: 146,
@@ -63,8 +64,6 @@ const stylesGrid = {
 
 const User = ({users}) => {
 
-  console.log(users)
-
   const compressionFollowers = (followers) => {
     if(followers >= 1000000){
       return Math.round(followers/1000000) + "M";
@@ -76,13 +75,13 @@ const User = ({users}) => {
   }
 
   return(
-    <Grid container rowSpacing={6} columnSpacing={2}>
+    <Grid container rowSpacing={6} columnSpacing={2} sx={{justifyContent: "center"}}>
 
       {users.slice(0, 8).map((user) => {
         const profileLink = `/profile/${user.username}`
           // <Link to={profileLink} style={{ cursor: 'pointer' }}
         return(
-          <Grid item xl={3}>
+          <Grid item md={3} >
             <Link to={profileLink} style={stylesGrid.card}>
               <Box style={stylesGrid.image}>
                 <img style={{width: "100%"}} src="https://kinowar.com/wp-content/uploads/2021/01/%D0%90%D0%BD%D0%B0-%D0%B4%D0%B5-%D0%90%D1%80%D0%BC%D0%B0%D1%81-%D1%84%D0%BE%D1%82%D0%BE%D1%81%D0%B5%D1%81%D1%81%D0%B8%D1%8F-%D0%B4%D0%BB%D1%8F-%D0%B6%D1%83%D1%80%D0%BD%D0%B0%D0%BB%D0%B0-The-Sunday-Times-Style.jpg" alt="" />

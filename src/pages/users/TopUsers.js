@@ -2,12 +2,19 @@ import { Box, Grid } from '@mui/material'
 import React from 'react'
 
 const stylesTop = {
-  padding: 16,
-  borderRadius: 8,
+  padding: "16px",
+  borderRadius: "8px",
   background: "#fff",
   display: "flex",
   // justifyContent: "center"
-  justifyContent: "space-evenly"
+  // justifyContent: "space-evenly",
+  overflowX: "auto",
+  // maxWidth: "100%",
+  '&::-webkit-scrollbar': {
+    width: 0,
+    height: 0
+  },
+  // width: "100%"
 }
 const stylesTopUsers = {
   user: {
@@ -43,8 +50,17 @@ const stylesTopUsers = {
 
 const TopUsers = ({users}) => {
   return(
-    <Grid item>
-      <Grid container style={stylesTop}>
+    <Grid item sx={{
+      // display: {
+      //   xl: "block",
+      //   xs: "flex"
+      // },
+      margin: {
+        xs: "-32px -16px 12px -16px",
+        sm: "0"
+      }
+    }}>
+      <Box sx={stylesTop}>
 
         {users.slice(0, 8).map((user) => {
           return (
@@ -63,7 +79,7 @@ const TopUsers = ({users}) => {
           );
         })}
 
-      </Grid>
+      </Box>
     </Grid>
   );
 }

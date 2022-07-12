@@ -30,7 +30,8 @@ const styles = {
   wrapper: {
     display: "flex",
     justifyContent: "center",
-    marginTop: 32
+    marginTop: 32,
+    marginBottom: 32
   },
 };
 

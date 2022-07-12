@@ -46,6 +46,7 @@ const styles = {
   filterIcon2: {
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
     marginRight: 12,
     transition: "200ms"
   },
