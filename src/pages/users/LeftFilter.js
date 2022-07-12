@@ -20,12 +20,12 @@ const categories = [
 const leftFilterStyles = {
   cont: {
     padding: "24px 12px",
-    borderRadius: 8,
+    borderRadius: "8px",
     background: "#fff",
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
-    marginRight: 16
+    marginRight: "16px"
   },
   ageCont: {
     display: "flex",
@@ -170,7 +170,17 @@ const FormControlLabelStyles = {
 
 const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setCheckedTags}) => {
   return(
-    <Grid item style={leftFilterStyles.cont}>
+    <Grid
+      item
+      sx={{
+        ...leftFilterStyles.cont,
+        display: {
+          md: "flex",
+          xs: "none"
+        }
+      }}
+
+      >
       <Box style={leftFilterStyles.ageCont}>
         <Box style={leftFilterStyles.title}>ВОЗРАСТ</Box>
         <Box style={leftFilterStyles.ageContItem}>

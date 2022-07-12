@@ -11,11 +11,11 @@ const styles = {
     flexDirection: "column"
   },
   filterCont: {
-    width: 238,
-    height: 40,
+    width: "238px",
+    height: "40px",
     background: "#fff",
     display: "flex",
-    borderRadius: 8,
+    borderRadius: "8px",
     border: "1px solid #ECE9F1",
     justifyContent: "start",
     position: "relative"
@@ -28,7 +28,7 @@ const styles = {
     position: "absolute",
     top: "120%",
     right: 0,
-    zIndex: 1,
+    zIndex: 2,
     boxShadow: "0px 2px 8px rgba(26, 5, 29, 0.1)"
   },
   filterIcon: {
@@ -58,7 +58,8 @@ const styles = {
     color: "#4776E6",
     fontSize: 12,
     fontWeight: 600,
-    display: "flex"
+    display: "flex",
+    marginBottom: 8
   },
 
 
@@ -67,21 +68,40 @@ const styles = {
 const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, setCheckedTags}) => {
   return(
     <Box style={styles.mainCont}>
-      <Box style={{display: "flex"}}>
-        <Box style={{flexGrow: 1, marginRight: "16px"}}>
+      <Box sx={{
+        display: "flex",
+        flexDirection: {
+          xs: "column",
+          sm: "row"
+        }
+      }}>
+        <Box sx={{
+          flexGrow: 1,
+          marginRight: {
+            sm: "16px",
+            xs: 0
+          },
+          marginBottom: {
+            sm: 0,
+            xs: "8px"
+          }
+        }}>
           <SearchInput
             name="search"
             placeholder="Поиск авторов..."
             styles={{
               backgroundColor: "#fff",
               border: "1px solid #ECE9F1",
-              borderRadius: 8,
+              borderRadius: 8
             }}
           />
         </Box>
 
         <ButtonBase
-          style={styles.filterCont}
+          sx={{
+            ...styles.filterCont,
+
+          }}
           onClick={() => {
             setSortByOpen(!sortByOpen)
           }}
@@ -155,7 +175,7 @@ const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, s
         </ButtonBase>
       </Box>
 
-      <Box style={{display: "flex", marginTop: 8, zIndex: 1}}>
+      <Box style={{display: "flex", marginTop: 8, zIndex: 1, flexWrap: "wrap"}}>
         {Object.keys(checkedTags).map((tag) => {
           if(checkedTags[tag]) {
             return (

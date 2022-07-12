@@ -32,8 +32,8 @@ const wantToTop = {
 const title = {
   display: "flex",
   justifyContent: "space-between",
-  marginTop: 16,
-  marginBottom: 24,
+  marginTop: "16px",
+  marginBottom: "24px",
   alignItems: "center"
 };
 
@@ -266,7 +266,13 @@ export function Users() {
       <Box sx={{maxWidth: "100%"}}>
         <TopUsers users={users} />
         <Grid item>
-          <Box style={title}>
+          <Box sx={{
+            ...title,
+            marginBottom: {
+              xs: "36px",
+              sm: "24px"
+            }
+          }}>
             <Box style={{fontSize: 24, fontWeight: 700}}>
               ТОП авторов
             </Box>
