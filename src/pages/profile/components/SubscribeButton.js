@@ -2,7 +2,7 @@ import Button from '@mui/material/Button'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { t } from 'i18next'
-import { toggleSubscribe } from '../../../redux/profile.action'
+import { toggleSubscribe } from '../../../redux/actions/profile.action'
 
 export const SubscribeButton = () => {
   const dispatch = useDispatch()
@@ -21,10 +21,11 @@ export const SubscribeButton = () => {
     dispatch(toggleSubscribe(userProfile.profileUser?._id))
   }
 
-  return <div style={{ display: 'flex' }}>
+  return <div style={{ display: 'flex', justifyAlign: 'center' }}>
     {!isSubscribed() ?
-      <Button onClick={handleFollow} variant='contained' style={{ marginTop: 10 }}>Subscribe for 7$ in a
+      <Button onClick={handleFollow} variant='contained' style={{ marginTop: 10 }}>
+        Subscribe for {userProfile?.profileUser.subscribtionPrice} in a
         month</Button> :
-      <Button onClick={handleFollow} color="primary" variant='dashed' style={{ marginTop: 10 }}>{t('COMMON.UNSUBSCRIBE')}</Button>}
+      <Button onClick={handleFollow} color="primary" variant='contained' style={{ marginTop: 10 }}>{t('COMMON.UNSUBSCRIBE')}</Button>}
   </div>
 }

@@ -13,41 +13,33 @@ export const UserParametersTab = () => {
     }} sx={{ mt: 3 }}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
+          <Button variant={'blue'}>
+            <img style={{paddingRight: '10px'}} src="/images/icons/key-alt.svg" alt="change pass" />Change password</Button>
+        </Grid>
+        <Grid item xs={12} sm={12}>
           <TextField
             name="weight"
             required
             fullWidth
-            id="weight"
-            label="Your weight"
-            type="number"
-            autoFocus
+            id="email"
+            label="E-mail"
+            type="email"
           />
         </Grid>
+
         <Grid item xs={12} sm={12}>
-          <TextField
-            name="firstMessagePrice"
-            required
-            fullWidth
-            id="firstMessagePrice"
-            label="First Message Price"
-            type="number"
-            autoFocus
-          />
+          <div style={{display: 'flex', flexDirection: 'column'}}>
+            <FormControlLabel control={<Checkbox defaultChecked />}
+                              label="Service news" />
+            <FormControlLabel control={<Checkbox defaultChecked />}
+                              label="Infromation about the notifications" />
+            <FormControlLabel control={<Checkbox defaultChecked />}
+                              label="New subscribers notification" />
+          </div>
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
-            name="nextMessages"
-            required
-            fullWidth
-            id="nextMessages"
-            label="Next Messages price"
-            type="number"
-            autoFocus
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <FormControlLabel control={<Checkbox defaultChecked />}
-                            label="Disable sending messages users without credit" />
+          <Button variant={'red'}>
+            <img style={{paddingRight: '10px'}} src="/images/icons/user-x.svg" alt="change pass" />Deactivate profile</Button>
         </Grid>
       </Grid>
       <Button

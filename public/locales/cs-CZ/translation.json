@@ -49,6 +49,9 @@
     "ADD_PRODUCT_IMAGE": "Přidat obrázek produktu",
     "PRODUCT_NAME": "Přidat název produktu"
   },
+  "CONFIG": {
+    "SETUP_WISH": "You have no wishes yet. Open the collection on your dream 💫",
+  },
   "PROFILE": {
     "TIP_AMOUNT": "Výše dýška",
     "CREDIT_CARDS": "Kreditní karty",
@@ -59,7 +62,8 @@
     "VIDEO": "Video",
     "LIKES": "lajku",
     "PRODUCTS": "Produkty",
-    "UPLOAD_AVATAR": "Nahrát avatar"
+    "UPLOAD_AVATAR": "Nahrát avatar",
+    "WISHES": "Přání"
   },
   "USERMENU": {
     "MY_PAGE": "Moje stranka",
@@ -81,7 +85,8 @@
   },
   "REGISTER": {
     "REPEAT_PASSWORD": "Zopakujte heslo",
-    "ALREADY_HAVE_ACCOUNT": "Již u nás mate svůj účet"
+    "ALREADY_HAVE_ACCOUNT": "Již u nás mate svůj účet",
+    "EMAIL_ALREADY_IN_USE": "Tento e-mail se jiz pouziva"
   },
   "ZODIAC": {
     "TAURUS": "Býk"

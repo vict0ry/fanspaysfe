@@ -1,10 +1,21 @@
 const initialState = {
   successSnackbarOpen: false,
   errorSnackbarOpen: false,
-  infoSnackbarOpen: false
+  infoSnackbarOpen: false,
+  subscribeInsufficientAmountDialog: false
 }
 const uiReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "DISPLAY_INSUFFICIENT_DIALOG":
+      return {
+        ...state,
+        subscribeInsufficientAmountDialog: true
+      }
+    case "HIDE_INSUFFICIENT_DIALOG":
+      return {
+        ...state,
+        subscribeInsufficientAmountDialog: false
+      }
     case "SNACKBAR_SUCCESS":
       return {
         ...state,

@@ -3,23 +3,14 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Box from '@mui/material/Box'
 import CardHeader from '@mui/material/CardHeader'
-import { Divider } from '@mui/material'
-import { Link } from 'react-router-dom'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import LinkIcon from '@mui/icons-material/Link'
-import DateRangeIcon from '@mui/icons-material/DateRange'
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
-import ScaleIcon from '@mui/icons-material/Scale'
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import { useTranslation } from 'react-i18next'
 import { t } from 'i18next'
 import moment from 'moment'
 import { getZodiac } from '../helper'
-import { SocialIcon } from 'react-social-icons'
 
 const ProfileStatistics = ({ followers = 0, following = 0, posts = 0, products = 0, video = 0, likes = 0 }) => {
   const TextNumber = ({ number, text }) => {
-    return <Box style={{ textAlign: 'center' }}>
+    return <Box style={{  textAlign: 'center' }}>
       <Box sx={{ fontSize: '1.5rem', fontWeight: 'bold' }} className="number">
         {number}
       </Box>
@@ -29,7 +20,11 @@ const ProfileStatistics = ({ followers = 0, following = 0, posts = 0, products =
     </Box>
   }
   return <Box className={'numbers-wrapper'}
-              sx={{ display: 'flex', justifyContent: 'space-around', margin: '30px 0' }}>
+              sx={{ display: {md: 'flex', xs: 'grid'},
+                justifyContent: 'space-around',
+                margin: '30px 0',
+                gridTemplateColumns: '1fr 1fr 1fr',
+              }}>
     <TextNumber number={followers} text={t('COMMON.FOLLOWERS')} />
     <TextNumber number={following} text={t('COMMON.FOLLOWING')} />
     <TextNumber number={posts} text={t('PROFILE.POSTS')} />
@@ -52,7 +47,7 @@ export const InfoIcon = ({title, icon, afterIcon}) => {
   </Box>
 }
 
-export default function AboutCard({ user, postsLength }) {
+export default function AboutCard({ user, postsLength, disable }) {
   const fullName = user?.firstName + ' ' + user?.lastName
   const { t } = useTranslation()
   const parsedDate = moment(user?.birthDate, 'YYYY-MM-DD')
@@ -62,13 +57,13 @@ export default function AboutCard({ user, postsLength }) {
 
 
   return (<div>
-      <Card sx={{ maxWidth: '1fr',width: '590px', gridColumn: 'unset' }}>
+      <Card sx={{ maxWidth: '1fr',width: { md: '590px', xs: '390px' }, gridColumn: 'unset' }}>
         <div style={{ padding: 10, float: 'right', color: 'green', cursor: 'pointer' }}>{t('COMMON.ONLINE')}</div>
         <CardHeader subheader={'@' + user?.username} subtitle={'ahoj'} title={fullName} />
 
         <CardContent>
 
-          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 2 }}>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { md: '1fr 1fr 1fr', xs: '1fr 1fr' }, gap: 2 }}>
             <InfoIcon afterIcon={'srpen 2021'} icon={'/images/icons/calendar.svg'} title={t('PROFILE.USER_FIRST_REGISTERED')}></InfoIcon>
             <InfoIcon afterIcon={'Praha'} icon={'/images/icons/map-pin.svg'} title={t('Location')}></InfoIcon>
             <InfoIcon afterIcon={new Date(parsedDate).toLocaleDateString('cs-CZ')} icon={'/images/icons/gift.svg'} title={t('PROFILE.BIRTH_DATE')}></InfoIcon>
@@ -84,10 +79,10 @@ export default function AboutCard({ user, postsLength }) {
         </CardContent>
       </Card>
 
-    <Card sx={{ maxWidth: '1fr',width: '590px', marginTop: '10px', gridColumn: 'unset' }}>
-      <ProfileStatistics followers={user?.followers.length}
+    <Card sx={{ maxWidth: '1fr',width: {md: '590px', xs: '390px'}, marginTop: '10px', gridColumn: 'unset' }}>
+      <ProfileStatistics followers={user?.followers?.length}
                          posts={postsLength}
-                         following={user?.following.length} />
+                         following={user?.following?.length} />
     </Card>
     </div>
   )

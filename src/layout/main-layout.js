@@ -4,18 +4,23 @@ import { Outlet } from 'react-router-dom'
 import StickyFooter from './sticky-footer'
 import React from 'react'
 import { connect } from 'react-redux'
+import SuccessSnackbar from '../components/SuccessSnackbar'
+import { SubscribeDialog } from '../components/SubscribeDialog'
 
 const MainLayout = ({ props }) => {
-  return (<div>
+  return (
+    <div>
     <SearchBar />
-      <Container maxWidth="xl"> {/*lg*/}
-        <Outlet />
-      </Container>
+    <Container maxWidth="lg">
+      <Outlet />
+    </Container>
     <StickyFooter />
-  </div>)
+      <SuccessSnackbar />
+      <SubscribeDialog />
+    </div>)
 }
 const mapStateToProps = state => {
-  // console.log(state.router.location)
+  console.log(state.router.location)
   return state
 }
 export default connect(mapStateToProps)(MainLayout)

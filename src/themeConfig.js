@@ -17,6 +17,24 @@ export const CustomThemeConfig = createTheme({
             color: 'white'
           },
         },
+        {
+          props: { variant: 'red' },
+          style: {
+            textTransform: 'none',
+            textDecoration: 'none',
+            background: '#FFEDED',
+            color: '#E64747'
+          },
+        },
+        {
+          props: { variant: 'blue' },
+          style: {
+            textTransform: 'none',
+            textDecoration: 'none',
+            background: '#E8EFFF',
+            color: '#4776E6'
+          },
+        },
       ],
     },
     MuiAppBar: {
