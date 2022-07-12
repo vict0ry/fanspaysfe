@@ -5,11 +5,11 @@ import * as React from 'react'
 import { useContext, useEffect } from 'react'
 import { Paper } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { loadChatMessages, loadChats } from '../../redux/messages.action'
 import { SocketContext } from '../../context/socket'
 import { HeaderSideBar } from './messagesSideBarHeader'
 import Box from '@mui/material/Box'
 import useWindowDimensions from '../../useWindowDimensions'
+import { loadChats } from '../../redux/actions/messages.action'
 
 export const FolderList = ({setFolderListOpen}) => {
   const socket = useContext(SocketContext)

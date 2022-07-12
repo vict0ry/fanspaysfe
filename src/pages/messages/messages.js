@@ -8,7 +8,6 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { loadChatMessages, loadChats, sendMessage } from '../../redux/messages.action'
 import axios from 'axios'
 import { SocketContext } from '../../context/socket'
 import { t } from 'i18next'
@@ -21,6 +20,7 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import { ClickAwayListener } from '@mui/base'
 import useWindowDimensions from '../../useWindowDimensions'
+import { loadChatMessages, loadChats } from '../../redux/actions/messages.action'
 
 
 const chatMessages = [
