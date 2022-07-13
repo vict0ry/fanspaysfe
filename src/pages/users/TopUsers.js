@@ -60,7 +60,13 @@ const TopUsers = ({users}) => {
         sm: "0"
       }
     }}>
-      <Box sx={stylesTop}>
+      <Box sx={{
+        ...stylesTop,
+        justifyContent: {
+          xs: "start",
+          md: "space-around"
+        }
+      }}>
 
         {users.slice(0, 8).map((user) => {
           return (

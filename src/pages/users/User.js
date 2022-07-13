@@ -76,7 +76,7 @@ const User = ({users}) => {
   }
 
   return(
-    <Grid container rowSpacing={6} columnSpacing={2} sx={{justifyContent: "center"}}>
+    <Grid container rowSpacing={{xs: 2, md: 6}} columnSpacing={2} sx={{justifyContent: "center"}}>
 
       {users.slice(0, 8).map((user) => {
         const profileLink = `/profile/${user.username}`

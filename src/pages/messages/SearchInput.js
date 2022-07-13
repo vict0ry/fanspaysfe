@@ -2,6 +2,7 @@ import { Icon } from './Icon'
 import * as React from 'react'
 import { alpha, styled } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
+// import { useState } from 'react'
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -27,7 +28,7 @@ const Search = styled('div')(({ theme }) => ({
   }
 }))
 
-export const SearchInput = ({name, placeholder, styles}) => {
+export const SearchInput = ({name, placeholder, styles, state, setState}) => {
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     background: "#F7F5F9",
     borderRadius: 8,
@@ -46,6 +47,8 @@ export const SearchInput = ({name, placeholder, styles}) => {
     ...styles
   }))
 
+  const [value, setValue] = React.useState("");
+
   return (
     <Search>
       <SearchIconWrapper>
@@ -55,6 +58,11 @@ export const SearchInput = ({name, placeholder, styles}) => {
         placeholder={placeholder}
         fullWidth={true}
         inputProps={{ 'aria-label': 'search' }}
+        onChange={(e) => {
+          console.log(e.target.value)
+          setValue(e.target.value);
+        }}
+        // value={value}
       />
     </Search>
   )

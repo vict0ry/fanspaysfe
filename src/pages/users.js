@@ -247,8 +247,19 @@ export function Users() {
   const [sortBy, setSortBy] = useState("По популярности ⭐");
   const [sortByOpen, setSortByOpen] = useState(false);
   const [checkedTags, setCheckedTags] = useState({});
+  const [findNickname, setFindNickname] = useState("");
 
   const {width, height} = useWindowDimensions();
+
+  const [leftMenuOpen, setLeftMenuOpen] = useState(false);
+
+  console.log(width, leftMenuOpen)
+
+  if(leftMenuOpen && width <= 900){
+    document.body.style.overflow = "hidden"
+  } else {
+    document.body.style.overflow = "initial"
+  }
 
   return (
     <Grid container style={{paddingTop: 40, justifyContent: "center"}}>
@@ -292,16 +303,52 @@ export function Users() {
           </Box>
 
           <Grid container
-            sx={{display: "flex", flexWrap: "nowrap"}}
+            sx={{display: "flex", flexWrap: "nowrap", alignItems: "start"}}
           >
-            <LeftFilter
-              fromAge={fromAge}
-              setFromAge={setFromAge}
-              upToAge={upToAge}
-              setUpToAge={setUpToAge}
-              checkedTags={checkedTags}
-              setCheckedTags={setCheckedTags}
-            />
+            {width <= 900 && leftMenuOpen &&
+                <LeftFilter
+                  fromAge={fromAge}
+                  setFromAge={setFromAge}
+                  upToAge={upToAge}
+                  setUpToAge={setUpToAge}
+                  checkedTags={checkedTags}
+                  setCheckedTags={setCheckedTags}
+                  setLeftMenuOpen={setLeftMenuOpen}
+                  leftMenuOpen={leftMenuOpen}
+                  findNickname={findNickname}
+                  setFindNickname={setFindNickname}
+                />
+            }
+            {width <= 900 && leftMenuOpen &&
+              <Box sx={{
+                position: "fixed",
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+                width: "100vw",
+                height: "100vh",
+                zIndex: 2,
+                background: "rgba(93, 94, 101, 0.05);",
+                backdropFilter: "blur(8px)"
+              }}>
+
+              </Box>
+            }
+            {width > 900 &&
+              <LeftFilter
+                fromAge={fromAge}
+                setFromAge={setFromAge}
+                upToAge={upToAge}
+                setUpToAge={setUpToAge}
+                checkedTags={checkedTags}
+                setCheckedTags={setCheckedTags}
+                setLeftMenuOpen={setLeftMenuOpen}
+                leftMenuOpen={leftMenuOpen}
+                findNickname={findNickname}
+                setFindNickname={setFindNickname}
+              />
+            }
             <Grid item
               sx={{maxWidth: 700}}
             >
@@ -312,6 +359,8 @@ export function Users() {
                 sortBy={sortBy}
                 checkedTags={checkedTags}
                 setCheckedTags={setCheckedTags}
+                setLeftMenuOpen={setLeftMenuOpen}
+                leftMenuOpen={leftMenuOpen}
               />
               <User users={users} />
               <PagesController />

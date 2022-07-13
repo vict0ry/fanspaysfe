@@ -31,7 +31,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     marginTop: 32,
-    marginBottom: 32
+    marginBottom: 96
   },
 };
 

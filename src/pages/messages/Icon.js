@@ -177,8 +177,8 @@ export const Icon = ({name, color}) => {
         case "filter":
             image =
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2.66675 3.3335H13.3334" stroke="#B3B3B3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M3 3.3335L6.66667 8.66683V14.0002H9.33333V8.66683L13 3.3335" stroke="#B3B3B3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M2.66675 3.3335H13.3334" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M3 3.3335L6.66667 8.66683V14.0002H9.33333V8.66683L13 3.3335" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
             break;
         case "triangle":
@@ -205,7 +205,13 @@ export const Icon = ({name, color}) => {
                     <path d="M9 18L15 12L9 6" stroke="#4776E6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
             break;
-
+        case "X":
+            image =
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 7L17 17" stroke="#1A051D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M17 7L7 17" stroke="#1A051D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
 
       default:
             image = <svg></svg>

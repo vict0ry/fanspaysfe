@@ -2,7 +2,8 @@ import React from 'react'
 import { Box, Button, Checkbox, FormControlLabel, FormGroup, Grid, InputBase } from '@mui/material'
 import { SearchInput } from '../messages/SearchInput'
 import { Icon } from '../messages/Icon'
-
+import useWindowDimensions from '../../useWindowDimensions'
+import { TextField } from '@mui/material'
 
 
 const categories = [
@@ -39,7 +40,7 @@ const leftFilterStyles = {
     alignItems: "center"
   },
   title: {
-    marginBottom: 16,
+    marginBottom: "16px",
     fontSize: 14,
     fontWeight: 700,
     color: "#5D5E65",
@@ -87,20 +88,16 @@ const leftFilterStyles = {
     width: "100%",
     overflowY: "scroll",
     '&::-webkit-scrollbar-track': {
-      // boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
-      // webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)'
       background: "#ECE9F1",
       border: "8px solid transparent",
       backgroundClip: "content-box",
-      borderRadius: 3,
-
+      borderRadius: 3
     },
     '&::-webkit-scrollbar-thumb': {
       backgroundColor: '#4776E6',
       borderRadius: 3,
       border: "8px solid transparent",
-      backgroundClip: "content-box",
-      // outline: '1px solid slategrey'
+      backgroundClip: "content-box"
     },
     marginBottom: "24px"
   },
@@ -168,7 +165,9 @@ const FormControlLabelStyles = {
   }
 }
 
-const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setCheckedTags}) => {
+const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setCheckedTags, setLeftMenuOpen, setFindNickname, findNickname}) => {
+  const {width, height} = useWindowDimensions();
+
   return(
     <Grid
       item
@@ -176,13 +175,62 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
         ...leftFilterStyles.cont,
         display: {
           md: "flex",
-          xs: "none"
+          // xs: "none"
+        },
+        position: {
+          md: "initial",
+          xs: "fixed"
+        },
+        bottom: 0,
+        left: 0,
+        zIndex: {
+          md: "initial",
+          xs: 3
+        },
+        width: {
+          md: "initial",
+          xs: "100%"
+        },
+        padding: {
+          xs: "24px 32px",
+          md: "24px 12px"
+        },
+        borderTopLeftRadius: {
+          xs: "40px",
+          md: "8px"
+        },
+        borderTopRightRadius: {
+          xs: "40px",
+          md: "8px"
         }
       }}
 
       >
       <Box style={leftFilterStyles.ageCont}>
-        <Box style={leftFilterStyles.title}>ВОЗРАСТ</Box>
+        <Box sx={{
+          ...leftFilterStyles.title,
+          display: {
+            xs: "flex",
+            md: "block"
+          },
+          width: "100%",
+          justifyContent: "space-between"
+        }}>
+          ВОЗРАСТ
+          {width < 900 &&
+          <Button
+            sx={{
+              minWidth: 0,
+              minHeight: 0
+            }}
+            onClick={() => {
+              setLeftMenuOpen(false);
+            }}
+          >
+            <Icon name="X" />
+          </Button>
+          }
+        </Box>
         <Box style={leftFilterStyles.ageContItem}>
           <span style={leftFilterStyles.ageTitle}>От</span>
           <Box style={leftFilterStyles.ageController}>
@@ -284,11 +332,43 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
       </Box>
 
 
-      <Box style={{width: 180, marginBottom: "24px"}}>
+      <Box sx={{
+        width: {
+          md: "180px",
+          xs: "100%"
+        },
+        marginBottom: "24px"
+      }}>
         <Box style={leftFilterStyles.title}>ПОИСК ПО НИКУ</Box>
-        <SearchInput name="at" placeholder="Введите ник" />
+        {/*<SearchInput*/}
+        {/*  name="at"*/}
+        {/*  placeholder="Введите ник"*/}
+        {/*  state={findNickname}*/}
+        {/*  setState={setFindNickname}*/}
+        {/*/>*/}
+        {console.log(findNickname)}
+        <TextField
+          variant="standard"
+          InputProps={{disableUnderline: true}}
+          hiddenLabel
+          sx={{ width: '100%', padding: '0', marginLeft: 0, border: "0" }}
+          onChange={(e) => {
+            setFindNickname(e.target.value)
+          }}
+          value={findNickname}
+        />
       </Box>
-      <Box style={{display: "flex", }}>
+      <Box sx={{
+        display: "flex",
+        // width: {
+        //   md: "180px",
+        //   xs: "100%"
+        // },
+        justifyContent: {
+          md: "start",
+          xs: "center"
+        }
+      }}>
         <Button style={leftFilterStyles.apply_btn}>
           Применить фильтр
         </Button>

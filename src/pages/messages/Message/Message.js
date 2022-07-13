@@ -29,8 +29,6 @@ const Message = ({i, id, isSender}) => {
 
           <div key={id} style={{...stylesMessage.messageCont2, ...isSender(i) ? stylesMessage.alignItemsEnd: stylesMessage.alignItemsStart}}>
 
-            {/* {console.log(i)} */}
-
             <div ref={messageInfo} style={{...stylesMessage.messageInfo}}>
               <div style={stylesMessage.nameAuthor}>{isSender(i) ? "Вы" : i.sender.firstName + " " + i.sender.lastName}</div>
               <div style={stylesMessage.timeMessage}>{
