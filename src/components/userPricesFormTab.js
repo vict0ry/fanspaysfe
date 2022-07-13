@@ -36,7 +36,6 @@ export const UserPricesFormTab = () => {
 
   const user = useSelector(state => state.profile.profile)
   useEffect(() => {
-    debugger;
     axios.get('/api/wish/' + user?.profileUser?._id).then(wishes => { setWishes(wishes.data) })}, [])
   return (
     <div>

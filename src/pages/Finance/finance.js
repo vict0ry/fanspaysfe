@@ -17,7 +17,6 @@ export const Finance = () => {
   const [transactions, setTransactions] = useState([]);
   useEffect(() => {
     axios.get('/api/credit').then(({ data }) => {
-      debugger;
       setTransactions(data.transactions);
     })
   }, []);

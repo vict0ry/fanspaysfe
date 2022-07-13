@@ -16,7 +16,6 @@ const PaymentStatus = () => {
     const clientSecret = new URLSearchParams(window.location.search).get(
       'setup_intent_client_secret'
     );
-    debugger;
 
     // Retrieve the SetupIntent
     stripe
