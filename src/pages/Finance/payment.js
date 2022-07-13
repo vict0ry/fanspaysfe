@@ -32,8 +32,6 @@ export default function Payment() {
     clientSecret,
     appearance,
   };
-  debugger;
-
   return (
     <div>
       {clientSecret  && (

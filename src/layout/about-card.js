@@ -69,7 +69,7 @@ export default function AboutCard({ user, postsLength, disable }) {
             <InfoIcon afterIcon={new Date(parsedDate).toLocaleDateString('cs-CZ')} icon={'/images/icons/gift.svg'} title={t('PROFILE.BIRTH_DATE')}></InfoIcon>
             <InfoIcon afterIcon={t(getZodiac(parsedDay, parsedMonth))} icon={'/images/icons/zodiac-aries.svg'} title={t('PROFILE.ZODIAC')}></InfoIcon>
             <InfoIcon afterIcon={t('10 minutes')} icon={'/images/icons/time.svg'} title= {t('COMMON.LAST_ACTIVE')}></InfoIcon>
-            <InfoIcon afterIcon={t('Male')} icon={'/images/icons/map-pin.svg'} title= {t('COMMON.SEX')}></InfoIcon>
+            <InfoIcon afterIcon={t(user?.gender)} icon={'/images/icons/map-pin.svg'} title= {t('COMMON.SEX')}></InfoIcon>
           </Box>
 
           <Box sx={{ textAlign: 'left', marginTop: 2 }}>

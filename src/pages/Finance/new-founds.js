@@ -69,7 +69,6 @@ export const NewFounds = () => {
 
                   <Button onClick={() => {
                     axios.post("/api/stripe/pay").then(res => {
-                      debugger;
                       return res;
                     })
                   }}>Pay me</Button>
