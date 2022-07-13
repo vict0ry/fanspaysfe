@@ -15,6 +15,17 @@ export const removePost = (postId) => {
     })
   }
 }
+export const changePost = (postId, content, pictures) => {
+  return (dispatch) => {
+    return axios.post('/api/posts/' + postId + '/update', {
+      content,
+      pictures
+    }).then(({ data }) => {
+      console.log(data)
+      // dispatch(deletedPost(data._id))
+    })
+  }
+}
 export const likePost = (postId) => {
   return (dispatch, getState) => {
     return axios.put('/api/posts/' + postId + '/like').then(res => {

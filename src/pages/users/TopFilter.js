@@ -1,4 +1,4 @@
-import { Box, ButtonBase } from '@mui/material'
+import { Box, ButtonBase, InputBase } from '@mui/material'
 import { SearchInput } from '../messages/SearchInput'
 import { ClickAwayListener } from '@mui/base'
 import React from 'react'
@@ -64,7 +64,7 @@ const styles = {
   }
 };
 
-const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, setCheckedTags, setLeftMenuOpen, leftMenuOpen}) => {
+const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, setCheckedTags, setLeftMenuOpen, leftMenuOpen, findAuthors, setFindAuthors}) => {
   const {width, height} = useWindowDimensions();
 
   return(
@@ -87,14 +87,24 @@ const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, s
             xs: "8px"
           }
         }}>
-          <SearchInput
-            name="search"
-            placeholder="Поиск авторов..."
-            styles={{
-              backgroundColor: "#fff",
-              border: "1px solid #ECE9F1",
-              borderRadius: 8
+          {/*<SearchInput*/}
+          {/*  name="search"*/}
+          {/*  placeholder="Поиск авторов..."*/}
+          {/*  styles={{*/}
+          {/*    backgroundColor: "#fff",*/}
+          {/*    border: "1px solid #ECE9F1",*/}
+          {/*    borderRadius: 8*/}
+          {/*  }}*/}
+          {/*/>*/}
+
+          <InputBase
+            InputProps={{disableUnderline: true}}
+            placeholder="Введите ник"
+            sx={{ width: '100%', padding: '0', marginLeft: 0, border: "1px solid #000" }}
+            onChange={(e) => {
+              setFindAuthors(e.target.value)
             }}
+            value={findAuthors}
           />
         </Box>
 

@@ -4,6 +4,7 @@ import { SearchInput } from '../messages/SearchInput'
 import { Icon } from '../messages/Icon'
 import useWindowDimensions from '../../useWindowDimensions'
 import { TextField } from '@mui/material'
+import axios from 'axios'
 
 
 const categories = [
@@ -43,8 +44,7 @@ const leftFilterStyles = {
     marginBottom: "16px",
     fontSize: 14,
     fontWeight: 700,
-    color: "#5D5E65",
-
+    color: "#5D5E65"
   },
   ageTitle: {
     fontSize: 12,
@@ -165,7 +165,7 @@ const FormControlLabelStyles = {
   }
 }
 
-const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setCheckedTags, setLeftMenuOpen, setFindNickname, findNickname}) => {
+const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setCheckedTags, setLeftMenuOpen, setFindNickname, findNickname, findAuthors, sortBy}) => {
   const {width, height} = useWindowDimensions();
 
   return(
@@ -346,12 +346,11 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
         {/*  state={findNickname}*/}
         {/*  setState={setFindNickname}*/}
         {/*/>*/}
-        {console.log(findNickname)}
-        <TextField
-          variant="standard"
+        {/*{console.log(findNickname)}*/}
+        <InputBase
           InputProps={{disableUnderline: true}}
-          hiddenLabel
-          sx={{ width: '100%', padding: '0', marginLeft: 0, border: "0" }}
+          placeholder="Введите ник"
+          sx={{ width: '100%', padding: '0', marginLeft: 0, border: "1px solid #000" }}
           onChange={(e) => {
             setFindNickname(e.target.value)
           }}
@@ -369,7 +368,28 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
           xs: "center"
         }
       }}>
-        <Button style={leftFilterStyles.apply_btn}>
+        <Button
+          style={
+            leftFilterStyles.apply_btn}
+            onClick={() => {
+              const checked = [];
+              Object.keys(checkedTags).forEach(tag => {
+                if(checkedTags[tag]){
+                  checked.push(tag);
+                }
+              })
+              const data = {
+                fromAge: fromAge,
+                upToAge: upToAge,
+                checkedTags: checked,
+                findNickname: findNickname,
+                findAuthors: findAuthors,
+                sortBy: sortBy
+              };
+              console.log(data)
+              axios.post('/test/filter?age=18&nickname=test', data).then(res => console.log(res.data));
+            }}
+        >
           Применить фильтр
         </Button>
         <Button style={leftFilterStyles.clear_btn}>

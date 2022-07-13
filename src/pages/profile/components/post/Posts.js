@@ -75,7 +75,7 @@ export const Posts = ({ profileUser, posts, disableAdd = false }) => {
             <CardHeader
               action={
                 <IconButton aria-label="settings">
-                  <PostMenu postId={message._id} />
+                  <PostMenu postId={message._id} legacyContent={message.content} legacyPictures={message.pictures}/>
                 </IconButton>
               }
               avatar={

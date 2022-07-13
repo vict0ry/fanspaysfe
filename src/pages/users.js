@@ -248,6 +248,7 @@ export function Users() {
   const [sortByOpen, setSortByOpen] = useState(false);
   const [checkedTags, setCheckedTags] = useState({});
   const [findNickname, setFindNickname] = useState("");
+  const [findAuthors, setFindAuthors] = useState("");
 
   const {width, height} = useWindowDimensions();
 
@@ -317,6 +318,8 @@ export function Users() {
                   leftMenuOpen={leftMenuOpen}
                   findNickname={findNickname}
                   setFindNickname={setFindNickname}
+                  findAuthors={findAuthors}
+                  sortBy={sortBy}
                 />
             }
             {width <= 900 && leftMenuOpen &&
@@ -347,6 +350,8 @@ export function Users() {
                 leftMenuOpen={leftMenuOpen}
                 findNickname={findNickname}
                 setFindNickname={setFindNickname}
+                findAuthors={findAuthors}
+                sortBy={sortBy}
               />
             }
             <Grid item
@@ -361,6 +366,8 @@ export function Users() {
                 setCheckedTags={setCheckedTags}
                 setLeftMenuOpen={setLeftMenuOpen}
                 leftMenuOpen={leftMenuOpen}
+                setFindAuthors={setFindAuthors}
+                findAuthors={findAuthors}
               />
               <User users={users} />
               <PagesController />

@@ -4,8 +4,10 @@ import MenuItem from '@mui/material/MenuItem'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { removePost } from '../../../../redux/actions/posts.action'
 import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { PostMenuPopup} from './PostMenuPopup'
 
-export default function PostMenu({ postId }) {
+export default function PostMenu({ postId, legacyPictures, legacyContent }) {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
@@ -18,6 +20,8 @@ export default function PostMenu({ postId }) {
   const handleRemovePost = () => {
     dispatch(removePost(postId))
   }
+
+  const [openPostEditor, setOpenPostEditor] = useState(false);
 
   return (
     <div>
@@ -37,8 +41,20 @@ export default function PostMenu({ postId }) {
         }}
       >
         <MenuItem onClick={handleRemovePost}>Remove Post</MenuItem>
-        <MenuItem onClick={handleClose}>Edit Post</MenuItem>
+        <MenuItem onClick={() => {
+          handleClose();
+          setOpenPostEditor(true);
+        }}>Edit Post</MenuItem>
       </Menu>
+
+      {openPostEditor &&
+        <PostMenuPopup
+          setOpenPostEditor={setOpenPostEditor}
+          legacyPictures={legacyPictures}
+          legacyContent={legacyContent}
+          postId={postId}
+        />
+      }
     </div>
   )
 }
