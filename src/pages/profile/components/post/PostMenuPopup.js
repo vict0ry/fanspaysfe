@@ -17,7 +17,7 @@ const PostMenuPopup = ({postId, setOpenPostEditor, legacyPictures, legacyContent
 
   useEffect(() => {
       setContent(legacyContent);
-      setPictures([...legacyPictures, ...legacyPictures]);
+      setPictures(legacyPictures);
     }, [])
 
   return(
