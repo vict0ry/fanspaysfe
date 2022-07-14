@@ -30,6 +30,7 @@ import { ThemeProvider } from '@mui/material'
 import { CustomThemeConfig } from './themeConfig'
 import SuccessSnackbar from './components/SuccessSnackbar'
 import PaymentStatus from './pages/Finance/Paymentstatus'
+import { HomeNotLogged } from './pages/home-not-logged/home-not-logged'
 
 const target = document.querySelector('#root')
 axios.defaults.baseURL = beURL
@@ -96,6 +97,9 @@ root.render(
                   <Route path="users" element={<Users />} />
                 </Route>
               </Route>
+
+              <Route path="main" element={<HomeNotLogged />} />
+
             </Routes>
           </BrowserRouter>
         </PersistGate>
