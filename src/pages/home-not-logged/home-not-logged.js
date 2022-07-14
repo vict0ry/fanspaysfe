@@ -38,7 +38,7 @@ export const HomeNotLogged = () => {
                     <li className={styles["has-child"]}><a href="#">{t('Больше')}</a></li>
                   </ul>
                 </nav>
-                <div className={styles["languagesle"]}>
+                <div className={styles["languages"]}>
                   <div className={styles["current"]}>
                     <svg width={32} height={32} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="#5D5E65" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
