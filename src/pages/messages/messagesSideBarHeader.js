@@ -6,6 +6,7 @@ import { create } from "@mui/material/styles/createTransitions";
 import { Button } from "@mui/material";
 import { textTransform } from "@mui/system";
 import Box from '@mui/material/Box';
+import { t } from 'i18next'
 
 export const HeaderSideBar = ({amountMessages}) => {
 
@@ -69,7 +70,7 @@ export const HeaderSideBar = ({amountMessages}) => {
         <Box style={styles.main}>
             <Box style={{...styles.header, ...{marginBottom: 16}}}>
                 <Box style={styles.flex}>
-                    <Box style={styles.title}> Messages </Box>
+                    <Box style={styles.title}> {t("MESSAGES.TITLE")} </Box>
                     <Button style={styles.amountMessages}>{amountMessages}</Button>
                 </Box>
                 <Button 
@@ -94,7 +95,7 @@ export const HeaderSideBar = ({amountMessages}) => {
                         <Box style={{marginRight: 10}}>
                             <Icon name="createGroup" />
                         </Box>
-                        <Box>Создать группу</Box>
+                        <Box>{t("MESSAGES.CREATE_GROUP")}</Box>
                     </Box>
                     
                     <Button style={{minWidth: 0}}>
@@ -109,7 +110,7 @@ export const HeaderSideBar = ({amountMessages}) => {
                         <Box style={{marginRight: 10}}>
                             <Icon name="createMailing" />
                         </Box>
-                        <Box>Создать рассылку</Box>
+                        <Box>{t("MESSAGES.CREATE_MAILING")}</Box>
                     </Box>
 
                     <Button style={{minWidth: 0}}>

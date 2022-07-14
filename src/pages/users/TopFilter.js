@@ -4,6 +4,7 @@ import { ClickAwayListener } from '@mui/base'
 import React from 'react'
 import { Icon } from '../messages/Icon'
 import useWindowDimensions from '../../useWindowDimensions'
+import { t } from 'i18next'
 
 const styles = {
   mainCont: {
@@ -165,38 +166,38 @@ const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, s
                 <ButtonBase
                   style={{padding: 8, justifyContent: "start"}}
                   onClick={() => {
-                    setSortBy("По популярности ⭐")
+                    setSortBy(t("USERS.BY_POPULARITY") + " ⭐")
                     setSortByOpen(!sortByOpen)
                   }}
-                >По популярности ⭐</ButtonBase>
+                >{t("USERS.BY_POPULARITY")} ⭐</ButtonBase>
                 <ButtonBase
                   style={{padding: 8, justifyContent: "start"}}
                   onClick={() => {
-                    setSortBy("По количеству фанов 👑")
+                    setSortBy(t("USERS.BY_NUMBER_FANS") + " 👑")
                     setSortByOpen(!sortByOpen)
                   }}
-                >По количеству фанов 👑</ButtonBase>
+                >{t("USERS.BY_NUMBER_FANS")} 👑</ButtonBase>
                 <ButtonBase
                   style={{padding: 8, justifyContent: "start"}}
                   onClick={() => {
-                    setSortBy("Новенькие 🔥")
+                    setSortBy(t("USERS.NEW") + " 🔥")
                     setSortByOpen(!sortByOpen)
                   }}
-                >Новенькие 🔥️</ButtonBase>
+                >{t("USERS.NEW")} 🔥️</ButtonBase>
                 <ButtonBase
                   style={{padding: 8, justifyContent: "start"}}
                   onClick={() => {
-                    setSortBy("Возраст: Сначала младше")
+                    setSortBy(t("USERS.AGE_YOUNGER"))
                     setSortByOpen(!sortByOpen)
                   }}
-                >Возраст: Сначала младше</ButtonBase>
+                >{t("USERS.AGE_YOUNGER")}</ButtonBase>
                 <ButtonBase
                   style={{padding: 8, justifyContent: "start"}}
                   onClick={() => {
-                    setSortBy("Возраст: Сначала старше")
+                    setSortBy(t("USERS.AGE_OLDER"))
                     setSortByOpen(!sortByOpen)
                   }}
-                >Возраст: Сначала старше</ButtonBase>
+                >{t("USERS.AGE_OLDER")}</ButtonBase>
 
               </Box>
             </ClickAwayListener>

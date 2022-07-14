@@ -5,6 +5,7 @@ import { Icon } from '../messages/Icon'
 import useWindowDimensions from '../../useWindowDimensions'
 import { TextField } from '@mui/material'
 import axios from 'axios'
+import { t } from 'i18next'
 
 
 const categories = [
@@ -50,7 +51,7 @@ const leftFilterStyles = {
     fontSize: 12,
     fontWeight: 700,
     marginRight: 8,
-    width: 20
+    // maxWidth: 30
   },
   ageController: {
     display: "flex",
@@ -216,7 +217,7 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
           width: "100%",
           justifyContent: "space-between"
         }}>
-          ВОЗРАСТ
+          {t("USERS.AGE")}
           {width < 900 &&
           <Button
             sx={{
@@ -232,7 +233,7 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
           }
         </Box>
         <Box style={leftFilterStyles.ageContItem}>
-          <span style={leftFilterStyles.ageTitle}>От</span>
+          <span style={leftFilterStyles.ageTitle}>{t("USERS.FROM")}</span>
           <Box style={leftFilterStyles.ageController}>
             <Button
               style={leftFilterStyles.ageButton}
@@ -267,7 +268,7 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
         </Box>
 
         <Box style={leftFilterStyles.ageContItem}>
-          <span style={leftFilterStyles.ageTitle}>До</span>
+          <span style={leftFilterStyles.ageTitle}>{t("USERS.UP_TO")}</span>
           <Box style={leftFilterStyles.ageController}>
             <Button
               style={{
@@ -302,7 +303,7 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
 
 
       <Box style={{width: "100%"}}>
-        <Box style={leftFilterStyles.title}>КАТЕГОРИЯ</Box>
+        <Box style={leftFilterStyles.title}>{t("USERS.CATEGORY")}</Box>
         <Box sx={leftFilterStyles.categories}>
           <FormGroup>
             {categories.map((category) => {
@@ -339,7 +340,7 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
         },
         marginBottom: "24px"
       }}>
-        <Box style={leftFilterStyles.title}>ПОИСК ПО НИКУ</Box>
+        <Box style={leftFilterStyles.title}>{t("USERS.SEARCH_BY_NICKNAME")}</Box>
         {/*<SearchInput*/}
         {/*  name="at"*/}
         {/*  placeholder="Введите ник"*/}
@@ -349,7 +350,7 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
         {/*{console.log(findNickname)}*/}
         <InputBase
           InputProps={{disableUnderline: true}}
-          placeholder="Введите ник"
+          placeholder="nickname"
           sx={{ width: '100%', padding: '0', marginLeft: 0, border: "1px solid #000" }}
           onChange={(e) => {
             setFindNickname(e.target.value)
@@ -390,7 +391,7 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
               axios.post('/test/filter?age=18&nickname=test', data).then(res => console.log(res.data));
             }}
         >
-          Применить фильтр
+          {t("USERS.APPLY_FILTER")}
         </Button>
         <Button style={leftFilterStyles.clear_btn}>
           <Icon name="delete" />

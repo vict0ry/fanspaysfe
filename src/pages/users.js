@@ -1,21 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import CardContent from '@mui/material/CardContent'
-// import { SearchInput } from '../components/SearchInput'
-import CardMedia from '@mui/material/CardMedia'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
 import { Button, Grid, ButtonBase, Box, InputBase } from '@mui/material'
 import { SharedLeftMenu } from '../layout/components/SharedLeftMenu'
-import { Icon } from './messages/Icon'
-import { FormGroup, FormControlLabel, Checkbox } from '@mui/material'
-import { SearchInput } from './messages/SearchInput'
-import { ClickAwayListener } from '@mui/base'
 import { LeftFilter } from './users/LeftFilter'
 import { TopUsers } from './users/TopUsers'
 import { TopFilter } from './users/TopFilter'
 import { User } from './users/User'
 import { PagesController } from './users/PagesController'
 import useWindowDimensions from '../useWindowDimensions'
+import { t } from 'i18next'
 
 const wantToTop = {
   minWidth: 0,
@@ -244,7 +236,7 @@ export function Users() {
   const [fromAge, setFromAge] = useState(21)
   const [upToAge, setUpToAge] = useState(21)
 
-  const [sortBy, setSortBy] = useState("По популярности ⭐");
+  const [sortBy, setSortBy] = useState(t("USERS.BY_POPULARITY") + " ⭐");
   const [sortByOpen, setSortByOpen] = useState(false);
   const [checkedTags, setCheckedTags] = useState({});
   const [findNickname, setFindNickname] = useState("");
@@ -286,7 +278,7 @@ export function Users() {
             }
           }}>
             <Box style={{fontSize: 24, fontWeight: 700}}>
-              ТОП авторов
+              {t("USERS.TOP_AUTHORS")}
             </Box>
             <Button
               sx={{
@@ -300,7 +292,7 @@ export function Users() {
                   md: "12px 24px"
                 }
               }}
-            >Хочу в ТОП</Button>
+            >{t("USERS.WANT_TO_TOP")}</Button>
           </Box>
 
           <Grid container

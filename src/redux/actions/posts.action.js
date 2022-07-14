@@ -15,15 +15,22 @@ export const removePost = (postId) => {
     })
   }
 }
-export const changePost = (postId, content, pictures) => {
+export const changePost = (postId, formData) => {
+  console.log(formData)
   return (dispatch) => {
-    return axios.post('/api/posts/' + postId + '/update', {
-      content,
-      pictures
-    }).then(({ data }) => {
-      console.log(data)
-      // dispatch(deletedPost(data._id))
+    return axios({
+      method: 'post',
+      url: '/api/posts/' + postId + '/update',
+      data: formData,
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }).then(post => {
+      console.log(post)
     })
+
+    // return axios.post('/api/posts/' + postId + '/update', formData).then(({ data }) => {
+    //   console.log(data)
+    //   dispatch(deletedPost(data._id))
+    // })
   }
 }
 export const likePost = (postId) => {

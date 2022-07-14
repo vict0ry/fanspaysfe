@@ -2,6 +2,7 @@ import { Box, Button, Grid } from '@mui/material'
 import { Icon } from '../messages/Icon'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { t } from 'i18next'
 
 const stylesGrid = {
   card: {
@@ -104,7 +105,7 @@ const User = ({users}) => {
               </Box>
 
               <Button style={stylesGrid.button}>
-                Перейти в блог
+                {t("USERS.GO_TO_BLOG")}
               </Button>
             </Link>
           </Grid>

@@ -761,7 +761,7 @@ export function Messages() {
             <Box style={{height: "100%"}}>
               <Box style={styles.status}>
                 {width > 600 &&
-                <span style={{marginRight: 8}}>В сети</span>
+                <span style={{marginRight: 8}}>{t("MESSAGES.ONLINE")}</span>
                 }
                 <Box style={styles.statusCircle}></Box>
               </Box>
@@ -772,7 +772,7 @@ export function Messages() {
           <Box style={styles.headerRight}>
             {width >= 1200 &&
             <Button style={styles.sendRequest} >
-              Отправить запрос
+              {t("MESSAGES.SEND_REQUEST")}
             </Button>
             }
             <ClickAwayListener
@@ -794,20 +794,20 @@ export function Messages() {
                 <Box style={styles.chatControllerOpen}>
                   {width < 1200 &&
                   <Button style={{...styles.sendRequest, ...{width: "100%"}}}>
-                    Отправить запрос
+                    {t("MESSAGES.SEND_REQUEST")}
                   </Button>
                   }
                   <Button style={styles.chatControllerOpenItem} >
                     <Box style={styles.chatControllerOpenImage}><Icon name="bell" /></Box>
-                    <Box>Отключить уведомления</Box>
+                    <Box>{t("MESSAGES.DISABLE_NOTIFICATIONS")}</Box>
                   </Button>
                   <Button style={styles.chatControllerOpenItem}>
                     <Box style={styles.chatControllerOpenImage}><Icon name="block" /></Box>
-                    <Box>Заблокировать</Box>
+                    <Box>{t("MESSAGES.BLOCK_USER")}</Box>
                   </Button>
                   <Button style={styles.chatControllerOpenItem}>
                     <Box style={styles.chatControllerOpenImage}><Icon name="flag" /></Box>
-                    <Box>Сообщить о нарушении</Box>
+                    <Box>{t("MESSAGES.REPORT")}</Box>
                   </Button>
                 </Box>
                 }
@@ -891,7 +891,7 @@ export function Messages() {
                       }}
                     >
                       <Box style={styles.chatControllerOpenImage}><Icon name="imagePhoto" /></Box>
-                      <Box>Фото или видео</Box>
+                      <Box>{t("MESSAGES.SEND_PHOTO_OR_VIDEO")}</Box>
 
                     </Button>
                     <Button
@@ -901,7 +901,7 @@ export function Messages() {
                       }}
                     >
                       <Box style={styles.chatControllerOpenImage}><Icon name="file" /></Box>
-                      <Box>Файл</Box>
+                      <Box>{t("MESSAGES.SEND_FILE")}</Box>
                     </Button>
                     <Button
                       style={styles.chatControllerOpenItem}
@@ -910,7 +910,7 @@ export function Messages() {
                       }}
                     >
                       <Box style={styles.chatControllerOpenImage}><Icon name="camera" /></Box>
-                      <Box>Камера</Box>
+                      <Box>{t("MESSAGES.CAMERA")}</Box>
                     </Button>
                     <Button
                       style={styles.chatControllerOpenItem}
@@ -919,7 +919,7 @@ export function Messages() {
                       }}
                     >
                       <Box style={styles.chatControllerOpenImage}><Icon name="tips" /></Box>
-                      <Box>Чаевые</Box>
+                      <Box>{t("MESSAGES.TIPS")}</Box>
                     </Button>
                     <Button
                       style={styles.chatControllerOpenItem}
@@ -928,7 +928,7 @@ export function Messages() {
                       }}
                     >
                       <Box style={styles.chatControllerOpenImage}><Icon name="gift" /></Box>
-                      <Box>Подарки</Box>
+                      <Box>{t("MESSAGES.GIFTS")}</Box>
                     </Button>
                   </Box>
                   }
