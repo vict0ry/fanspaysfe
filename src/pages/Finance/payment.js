@@ -16,13 +16,13 @@ export default function Payment() {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    axios.post("/api/stripe/create", {
-     items: [{ id: "xl-tshirt" }]
-    })
-      .then((res) => {
-        return setClientSecret(res.data.client_secret)
-      })
+    // // Create PaymentIntent as soon as the page loads
+    // axios.post("/api/stripe/create", {
+    //  items: [{ id: "xl-tshirt" }]
+    // })
+    //   .then((res) => {
+    //     return setClientSecret(res.data.client_secret)
+    //   })
   }, []);
 
   const appearance = {
