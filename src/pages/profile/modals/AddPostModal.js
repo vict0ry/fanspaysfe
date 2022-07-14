@@ -12,6 +12,7 @@ import { postAdded } from '../../../redux/actions/posts.action'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'
+import { Icon } from '../../messages/Icon'
 
 const style = {
   position: 'absolute',
@@ -73,7 +74,7 @@ export default function AddPostModal() {
         img: i
       }
     })
-    setState(objectUrlImgs)
+    setState([...state, ...objectUrlImgs])
   }
   return (
     <div>
@@ -93,8 +94,29 @@ export default function AddPostModal() {
                      sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label="Message"
                      variant="outlined" />
           <Grid sx={{ maxHeight: '500px', overflowY: 'scroll', marginTop: '20px' }} container spacing={1}>
-            {state?.map(s => {
-              return <Grid item xs={4} sm={4}>
+            {state?.map((s, index) => {
+              return <Grid item xs={4} sm={4} sx={{
+                position: "relative"
+              }}>
+                <Button
+                  sx={{
+                    minWidth: 0,
+                    minHeight: 0,
+                    position: "absolute",
+                    right: "0",
+                    top: "0",
+                    background: "#fff",
+                    zIndex: 1,
+                    "&:hover": {
+                      backgroundColor: "#E7E7E7"
+                    }
+                  }}
+                  onClick={() => {
+                    setState([...state.slice(0, index), ...state.slice(index+1, state.length)])
+                  }}
+                >
+                  <Icon name="x" />
+                </Button>
                 <img style={{ maxWidth: '100%' }} src={URL.createObjectURL(s?.img)} />
               </Grid>
             })}
