@@ -18,7 +18,9 @@ export const SharedLeftMenu = () => {
     })
   }, []);
   const linkStyles = { color: '#5D5E65', fontWeight: '600', padding: '5px 0', lineHeight: '24px'};
-  const user = useSelector(state => state.user.userData)
+  const user = useSelector(state => {
+    return state.user.userData;
+  })
   return <Box sx={{ width: 300, display: { xs: 'none', md: 'flex' }, flexDirection: 'column', color: 'black' }}>
     <Box style={{ marginBottom: '10px' }}>
       <MiniUser user={user} />

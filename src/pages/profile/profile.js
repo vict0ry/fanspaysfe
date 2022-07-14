@@ -50,6 +50,7 @@ export function Profile(props) {
 
   const posts = useSelector(state => state.posts.posts)
   const user = useSelector(state => state.profile.profile)
+  debugger;
 
   const myProfile = () => {
     return !useParams().username || useParams().username === loggedUser?.userData?.username;

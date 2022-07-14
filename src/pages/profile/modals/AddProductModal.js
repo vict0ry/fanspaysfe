@@ -13,6 +13,7 @@ import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
+import { beURL } from '../../../config'
 
 const style = {
   position: 'absolute',
@@ -84,7 +85,8 @@ export default function AddProductModal() {
           <Grid container spacing={1}>
             {products.map(product => {
               return <Grid item xs={12} sm={6}><Card>
-                <CardContent>
+                <CardContent style={{width: '100%'}}>
+                  <img width={'100%'} src={beURL + product?.pictures[0]} alt="" />
                   <Typography gutterBottom variant="h5" component="div">
                     {product.name}
                   </Typography>
@@ -93,7 +95,9 @@ export default function AddProductModal() {
                   </Typography>
                 </CardContent>
                 <CardActions style={{ justifyContent: 'space-between', flexDirection: 'row-reverse' }}>
-                  <Button variant={'contained'} style={{ float: 'right' }} size="small">Koupit</Button>
+                  <Button onClick={() => {
+                    axios.post('/api/shop/buy/'+product._id);
+                  }} variant={'contained'} style={{ float: 'right' }} size="small">{t('COMMON.BUY')}</Button>
                   <div style={{ fontWeight: 'bold', color: 'green' }}>{product.price} Kč</div>
                 </CardActions>
               </Card></Grid>

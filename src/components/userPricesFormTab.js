@@ -34,7 +34,16 @@ export const SubscriptionSettingsCard = () => {
 export const UserPricesFormTab = () => {
   const [wishes, setWishes] = useState();
 
-  const user = useSelector(state => state.profile.profile)
+  const user = useSelector(state => state.profile.profile);
+  const [subscriptionPrice, setSubscriptionPrice] = useState(0);
+  const handleSubscriptionPrice = (value) => {
+    setSubscriptionPrice(value);
+  }
+  useEffect(() => {
+    setSubscriptionPrice(user?.profileUser?.subscribtionPrice || 0);
+  }, [])
+
+  debugger;
   useEffect(() => {
     axios.get('/api/wish/' + user?.profileUser?._id).then(wishes => { setWishes(wishes.data) })}, [])
   return (
@@ -45,6 +54,7 @@ export const UserPricesFormTab = () => {
           <Grid item xs={12} sm={12}><strong style={{padding: '30px 0'}}>{t('Subscriptions')}</strong></Grid>
           <Grid item xs={12} sm={12}>
             <TextField
+              onChange={(e) => handleSubscriptionPrice(e.target.value)}
               style={{maxWidth: '500px', marginBottom: '20px'}}
               name="price"
               required
@@ -53,11 +63,12 @@ export const UserPricesFormTab = () => {
               label="Your price"
               type="number"
               autoFocus
+              value={subscriptionPrice}
             />
             <br/>
             <Button onClick={() => {
               axios.put('/api/users/subscribtionPrice', {
-                price: 300
+                price: subscriptionPrice
               });
             }} variant={'outlined'}>Save</Button>
           </Grid>
