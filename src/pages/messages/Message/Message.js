@@ -1,6 +1,8 @@
 import React from "react";
 import stylesMessage from "./style"
 import ListItem from '@mui/material/ListItem'
+import { ProductCart } from '../../profile/modals/ProductCart'
+import Button from '@mui/material/Button'
 
 const Message = ({i, id, isSender}) => {
 
@@ -41,7 +43,17 @@ const Message = ({i, id, isSender}) => {
             </div>
 
             <div ref={message} style={{...stylesMessage.message, ...isSender(i) ? stylesMessage.myMessage : stylesMessage.anotherMessage}}>
-              {i.content}
+              { i.product ? <div>
+                Hi, just bought your product, what is the next step in order to get it ? <br/>
+                <ProductCart disableActions={true}
+                             style={{maxWidth: '100px'}} product={i.product}></ProductCart>
+                <Button color="error">
+                  Cancel order
+                </Button>
+                <Button color="success">
+                  Order shipped
+                </Button>
+              </div> : i.content }
             </div>
 
             

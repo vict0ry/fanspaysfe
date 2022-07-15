@@ -14,6 +14,7 @@ import CardActions from '@mui/material/CardActions'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { beURL } from '../../../config'
+import { ProductCart } from './ProductCart'
 
 const style = {
   position: 'absolute',
@@ -29,6 +30,7 @@ const style = {
 
 export default function AddProductModal() {
   const dispatch = useDispatch()
+  const profile = useSelector(state => state.profile.profile);
   const [open, setOpen] = useState(false)
   const [products, setProducts] = useState([])
   const handleOpen = () => setOpen(true)
@@ -37,7 +39,8 @@ export default function AddProductModal() {
   const inputFile = useRef(null)
 
   useEffect(() => {
-    axios.get('/api/shop').then(products => {
+    debugger;
+    axios.get('/api/shop/' + profile.profileUser._id).then(products => {
       setProducts(products.data)
     })
   }, [])
@@ -84,23 +87,9 @@ export default function AddProductModal() {
         {products.length ? <div>
           <Grid container spacing={1}>
             {products.map(product => {
-              return <Grid item xs={12} sm={6}><Card>
-                <CardContent style={{width: '100%'}}>
-                  <img width={'100%'} src={beURL + product?.pictures[0]} alt="" />
-                  <Typography gutterBottom variant="h5" component="div">
-                    {product.name}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {product.description}
-                  </Typography>
-                </CardContent>
-                <CardActions style={{ justifyContent: 'space-between', flexDirection: 'row-reverse' }}>
-                  <Button onClick={() => {
-                    axios.post('/api/shop/buy/'+product._id);
-                  }} variant={'contained'} style={{ float: 'right' }} size="small">{t('COMMON.BUY')}</Button>
-                  <div style={{ fontWeight: 'bold', color: 'green' }}>{product.price} Kč</div>
-                </CardActions>
-              </Card></Grid>
+              return <Grid item xs={12} sm={6}>
+                <ProductCart product={product}></ProductCart>
+              </Grid>
             })}
           </Grid>
         </div> : t('COMMON.NOTHING_HERE_YET')}

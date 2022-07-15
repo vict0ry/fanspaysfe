@@ -9,7 +9,7 @@ import { SocketContext } from '../../context/socket'
 import { HeaderSideBar } from './messagesSideBarHeader'
 import Box from '@mui/material/Box'
 import useWindowDimensions from '../../useWindowDimensions'
-import { loadChats } from '../../redux/actions/messages.action'
+import { loadChatMessages, loadChats } from '../../redux/actions/messages.action'
 
 export const FolderList = ({setFolderListOpen}) => {
   const socket = useContext(SocketContext)
@@ -73,6 +73,7 @@ export const FolderList = ({setFolderListOpen}) => {
           return (
             <ListItem
               onClick={() => {
+                debugger;
                 dispatch(loadChatMessages(_id))
                 socket.emit('join room', _id)
                 setFolderListOpen(false)
