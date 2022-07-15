@@ -40,7 +40,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 const root = ReactDOMClient.createRoot(target)
 const PrivateWrapper = () => {
   const auth = !!localStorage.getItem('user') || null;
-  return auth ? <Outlet /> : <Navigate to="/login" />;
+  return auth ? <Outlet /> : <Navigate to="/home" />;
 }
 const LoginDisallow = () => {
   const auth = !!localStorage.getItem('user') || null;
@@ -97,8 +97,9 @@ root.render(
                   <Route path="users" element={<Users />} />
                 </Route>
               </Route>
-
-              <Route path="main" element={<HomeNotLogged />} />
+              <Route element={<LoginDisallow />}>
+                <Route path="home" element={<HomeNotLogged />} />
+              </Route>
 
             </Routes>
           </BrowserRouter>
