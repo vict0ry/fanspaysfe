@@ -1,24 +1,11 @@
-import React from 'react'
-import { Box, Button, Checkbox, FormControlLabel, FormGroup, Grid, InputBase } from '@mui/material'
+import React, { useState } from 'react'
+import { Box, Button, ButtonBase, Checkbox, FormControlLabel, FormGroup, Grid, InputBase, Slider } from '@mui/material'
 import { SearchInput } from '../messages/SearchInput'
 import { Icon } from '../messages/Icon'
 import useWindowDimensions from '../../useWindowDimensions'
 import { TextField } from '@mui/material'
 import axios from 'axios'
 import { t } from 'i18next'
-
-
-const categories = [
-  "Медитация",
-  "Спорт",
-  "Йога",
-  "Рисование",
-  "Видеоигры",
-  "Музыка",
-  "Мода и Стиль"
-];
-
-
 
 const leftFilterStyles = {
   cont: {
@@ -34,7 +21,8 @@ const leftFilterStyles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
-    marginBottom: 24
+    marginBottom: "24px",
+    width: "100%"
   },
   ageContItem: {
     marginBottom: 8,
@@ -166,8 +154,12 @@ const FormControlLabelStyles = {
   }
 }
 
-const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setCheckedTags, setLeftMenuOpen, setFindNickname, findNickname, findAuthors, sortBy}) => {
+const LeftFilter = (props) => {
   const {width, height} = useWindowDimensions();
+
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(10000);
+  const [price, setPrice] = useState([minPrice, maxPrice]);
 
   return(
     <Grid
@@ -189,7 +181,7 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
           xs: 3
         },
         width: {
-          md: "initial",
+          md: "224px",
           xs: "100%"
         },
         padding: {
@@ -205,9 +197,11 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
           md: "8px"
         }
       }}
-
-      >
-      <Box style={leftFilterStyles.ageCont}>
+    >
+      <Box style={{
+        ...leftFilterStyles.ageCont,
+        ...props.isMarket ? {marginBottom: "8px"}: {}
+      }}>
         <Box sx={{
           ...leftFilterStyles.title,
           display: {
@@ -217,7 +211,10 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
           width: "100%",
           justifyContent: "space-between"
         }}>
-          {t("USERS.AGE")}
+          {
+            props.isMarket ? t("MARKET.PRICE") :
+            t("USERS.AGE")
+          }
           {width < 900 &&
           <Button
             sx={{
@@ -225,30 +222,32 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
               minHeight: 0
             }}
             onClick={() => {
-              setLeftMenuOpen(false);
+              props.setLeftMenuOpen(false);
             }}
           >
             <Icon name="X" />
           </Button>
           }
         </Box>
-        <Box style={leftFilterStyles.ageContItem}>
+
+
+        {!props.isMarket && <Box style={leftFilterStyles.ageContItem}>
           <span style={leftFilterStyles.ageTitle}>{t("USERS.FROM")}</span>
           <Box style={leftFilterStyles.ageController}>
             <Button
               style={leftFilterStyles.ageButton}
               onClick={() => {
-                if(fromAge > 0) {
-                  setFromAge(fromAge - 1)
+                if(props.fromAge > 0) {
+                  props.setFromAge(props.fromAge - 1)
                 }
               }}
             >-</Button>
             <InputBase
               style={leftFilterStyles.inputAge}
-              value={fromAge}
+              value={props.fromAge}
               onChange={(e) => {
-                if(Number(e.target.value) <= upToAge && Number(e.target.value) > 0) {
-                  setFromAge(Number(e.target.value));
+                if(Number(e.target.value) <= props.upToAge && Number(e.target.value) > 0) {
+                  props.setFromAge(Number(e.target.value));
                 }
               }}
             />
@@ -256,49 +255,162 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
               style={{
                 ...leftFilterStyles.ageButton,
                 ...{paddingTop: 3},
-                ...fromAge===upToAge ? {color: "#C4C4C4"}: {}
+                ...props.fromAge===props.upToAge ? {color: "#C4C4C4"}: {}
               }}
               onClick={() => {
-                if(fromAge < upToAge) {
-                  setFromAge(fromAge + 1)
+                if(props.fromAge < props.upToAge) {
+                  props.setFromAge(props.fromAge + 1)
                 }
               }}
             >+</Button>
           </Box>
-        </Box>
+        </Box>}
 
-        <Box style={leftFilterStyles.ageContItem}>
+        {!props.isMarket && <Box style={leftFilterStyles.ageContItem}>
           <span style={leftFilterStyles.ageTitle}>{t("USERS.UP_TO")}</span>
           <Box style={leftFilterStyles.ageController}>
             <Button
               style={{
                 ...leftFilterStyles.ageButton,
-                ...fromAge===upToAge ? {color: "#C4C4C4"}: {}
+                ...props.fromAge===props.upToAge ? {color: "#C4C4C4"}: {}
               }}
               onClick={() => {
-                if(fromAge < upToAge) {
-                  setUpToAge(upToAge-1)
+                if(props.fromAge < props.upToAge) {
+                  props.setUpToAge(props.upToAge-1)
                 }
               }}
             >-</Button>
             <InputBase
               style={leftFilterStyles.inputAge}
-              value={upToAge}
+              value={props.upToAge}
               onChange={(e) => {
-                if(fromAge <= Number(e.target.value) && Number(e.target.value) <= 100) {
-                  setUpToAge(Number(e.target.value));
+                if(props.fromAge <= Number(e.target.value) && Number(e.target.value) <= 100) {
+                  props.setUpToAge(Number(e.target.value));
                 }
               }}
             />
             <Button
               style={{...leftFilterStyles.ageButton, ...{paddingTop: 3}}}
               onClick={() => {
-                if(Number(upToAge < 99))
-                  setUpToAge(upToAge+1)
+                if(Number(props.upToAge < 99))
+                  props.setUpToAge(props.upToAge+1)
               }}
             >+</Button>
           </Box>
-        </Box>
+        </Box>}
+
+        {props.isMarket &&
+          <Box sx={{
+            display: "flex",
+            width: "100%"
+          }}>
+            <Box sx={{
+              flexGrow: 1,
+              display: "flex",
+              padding: "4px 8px",
+              background: "#F7F5F9",
+              borderRadius: "6px",
+              marginRight: "8px",
+              alignItems: "center"
+            }}>
+              <span style={{...leftFilterStyles.ageTitle, ...{fontSize: "10px", color: "#B3B3B3", margin: 0}}}>{t("USERS.FROM")}</span>
+              <InputBase
+                sx={{
+                  margin: "0 8px",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  color: "#1A051D",
+                  width: "35px",
+                  height: "16px",
+                }}
+                value={price[0]}
+                onChange={(e) => {
+                  if(price[1] >= Number(e.target.value) && Number(e.target.value) >= minPrice) {
+                    setPrice([Number(e.target.value), price[1]]);
+                  }
+                }}
+              />
+              <span style={{
+                color: "#B3B3B3",
+                fontSize: "10px",
+                fontWeight: 600,
+
+              }}>$</span>
+            </Box>
+
+            <Box sx={{
+              flexGrow: 1,
+              display: "flex",
+              padding: "4px 8px",
+              background: "#F7F5F9",
+              borderRadius: "6px",
+              alignItems: "center"
+            }}>
+              <span style={{...leftFilterStyles.ageTitle, ...{fontSize: "10px", color: "#B3B3B3", margin: 0}}}>{t("USERS.UP_TO")}</span>
+              <InputBase
+                sx={{
+                  margin: "0 8px",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  color: "#1A051D",
+                  width: "35px",
+                  height: "16px",
+                }}
+                value={price[1]}
+                onChange={(e) => {
+                  if(price[0] <= Number(e.target.value) && Number(e.target.value) <= maxPrice) {
+                    setPrice([price[0], Number(e.target.value)]);
+                  }
+                }}
+              />
+              <span style={{
+                color: "#B3B3B3",
+                fontSize: "10px",
+                fontWeight: 600,
+
+              }}>$</span>
+            </Box>
+          </Box>
+        }
+
+        {props.isMarket &&
+          <Box sx={{
+            width: "100%",
+            marginTop: "16px",
+            padding: "0 12px",
+
+          }}>
+            <Slider
+              min={minPrice}
+              max={maxPrice}
+              // getAriaLabel={() => 'Temperature range'}
+              value={price}
+              onChange={(e, value) => {
+                setPrice(value);
+              }}
+              valueLabelDisplay="auto"
+              // getAriaValueText={valuetext}
+              sx={{
+                '& .css-eg0mwd-MuiSlider-thumb': {
+                  width: "24px",
+                  height: "24px",
+                  border: "4px solid #F7F5F9",
+
+                },
+                '& .css-14pt78w-MuiSlider-rail': {
+                  backgroundColor: "#ECE9F1"
+                },
+                '& .css-eg0mwd-MuiSlider-thumb:before': {
+                  boxShadow: "none"
+                },
+                '& .css-1gv0vcd-MuiSlider-track': {
+                  backgroundColor: "#4776E6"
+                }
+              }}
+            />
+          </Box>
+        }
+
       </Box>
 
 
@@ -306,7 +418,7 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
         <Box style={leftFilterStyles.title}>{t("USERS.CATEGORY")}</Box>
         <Box sx={leftFilterStyles.categories}>
           <FormGroup>
-            {categories.map((category) => {
+            {props.categories.map((category) => {
               return(
                 <FormControlLabel
                   control={
@@ -315,14 +427,14 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
                       checkedIcon={<BpCheckedIcon />}
                       name={category}
                       onChange={(e) => {
-                        setCheckedTags({
-                          ...checkedTags,
+                        props.setCheckedTags({
+                          ...props.checkedTags,
                           [e.target.name]: e.target.checked
                         });
                       }}
                     />
                   }
-                  checked={checkedTags[category] === undefined || !checkedTags[category] ? false : true}
+                  checked={props.checkedTags[category] === undefined || !props.checkedTags[category] ? false : true}
                   label={category}
                   sx={FormControlLabelStyles}
                 />
@@ -331,6 +443,70 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
           </FormGroup>
         </Box>
       </Box>
+
+
+      <Box sx={{width: "100%", marginBottom: "24px"}}>
+        <Box style={leftFilterStyles.title}>{t("MARKET.TAGS")}</Box>
+        <Box sx={{
+          padding: "8px 8px",
+          borderRadius: "8px",
+          border: "1px solid #ECE9F1",
+          background: "#fff",
+          display: "flex",
+          flexWrap: "wrap",
+          maxHeight: "120px",
+          width: "100%",
+          overflowY: "auto"
+        }}>
+          <Box sx={{
+            marginRight: "8px",
+            marginBottom: "8px"
+          }}>
+            <Icon name="hashtag" />
+          </Box>
+          {Object.keys(props.checkedTags).map((tag) => {
+            if(props.checkedTags[tag]) {
+              return (
+                <Box sx={{
+                  padding: "4px 8px",
+                  background: "#E8EFFF",
+                  borderRadius: "4px",
+                  marginRight: "4px",
+                  color: "#4776E6",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  display: "flex",
+                  marginBottom: "8px"
+                }}>
+                <span style={{ marginRight: 2 }}>
+                  {tag}
+                </span>
+                  <ButtonBase onClick={() => {
+                    props.setCheckedTags({
+                      ...props.checkedTags,
+                      [tag]: false
+                    });
+                  }}>
+                    <Icon name="x" />
+                  </ButtonBase>
+                </Box>
+              );
+            }
+          })}
+
+        </Box>
+      </Box>
+
+
+
+
+
+
+
+
+
+
+
 
 
       <Box sx={{
@@ -344,18 +520,18 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
         {/*<SearchInput*/}
         {/*  name="at"*/}
         {/*  placeholder="Введите ник"*/}
-        {/*  state={findNickname}*/}
-        {/*  setState={setFindNickname}*/}
+        {/*  state={props.findNickname}*/}
+        {/*  setState={props.setFindNickname}*/}
         {/*/>*/}
-        {/*{console.log(findNickname)}*/}
+        {/*{console.log(props.findNickname)}*/}
         <InputBase
           InputProps={{disableUnderline: true}}
           placeholder="nickname"
           sx={{ width: '100%', padding: '0', marginLeft: 0, border: "1px solid #000" }}
           onChange={(e) => {
-            setFindNickname(e.target.value)
+            props.setFindNickname(e.target.value)
           }}
-          value={findNickname}
+          value={props.findNickname}
         />
       </Box>
       <Box sx={{
@@ -374,18 +550,18 @@ const LeftFilter = ({fromAge, setFromAge, upToAge, setUpToAge, checkedTags, setC
             leftFilterStyles.apply_btn}
             onClick={() => {
               const checked = [];
-              Object.keys(checkedTags).forEach(tag => {
-                if(checkedTags[tag]){
+              Object.keys(props.checkedTags).forEach(tag => {
+                if(props.checkedTags[tag]){
                   checked.push(tag);
                 }
               })
               const data = {
-                fromAge: fromAge,
-                upToAge: upToAge,
+                fromAge: props.fromAge,
+                upToAge: props.upToAge,
                 checkedTags: checked,
-                findNickname: findNickname,
-                findAuthors: findAuthors,
-                sortBy: sortBy
+                findNickname: props.findNickname,
+                findAuthors: props.findAuthors,
+                sortBy: props.sortBy
               };
               console.log(data)
               axios.post('/test/filter?age=18&nickname=test', data).then(res => console.log(res.data));

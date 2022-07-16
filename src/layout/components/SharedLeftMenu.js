@@ -12,7 +12,7 @@ import axios from 'axios'
 
 export const SharedLeftMenu = () => {
   const [balance, setBalance] = useState(0);
-  useEffect(() => {
+  useEffect(() => {-
     axios.get('/api/credit').then(({ data }) => {
       setBalance(data.total);
     })

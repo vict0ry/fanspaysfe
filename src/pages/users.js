@@ -9,6 +9,16 @@ import { PagesController } from './users/PagesController'
 import useWindowDimensions from '../useWindowDimensions'
 import { t } from 'i18next'
 
+const categories = [
+  "Медитация",
+  "Спорт",
+  "Йога",
+  "Рисование",
+  "Видеоигры",
+  "Музыка",
+  "Мода и Стиль"
+];
+
 const wantToTop = {
   minWidth: 0,
   padding: "12px 24px",
@@ -246,8 +256,6 @@ export function Users() {
 
   const [leftMenuOpen, setLeftMenuOpen] = useState(false);
 
-  console.log(width, leftMenuOpen)
-
   if(leftMenuOpen && width <= 900){
     document.body.style.overflow = "hidden"
   } else {
@@ -267,6 +275,7 @@ export function Users() {
       >
         <SharedLeftMenu />
       </Grid>
+
       <Box sx={{maxWidth: "100%"}}>
         <TopUsers users={users} />
         <Grid item>
@@ -312,6 +321,7 @@ export function Users() {
                   setFindNickname={setFindNickname}
                   findAuthors={findAuthors}
                   sortBy={sortBy}
+                  categories={categories}
                 />
             }
             {width <= 900 && leftMenuOpen &&
@@ -344,6 +354,7 @@ export function Users() {
                 setFindNickname={setFindNickname}
                 findAuthors={findAuthors}
                 sortBy={sortBy}
+                categories={categories}
               />
             }
             <Grid item
