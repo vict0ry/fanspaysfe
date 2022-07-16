@@ -179,7 +179,7 @@ export const HomeNotLogged = () => {
               <picture><source srcSet="http://localhost:3000/images/home-page-not-logged/uploads/5.webp" type="image/webp" /><img src="http://localhost:3000/images/home-page-not-logged/uploads/5.png" alt="img" /></picture>
             </div>
             <div className="benefits-wrap__content">
-              <div className="title ttl">{t("MAIN.CARD2_TITLE1")}<span>{t("MAIN.CARD2_TITLE_WORD")}</span>{t("MAIN.CARD2_TITLE2")}</div>
+              <div className="title ttl">{t("MAIN.CARD2_TITLE1")}<span>{t("MAIN.CONTENT")}</span>{t("MAIN.CARD2_TITLE2")}</div>
               <div className="text">{t("MAIN.CARD2_DESCRIPTION")}</div>
             </div>
           </div>
