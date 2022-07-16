@@ -60,12 +60,12 @@ export const HomeNotLogged = () => {
           <div className="main-wrap">
             <div className="main-wrap__content">
               <div className="main-wrap__content--title">
-                Лучший сервис для <span>авторов</span> и фанатов
+                {t("MAIN.MAIN_TITLE1")}<span>{t("MAIN.MAIN_TITLE_WORD")}</span>{t("MAIN.MAIN_TITLE2")}
               </div>
               <div className="main-wrap__content--text">
-                Ежемесячная поддержка вашего творчества от самых преданных поклонников.
+                {t("MAIN.MAIN_TITLE_DESCRIPTION")}
               </div>
-              <button className="btn btn-bg">Стать автором</button>
+              <button className="btn btn-bg">{t("MAIN.BECOME_AN_AUTHOR")}</button>
             </div>
             <div className="main-wrap__images">
               <div className="main-wrap__images--faces">
@@ -80,7 +80,7 @@ export const HomeNotLogged = () => {
                 <div className="wrapper">
                   <div className="image">
                     <div className="title">
-                      1000$ <span>в месяц</span>
+                      1000$ <span>{t("MAIN.PER_MONTH")}</span>
                     </div>
                     <picture><source srcSet="http://localhost:3000/images/home-page-not-logged/uploads/3.webp" type="image/webp" /><img src="http://localhost:3000/images/home-page-not-logged/uploads/3.png" alt="img" /></picture>
                   </div>
@@ -88,8 +88,8 @@ export const HomeNotLogged = () => {
                 <div className="wrapp">
                   <div className="alert">
                     <div className="text">
-                      Увеличение Дохода
-                      <span>Стань ближе со своей аудиторией и монетизируй свой талант</span>
+                      {t("MAIN.INCOME_INCREASE")}
+                      <span>{t("MAIN.INCOME_INCREASE_DESCRIPTION")}</span>
                     </div>
                     <div className="graph">
                       <div className="graph-eclipse">
@@ -131,7 +131,7 @@ export const HomeNotLogged = () => {
         <div className="container">
           <div className="search-wrap">
             <div className="search-wrap__title ttl">
-              Поиск среди <span>20 000+</span> авторов
+              {t("MAIN.SEARCH1")}<span>20 000+</span>{t("MAIN.SEARCH2")}
             </div>
             <form className="search-wrap__form">
               <div className="input">
@@ -143,7 +143,7 @@ export const HomeNotLogged = () => {
                 </div>
                 <input type="text" placeholder="Найдите автора контента..." />
               </div>
-              <button type="submit" className="btn">Поиск</button>
+              <button type="submit" className="btn">{t("MAIN.SEARCH")}</button>
             </form>
           </div>
         </div>
@@ -151,13 +151,11 @@ export const HomeNotLogged = () => {
       <div className="about">
         <div className="container">
           <div className="about-wrap">
-            <div className="about-wrap__title ttl">Что такое Fans<span>Pays</span>?</div>
+            <div className="about-wrap__title ttl">{t("MAIN.WHAT_IS")}<span>Pays</span>?</div>
             <div className="about-wrap__text">
-              Оформив ежемесячную подписку, фанаты получат эксклюзивные материалы от понравившихся авторов.
-              Приглашайте в сообщество поклонников и позвольте им взглянуть за кулисы. А взамен получите свободу и
-              стабильность, которые так нужны для раскрытия потенциала и построения творческой карьеры
+              {t("MAIN.WHAT_IS_ANSWER")}
             </div>
-            <div className="about-wrap__text--more">Читать все</div>
+            <div className="about-wrap__text--more">{t("MAIN.READ_MORE")}</div>
           </div>
         </div>
       </div>
@@ -168,8 +166,8 @@ export const HomeNotLogged = () => {
               <picture><source srcSet="http://localhost:3000/images/home-page-not-logged/uploads/4.webp" type="image/webp" /><img src="http://localhost:3000/images/home-page-not-logged/uploads/4.png" alt="img" /></picture>
             </div>
             <div className="benefits-wrap__content">
-              <div className="title ttl">Сделайте из <span>хобби</span> источник дохода</div>
-              <div className="text">Ежемесячная поддержка вашего творчества от самых преданных поклонников.</div>
+              <div className="title ttl">{t("MAIN.CARD1_TITLE1")}<span>{t("MAIN.CARD1_TITLE_WORD")}</span>{t("MAIN.CARD1_TITLE2")}</div>
+              <div className="text">{t("MAIN.CARD1_DESCRIPTION")}</div>
             </div>
           </div>
         </div>
@@ -181,8 +179,8 @@ export const HomeNotLogged = () => {
               <picture><source srcSet="http://localhost:3000/images/home-page-not-logged/uploads/5.webp" type="image/webp" /><img src="http://localhost:3000/images/home-page-not-logged/uploads/5.png" alt="img" /></picture>
             </div>
             <div className="benefits-wrap__content">
-              <div className="title ttl">Эксклюзивный <span>контент</span> любимых авторов</div>
-              <div className="text">Ежемесячная поддержка вашего творчества от самых преданных поклонников.</div>
+              <div className="title ttl">{t("MAIN.CARD2_TITLE1")}<span>{t("MAIN.CARD2_TITLE_WORD")}</span>{t("MAIN.CARD2_TITLE2")}</div>
+              <div className="text">{t("MAIN.CARD2_DESCRIPTION")}</div>
             </div>
           </div>
         </div>
@@ -194,8 +192,8 @@ export const HomeNotLogged = () => {
               <picture><source srcSet="http://localhost:3000/images/home-page-not-logged/uploads/6.webp" type="image/webp" /><img src="http://localhost:3000/images/home-page-not-logged/uploads/6.png" alt="img" /></picture>
             </div>
             <div className="benefits-wrap__content">
-              <div className="title ttl">Станьте <span>ближе</span> со своими фанатами</div>
-              <div className="text">Ежемесячная поддержка вашего творчества от самых преданных поклонников.</div>
+              <div className="title ttl">{t("MAIN.CARD3_TITLE1")}<span>{t("MAIN.CARD3_TITLE_WORD")}</span>{t("MAIN.CARD3_TITLE2")}</div>
+              <div className="text">{t("MAIN.CARD3_DESCRIPTION")}</div>
             </div>
           </div>
         </div>
@@ -203,7 +201,7 @@ export const HomeNotLogged = () => {
       <div className="why">
         <div className="container">
           <div className="why-wrap">
-            <div className="why-wrap__title ttl">Почему Fans<span>Pays</span>?</div>
+            <div className="why-wrap__title ttl">{t("MAIN.WHY_FANS")}<span>Pays</span>?</div>
             <div className="why-wrap__list">
               <div className="item">
                 <div className="icon">
@@ -220,7 +218,7 @@ export const HomeNotLogged = () => {
                     </defs>
                   </svg>
                 </div>
-                <div className="text">Быстрый и удобный сервис</div>
+                <div className="text">{t("MAIN.WHY_ANSWER1")}</div>
               </div>
               <div className="item">
                 <div className="icon">
@@ -237,7 +235,7 @@ export const HomeNotLogged = () => {
                     </defs>
                   </svg>
                 </div>
-                <div className="text">Платежи по всему миру</div>
+                <div className="text">{t("MAIN.WHY_ANSWER2")}</div>
               </div>
               <div className="item">
                 <div className="icon">
@@ -254,7 +252,7 @@ export const HomeNotLogged = () => {
                     </defs>
                   </svg>
                 </div>
-                <div className="text">Дружелюбное сообщество</div>
+                <div className="text">{t("MAIN.WHY_ANSWER3")}</div>
               </div>
               <div className="item">
                 <div className="icon">
@@ -270,7 +268,7 @@ export const HomeNotLogged = () => {
                     </defs>
                   </svg>
                 </div>
-                <div className="text">Эксклюзивный контент</div>
+                <div className="text">{t("MAIN.WHY_ANSWER4")}</div>
               </div>
             </div>
           </div>
@@ -279,7 +277,7 @@ export const HomeNotLogged = () => {
       <div className="slider slider-pc">
         <div className="container">
           <div className="slider-wrap">
-            <div className="slider-wrap__title ttl">Авторы уже <span>зарабатывают</span> с нами</div>
+            <div className="slider-wrap__title ttl">{t("MAIN.SLIDER_TITLE1")}<span>{t("MAIN.SLIDER_TITLE_WORD")}</span>{t("MAIN.SLIDER_TITLE2")}</div>
             <div className="slider-wrap__list">
               <div className="item">
                 <div className="wrapper">
@@ -287,9 +285,9 @@ export const HomeNotLogged = () => {
                     <picture><source srcSet="http://localhost:3000/images/home-page-not-logged/uploads/7.webp" type="image/webp" /><img src="http://localhost:3000/images/home-page-not-logged/uploads/7.png" alt="img" /></picture>
                   </div>
                   <div className="content">
-                    <div className="name">Василий Дрозд</div>
-                    <div className="position">Видеоигры</div>
-                    <a href="#" className="btn">Перейти в блог</a>
+                    <div className="name">{t("MAIN.SLIDER_CARD1_NAME")}</div>
+                    <div className="position">{t("MAIN.SLIDER_CARD1_TAGS")}</div>
+                    <a href="#" className="btn">{t("MAIN.SLIDER_CARD_BTN")}</a>
                   </div>
                 </div>
               </div>
@@ -299,9 +297,9 @@ export const HomeNotLogged = () => {
                     <picture><source srcSet="http://localhost:3000/images/home-page-not-logged/uploads/8.webp" type="image/webp" /><img src="http://localhost:3000/images/home-page-not-logged/uploads/8.png" alt="img" /></picture>
                   </div>
                   <div className="content">
-                    <div className="name">Аня Кошкина</div>
-                    <div className="position">Медитация · Йога · Пилатес</div>
-                    <a href="#" className="btn">Перейти в блог</a>
+                    <div className="name">{t("MAIN.SLIDER_CARD2_NAME")}</div>
+                    <div className="position">{t("MAIN.SLIDER_CARD2_TAGS")}</div>
+                    <a href="#" className="btn">{t("MAIN.SLIDER_CARD_BTN")}</a>
                   </div>
                 </div>
               </div>
@@ -311,9 +309,9 @@ export const HomeNotLogged = () => {
                     <picture><source srcSet="http://localhost:3000/images/home-page-not-logged/uploads/9.webp" type="image/webp" /><img src="http://localhost:3000/images/home-page-not-logged/uploads/9.png" alt="img" /></picture>
                   </div>
                   <div className="content">
-                    <div className="name">Соломия Кравченко</div>
-                    <div className="position">Макияж • Личный бренд</div>
-                    <a href="#" className="btn">Перейти в блог</a>
+                    <div className="name">{t("MAIN.SLIDER_CARD3_NAME")}</div>
+                    <div className="position">{t("MAIN.SLIDER_CARD3_TAGS")}</div>
+                    <a href="#" className="btn">{t("MAIN.SLIDER_CARD_BTN")}</a>
                   </div>
                 </div>
               </div>
@@ -323,9 +321,9 @@ export const HomeNotLogged = () => {
                     <picture><source srcSet="http://localhost:3000/images/home-page-not-logged/uploads/7.webp" type="image/webp" /><img src="http://localhost:3000/images/home-page-not-logged/uploads/7.png" alt="img" /></picture>
                   </div>
                   <div className="content">
-                    <div className="name">Василий Дрозд 2</div>
-                    <div className="position">Видеоигры</div>
-                    <a href="#" className="btn">Перейти в блог</a>
+                    <div className="name">{t("MAIN.SLIDER_CARD4_NAME")}</div>
+                    <div className="position">{t("MAIN.SLIDER_CARD4_TAGS")}</div>
+                    <a href="#" className="btn">{t("MAIN.SLIDER_CARD_BTN")}</a>
                   </div>
                 </div>
               </div>
@@ -394,14 +392,13 @@ export const HomeNotLogged = () => {
       <div className="create">
         <div className="container">
           <div className="create-wrap">
-            <div className="create-wrap__title ttl">Создавать <span>контент</span> — просто</div>
-            <div className="create-wrap__text">Есть множество способов порадовать поклонников, и каждый автор делает это
-              по-своему.</div>
+            <div className="create-wrap__title ttl">{t("MAIN.CREATE.TITLE1")}<span>{t("MAIN.CONTENT")}</span>{t("MAIN.CREATE.TITLE2")}</div>
+            <div className="create-wrap__text">{t("MAIN.CREATE.TITLE_DESCRIPTION")}</div>
             <div className="create-wrap__tabs">
-              <div data-id={0} className="item">ВИДЕОБЛОГЕР</div>
-              <div data-id={1} className="item">ИЛЛЮСТРАТОР</div>
-              <div data-id={2} className="item">МУЗЫКАНТ</div>
-              <div data-id={3} className="item">УНИВЕРСАЛ</div>
+              <div data-id={0} className="item">{t("MAIN.CREATE.ROLE1")}</div>
+              <div data-id={1} className="item">{t("MAIN.CREATE.ROLE2")}</div>
+              <div data-id={2} className="item">{t("MAIN.CREATE.ROLE3")}</div>
+              <div data-id={3} className="item">{t("MAIN.CREATE.ROLE4")}</div>
             </div>
             <div className="create-wrap__list">
               <div className="item">
@@ -561,7 +558,7 @@ export const HomeNotLogged = () => {
       <div className="author">
         <div className="container">
           <div className="author-wrap">
-            <div className="author-wrap__title ttl">Нам <span>доверяют</span> более 356 авторов</div>
+            <div className="author-wrap__title ttl">{t("MAIN.SLIDER2.TITLE1")}<span>{t("MAIN.SLIDER2.TITLE_WORD")}</span>{t("MAIN.SLIDER2.TITLE2")}</div>
             <div className="author-wrap__list">
               <div className="item">
                 <div className="wrapper opacity">
@@ -629,10 +626,10 @@ export const HomeNotLogged = () => {
               <picture><source srcSet="http://localhost:3000/images/home-page-not-logged/uploads/31.webp" type="image/webp" /><img src="http://localhost:3000/images/home-page-not-logged/uploads/31.png" alt="img" /></picture>
             </div>
             <div className="callback-wrap__content">
-              <div className="title">{t('HOME.BECOME_AUTHOR')} {t('COMMON.OR')} {t('поддержите творчество')}</div>
+              <div className="title">{t("MAIN.BOTTOM_MAILER.TITLE")}</div>
               <form className="form">
-                <input required type="email" placeholder="Введите E-mail" />
-                <button type="submit" className="btn btn-black">{t('COMMON.LOGIN')}</button>
+                <input required type="email" placeholder={t("MAIN.BOTTOM_MAILER.PLACEHOLDER")} />
+                <button type="submit" className="btn btn-black">{t("MAIN.BOTTOM_MAILER.BUTTON")}</button>
               </form>
             </div>
           </div>

@@ -837,6 +837,12 @@
 #home-not-logged .author-wrap__title {
     margin-bottom: 64px;
 }
+
+#home-not-logged .author-wrap__list {
+    /*display: flex;*/
+    /*justify-content: space-around;*/
+}
+
 #home-not-logged .author-wrap__list .item .wrapper {
     width: 100%;
     display: -webkit-box;
