@@ -118,7 +118,19 @@ export const Posts = ({ profileUser, posts, disableAdd = false }) => {
                 </IconButton>
               </div>
               <div style={{ cursor: 'pointer' }}>
-                <SendTipModal postModal={true} recipient={profileUser} >Send tip</SendTipModal>
+                <SendTipModal postModal={true} recipient={profileUser} >
+                  <Box sx={{ display: 'flex',
+                    justifyAlign: 'center',
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    width: 140,
+                    border: 'none',
+                    pl: 2,
+                    color: 'black'
+                  }}>
+                    <img src='/images/icons/copper-coin.svg'/> <span style={{marginLeft: 10}}>Send tip</span>
+                  </Box>
+                </SendTipModal>
               </div>
             </CardActions> : '' }
             {!message?.likes?.length ? t('BE_THE_FIRST_ONE') : message?.likes?.length + ' likes'} - {message?.comments?.length} comments

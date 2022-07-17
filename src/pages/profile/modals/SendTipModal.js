@@ -66,20 +66,7 @@ export default function SendTipModal({ recipient, children, postModal }) {
   return (
     <>
       {isAllowed() ?
-        <Box sx={{ display: 'flex',
-          justifyAlign: 'center',
-          alignItems: 'center',
-          cursor: 'pointer',
-          width: 180,
-          borderRadius: 8,
-          border: postModal ? 'none' : '2px solid',
-          borderImage: 'linear-gradient(to right, #4776E6, #8E54E9) 1',
-          pl: 4,
-          color: 'black',
-          height: 40}}
-             onClick={handleOpen}>
-          <img src='/images/icons/copper-coin.svg'/> <span style={{marginLeft: 10}}>{children}</span>
-        </Box> : ''}
+        <Box onClick={handleOpen}>{children}</Box> : ''}
       <Modal
         open={open}
         onClose={handleClose}

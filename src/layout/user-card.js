@@ -61,7 +61,21 @@ export default function ProfileCard({ profileUser, myProfile }) {
           <AddRemoveBalance recipient={profileUser} />
           <Divider sx={{ pt: 2 }} />
           <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
-            <SendTipModal recipient={profileUser}>SEND TIP</SendTipModal>
+            <SendTipModal recipient={profileUser}>
+              <Box sx={{ display: 'flex',
+                justifyAlign: 'center',
+                alignItems: 'center',
+                cursor: 'pointer',
+                width: 180,
+                borderRadius: 8,
+                border: '2px solid',
+                borderImage: 'linear-gradient(to right, #4776E6, #8E54E9) 1',
+                pl: 4,
+                color: 'black',
+                height: 40}}>
+                <img src='/images/icons/copper-coin.svg'/> <span style={{marginLeft: 10}}>Send tip</span>
+              </Box>
+            </SendTipModal>
           </Box>
         </div>  : <Link to={'/edit'}><Button style={{marginTop: '10px'}} variant={'contained'}>{t('Edit profile')}</Button></Link> }
 

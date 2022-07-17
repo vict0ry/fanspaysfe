@@ -19,6 +19,7 @@ import { Divider } from '@mui/material'
 import Card from '@mui/material/Card'
 import axios from 'axios'
 import { AddWishModal } from '../../components/AddWishModal'
+import AddDemandModal from './modals/AddDemandModal'
 
 
 export const NotSubscribed = () => {
@@ -106,6 +107,7 @@ export function Profile(props) {
                   title={wish.name}
                   id={wish._id}
                   from={300}
+                  recipient={user?.profileUser}
                   myProfile={myProfile()}
                   to={wish.amount} style={{margin: '10px 0'}} />
                 <Divider style={{margin: '10px 0'}} />
@@ -124,8 +126,7 @@ export function Profile(props) {
               <Tabs value={selectedTab} onChange={handleChange} aria-label="basic tabs example">
                 <Tab label={t('COMMON.STORIES')} {...a11yProps(0)} />
                 <Tab label={t('COMMON.USER_PRODUCTS')} {...a11yProps(1)} />
-                <Tab label={t('COMMON.USER_VIDEOS')} {...a11yProps(1)} />
-                <Tab label={t('COMMON.USER_DEMANDS')} {...a11yProps(1)} />
+                <Tab label={t('COMMON.USER_DEMANDS')} {...a11yProps(2)} />
               </Tabs>
             </Box>
             <TabPanel value={selectedTab} index={0}>
@@ -133,6 +134,9 @@ export function Profile(props) {
             </TabPanel>
             <TabPanel value={selectedTab} index={1}>
               <AddProductModal />
+            </TabPanel>
+            <TabPanel value={selectedTab} index={2}>
+              <AddDemandModal />
             </TabPanel>
           </div>
         </Box>
