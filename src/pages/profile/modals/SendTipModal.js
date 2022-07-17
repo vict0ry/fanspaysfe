@@ -54,6 +54,7 @@ export default function SendTipModal({ recipient, children, postModal }) {
       description: formData.description,
       amount: +formData.amount,
       recipient: recipient._id,
+      category: 'TIP',
       sender: loggedUser.userData._id
     }).then(_ => {
       axios.get('/api/credit').then(response => {
