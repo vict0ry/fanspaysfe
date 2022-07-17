@@ -3,6 +3,7 @@ import { Icon } from '../messages/Icon'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { t } from 'i18next'
+import { beURL } from '../../config'
 
 const stylesGrid = {
   card: {
@@ -79,14 +80,13 @@ const User = ({users}) => {
   return(
     <Grid container rowSpacing={{xs: 2, md: 6}} columnSpacing={2} sx={{justifyContent: "center"}}>
 
-      {users.slice(0, 8).map((user) => {
+      {users?.data?.map((user) => {
         const profileLink = `/profile/${user.username}`
-          // <Link to={profileLink} style={{ cursor: 'pointer' }}
         return(
           <Grid item xs={6} md={4} lg={3} >
             <Link to={profileLink} style={stylesGrid.card}>
               <Box style={stylesGrid.image}>
-                <img style={{width: "100%"}} src="https://kinowar.com/wp-content/uploads/2021/01/%D0%90%D0%BD%D0%B0-%D0%B4%D0%B5-%D0%90%D1%80%D0%BC%D0%B0%D1%81-%D1%84%D0%BE%D1%82%D0%BE%D1%81%D0%B5%D1%81%D1%81%D0%B8%D1%8F-%D0%B4%D0%BB%D1%8F-%D0%B6%D1%83%D1%80%D0%BD%D0%B0%D0%BB%D0%B0-The-Sunday-Times-Style.jpg" alt="" />
+                <img style={{width: "100%"}} src={beURL + user.profilePic} alt="" />
                 <div style={stylesGrid.subscribers}>
                   <div style={{width: 8, height: 8, marginRight: 2, display: "flex", justifyContent: "center", alignItems: "center"}}>
                     <Icon name="crown"></Icon>
