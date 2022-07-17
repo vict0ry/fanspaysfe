@@ -130,7 +130,7 @@ export function EditProfile(props) {
   return <div>
     <Box sx={{ 'mt': 2 }}>
 
-      <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr 3fr', gap: 2 }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: 2 }}>
         <Tabs
           style={{background:'white'}}
           orientation="vertical"
