@@ -43,7 +43,6 @@ export default function BasicTabs() {
 
   return (
     <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 3fr', width: '100%', marginTop: '10px' }}>
-      <SharedLeftMenu />
       <div>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">

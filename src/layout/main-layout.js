@@ -6,13 +6,19 @@ import React from 'react'
 import { connect } from 'react-redux'
 import SuccessSnackbar from '../components/SuccessSnackbar'
 import { SubscribeDialog } from '../components/SubscribeDialog'
+import { SharedLeftMenu } from './components/SharedLeftMenu'
+import Box from '@mui/material/Box'
 
 const MainLayout = ({ props }) => {
   return (
     <div>
     <SearchBar />
-    <Container maxWidth="sx">
-      <Outlet />
+    <Container maxWidth="lg">
+      <Box sx={{ display: 'grid', minHeight: 'calc(100vh - 176px)',
+        gridTemplateColumns: '1fr 3fr', width: '100%', marginTop: '40px' }}>
+        <SharedLeftMenu />
+        <Outlet />
+      </Box>
     </Container>
     <StickyFooter />
       <SuccessSnackbar />

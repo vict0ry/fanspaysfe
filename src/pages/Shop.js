@@ -262,7 +262,6 @@ export const Shop = () => {
           }
         }}
       >
-        <SharedLeftMenu />
       </Grid>
 
       <Box sx={{maxWidth: "100%"}}>

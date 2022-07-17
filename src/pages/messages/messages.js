@@ -564,7 +564,6 @@ export function Messages() {
         }: {},
       }}
     >
-      <SharedLeftMenu />
       {folderListOpen && width < 600 &&
         <FolderList setFolderListOpen={setFolderListOpen} />
       }

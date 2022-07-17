@@ -31,7 +31,6 @@ export const Finance = () => {
       }} xs={{
         display: 'none'
       }}>
-        <SharedLeftMenu />
         <Box sx={{width: '186%'}}>
           <FinanceStatistics/>
             <Typography sx={{mt: 10, ml: '10%'}} variant={'h5'}>Add new founds</Typography>

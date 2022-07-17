@@ -14,7 +14,6 @@ import { SubscribeButton } from './components/SubscribeButton'
 import { loadProfile } from '../../redux/actions/profile.action'
 import { TabPanel } from '../../components/TabPanel'
 import './profile.css'
-import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
 import { Wish } from '../../components/Wish'
 import { Divider } from '@mui/material'
 import Card from '@mui/material/Card'
@@ -88,7 +87,6 @@ export function Profile(props) {
       }} xs={{
         display: 'none'
       }}>
-        <SharedLeftMenu />
         <Box style={{margin: '10px 0'}}>
           <ProfileCard
             myProfile={myProfile()}

@@ -86,7 +86,6 @@ export function Users() {
           }
         }}
       >
-        <SharedLeftMenu />
       </Grid>
 
       <Box sx={{maxWidth: "100%"}}>

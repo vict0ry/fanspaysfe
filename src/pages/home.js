@@ -57,7 +57,6 @@ export const Home = () => {
       }} xs={{
         display: 'none'
       }}>
-        <SharedLeftMenu />
         <div>
           <div>
             <Box sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', width:{xs: '393px', md: '800px'}}}>

@@ -131,9 +131,6 @@ export function EditProfile(props) {
     <Box sx={{ 'mt': 2 }}>
 
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr 3fr', gap: 2 }}>
-        <div>
-          <SharedLeftMenu />
-        </div>
         <Tabs
           style={{background:'white'}}
           orientation="vertical"
