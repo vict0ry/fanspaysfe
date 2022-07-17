@@ -53,12 +53,14 @@ export function Profile(props) {
 
   const myProfile = () => {
     return !useParams().username || useParams().username === loggedUser?.userData?.username;
-
   }
-  useEffect(() => {
+  const loadWishes = () => {
     axios.get('/api/wish/' + user?.profileUser?._id).then(wishes => {
       setWishes(wishes.data);
     })
+  }
+  useEffect(() => {
+    loadWishes();
     dispatch(loadProfile(username))
   }, [])
   const handleChange = (event, newValue) => {
@@ -108,7 +110,8 @@ export function Profile(props) {
                   to={wish.amount} style={{margin: '10px 0'}} />
                 <Divider style={{margin: '10px 0'}} />
               </div>
-            }) : <AddWishModal myProfile={myProfile()}></AddWishModal> }
+            }) : '' }
+              <AddWishModal change={() => loadWishes() } myProfile={myProfile()}></AddWishModal>
           </Card> }
         </Box>
         <Box>

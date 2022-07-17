@@ -15,9 +15,23 @@ import { beURL } from '../../config'
 export const Finance = () => {
 
   const [transactions, setTransactions] = useState([]);
+  const [incomeStatistic, setIncomeStatistic] = useState({
+    tips: 0,
+    followers: 0,
+    products: 0,
+    total: 0
+  })
   useEffect(() => {
     axios.get('/api/credit').then(({ data }) => {
       setTransactions(data.transactions);
+      const filterByCategory = filterName => data.income.filter(i => i.category === filterName).map(i => i.amount).reduce((a,b) => a+b, 0)
+      setIncomeStatistic({
+        ...incomeStatistic,
+        tips: filterByCategory('TIP'),
+        followers: filterByCategory('followers'),
+        products: filterByCategory('products'),
+        total: data.income.map(i => i.amount).reduce((a,b) => a+b)
+      })
     })
   }, []);
 
@@ -32,7 +46,8 @@ export const Finance = () => {
         display: 'none'
       }}>
         <Box sx={{width: '186%'}}>
-          <FinanceStatistics/>
+          <FinanceStatistics tips={incomeStatistic.tips} followers={incomeStatistic.followers}
+                             products={incomeStatistic.products} total={incomeStatistic.total} />
             <Typography sx={{mt: 10, ml: '10%'}} variant={'h5'}>Add new founds</Typography>
           <NewFounds/>
           <Typography sx={{mt: 8, ml: '10%'}} variant={'h5'}>Incoming Analytics</Typography>

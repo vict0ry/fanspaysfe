@@ -3,7 +3,6 @@ import TextField from '@mui/material/TextField'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal'
-import { useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
@@ -21,13 +20,10 @@ const style = {
   boxShadow: 24,
   p: 4
 }
-export const AddWishModal = ({myProfile}) => {
+export const AddWishModal = ({myProfile, change}) => {
   const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-  const { username } = useParams()
   const dispatch = useDispatch();
-  const loggedUser = useSelector(state => state.user)
   const { t } = useTranslation()
 
   const submitForm = (event) => {
@@ -47,6 +43,7 @@ export const AddWishModal = ({myProfile}) => {
       name: formData.name,
       amount: +formData.amount,
     }).then(i => {
+      change();
       handleClose();
       dispatch(showSuccessSnackbar("Success!"));
     })

@@ -8,7 +8,7 @@ import CardContent from '@mui/material/CardContent'
 import React from 'react'
 
 
-export const FinanceStatistics = () => {
+export const FinanceStatistics = ({tips, followers, products, total}) => {
 
   return(
     <Box sx={{
@@ -69,7 +69,7 @@ export const FinanceStatistics = () => {
               <img src='/images/icons/briefcase.svg'/>
             </Box>
             <Box>
-              <Typography variant={'h5'}>$ 1306</Typography>
+              <Typography variant={'h5'}>{total}</Typography>
               <Typography variant={'caption'}>All</Typography>
             </Box>
           </CardContent>
@@ -83,7 +83,7 @@ export const FinanceStatistics = () => {
               <img style={{width: 40, height: 40}} src='/images/icons/copper-coin.svg'/>
             </Box>
             <Box>
-              <Typography variant={'h5'}>$ 41.2</Typography>
+              <Typography variant={'h5'}>{tips}</Typography>
               <Typography variant={'caption'}>Tips</Typography>
             </Box>
           </CardContent>
@@ -94,7 +94,7 @@ export const FinanceStatistics = () => {
               <img src='/images/icons/crown.svg'/>
             </Box>
             <Box>
-              <Typography variant={'h5'}>$ 52.2</Typography>
+              <Typography variant={'h5'}>{followers}</Typography>
               <Typography variant={'caption'}>Followers</Typography>
             </Box>
           </CardContent>
@@ -105,7 +105,7 @@ export const FinanceStatistics = () => {
               <img src='/images/icons/store.svg'/>
             </Box>
             <Box>
-              <Typography variant={'h5'}>$ 98</Typography>
+              <Typography variant={'h5'}>{products}</Typography>
               <Typography variant={'caption'}>Products</Typography>
             </Box>
           </CardContent>
