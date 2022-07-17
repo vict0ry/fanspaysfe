@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal'
@@ -11,6 +11,22 @@ import { useTranslation } from 'react-i18next'
 import FormControl from '@mui/material/FormControl'
 import { FormGroup } from '@material-ui/core'
 import { showSuccessSnackbar } from '../../../redux/actions/snackbar.actions'
+import CardHeader from '@mui/material/CardHeader'
+import IconButton from '@mui/material/IconButton'
+import PostMenu from '../components/post/PostMenu'
+import Avatar from '@mui/material/Avatar'
+import { beURL } from '../../../config'
+import { Link } from 'react-router-dom'
+import CardContent from '@mui/material/CardContent'
+import Typography from '@mui/material/Typography'
+import { NotSubscribed } from '../profile'
+import FbImageLibrary from '../../../components/react-fb-image-grid'
+import CardActions from '@mui/material/CardActions'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import CommentIcon from '@mui/icons-material/Comment'
+import SendTipModal from './SendTipModal'
+import Card from '@mui/material/Card'
+import moment from 'moment'
 
 const style = {
   position: 'absolute',
@@ -39,8 +55,7 @@ export default function AddDemandModal() {
   const submitForm = (event) => {
     event.preventDefault()
     const { price, description } = event.target.elements
-    debugger;
-    return axios.post('/api/demands',{
+    return axios.post('/api/demands', {
       price: +price.value,
       description: description.value,
       recipient: user.profileUser._id
@@ -49,6 +64,12 @@ export default function AddDemandModal() {
       dispatch(showSuccessSnackbar("Success!"));
     })
   }
+  const [demands, setDemands] = useState([]);
+  useEffect(() => {
+    axios.get('/api/demands/' + user.profileUser._id).then(({ data }) => {
+      setDemands(data);
+    })
+  }, []);
 
 
   return (
@@ -63,32 +84,87 @@ export default function AddDemandModal() {
       >
         <Box component={'form'} onSubmit={submitForm} sx={style}>
           <FormGroup>
-          <FormControl style={{marginBottom: '10px'}}>
-            <TextField
-              name={'price'}
-              type={'number'}
-              sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('PROFILE.OFFERED_AMOUNT')} required />
+            <FormControl style={{ marginBottom: '10px' }}>
+              <TextField
+                name={'price'}
+                type={'number'}
+                sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('PROFILE.OFFERED_AMOUNT')}
+                required />
 
-          </FormControl>
-         <FormControl>
-           <TextField
-                      multiline
-                      name={'description'}
-                      maxRows={3}
-                      minRows={3}
-                      sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('PROFILE.OFFERED_MESSAGE')}
-                      variant="outlined" />
-         </FormControl>
+            </FormControl>
+            <FormControl>
+              <TextField
+                multiline
+                name={'description'}
+                maxRows={3}
+                minRows={3}
+                sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('PROFILE.OFFERED_MESSAGE')}
+                variant="outlined" />
+            </FormControl>
             <FormControl>
               <Button
                 type={'submit'}
-                sx={{ maxWidth: '100px', marginTop:'10px', float: 'right' }} variant="outlined">{t('COMMON.SEND')}
+                sx={{ maxWidth: '100px', marginTop: '10px', float: 'right' }} variant="outlined">{t('COMMON.SEND')}
               </Button>
 
             </FormControl>
           </FormGroup>
         </Box>
       </Modal>
-    </div>
-  )
+      {
+        demands.map(demand => {
+          debugger;
+          return <div style={{marginTop: '20px'}}>
+            <div>
+              <Card>
+                <CardHeader
+                  avatar={
+                    <Avatar sx={{ width: '55px', height: '55px' }} aria-label="recipe">
+                      <img style={{ width: '100%' }} src={beURL + demand.postedBy?.profilePic} />
+                    </Avatar>
+                  }
+                  title={
+                    <div style={{display: 'flex', justifyContent: "space-between"}}>
+                      <Link to={'/profile/' + demand.postedBy.username}>{demand.postedBy.firstName + ' ' + demand.postedBy.lastName}</Link>
+                      {moment(demand.createdAt).fromNow()}
+                    </div>
+                  }
+                  subheader={demand.postedBy.username}
+                >
+                </CardHeader>
+                <CardContent>
+                  <div style={{fontSize: '24px', fontWeight: 'bold'}}>
+                    {demand.description}
+                  </div>
+                </CardContent>
+
+                <CardActions sx={{display: 'flex', justifyContent: 'space-between'}}>
+                  <div style={{
+                    background: 'linear-gradient(94.04deg, #4776E6 10.41%, #8E54E9 77.48%)',
+                    '-webkit-background-clip': 'text',
+                    '-webkit-text-fill-color': 'transparent',
+                    'background-clip': 'text',
+                    'text-fill-color': 'transparent',
+                    fontWeight: 'bold',
+                    fontSize: '24px'
+                  }}>{demand.price} CZK</div>
+                  <div>
+                    <Button variant={'success'}>
+                      <img src="/images/icons/accept.svg" style={{marginRight: '10px'}} alt="" />
+                      {t('COMMON.ACCEPT')}
+                    </Button>
+                    <Button variant={'cancel'} sx={{marginLeft: '10px'}}>
+                      <img src="/images/icons/remove.svg" style={{marginRight: '10px'}} alt="" />
+                      {t('COMMON.REFUSE')}
+                    </Button>
+                  </div>
+                </CardActions>
+              </Card>
+            </div>
+
+          </div>
+        })
+      }
+    </div>)
 }
+

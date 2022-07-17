@@ -2,6 +2,9 @@
   "BE_THE_FIRST_ONE": "Buďte první",
   "COMMON": {
     "SEX": "Pohlaví",
+    "ACCEPT": "Přijmout",
+    "REFUSE": "Odmitnout",
+    "ADD_DEMAND": "Vložit poptávku",
     "FIRST_NAME": "Jméno",
     "PREVIEW_IMAGE": "Náhled obrázku",
     "BALANCE": "Zůstatek",

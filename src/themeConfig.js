@@ -18,12 +18,21 @@ export const CustomThemeConfig = createTheme({
           },
         },
         {
-          props: { variant: 'red' },
+          props: { variant: 'cancel' },
           style: {
             textTransform: 'none',
             textDecoration: 'none',
             background: '#FFEDED',
             color: '#E64747'
+          },
+        },
+        {
+          props: { variant: 'success' },
+          style: {
+            textTransform: 'none',
+            textDecoration: 'none',
+            background: '#EBFEF9',
+            color: '#1FCC64'
           },
         },
         {
