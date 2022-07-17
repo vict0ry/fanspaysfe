@@ -5,16 +5,12 @@ import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal'
 import TextField from '@mui/material/TextField'
 import { useDispatch, useSelector } from 'react-redux'
-import ImageIcon from '@mui/icons-material/Image'
-import PollIcon from '@mui/icons-material/Poll'
 import axios from 'axios'
-import { postAdded } from '../../../redux/actions/posts.action'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import Grid from '@mui/material/Grid'
-import { Icon } from '../../messages/Icon'
 import FormControl from '@mui/material/FormControl'
 import { FormGroup } from '@material-ui/core'
+import { showSuccessSnackbar } from '../../../redux/actions/snackbar.actions'
 
 const style = {
   position: 'absolute',
@@ -29,41 +25,31 @@ const style = {
 }
 
 export default function AddDemandModal() {
-  const dispatch = useDispatch()
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-  const inputFile = useRef(null)
-  const onFileUploadClick = () => {
-    inputFile.current.click()
-  }
   const { username } = useParams()
   const loggedUser = useSelector(state => state.user)
-  const [postMessage, setPostMessage] = useState('')
   const { t } = useTranslation()
   const isAllowed = () => {
     return !!(!username || username === loggedUser?.userData?.username)
   }
-
-  function handlePostMessageOnKeyDown(value) {
-    setPostMessage(value)
-  }
-
-  const [state, setState] = useState([])
-
-
-  const formData = new FormData()
-
-  function handleAddMessage() {
-    return axios({
-      method: 'post',
-      url: '/api/demands',
-      data: formData,
-      headers: { 'Content-Type': 'multipart/form-data' }
+  const user = useSelector(state => state.profile.profile);
+  const dispatch = useDispatch();
+  const submitForm = (event) => {
+    event.preventDefault()
+    const { price, description } = event.target.elements
+    debugger;
+    return axios.post('/api/demands',{
+      price: +price.value,
+      description: description.value,
+      recipient: user.profileUser._id
     }).then(demands => {
-      console.log(demands)
+      handleClose();
+      dispatch(showSuccessSnackbar("Success!"));
     })
   }
+
 
   return (
     <div>
@@ -75,29 +61,32 @@ export default function AddDemandModal() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box component={'form'} onSubmit={submitForm} sx={style}>
           <FormGroup>
           <FormControl style={{marginBottom: '10px'}}>
             <TextField
-              name={'amount'}
+              name={'price'}
               type={'number'}
               sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('PROFILE.OFFERED_AMOUNT')} required />
 
           </FormControl>
          <FormControl>
-           <TextField onKeyUp={() => handlePostMessageOnKeyDown(event.target.value)}
+           <TextField
                       multiline
+                      name={'description'}
                       maxRows={3}
                       minRows={3}
                       sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('PROFILE.OFFERED_MESSAGE')}
                       variant="outlined" />
          </FormControl>
+            <FormControl>
+              <Button
+                type={'submit'}
+                sx={{ maxWidth: '100px', marginTop:'10px', float: 'right' }} variant="outlined">{t('COMMON.SEND')}
+              </Button>
+
+            </FormControl>
           </FormGroup>
-          <div className="action" style={{ marginTop: 10 }}>
-            <Button
-              onClick={() => handleAddMessage()}
-              sx={{ padding: 0, marginLeft: '5px', float: 'right' }} variant="outlined">{t('COMMON.SEND')}</Button>
-          </div>
         </Box>
       </Modal>
     </div>
