@@ -28,14 +28,13 @@ export const NewFounds = ({balance}) => {
   };
   return(
     <Box sx={{mt: 5,
-      ml: {xs: 0, md: '10%'},
-      width: {xs: '53%', md: "60%"},
+      ml: {xs: 0},
       alignItems: 'center',
       height:{xs: '17%'},
       display: 'flex',
       flexDirection:{xs:'column', md:'row'},
       justifyContent: 'space-between'}}>
-      <Box sx={{width: {xs: '60%', md: '30%'}}}>
+      <Box>
         <Card>
           <CardContent sx={{display: 'flex'}}>
             <Typography variant={'h5'}>Balance:</Typography>
@@ -47,7 +46,7 @@ export const NewFounds = ({balance}) => {
         </Card>
       </Box>
       <Box sx={{width: {md: '65%', xs: '100%'}}}>
-        <Card sx={{height: {md: '117px', xs: '150px'}}}>
+        <Card>
           <CardContent sx={{display: 'flex'}}>
             <Typography sx={{fontWeight: 'bold'}} variant={'h6'}>You should to add the deposit method</Typography>
           </CardContent>
@@ -66,7 +65,6 @@ export const NewFounds = ({balance}) => {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-
                   <Button onClick={() => {
                     axios.post("/api/stripe/pay").then(res => {
                       return res;

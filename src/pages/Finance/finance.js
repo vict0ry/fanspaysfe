@@ -47,19 +47,19 @@ export const Finance = () => {
       }} xs={{
         display: 'none'
       }}>
-        <Box sx={{width: '186%'}}>
+        <Box>
           <FinanceStatistics tips={incomeStatistic.tips} followers={incomeStatistic.followers}
                              products={incomeStatistic.products} total={incomeStatistic.total} />
-            <Typography sx={{mt: 10, ml: '10%'}} variant={'h5'}>Add new funds</Typography>
+            <Typography sx={{mt: 10}} variant={'h5'}>Add new funds</Typography>
           <NewFounds balance={balance}/>
-          <Typography sx={{mt: 8, ml: '10%'}} variant={'h5'}>Incoming Analytics</Typography>
-          <Box sx={{mt: 2, mb: 10, ml: '9%', width: '60%', display: 'flex', justifyContent: 'space-between', flexDirection: {xs: 'column', md: 'row'}}}>
+          <Typography sx={{mt: 8}} variant={'h5'}>Incoming Analytics</Typography>
+          <Box sx={{mt: 2, mb: 10, display: 'flex', justifyContent: 'space-between', flexDirection: {xs: 'column', md: 'row'}}}>
             <FinanceChart />
-            <Box sx={{width: '40%'}}>
+            <Box style={{marginLeft: '10px'}}>
              <Card sx={{height: '322px'}}>
                <CardActions sx={{display: 'flex', flexDirection: 'column'}}>
                  <Typography sx={{fontSize: '20px', fontWeight: 'bold'}}>Transactions</Typography>
-                 <div style={{display: 'flex', width: '100%', flexDirection: 'column', overflow: 'scroll'}}>
+                 <div style={{display: 'flex', flexDirection: 'column', overflow: 'scroll'}}>
                    { transactions?.map(i => {
                      return i ? <div style={{display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', gap: 2}}>
                        <Box>

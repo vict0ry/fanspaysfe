@@ -12,10 +12,7 @@ export const FinanceStatistics = ({tips, followers, products, total}) => {
 
   return(
     <Box sx={{
-      ml: {md: '10%', xs: 0},
-      height:{xs: '670px', md: '190px'},
-      background: 'linear-gradient(#4776E6, #8E54E9)',
-      width: {xs: '396px', md: '60%'}}}>
+      background: 'linear-gradient(#4776E6, #8E54E9)'}}>
       <Box sx={{
         display: 'flex',
         flexDirection:{xs: 'column', md: 'row'},
@@ -53,7 +50,6 @@ export const FinanceStatistics = ({tips, followers, products, total}) => {
         flexDirection: {xs: 'column', md: 'row'},
         height: {xs: '500px', md: '88px'},
         top: {xs: '26px', md: 71},
-        left: {xs: '6%', md: 0},
         width: '700px',
         justifyContent: 'space-between',
         position: 'relative'}}>
