@@ -6,6 +6,14 @@ import useWindowDimensions from '../../useWindowDimensions'
 import { TextField } from '@mui/material'
 import axios from 'axios'
 import { t } from 'i18next'
+import { ClickAwayListener } from '@mui/base'
+
+const available_tags = [
+  "ex",
+  "online",
+  "t-shirt",
+  "футболка"
+];
 
 const leftFilterStyles = {
   cont: {
@@ -21,8 +29,8 @@ const leftFilterStyles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
-    marginBottom: "24px",
-    width: "100%"
+    marginBottom: "8px",
+    width: "100%",
   },
   ageContItem: {
     marginBottom: 8,
@@ -161,6 +169,10 @@ const LeftFilter = (props) => {
   const [maxPrice, setMaxPrice] = useState(10000);
   const [price, setPrice] = useState([minPrice, maxPrice]);
 
+  const [tags, setTags] = useState({});
+  const [inputTag, setInputTag] = useState("");
+  const [tagsListOpen, setTagsListOpen] = useState(false)
+
   return(
     <Grid
       item
@@ -198,10 +210,7 @@ const LeftFilter = (props) => {
         }
       }}
     >
-      <Box style={{
-        ...leftFilterStyles.ageCont,
-        ...props.isMarket ? {marginBottom: "8px"}: {}
-      }}>
+      <Box style={leftFilterStyles.ageCont}>
         <Box sx={{
           ...leftFilterStyles.title,
           display: {
@@ -211,10 +220,7 @@ const LeftFilter = (props) => {
           width: "100%",
           justifyContent: "space-between"
         }}>
-          {
-            props.isMarket ? t("MARKET.PRICE") :
-            t("USERS.AGE")
-          }
+          {t("MARKET.PRICE")}
           {width < 900 &&
           <Button
             sx={{
@@ -231,185 +237,116 @@ const LeftFilter = (props) => {
         </Box>
 
 
-        {!props.isMarket && <Box style={leftFilterStyles.ageContItem}>
-          <span style={leftFilterStyles.ageTitle}>{t("USERS.FROM")}</span>
-          <Box style={leftFilterStyles.ageController}>
-            <Button
-              style={leftFilterStyles.ageButton}
-              onClick={() => {
-                if(props.fromAge > 0) {
-                  props.setFromAge(props.fromAge - 1)
-                }
-              }}
-            >-</Button>
-            <InputBase
-              style={leftFilterStyles.inputAge}
-              value={props.fromAge}
-              onChange={(e) => {
-                if(Number(e.target.value) <= props.upToAge && Number(e.target.value) > 0) {
-                  props.setFromAge(Number(e.target.value));
-                }
-              }}
-            />
-            <Button
-              style={{
-                ...leftFilterStyles.ageButton,
-                ...{paddingTop: 3},
-                ...props.fromAge===props.upToAge ? {color: "#C4C4C4"}: {}
-              }}
-              onClick={() => {
-                if(props.fromAge < props.upToAge) {
-                  props.setFromAge(props.fromAge + 1)
-                }
-              }}
-            >+</Button>
-          </Box>
-        </Box>}
-
-        {!props.isMarket && <Box style={leftFilterStyles.ageContItem}>
-          <span style={leftFilterStyles.ageTitle}>{t("USERS.UP_TO")}</span>
-          <Box style={leftFilterStyles.ageController}>
-            <Button
-              style={{
-                ...leftFilterStyles.ageButton,
-                ...props.fromAge===props.upToAge ? {color: "#C4C4C4"}: {}
-              }}
-              onClick={() => {
-                if(props.fromAge < props.upToAge) {
-                  props.setUpToAge(props.upToAge-1)
-                }
-              }}
-            >-</Button>
-            <InputBase
-              style={leftFilterStyles.inputAge}
-              value={props.upToAge}
-              onChange={(e) => {
-                if(props.fromAge <= Number(e.target.value) && Number(e.target.value) <= 100) {
-                  props.setUpToAge(Number(e.target.value));
-                }
-              }}
-            />
-            <Button
-              style={{...leftFilterStyles.ageButton, ...{paddingTop: 3}}}
-              onClick={() => {
-                if(Number(props.upToAge < 99))
-                  props.setUpToAge(props.upToAge+1)
-              }}
-            >+</Button>
-          </Box>
-        </Box>}
-
-        {props.isMarket &&
+        <Box sx={{
+          display: "flex",
+          width: "100%"
+        }}>
           <Box sx={{
+            flexGrow: 1,
             display: "flex",
-            width: "100%"
+            padding: "4px 8px",
+            background: "#F7F5F9",
+            borderRadius: "6px",
+            marginRight: "8px",
+            alignItems: "center"
           }}>
-            <Box sx={{
-              flexGrow: 1,
-              display: "flex",
-              padding: "4px 8px",
-              background: "#F7F5F9",
-              borderRadius: "6px",
-              marginRight: "8px",
-              alignItems: "center"
-            }}>
-              <span style={{...leftFilterStyles.ageTitle, ...{fontSize: "10px", color: "#B3B3B3", margin: 0}}}>{t("USERS.FROM")}</span>
-              <InputBase
-                sx={{
-                  margin: "0 8px",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  color: "#1A051D",
-                  width: "35px",
-                  height: "16px",
-                }}
-                value={price[0]}
-                onChange={(e) => {
-                  if(price[1] >= Number(e.target.value) && Number(e.target.value) >= minPrice) {
-                    setPrice([Number(e.target.value), price[1]]);
-                  }
-                }}
-              />
-              <span style={{
-                color: "#B3B3B3",
-                fontSize: "10px",
-                fontWeight: 600,
-
-              }}>$</span>
-            </Box>
-
-            <Box sx={{
-              flexGrow: 1,
-              display: "flex",
-              padding: "4px 8px",
-              background: "#F7F5F9",
-              borderRadius: "6px",
-              alignItems: "center"
-            }}>
-              <span style={{...leftFilterStyles.ageTitle, ...{fontSize: "10px", color: "#B3B3B3", margin: 0}}}>{t("USERS.UP_TO")}</span>
-              <InputBase
-                sx={{
-                  margin: "0 8px",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  color: "#1A051D",
-                  width: "35px",
-                  height: "16px",
-                }}
-                value={price[1]}
-                onChange={(e) => {
-                  if(price[0] <= Number(e.target.value) && Number(e.target.value) <= maxPrice) {
-                    setPrice([price[0], Number(e.target.value)]);
-                  }
-                }}
-              />
-              <span style={{
-                color: "#B3B3B3",
-                fontSize: "10px",
-                fontWeight: 600,
-
-              }}>$</span>
-            </Box>
-          </Box>
-        }
-
-        {props.isMarket &&
-          <Box sx={{
-            width: "100%",
-            marginTop: "16px",
-            padding: "0 12px",
-
-          }}>
-            <Slider
-              min={minPrice}
-              max={maxPrice}
-              // getAriaLabel={() => 'Temperature range'}
-              value={price}
-              onChange={(e, value) => {
-                setPrice(value);
-              }}
-              valueLabelDisplay="auto"
-              // getAriaValueText={valuetext}
+            <span style={{...leftFilterStyles.ageTitle, ...{fontSize: "10px", color: "#B3B3B3", margin: 0}}}>{t("USERS.FROM")}</span>
+            <InputBase
               sx={{
-                '& .css-eg0mwd-MuiSlider-thumb': {
-                  width: "24px",
-                  height: "24px",
-                  border: "4px solid #F7F5F9",
-
-                },
-                '& .css-14pt78w-MuiSlider-rail': {
-                  backgroundColor: "#ECE9F1"
-                },
-                '& .css-eg0mwd-MuiSlider-thumb:before': {
-                  boxShadow: "none"
-                },
-                '& .css-1gv0vcd-MuiSlider-track': {
-                  backgroundColor: "#4776E6"
+                margin: "0 8px",
+                fontSize: "12px",
+                fontWeight: 600,
+                color: "#1A051D",
+                width: "35px",
+                height: "16px",
+              }}
+              value={price[0]}
+              onChange={(e) => {
+                if(price[1] >= Number(e.target.value) && Number(e.target.value) >= minPrice) {
+                  setPrice([Number(e.target.value), price[1]]);
                 }
               }}
             />
+            <span style={{
+              color: "#B3B3B3",
+              fontSize: "10px",
+              fontWeight: 600,
+
+            }}>$</span>
           </Box>
-        }
+
+          <Box sx={{
+            flexGrow: 1,
+            display: "flex",
+            padding: "4px 8px",
+            background: "#F7F5F9",
+            borderRadius: "6px",
+            alignItems: "center"
+          }}>
+            <span style={{...leftFilterStyles.ageTitle, ...{fontSize: "10px", color: "#B3B3B3", margin: 0}}}>{t("USERS.UP_TO")}</span>
+            <InputBase
+              sx={{
+                margin: "0 8px",
+                fontSize: "12px",
+                fontWeight: 600,
+                color: "#1A051D",
+                width: "35px",
+                height: "16px",
+              }}
+              value={price[1]}
+              onChange={(e) => {
+                if(price[0] <= Number(e.target.value) && Number(e.target.value) <= maxPrice) {
+                  setPrice([price[0], Number(e.target.value)]);
+                }
+              }}
+            />
+            <span style={{
+              color: "#B3B3B3",
+              fontSize: "10px",
+              fontWeight: 600,
+
+            }}>$</span>
+          </Box>
+        </Box>
+
+        <Box sx={{
+          width: "100%",
+          marginTop: "16px",
+          padding: "0 12px",
+
+        }}>
+          <Slider
+            min={minPrice}
+            max={maxPrice}
+            value={price}
+            onChange={(e, value) => {
+              setPrice(value);
+            }}
+            sx={{
+              '&:focus, &:hover, &.Mui-active': {
+
+              },
+              '& .Mui-focusVisible': {
+                
+              },
+              '& .css-eg0mwd-MuiSlider-thumb': {
+                width: "24px",
+                height: "24px",
+                border: "4px solid #F7F5F9",
+
+              },
+              '& .css-14pt78w-MuiSlider-rail': {
+                backgroundColor: "#ECE9F1"
+              },
+              '& .css-eg0mwd-MuiSlider-thumb:before': {
+                boxShadow: "none"
+              },
+              '& .css-1gv0vcd-MuiSlider-track': {
+                backgroundColor: "#4776E6"
+              }
+            }}
+          />
+        </Box>
 
       </Box>
 
@@ -464,8 +401,8 @@ const LeftFilter = (props) => {
           }}>
             <Icon name="hashtag" />
           </Box>
-          {Object.keys(props.checkedTags).map((tag) => {
-            if(props.checkedTags[tag]) {
+          {Object.keys(tags).map((tag) => {
+            if(tags[tag]) {
               return (
                 <Box sx={{
                   padding: "4px 8px",
@@ -482,8 +419,8 @@ const LeftFilter = (props) => {
                   {tag}
                 </span>
                   <ButtonBase onClick={() => {
-                    props.setCheckedTags({
-                      ...props.checkedTags,
+                    setTags({
+                      ...tags,
                       [tag]: false
                     });
                   }}>
@@ -495,6 +432,89 @@ const LeftFilter = (props) => {
           })}
 
         </Box>
+
+
+        <Box sx={{
+          padding: "4px 8px",
+          background: "#E8EFFF",
+          borderRadius: "4px",
+          color: "#4776E6",
+          fontSize: "12px",
+          fontWeight: 600,
+          display: "flex",
+          position: "relative"
+        }}>
+              <InputBase
+                sx={{
+                  margin: "0 8px",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  color: "#1A051D",
+                  width: "100%",
+                }}
+                value={inputTag}
+                onChange={(e) => {
+                  setInputTag(e.target.value);
+                  if(e.target.value.length >= 2){
+                    setTagsListOpen(true)
+                  } else {
+                    setTagsListOpen(false)
+                  }
+                }}
+              />
+
+            {tagsListOpen && <ClickAwayListener onClickAway={() => {
+              setTagsListOpen(false);
+            }}>
+              <Box sx={{
+                position: "absolute",
+                left: 0,
+                top: "100%",
+                width: "100%",
+                background: "#fff",
+                display: "flex",
+                flexDirection: "column",
+                zIndex: 1,
+                borderBottomLeftRadius: "8px",
+                borderBottomRightRadius: "8px",
+                overflowY: "auto",
+                boxShadow: "0px 2px 8px rgba(26, 5, 29, 0.1)"
+              }}>
+                {
+                  available_tags.map(tag => {
+                    return(
+                      <ButtonBase
+                        sx={{
+                          minWidth: 0,
+                          minHeight: 0,
+                          display: "flex",
+                          justifyContent: "start",
+                          background: "#E8EFFF",
+                          // marginBottom: "4px",
+                          borderTop: "1px solid #fff",
+                          padding: "8px"
+                        }}
+
+                        onClick={() => {
+                          setTags({
+                            ...tags,
+                            [tag]: true
+                          })
+
+                          setTagsListOpen(false);
+                          setInputTag("")
+                        }}
+                      >
+                        {tag}
+                      </ButtonBase>
+                    );
+                  })
+                }
+              </Box>
+            </ClickAwayListener>}
+          </Box>
+
+
       </Box>
 
 
@@ -529,7 +549,9 @@ const LeftFilter = (props) => {
           placeholder="nickname"
           sx={{ width: '100%', padding: '0', marginLeft: 0, border: "1px solid #000" }}
           onChange={(e) => {
-            props.setFindNickname(e.target.value)
+            if(e.target.value.length <= 20) {
+              props.setFindNickname(e.target.value)
+            }
           }}
           value={props.findNickname}
         />
@@ -561,7 +583,11 @@ const LeftFilter = (props) => {
                 checkedTags: checked,
                 findNickname: props.findNickname,
                 findAuthors: props.findAuthors,
-                sortBy: props.sortBy
+                sortBy: props.sortBy,
+                tags: tags,
+                price: price,
+                minPrice: minPrice,
+                maxPrice: maxPrice
               };
               console.log(data)
               axios.post('/test/filter?age=18&nickname=test', data).then(res => console.log(res.data));

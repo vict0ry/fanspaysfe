@@ -65,7 +65,7 @@ const styles = {
   }
 };
 
-const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, setCheckedTags, setLeftMenuOpen, leftMenuOpen, findAuthors, setFindAuthors}) => {
+const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, setCheckedTags, setLeftMenuOpen, leftMenuOpen, findAuthors, setFindAuthors, findNickname, setFindNickname}) => {
   const {width, height} = useWindowDimensions();
 
   return(
@@ -166,39 +166,31 @@ const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, s
                 <ButtonBase
                   style={{padding: 8, justifyContent: "start"}}
                   onClick={() => {
-                    setSortBy(t("USERS.BY_POPULARITY") + " ⭐")
+                    setSortBy(t("MARKET.DESCENDING") + " ↓")
                     setSortByOpen(!sortByOpen)
                   }}
-                >{t("USERS.BY_POPULARITY")} ⭐</ButtonBase>
+                >{t("MARKET.DESCENDING")} ↓</ButtonBase>
                 <ButtonBase
                   style={{padding: 8, justifyContent: "start"}}
                   onClick={() => {
-                    setSortBy(t("USERS.BY_NUMBER_FANS") + " 👑")
+                    setSortBy(t("MARKET.ASCENDING") + " ↑")
                     setSortByOpen(!sortByOpen)
                   }}
-                >{t("USERS.BY_NUMBER_FANS")} 👑</ButtonBase>
+                >{t("MARKET.ASCENDING")} ↑</ButtonBase>
                 <ButtonBase
                   style={{padding: 8, justifyContent: "start"}}
                   onClick={() => {
-                    setSortBy(t("USERS.NEW") + " 🔥")
+                    setSortBy(t(t("MARKET.NEW")) + " 🔥")
                     setSortByOpen(!sortByOpen)
                   }}
-                >{t("USERS.NEW")} 🔥️</ButtonBase>
+                >{t("MARKET.NEW")} 🔥️</ButtonBase>
                 <ButtonBase
                   style={{padding: 8, justifyContent: "start"}}
                   onClick={() => {
-                    setSortBy(t("USERS.AGE_YOUNGER"))
+                    setSortBy(t("MARKET.POPULAR") + " ⭐")
                     setSortByOpen(!sortByOpen)
                   }}
-                >{t("USERS.AGE_YOUNGER")}</ButtonBase>
-                <ButtonBase
-                  style={{padding: 8, justifyContent: "start"}}
-                  onClick={() => {
-                    setSortBy(t("USERS.AGE_OLDER"))
-                    setSortByOpen(!sortByOpen)
-                  }}
-                >{t("USERS.AGE_OLDER")}</ButtonBase>
-
+                >{t("MARKET.POPULAR")} ⭐</ButtonBase>
               </Box>
             </ClickAwayListener>
             }
@@ -221,6 +213,18 @@ const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, s
       </Box>
 
       <Box style={{display: "flex", marginTop: 8, zIndex: 1, flexWrap: "wrap"}}>
+        {findNickname &&
+          <Box style={styles.tag}>
+            <span style={{marginRight: 2, color: "#8E54E9"}}>
+              @{findNickname}
+            </span>
+            <ButtonBase onClick={() => {
+              setFindNickname("");
+            }}>
+              <Icon name="x" />
+            </ButtonBase>
+          </Box>
+        }
         {Object.keys(checkedTags).map((tag) => {
           if(checkedTags[tag]) {
             return (

@@ -157,10 +157,6 @@ const FormControlLabelStyles = {
 const LeftFilter = (props) => {
   const {width, height} = useWindowDimensions();
 
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(10000);
-  const [price, setPrice] = useState([minPrice, maxPrice]);
-
   return(
     <Grid
       item
@@ -198,10 +194,7 @@ const LeftFilter = (props) => {
         }
       }}
     >
-      <Box style={{
-        ...leftFilterStyles.ageCont,
-        ...props.isMarket ? {marginBottom: "8px"}: {}
-      }}>
+      <Box style={leftFilterStyles.ageCont}>
         <Box sx={{
           ...leftFilterStyles.title,
           display: {
@@ -211,10 +204,7 @@ const LeftFilter = (props) => {
           width: "100%",
           justifyContent: "space-between"
         }}>
-          {
-            props.isMarket ? t("MARKET.PRICE") :
-            t("USERS.AGE")
-          }
+          {t("USERS.AGE")}
           {width < 900 &&
           <Button
             sx={{
@@ -231,7 +221,7 @@ const LeftFilter = (props) => {
         </Box>
 
 
-        {!props.isMarket && <Box style={leftFilterStyles.ageContItem}>
+        <Box style={leftFilterStyles.ageContItem}>
           <span style={leftFilterStyles.ageTitle}>{t("USERS.FROM")}</span>
           <Box style={leftFilterStyles.ageController}>
             <Button
@@ -264,9 +254,9 @@ const LeftFilter = (props) => {
               }}
             >+</Button>
           </Box>
-        </Box>}
+        </Box>
 
-        {!props.isMarket && <Box style={leftFilterStyles.ageContItem}>
+        <Box style={leftFilterStyles.ageContItem}>
           <span style={leftFilterStyles.ageTitle}>{t("USERS.UP_TO")}</span>
           <Box style={leftFilterStyles.ageController}>
             <Button
@@ -297,120 +287,7 @@ const LeftFilter = (props) => {
               }}
             >+</Button>
           </Box>
-        </Box>}
-
-        {props.isMarket &&
-          <Box sx={{
-            display: "flex",
-            width: "100%"
-          }}>
-            <Box sx={{
-              flexGrow: 1,
-              display: "flex",
-              padding: "4px 8px",
-              background: "#F7F5F9",
-              borderRadius: "6px",
-              marginRight: "8px",
-              alignItems: "center"
-            }}>
-              <span style={{...leftFilterStyles.ageTitle, ...{fontSize: "10px", color: "#B3B3B3", margin: 0}}}>{t("USERS.FROM")}</span>
-              <InputBase
-                sx={{
-                  margin: "0 8px",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  color: "#1A051D",
-                  width: "35px",
-                  height: "16px",
-                }}
-                value={price[0]}
-                onChange={(e) => {
-                  if(price[1] >= Number(e.target.value) && Number(e.target.value) >= minPrice) {
-                    setPrice([Number(e.target.value), price[1]]);
-                  }
-                }}
-              />
-              <span style={{
-                color: "#B3B3B3",
-                fontSize: "10px",
-                fontWeight: 600,
-
-              }}>$</span>
-            </Box>
-
-            <Box sx={{
-              flexGrow: 1,
-              display: "flex",
-              padding: "4px 8px",
-              background: "#F7F5F9",
-              borderRadius: "6px",
-              alignItems: "center"
-            }}>
-              <span style={{...leftFilterStyles.ageTitle, ...{fontSize: "10px", color: "#B3B3B3", margin: 0}}}>{t("USERS.UP_TO")}</span>
-              <InputBase
-                sx={{
-                  margin: "0 8px",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  color: "#1A051D",
-                  width: "35px",
-                  height: "16px",
-                }}
-                value={price[1]}
-                onChange={(e) => {
-                  if(price[0] <= Number(e.target.value) && Number(e.target.value) <= maxPrice) {
-                    setPrice([price[0], Number(e.target.value)]);
-                  }
-                }}
-              />
-              <span style={{
-                color: "#B3B3B3",
-                fontSize: "10px",
-                fontWeight: 600,
-
-              }}>$</span>
-            </Box>
-          </Box>
-        }
-
-        {props.isMarket &&
-          <Box sx={{
-            width: "100%",
-            marginTop: "16px",
-            padding: "0 12px",
-
-          }}>
-            <Slider
-              min={minPrice}
-              max={maxPrice}
-              // getAriaLabel={() => 'Temperature range'}
-              value={price}
-              onChange={(e, value) => {
-                setPrice(value);
-              }}
-              valueLabelDisplay="auto"
-              // getAriaValueText={valuetext}
-              sx={{
-                '& .css-eg0mwd-MuiSlider-thumb': {
-                  width: "24px",
-                  height: "24px",
-                  border: "4px solid #F7F5F9",
-
-                },
-                '& .css-14pt78w-MuiSlider-rail': {
-                  backgroundColor: "#ECE9F1"
-                },
-                '& .css-eg0mwd-MuiSlider-thumb:before': {
-                  boxShadow: "none"
-                },
-                '& .css-1gv0vcd-MuiSlider-track': {
-                  backgroundColor: "#4776E6"
-                }
-              }}
-            />
-          </Box>
-        }
-
+        </Box>
       </Box>
 
 

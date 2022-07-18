@@ -197,5 +197,14 @@
       "PLACEHOLDER": "Введите E-mail",
       "BUTTON": "Войти"
     }
+  },
+  "MARKET": {
+    "PRICE": "Price",
+    "TAGS": "Tags",
+    "BUY": "Buy",
+    "DESCENDING": "Price: descending",
+    "ASCENDING": "Price: ascending",
+    "POPULAR": "Popular",
+    "NEW": "New"
   }
 }
