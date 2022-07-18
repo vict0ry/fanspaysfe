@@ -38,94 +38,7 @@ export const Shop = () => {
 
 
 
-  const [shopItems, setShopItems] = useState([
-    {
-      "pictures": [
-        "/uploads/images/65ce7a1da55ddac0d3a706fb705b70c7.png"
-      ],
-      "likes": [],
-      "_id": "62b9d5fa7f9487afdcd0b6b1",
-      "postedBy": "5fff0e6b4d090d1488d580cc",
-      "name": "product name",
-      "description": "product description",
-      "price": 500,
-      "createdAt": "2022-06-27T16:08:26.194Z",
-      "updatedAt": "2022-06-27T16:08:26.194Z",
-      "__v": 0
-    },
-    {
-      "pictures": [
-        "/uploads/images/65ce7a1da55ddac0d3a706fb705b70c7.png"
-      ],
-      "likes": [],
-      "_id": "62d022239933754f4e82be49",
-      "postedBy": "5fff0e6b4d090d1488d580cc",
-      "name": "nazev",
-      "description": "popis produktu beach",
-      "price": 550,
-      "createdAt": "2022-07-14T14:03:15.331Z",
-      "updatedAt": "2022-07-14T14:03:15.331Z",
-      "__v": 0
-    },
-    {
-      "pictures": [
-        "/uploads/images/65ce7a1da55ddac0d3a706fb705b70c7.png"
-      ],
-      "likes": [],
-      "_id": "62d5008d35a686f9e23cabb4",
-      "status": "request",
-      "postedBy": "5fff0e6b4d090d1488d580cc",
-      "name": "Brahmi",
-      "description": "Brahmi is the best product",
-      "price": 600,
-      "createdAt": "2022-07-18T06:41:17.124Z",
-      "updatedAt": "2022-07-18T06:41:17.124Z",
-      "__v": 0
-    },
-    {
-      "pictures": [
-        "/uploads/images/65ce7a1da55ddac0d3a706fb705b70c7.png"
-      ],
-      "likes": [],
-      "_id": "62b9d5fa7f9487afdcd0b6b1",
-      "postedBy": "5fff0e6b4d090d1488d580cc",
-      "name": "product name",
-      "description": "product description",
-      "price": 500,
-      "createdAt": "2022-06-27T16:08:26.194Z",
-      "updatedAt": "2022-06-27T16:08:26.194Z",
-      "__v": 0
-    },
-    {
-      "pictures": [
-        "/uploads/images/65ce7a1da55ddac0d3a706fb705b70c7.png"
-      ],
-      "likes": [],
-      "_id": "62d022239933754f4e82be49",
-      "postedBy": "5fff0e6b4d090d1488d580cc",
-      "name": "nazev",
-      "description": "popis produktu beach",
-      "price": 550,
-      "createdAt": "2022-07-14T14:03:15.331Z",
-      "updatedAt": "2022-07-14T14:03:15.331Z",
-      "__v": 0
-    },
-    {
-      "pictures": [
-        "/uploads/images/65ce7a1da55ddac0d3a706fb705b70c7.png"
-      ],
-      "likes": [],
-      "_id": "62d5008d35a686f9e23cabb4",
-      "status": "request",
-      "postedBy": "5fff0e6b4d090d1488d580cc",
-      "name": "Brahmi",
-      "description": "Brahmi is the best product",
-      "price": 600,
-      "createdAt": "2022-07-18T06:41:17.124Z",
-      "updatedAt": "2022-07-18T06:41:17.124Z",
-      "__v": 0
-    }
-  ]);
+  const [shopItems, setShopItems] = useState([]);
 
   console.log(shopItems)
 
@@ -149,7 +62,12 @@ export const Shop = () => {
   }
   const [currentPage, setCurrentPage] = useState(0);
   const loadShopData = () => {
-    // axios.get('/api/shop').then(res => setShopItems(res.data));
+    debugger;
+    axios.get('/api/shop').then(res => {
+      debugger;
+      setShopItems(res.data)
+    });
+    debugger;
   }
 
   return(
@@ -240,9 +158,9 @@ export const Shop = () => {
 
 
             <div style={{ marginTop: 10 }}>
-              {shopItems?.length ? <div>
+              {shopItems.data?.length ? <div>
                 <Grid container spacing={1}>
-                  {shopItems.map(product => {
+                  {shopItems.data.map(product => {
                     return <Grid item xs={6} md={4}>
                       {/*<ProductCart product={product}/>*/}
 
@@ -267,7 +185,7 @@ export const Shop = () => {
                           marginBottom: "8px",
                           overflow: "hidden"
                         }}>
-                          <img style={{width: "100%"}} src="https://www.peoples.ru/images/interesting/interesting_201401150644570.jpg" alt="" />
+                          <img style={{width: "100%"}} src={beURL + product?.pictures[0]} alt="" />
                         </Box>
 
                         <Box sx={{

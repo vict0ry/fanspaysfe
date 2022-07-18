@@ -31,7 +31,7 @@ export const Wish = ({title, from=0, to, id, myProfile, recipient}) => {
     }} className="progress">
       <div style={{
         height: '4px', background: 'linear-gradient(94.04deg, #4776E6 10.41%, #8E54E9 77.48%)',
-        position: 'absolute', width: width +'%'
+        position: 'absolute', width: width +'%', maxWidth: '100%'
       }} className="progress-size">
 
       </div>
@@ -39,7 +39,7 @@ export const Wish = ({title, from=0, to, id, myProfile, recipient}) => {
     <div style={{textAlign: 'left'}}>
       <span style={{color: '#1A051D', fontSize: '14px', fontWeight: 'bold', textAlign: 'center'}}>{title}</span>
     </div>
-    {!myProfile ? <SendTipModal wishId={id} type={'WISH'} recipient={recipient}>
+    {!myProfile && width < 100 ? <SendTipModal wishId={id} type={'WISH'} recipient={recipient}>
         <Button style={{margin: '10px 0'}} onClick={handleWishSupport} variant={'contained'}>{t('Support')}</Button>
       </SendTipModal> : ''}
   </div>);
