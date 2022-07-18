@@ -18,13 +18,11 @@ const PagesController = ({currentPageCallback, count = 100, pages}) => {
     event,
     newPage,
   ) => {
-    debugger;
     setPage(newPage);
     currentPageCallback(newPage)
   };
 
   const handleChangeRowsPerPage = event => {
-    debugger;
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };

@@ -43,7 +43,6 @@ export const UserPricesFormTab = () => {
     setSubscriptionPrice(user?.profileUser?.subscribtionPrice || 0);
   }, [])
 
-  debugger;
   useEffect(() => {
     axios.get('/api/wish/' + user?.profileUser?._id).then(wishes => { setWishes(wishes.data) })}, [])
   return (

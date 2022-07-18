@@ -59,7 +59,14 @@ export default function AboutCard({ user, postsLength, disable }) {
   return (<div>
       <Card sx={{ maxWidth: '1fr',width: { md: '590px', xs: '390px' }, gridColumn: 'unset' }}>
         <div style={{ padding: 10, float: 'right', color: 'green', cursor: 'pointer' }}>{t('COMMON.ONLINE')}</div>
-        <CardHeader subheader={'@' + user?.username} subtitle={'ahoj'} title={fullName} />
+        <CardHeader subheader={
+          <div>{'@' + user?.username}
+            <Box sx={{ textAlign: 'left', marginTop: 2 }}>
+              <p>{user?.description}</p>
+            </Box>
+          </div>
+
+        } title={fullName} />
 
         <CardContent>
 
@@ -72,10 +79,6 @@ export default function AboutCard({ user, postsLength, disable }) {
             <InfoIcon afterIcon={t(user?.gender)} icon={'/images/icons/map-pin.svg'} title= {t('COMMON.SEX')}></InfoIcon>
           </Box>
 
-          <Box sx={{ textAlign: 'left', marginTop: 2 }}>
-            <strong>{t('COMMON.DESCRIPTION')}:</strong>
-            <p>{user?.description}</p>
-          </Box>
         </CardContent>
       </Card>
 

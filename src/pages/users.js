@@ -186,7 +186,6 @@ export function Users() {
               />
               <User users={users} />
               <PagesController count={users.pages} currentPageCallback={(currentPage) => {
-                console.log('currentpageseted: ', currentPage);
                 setCurrentPage(currentPage);
                 loadUsers(currentPage);
               }} pages={users.pages} />

@@ -50,7 +50,6 @@ export function Profile(props) {
 
   const posts = useSelector(state => state.posts.posts)
   const user = useSelector(state => state.profile.profile)
-  debugger;
 
   const myProfile = () => {
     return !useParams().username || useParams().username === loggedUser?.userData?.username;
@@ -84,24 +83,33 @@ export function Profile(props) {
     <Box sx={{ 'mt': 2 }}>
       <Box className="profileGrid" sx={{
         display: 'grid', gridTemplateColumns: {
-          sm: '1fr 1.4fr 3fr',
+          sm: '2fr 1fr',
           xs: '1fr'
         }, gap: 2
       }} xs={{
         display: 'none'
       }}>
-        <Box style={{margin: '10px 0'}}>
+        <Box>
           <ProfileCard
             myProfile={myProfile()}
             profileUser={user?.profileUser} />
           { !wishes?.length && !myProfile() ? '' :
             <Card sx={{  p: {xs: 2},
-            maxWidth: { xs: 400, md: 400 },
+            maxWidth: { xs: 500, md: 500 },
             ml:{xs: 5, md: 0},
             mt: {xs: 2}, height: 'fit-content' }}>
-            <p style={{fontSize: '18px', margin:'0', fontWeight: 'bold'}}>{t('Wishes')}</p>
+              <div style={{display: 'flex',
+                marginBottom: '10px',
+                justifyContent: "space-between", alignItems: 'center', alignContent: 'center'}}>
+                <div style={{fontSize: '18px', margin:'0', fontWeight: 'bold'}}>
+                  {t('Wishes')}
+                </div>
+                <div>
+                  <img src="/images/icons/edit-button.svg" alt="" />
+                </div>
+              </div>
             <Divider style={{marginBottom: '10px'}} />
-            { wishes?.length ? wishes.map(wish => {
+            { wishes?.length ? wishes.map((wish, i, wishes) => {
               return <div>
                 <Wish
                   title={wish.name}
@@ -110,7 +118,7 @@ export function Profile(props) {
                   recipient={user?.profileUser}
                   myProfile={myProfile()}
                   to={wish.amount} style={{margin: '10px 0'}} />
-                <Divider style={{margin: '10px 0'}} />
+                { i + 1 !== wishes.length ? <Divider style={{margin: '10px 0'}} /> : '' }
               </div>
             }) : '' }
               <AddWishModal change={() => loadWishes() } myProfile={myProfile()}></AddWishModal>

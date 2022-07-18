@@ -4,7 +4,6 @@ import axios from 'axios'
 import SendTipModal from '../pages/profile/modals/SendTipModal'
 
 export const Wish = ({title, from=0, to, id, myProfile, recipient}) => {
-  debugger;
   const width = (100/to)*from;
   const handleWishSupport = () => {
     console.log('wish support')
@@ -17,14 +16,14 @@ export const Wish = ({title, from=0, to, id, myProfile, recipient}) => {
         display: 'flex',
         justifyAlign: 'center',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        fontSize: '16px', color: '#5D5E65'}}><span>{from} of {to}$</span>
-        {myProfile ?
-          <img onClick={() => {
-            axios.delete('/api/wish/' + id);
-          }}
-        src="/images/icons/edit-button.svg"
-        alt="edit" /> : 'Collected' }
+        justifyContent: 'space-between', color: '#5D5E65'}}>
+        <span style={{
+          fontWeight: 'bold',
+          fontSize: '16px'
+        }}>
+          {from} of {to}$
+        </span>
+        <span style={{fontSize: '14px', color: '#B3B3B3'}}>Collected</span>
       </div>
     <div style={{
       position: 'relative',

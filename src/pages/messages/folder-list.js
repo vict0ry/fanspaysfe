@@ -73,7 +73,6 @@ export const FolderList = ({setFolderListOpen}) => {
           return (
             <ListItem
               onClick={() => {
-                debugger;
                 dispatch(loadChatMessages(_id))
                 socket.emit('join room', _id)
                 setFolderListOpen(false)

@@ -39,7 +39,6 @@ export default function AddProductModal() {
   const inputFile = useRef(null)
 
   useEffect(() => {
-    debugger;
     axios.get('/api/shop/' + profile.profileUser._id).then(products => {
       setProducts(products.data)
     })

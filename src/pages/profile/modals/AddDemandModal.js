@@ -47,8 +47,8 @@ export default function AddDemandModal() {
   const { username } = useParams()
   const loggedUser = useSelector(state => state.user)
   const { t } = useTranslation()
-  const isAllowed = () => {
-    return !!(!username || username === loggedUser?.userData?.username)
+  const isMyProfile = () => {
+    return !(!username || username === loggedUser?.userData?.username)
   }
   const user = useSelector(state => state.profile.profile);
   const dispatch = useDispatch();
@@ -70,11 +70,16 @@ export default function AddDemandModal() {
       setDemands(data);
     })
   }, []);
+  const handleDemandAction = (action, demandId) => {
+    axios.put('/api/demands/change-status', {
+      demandId, action
+    }).then(console.log);
+  }
 
 
   return (
     <div>
-      {isAllowed() ?
+      {isMyProfile() ?
         <Button variant="contained" onClick={handleOpen}>{t('COMMON.ADD_DEMAND')}</Button> : ''}
       <Modal
         open={open}
@@ -106,14 +111,12 @@ export default function AddDemandModal() {
                 type={'submit'}
                 sx={{ maxWidth: '100px', marginTop: '10px', float: 'right' }} variant="outlined">{t('COMMON.SEND')}
               </Button>
-
             </FormControl>
           </FormGroup>
         </Box>
       </Modal>
       {
         demands.map(demand => {
-          debugger;
           return <div style={{marginTop: '20px'}}>
             <div>
               <Card>
@@ -149,14 +152,22 @@ export default function AddDemandModal() {
                     fontSize: '24px'
                   }}>{demand.price} CZK</div>
                   <div>
-                    <Button variant={'success'}>
-                      <img src="/images/icons/accept.svg" style={{marginRight: '10px'}} alt="" />
-                      {t('COMMON.ACCEPT')}
-                    </Button>
-                    <Button variant={'cancel'} sx={{marginLeft: '10px'}}>
-                      <img src="/images/icons/remove.svg" style={{marginRight: '10px'}} alt="" />
-                      {t('COMMON.REFUSE')}
-                    </Button>
+                    { !isMyProfile() ? <div>
+                      <Button onClick={() => handleDemandAction('accepted', demand._id)} variant={'success'}>
+                        <img src="/images/icons/accept.svg" style={{marginRight: '10px'}} alt="" />
+                        {t('COMMON.ACCEPT')}
+                      </Button>
+                      <Button onClick={() => handleDemandAction('declined', demand._id)} variant={'cancel'} sx={{marginLeft: '10px'}}>
+                        <img src="/images/icons/remove.svg" style={{marginRight: '10px'}} alt="" />
+                        {t('COMMON.REFUSE')}
+                      </Button>
+                    </div> : <div style={{
+                      background: demand.status === 'request' ? 'dark-yellow' : 'green',
+                      padding: '5px 10px',
+                      color: 'black',
+                      borderRadius: '5px'
+                    }}>{demand.status}</div> }
+
                   </div>
                 </CardActions>
               </Card>
