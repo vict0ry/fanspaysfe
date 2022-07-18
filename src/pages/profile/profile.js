@@ -114,7 +114,7 @@ export function Profile(props) {
                 <Wish
                   title={wish.name}
                   id={wish._id}
-                  from={300}
+                  from={wish?.collected?.map(i => i.amount).reduce((a,b) => a+b,0)}
                   recipient={user?.profileUser}
                   myProfile={myProfile()}
                   to={wish.amount} style={{margin: '10px 0'}} />

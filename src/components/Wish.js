@@ -39,7 +39,7 @@ export const Wish = ({title, from=0, to, id, myProfile, recipient}) => {
     <div style={{textAlign: 'left'}}>
       <span style={{color: '#1A051D', fontSize: '14px', fontWeight: 'bold', textAlign: 'center'}}>{title}</span>
     </div>
-    {!myProfile ? <SendTipModal recipient={recipient}>
+    {!myProfile ? <SendTipModal wishId={id} type={'WISH'} recipient={recipient}>
         <Button style={{margin: '10px 0'}} onClick={handleWishSupport} variant={'contained'}>{t('Support')}</Button>
       </SendTipModal> : ''}
   </div>);

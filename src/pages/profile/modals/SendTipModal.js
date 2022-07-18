@@ -26,7 +26,7 @@ const style = {
   p: 4
 }
 
-export default function SendTipModal({ recipient, children, postModal }) {
+export default function SendTipModal({ recipient, children, type = 'TIP', wishId }) {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -50,13 +50,21 @@ export default function SendTipModal({ recipient, children, postModal }) {
 
 
   function handleCreditSend(recipient) {
-    axios.post('/api/credit', {
+    let data = {
       description: formData.description,
       amount: +formData.amount,
       recipient: recipient._id,
       category: 'TIP',
       sender: loggedUser.userData._id
-    }).then(_ => {
+    };
+    if (type === 'WISH') {
+      data = {
+        ...data,
+        category: 'WISH',
+        wishId: wishId
+      }
+    }
+    axios.post('/api/credit', data).then(_ => {
       axios.get('/api/credit').then(response => {
         setOpen(false)
       })
