@@ -21,9 +21,11 @@ export const Finance = () => {
     products: 0,
     total: 0
   })
+  const [balance, setBalance] = useState(0);
   useEffect(() => {
     axios.get('/api/credit').then(({ data }) => {
       setTransactions(data.transactions);
+      setBalance(data.total)
       const filterByCategory = filterName => data.income.filter(i => i.category === filterName).map(i => i.amount).reduce((a,b) => a+b, 0)
       setIncomeStatistic({
         ...incomeStatistic,
@@ -48,8 +50,8 @@ export const Finance = () => {
         <Box sx={{width: '186%'}}>
           <FinanceStatistics tips={incomeStatistic.tips} followers={incomeStatistic.followers}
                              products={incomeStatistic.products} total={incomeStatistic.total} />
-            <Typography sx={{mt: 10, ml: '10%'}} variant={'h5'}>Add new founds</Typography>
-          <NewFounds/>
+            <Typography sx={{mt: 10, ml: '10%'}} variant={'h5'}>Add new funds</Typography>
+          <NewFounds balance={balance}/>
           <Typography sx={{mt: 8, ml: '10%'}} variant={'h5'}>Incoming Analytics</Typography>
           <Box sx={{mt: 2, mb: 10, ml: '9%', width: '60%', display: 'flex', justifyContent: 'space-between', flexDirection: {xs: 'column', md: 'row'}}}>
             <FinanceChart />

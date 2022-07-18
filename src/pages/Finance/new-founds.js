@@ -10,7 +10,7 @@ import Payment from './payment'
 import axios from 'axios'
 
 
-export const NewFounds = () => {
+export const NewFounds = ({balance}) => {
   const [openPaymentModal, setPaymentModal] = useState(false);
   const handleOpen = () => setPaymentModal(true);
   const handleClose = () => setPaymentModal(false);
@@ -39,7 +39,7 @@ export const NewFounds = () => {
         <Card>
           <CardContent sx={{display: 'flex'}}>
             <Typography variant={'h5'}>Balance:</Typography>
-            <Typography sx={{mt: 0.8, ml: 1}} variant={'body1'}>$ 1500</Typography>
+            <Typography sx={{mt: 0.8, ml: 1}} variant={'body1'}>{balance}</Typography>
           </CardContent>
           <CardActions>
             <Button sx={{background: '#4776E6'}} variant={'contained'}>Deposit</Button>
