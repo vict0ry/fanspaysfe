@@ -45,7 +45,7 @@ export const Shop = () => {
   const [fromAge, setFromAge] = useState(21)
   const [upToAge, setUpToAge] = useState(21)
 
-  const [sortBy, setSortBy] = useState(t("MARKET.POPULAR") + " ⭐");
+  const [sortBy, setSortBy] = useState(t("SHOP.POPULAR") + " ⭐");
   const [sortByOpen, setSortByOpen] = useState(false);
   const [checkedTags, setCheckedTags] = useState({});
   const [findNickname, setFindNickname] = useState("");
@@ -223,7 +223,7 @@ export const Shop = () => {
                             borderRadius: "8px",
                             background: "linear-gradient(94.04deg, #4776E6 10.41%, #8E54E9 77.48%)",
                             textTransform: "none",
-                          }}><span style={{lineHeight: "16px"}}>{t("MARKET.BUY")}</span></Button>
+                          }}><span style={{lineHeight: "16px"}}>{t("SHOP.BUY")}</span></Button>
                         </Box>
 
                       </Box>

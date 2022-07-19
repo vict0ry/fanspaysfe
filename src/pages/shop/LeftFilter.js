@@ -12,7 +12,9 @@ const available_tags = [
   "ex",
   "online",
   "t-shirt",
-  "футболка"
+  "футболка",
+  "thing1",
+  "thing2"
 ];
 
 const leftFilterStyles = {
@@ -220,7 +222,7 @@ const LeftFilter = (props) => {
           width: "100%",
           justifyContent: "space-between"
         }}>
-          {t("MARKET.PRICE")}
+          {t("SHOP.PRICE")}
           {width < 900 &&
           <Button
             sx={{
@@ -327,7 +329,7 @@ const LeftFilter = (props) => {
 
               },
               '& .Mui-focusVisible': {
-                
+
               },
               '& .css-eg0mwd-MuiSlider-thumb': {
                 width: "24px",
@@ -352,7 +354,7 @@ const LeftFilter = (props) => {
 
 
       <Box style={{width: "100%"}}>
-        <Box style={leftFilterStyles.title}>{t("USERS.CATEGORY")}</Box>
+        <Box style={leftFilterStyles.title}>{t("SHOP.CATEGORY")}</Box>
         <Box sx={leftFilterStyles.categories}>
           <FormGroup>
             {props.categories.map((category) => {
@@ -383,7 +385,7 @@ const LeftFilter = (props) => {
 
 
       <Box sx={{width: "100%", marginBottom: "24px"}}>
-        <Box style={leftFilterStyles.title}>{t("MARKET.TAGS")}</Box>
+        <Box style={leftFilterStyles.title}>{t("SHOP.TAGS")}</Box>
         <Box sx={{
           padding: "8px 8px",
           borderRadius: "8px",

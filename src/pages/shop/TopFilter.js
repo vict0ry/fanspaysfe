@@ -166,31 +166,31 @@ const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, s
                 <ButtonBase
                   style={{padding: 8, justifyContent: "start"}}
                   onClick={() => {
-                    setSortBy(t("MARKET.DESCENDING") + " ↓")
+                    setSortBy(t("SHOP.DESCENDING") + " ↓")
                     setSortByOpen(!sortByOpen)
                   }}
-                >{t("MARKET.DESCENDING")} ↓</ButtonBase>
+                >{t("SHOP.DESCENDING")} ↓</ButtonBase>
                 <ButtonBase
                   style={{padding: 8, justifyContent: "start"}}
                   onClick={() => {
-                    setSortBy(t("MARKET.ASCENDING") + " ↑")
+                    setSortBy(t("SHOP.ASCENDING") + " ↑")
                     setSortByOpen(!sortByOpen)
                   }}
-                >{t("MARKET.ASCENDING")} ↑</ButtonBase>
+                >{t("SHOP.ASCENDING")} ↑</ButtonBase>
                 <ButtonBase
                   style={{padding: 8, justifyContent: "start"}}
                   onClick={() => {
-                    setSortBy(t(t("MARKET.NEW")) + " 🔥")
+                    setSortBy(t(t("SHOP.NEW")) + " 🔥")
                     setSortByOpen(!sortByOpen)
                   }}
-                >{t("MARKET.NEW")} 🔥️</ButtonBase>
+                >{t("SHOP.NEW")} 🔥️</ButtonBase>
                 <ButtonBase
                   style={{padding: 8, justifyContent: "start"}}
                   onClick={() => {
-                    setSortBy(t("MARKET.POPULAR") + " ⭐")
+                    setSortBy(t("SHOP.POPULAR") + " ⭐")
                     setSortByOpen(!sortByOpen)
                   }}
-                >{t("MARKET.POPULAR")} ⭐</ButtonBase>
+                >{t("SHOP.POPULAR")} ⭐</ButtonBase>
               </Box>
             </ClickAwayListener>
             }
