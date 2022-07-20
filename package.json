@@ -2,6 +2,7 @@
   "private": true,
   "homepage": "https://create-react-app-redux.now.sh",
   "scripts": {
+    "extract-translations": "i18next --fail-on-warnings",
     "deploy": "now && now alias",
     "start": "react-scripts start",
     "now-start": "serve -s ./build",
@@ -12,6 +13,7 @@
   },
   "devDependencies": {
     "css-loader": "^6.7.1",
+    "i18next-parser": "^6.5.0",
     "prettier": "2.6.2",
     "react-scripts": "5.0.1"
   },
