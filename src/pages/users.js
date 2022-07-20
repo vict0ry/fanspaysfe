@@ -10,6 +10,7 @@ import useWindowDimensions from '../useWindowDimensions'
 import { t } from 'i18next'
 import axios from 'axios'
 
+
 const categories = [
   "Медитация",
   "Спорт",
@@ -59,7 +60,7 @@ export function Users() {
   const [fromAge, setFromAge] = useState(21)
   const [upToAge, setUpToAge] = useState(21)
 
-  const [sortBy, setSortBy] = useState(t("USERS.BY_POPULARITY") + " ⭐");
+  const [sortBy, setSortBy] = useState("");
   const [sortByOpen, setSortByOpen] = useState(false);
   const [checkedTags, setCheckedTags] = useState({});
   const [findNickname, setFindNickname] = useState("");
@@ -77,7 +78,7 @@ export function Users() {
 
 
   return (
-    <Grid container style={{paddingTop: 40, justifyContent: "center"}}>
+    <Grid container style={{justifyContent: "center"}}>
       <Grid
         items
         sx={{

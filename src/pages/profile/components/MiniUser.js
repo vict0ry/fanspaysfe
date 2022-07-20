@@ -5,13 +5,13 @@ export const MiniUser = ({ user }) => {
   return <Link to={'/profile/' + user?.username}>
     <div style={{ display: 'flex', marginBottom: 20 }} className="user-info">
       <div className="avatar-wrapper" style={{ marginRight: '5px' }}>
-        <img
+        {user.profilePic && <img
           style={{ borderRadius: '100%' }}
           src={beURL + user?.profilePic}
           alt=""
           width={'50px'}
           height={'50px'}
-        />
+        />}
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }} className="user-metadata">
         <strong style={{ fontSize: '1rem', color: 'black' }}>

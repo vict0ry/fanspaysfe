@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Box, Button, ButtonBase, Checkbox, FormControlLabel, FormGroup, Grid, InputBase, Slider } from '@mui/material'
-import { SearchInput } from '../messages/SearchInput'
+import { SearchInput } from '../shop/SearchInput'
 import { Icon } from '../messages/Icon'
 import useWindowDimensions from '../../useWindowDimensions'
 import { TextField } from '@mui/material'
@@ -321,71 +321,6 @@ const LeftFilter = (props) => {
         </Box>
       </Box>
 
-
-      <Box sx={{width: "100%", marginBottom: "24px"}}>
-        <Box style={leftFilterStyles.title}>{t("MARKET.TAGS")}</Box>
-        <Box sx={{
-          padding: "8px 8px",
-          borderRadius: "8px",
-          border: "1px solid #ECE9F1",
-          background: "#fff",
-          display: "flex",
-          flexWrap: "wrap",
-          maxHeight: "120px",
-          width: "100%",
-          overflowY: "auto"
-        }}>
-          <Box sx={{
-            marginRight: "8px",
-            marginBottom: "8px"
-          }}>
-            <Icon name="hashtag" />
-          </Box>
-          {Object.keys(props.checkedTags).map((tag) => {
-            if(props.checkedTags[tag]) {
-              return (
-                <Box sx={{
-                  padding: "4px 8px",
-                  background: "#E8EFFF",
-                  borderRadius: "4px",
-                  marginRight: "4px",
-                  color: "#4776E6",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  display: "flex",
-                  marginBottom: "8px"
-                }}>
-                <span style={{ marginRight: 2 }}>
-                  {tag}
-                </span>
-                  <ButtonBase onClick={() => {
-                    props.setCheckedTags({
-                      ...props.checkedTags,
-                      [tag]: false
-                    });
-                  }}>
-                    <Icon name="x" />
-                  </ButtonBase>
-                </Box>
-              );
-            }
-          })}
-
-        </Box>
-      </Box>
-
-
-
-
-
-
-
-
-
-
-
-
-
       <Box sx={{
         width: {
           md: "180px",
@@ -394,21 +329,11 @@ const LeftFilter = (props) => {
         marginBottom: "24px"
       }}>
         <Box style={leftFilterStyles.title}>{t("USERS.SEARCH_BY_NICKNAME")}</Box>
-        {/*<SearchInput*/}
-        {/*  name="at"*/}
-        {/*  placeholder="Введите ник"*/}
-        {/*  state={props.findNickname}*/}
-        {/*  setState={props.setFindNickname}*/}
-        {/*/>*/}
-        {/*{console.log(props.findNickname)}*/}
-        <InputBase
-          InputProps={{disableUnderline: true}}
-          placeholder="nickname"
-          sx={{ width: '100%', padding: '0', marginLeft: 0, border: "1px solid #000" }}
-          onChange={(e) => {
-            props.setFindNickname(e.target.value)
-          }}
+        <SearchInput
+          name="at"
+          placeholder="Введите ник"
           value={props.findNickname}
+          setValue={props.setFindNickname}
         />
       </Box>
       <Box sx={{

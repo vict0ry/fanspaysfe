@@ -1,5 +1,5 @@
 import { Box, ButtonBase, InputBase } from '@mui/material'
-import { SearchInput } from '../messages/SearchInput'
+import { SearchInput } from './SearchInput'
 import { ClickAwayListener } from '@mui/base'
 import React from 'react'
 import { Icon } from '../messages/Icon'
@@ -65,7 +65,7 @@ const styles = {
   }
 };
 
-const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, setCheckedTags, setLeftMenuOpen, leftMenuOpen, findAuthors, setFindAuthors, findNickname, setFindNickname}) => {
+const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, setCheckedTags, setLeftMenuOpen, leftMenuOpen, findProducts, setFindProducts, findNickname, setFindNickname}) => {
   const {width, height} = useWindowDimensions();
 
   return(
@@ -98,15 +98,22 @@ const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, s
           {/*  }}*/}
           {/*/>*/}
 
-          <InputBase
-            InputProps={{disableUnderline: true}}
-            placeholder="Введите ник"
-            sx={{ width: '100%', padding: '0', marginLeft: 0, border: "1px solid #000" }}
-            onChange={(e) => {
-              setFindAuthors(e.target.value)
-            }}
-            value={findAuthors}
+          <SearchInput
+            placeholder="Поиск товаров..."
+            setValue={setFindProducts}
+            value={findProducts}
+            name="search"
           />
+
+          {/*<InputBase*/}
+          {/*  InputProps={{disableUnderline: true}}*/}
+          {/*  placeholder="Введите ник"*/}
+          {/*  sx={{ width: '100%', padding: '0', marginLeft: 0, border: "1px solid #000" }}*/}
+          {/*  onChange={(e) => {*/}
+          {/*    setFindAuthors(e.target.value)*/}
+          {/*  }}*/}
+          {/*  value={findAuthors}*/}
+          {/*/>*/}
         </Box>
 
         <Box
@@ -225,10 +232,10 @@ const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, s
             </ButtonBase>
           </Box>
         }
-        {Object.keys(checkedTags).map((tag) => {
+        {Object.keys(checkedTags).map((tag, index) => {
           if(checkedTags[tag]) {
             return (
-              <Box style={styles.tag}>
+              <Box key={index} style={styles.tag}>
                 <span style={{ marginRight: 2 }}>
                   {tag}
                 </span>

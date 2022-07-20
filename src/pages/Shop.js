@@ -49,7 +49,7 @@ export const Shop = () => {
   const [sortByOpen, setSortByOpen] = useState(false);
   const [checkedTags, setCheckedTags] = useState({});
   const [findNickname, setFindNickname] = useState("");
-  const [findAuthors, setFindAuthors] = useState("");
+  const [findProducts, setFindProducts] = useState("");
 
   const {width, height} = useWindowDimensions();
 
@@ -99,7 +99,7 @@ export const Shop = () => {
             leftMenuOpen={leftMenuOpen}
             findNickname={findNickname}
             setFindNickname={setFindNickname}
-            findAuthors={findAuthors}
+            findProducts={findProducts}
             sortBy={sortBy}
             categories={categories}
           />
@@ -132,7 +132,7 @@ export const Shop = () => {
             leftMenuOpen={leftMenuOpen}
             findNickname={findNickname}
             setFindNickname={setFindNickname}
-            findAuthors={findAuthors}
+            findProducts={findProducts}
             sortBy={sortBy}
             categories={categories}
           />
@@ -149,12 +149,13 @@ export const Shop = () => {
               setCheckedTags={setCheckedTags}
               setLeftMenuOpen={setLeftMenuOpen}
               leftMenuOpen={leftMenuOpen}
-              setFindAuthors={setFindAuthors}
-              findAuthors={findAuthors}
+              setFindProducts={setFindProducts}
+              findProducts={findProducts}
               findNickname={findNickname}
               setFindNickname={setFindNickname}
             />
 
+            {console.log(findProducts)}
 
 
             <div style={{ marginTop: 10 }}>

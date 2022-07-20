@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Box, Button, ButtonBase, Checkbox, FormControlLabel, FormGroup, Grid, InputBase, Slider } from '@mui/material'
-import { SearchInput } from '../messages/SearchInput'
+import { SearchInput } from './SearchInput'
 import { Icon } from '../messages/Icon'
 import useWindowDimensions from '../../useWindowDimensions'
 import { TextField } from '@mui/material'
@@ -545,18 +545,25 @@ const LeftFilter = (props) => {
         {/*  state={props.findNickname}*/}
         {/*  setState={props.setFindNickname}*/}
         {/*/>*/}
-        {/*{console.log(props.findNickname)}*/}
-        <InputBase
-          InputProps={{disableUnderline: true}}
-          placeholder="nickname"
-          sx={{ width: '100%', padding: '0', marginLeft: 0, border: "1px solid #000" }}
-          onChange={(e) => {
-            if(e.target.value.length <= 20) {
-              props.setFindNickname(e.target.value)
-            }
-          }}
+
+        <SearchInput
+          placeholder="Введите ник"
           value={props.findNickname}
+          setValue={props.setFindNickname}
+          name="at"
         />
+
+        {/*<InputBase*/}
+        {/*  InputProps={{disableUnderline: true}}*/}
+        {/*  placeholder="nickname"*/}
+        {/*  sx={{ width: '100%', padding: '0', marginLeft: 0, border: "1px solid #000" }}*/}
+        {/*  onChange={(e) => {*/}
+        {/*    if(e.target.value.length <= 20) {*/}
+        {/*      props.setFindNickname(e.target.value)*/}
+        {/*    }*/}
+        {/*  }}*/}
+        {/*  value={props.findNickname}*/}
+        {/*/>*/}
       </Box>
       <Box sx={{
         display: "flex",
@@ -584,7 +591,7 @@ const LeftFilter = (props) => {
                 upToAge: props.upToAge,
                 checkedTags: checked,
                 findNickname: props.findNickname,
-                findAuthors: props.findAuthors,
+                findProducts: props.findProducts,
                 sortBy: props.sortBy,
                 tags: tags,
                 price: price,

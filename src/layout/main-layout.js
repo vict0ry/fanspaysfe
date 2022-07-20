@@ -14,8 +14,14 @@ const MainLayout = ({ props }) => {
     <div>
     <SearchBar />
     <Container maxWidth="lg">
-      <Box sx={{ display: 'grid', minHeight: 'calc(100vh - 176px)',
-        gridTemplateColumns: '1fr 3fr', width: '100%', marginTop: '40px' }}>
+      <Box sx={{
+        // display: 'grid',
+        display: "flex",
+        minHeight: 'calc(100vh - 176px)',
+        gridTemplateColumns: '1fr 3fr',
+        width: '100%',
+        marginTop: '40px'
+      }}>
         <SharedLeftMenu />
         <Outlet />
       </Box>
