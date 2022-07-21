@@ -107,32 +107,22 @@
     "BLOCK_USER": "Block",
     "REPORT": "Report a violation"
   },
-  "SHOP": {
-    "CATEGORY": "Category",
-    "PRICE": "Price",
-    "TAGS": "Tags",
-    "BUY": "Buy",
-    "DESCENDING": "Price: descending",
-    "ASCENDING": "Price: ascending",
-    "POPULAR": "Popular",
-    "NEW": "New"
-  },
   "USERS": {
-    "TOP_AUTHORS": "TOP authors",
-    "WANT_TO_TOP": "I want to TOP",
-    "AGE": "Age",
-    "FROM": "From",
-    "UP_TO": "Up to",
-    "CATEGORY": "Category",
-    "SEARCH_BY_NICKNAME": "Search by nickname",
-    "APPLY_FILTER": "Apply filter",
-    "GO_TO_BLOG": "Go to blog",
-    "BY_POPULARITY": "By popularity",
-    "BY_NUMBER_FANS": "By number of fans",
-    "NEW": "New",
-    "AGE_YOUNGER": "Younger at first",
-    "AGE_OLDER": "Older at first",
-    "INPUT_NICKNAME": "Input nickname"
+    "TOP_AUTHORS": "ТОП авторов",
+    "WANT_TO_TOP": "Хочу в ТОП",
+    "AGE": "Возраст",
+    "FROM": "От",
+    "UP_TO": "До",
+    "CATEGORY": "Категория",
+    "SEARCH_BY_NICKNAME": "Поиск по нику",
+    "APPLY_FILTER": "Применить фильтр",
+    "GO_TO_BLOG": "Перейти в блог",
+    "BY_POPULARITY": "По популярности",
+    "BY_NUMBER_FANS": "По количеству фанов",
+    "NEW": "Новенькиес",
+    "AGE_YOUNGER": "Возраст: Сначала младше",
+    "AGE_OLDER": "Возраст: Сначала старше",
+    "INPUT_NICKNAME": "Введите ник"
   },
   "MAIN": {
     "MAIN_TITLE1": "Лучший сервис для ",
@@ -207,5 +197,14 @@
       "PLACEHOLDER": "Введите E-mail",
       "BUTTON": "Войти"
     }
+  },
+  "MARKET": {
+    "PRICE": "Price",
+    "TAGS": "Tags",
+    "BUY": "Buy",
+    "DESCENDING": "Price: descending",
+    "ASCENDING": "Price: ascending",
+    "POPULAR": "Popular",
+    "NEW": "New"
   }
 }

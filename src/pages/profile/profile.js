@@ -80,19 +80,30 @@ export function Profile(props) {
   const [selectedTab, setSelectedTab] = React.useState(0)
 
   return <div>
-    <Box sx={{ 'mt': 2 }}>
+    <Box sx={{
+      // 'mt': 2
+    }}>
       <Box className="profileGrid" sx={{
-        display: 'grid', gridTemplateColumns: {
+        // display: "flex",
+        // width: "312px",
+        display: 'grid',
+        gridTemplateColumns: {
           sm: '2fr 1fr',
           xs: '1fr'
-        }, gap: 2
+        },
+        gap: 2
       }} xs={{
         display: 'none'
       }}>
-        <Box>
+        <Box sx={{
+          width: "312px",
+          display: "flex",
+          flexDirection: "column"
+        }}>
           <ProfileCard
             myProfile={myProfile()}
-            profileUser={user?.profileUser} />
+            profileUser={user?.profileUser}
+          />
           { !wishes?.length && !myProfile() ? '' :
             <Card sx={{  p: {xs: 2},
             maxWidth: { xs: 500, md: 500 },

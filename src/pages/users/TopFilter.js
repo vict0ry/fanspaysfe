@@ -1,5 +1,5 @@
 import { Box, ButtonBase, InputBase } from '@mui/material'
-import { SearchInput } from '../messages/SearchInput'
+import { SearchInput } from '../shop/SearchInput'
 import { ClickAwayListener } from '@mui/base'
 import React from 'react'
 import { Icon } from '../messages/Icon'
@@ -88,24 +88,16 @@ const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, s
             xs: "8px"
           }
         }}>
-          {/*<SearchInput*/}
-          {/*  name="search"*/}
-          {/*  placeholder="Поиск авторов..."*/}
-          {/*  styles={{*/}
-          {/*    backgroundColor: "#fff",*/}
-          {/*    border: "1px solid #ECE9F1",*/}
-          {/*    borderRadius: 8*/}
-          {/*  }}*/}
-          {/*/>*/}
-
-          <InputBase
-            InputProps={{disableUnderline: true}}
-            placeholder="Введите ник"
-            sx={{ width: '100%', padding: '0', marginLeft: 0, border: "1px solid #000" }}
-            onChange={(e) => {
-              setFindAuthors(e.target.value)
-            }}
+          <SearchInput
+            name="search"
+            placeholder="Поиск авторов..."
             value={findAuthors}
+            setValue={setFindAuthors}
+            styles={{
+              backgroundColor: "#fff",
+              border: "1px solid #ECE9F1",
+              borderRadius: 8
+            }}
           />
         </Box>
 

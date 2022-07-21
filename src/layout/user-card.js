@@ -29,7 +29,7 @@ export default function ProfileCard({ profileUser, myProfile }) {
 
   const TextNumber = ({ number, text }) => {
     return <Box style={{ textAlign: 'center' }}>
-      <Box sx={{ fontSize: '1.5rem', fontWeight: 'bold' }} className="number">
+      <Box sx={{ fontSize: '14px', fontWeight: 700 }} className="number">
         {number}
       </Box>
       <Box className="descr">
@@ -38,15 +38,32 @@ export default function ProfileCard({ profileUser, myProfile }) {
     </Box>
   }
   return (
-    <Card sx={{ maxWidth: { xs: 500, md: 500 }, ml:{xs: 5, md: 0}, height: 'fit-content' }}>
-      <CardMedia
-        component="img"
-        height="250"
-        image={avatar(profileUser?.profilePic)}
-        alt="Avatar"
-      />
-      <CardActions sx={{ justifyContent: ' space-around', display: ' flex', flexDirection: ' column' }} disableSpacing>
-        <Box sx={{ marginTop: '5px' }}>
+    <Card sx={{
+      maxWidth: { xs: 500, md: 500 },
+      ml:{
+        xs: 5,
+        md: 0
+      },
+      height: 'fit-content'
+    }}>
+      <Box sx={{
+        padding: "16px"
+      }}>
+        <CardMedia
+          component="img"
+          height="320"
+          width="280"
+          image={avatar(profileUser?.profilePic)}
+          alt="Avatar"
+          sx={{
+            borderRadius: "8px",
+          }}
+        />
+      </Box>
+      <CardActions sx={{ justifyContent: ' space-around', display: ' flex', flexDirection: ' column', paddingTop: 0 }} disableSpacing>
+        <Box sx={{
+          // marginTop: '5px'
+        }}>
           <TextNumber number={profileUser?.followers?.length} text={t('COMMON.FOLLOWERS')} />
         </Box>
         {!myProfile ? <div><Box sx={{ marginTop: '15px' }}>
@@ -72,7 +89,8 @@ export default function ProfileCard({ profileUser, myProfile }) {
                 borderImage: 'linear-gradient(to right, #4776E6, #8E54E9) 1',
                 pl: 4,
                 color: 'black',
-                height: 40}}>
+                height: 40}}
+              >
                 <img src='/images/icons/copper-coin.svg'/> <span style={{marginLeft: 10}}>Send tip</span>
               </Box>
             </SendTipModal>
