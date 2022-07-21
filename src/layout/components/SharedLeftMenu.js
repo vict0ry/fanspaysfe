@@ -73,14 +73,14 @@ export const SharedLeftMenu = () => {
         <img style={iconStyle} src="/images/icons/shopping-cart.svg" alt="" />
         <Link style={linkStyles} to={'/shop/'}>{t('USERMENU.MARKETPLACE')}</Link>
       </div>
-      <div className="link">
-        <img style={iconStyle} src="/images/icons/money.svg" alt="" />
-        <Link style={linkStyles} to={'/customer'}>{t('USERMENU.TRANSACTIONS')}</Link>
-      </div>
-      <div className="link">
-        <img style={iconStyle} src="/images/icons/bookmark.svg" alt="" />
-        <Link style={linkStyles} to={'/'}>{t('USERMENU.BOOKMARKS')}</Link>
-      </div>
+      {/*<div className="link">*/}
+      {/*  <img style={iconStyle} src="/images/icons/money.svg" alt="" />*/}
+      {/*  <Link style={linkStyles} to={'/customer'}>{t('USERMENU.TRANSACTIONS')}</Link>*/}
+      {/*</div>*/}
+      {/*<div className="link">*/}
+      {/*  <img style={iconStyle} src="/images/icons/bookmark.svg" alt="" />*/}
+      {/*  <Link style={linkStyles} to={'/'}>{t('USERMENU.BOOKMARKS')}</Link>*/}
+      {/*</div>*/}
       <div className="link">
         <img style={iconStyle} src="/images/icons/settings.svg" alt="" />
         <Link style={linkStyles} to={'/edit'}>{t('USERMENU.SETTINGS')}</Link>
