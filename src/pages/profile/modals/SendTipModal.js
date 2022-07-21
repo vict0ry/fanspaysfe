@@ -6,8 +6,6 @@ import TextField from '@mui/material/TextField'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import IconButton from '@mui/material/IconButton'
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 import { MiniUser } from '../components/MiniUser'
@@ -56,7 +54,7 @@ export default function SendTipModal({ recipient, children, type = 'TIP', wishId
       recipient: recipient._id,
       category: 'TIP',
       sender: loggedUser.userData._id
-    };
+    }
     if (type === 'WISH') {
       data = {
         ...data,
@@ -86,7 +84,8 @@ export default function SendTipModal({ recipient, children, type = 'TIP', wishId
           <TextField
             name={'amount'}
             type={'number'}
-            sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('PROFILE.TIP_AMOUNT')} required />
+            sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('PROFILE.TIP_AMOUNT')}
+            required />
           <Divider />
           <TextField style={{ marginTop: 10 }}
                      name={'description'}

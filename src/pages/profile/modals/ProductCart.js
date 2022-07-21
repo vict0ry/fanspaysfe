@@ -7,9 +7,9 @@ import Button from '@mui/material/Button'
 import axios from 'axios'
 import { t } from 'i18next'
 
-export const ProductCart = ({product, disableActions = false}) => {
-  return                 <Card>
-    <CardContent style={{width: '100%'}}>
+export const ProductCart = ({ product, disableActions = false }) => {
+  return <Card>
+    <CardContent style={{ width: '100%' }}>
       <img width={'100%'} src={beURL + product?.pictures[0]} alt="" />
       <Typography gutterBottom variant="h5" component="div">
         {product.name}
@@ -19,9 +19,9 @@ export const ProductCart = ({product, disableActions = false}) => {
       </Typography>
     </CardContent>
     <CardActions style={{ justifyContent: 'space-between', flexDirection: 'row-reverse' }}>
-      { !disableActions ? <Button onClick={() => {
-        axios.post('/api/shop/buy/'+product._id);
-      }} variant={'contained'} style={{ float: 'right' }} size="small">{t('COMMON.BUY')}</Button> : '' }
+      {!disableActions ? <Button onClick={() => {
+        axios.post('/api/shop/buy/' + product._id)
+      }} variant={'contained'} style={{ float: 'right' }} size="small">{t('COMMON.BUY')}</Button> : ''}
       <div style={{ fontWeight: 'bold', color: 'green' }}>{product.price} Kč</div>
     </CardActions>
   </Card>

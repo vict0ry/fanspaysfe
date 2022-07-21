@@ -8,61 +8,70 @@ import CardContent from '@mui/material/CardContent'
 import React from 'react'
 
 
-export const FinanceStatistics = ({tips, followers, products, total}) => {
+export const FinanceStatistics = ({ tips, followers, products, total }) => {
 
-  return(
+  return (
     <Box sx={{
-      background: 'linear-gradient(#4776E6, #8E54E9)'}}>
+      background: 'linear-gradient(#4776E6, #8E54E9)'
+    }}>
       <Box sx={{
         display: 'flex',
-        flexDirection:{xs: 'column', md: 'row'},
-        justifyContent: 'space-around'}}>
+        flexDirection: { xs: 'column', md: 'row' },
+        justifyContent: 'space-around'
+      }}>
         <Typography
           variant={'h6'}
           sx={{
-          color: 'white',
-          mt: 2,
-          ml: {xs: '17%', md: 0}}}>Your finance statistics, User :)</Typography>
+            color: 'white',
+            mt: 2,
+            ml: { xs: '17%', md: 0 }
+          }}>Your finance statistics, User :)</Typography>
         <Box>
           <FormControl fullWidth>
             <InputLabel
               sx={{
-              mt: 0.5,
-              ml:{xs: '30%'}}}
+                mt: 0.5,
+                ml: { xs: '30%' }
+              }}
               id="weeks-id">
               <img style={{
                 paddingRight: 10,
                 marginTop: 0,
                 width: 21,
-                height: 21}} src='/images/icons/calendar.svg'/>Weeks</InputLabel>
-            <Select labelId={"weeks-id"} sx={{
+                height: 21
+              }} src="/images/icons/calendar.svg" />Weeks</InputLabel>
+            <Select labelId={'weeks-id'} sx={{
               width: 150,
               height: 30,
               mt: 2,
-              background:"white",
-              ml: {xs: '30%'}}}>
+              background: 'white',
+              ml: { xs: '30%' }
+            }}>
             </Select>
           </FormControl>
         </Box>
       </Box>
       <Box sx={{
         display: 'flex',
-        flexDirection: {xs: 'column', md: 'row'},
-        height: {xs: '500px', md: '88px'},
-        top: {xs: '26px', md: 71},
+        flexDirection: { xs: 'column', md: 'row' },
+        height: { xs: '500px', md: '88px' },
+        top: { xs: '26px', md: 71 },
         width: '700px',
         justifyContent: 'space-between',
-        position: 'relative'}}>
+        position: 'relative'
+      }}>
         <Card sx={{
           width: 300,
           mr: 2,
-          ml: 2}}>
+          ml: 2
+        }}>
           <CardContent sx={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-around'}}>
+            justifyContent: 'space-around'
+          }}>
             <Box>
-              <img src='/images/icons/briefcase.svg'/>
+              <img src="/images/icons/briefcase.svg" />
             </Box>
             <Box>
               <Typography variant={'h5'}>{total}</Typography>
@@ -70,13 +79,14 @@ export const FinanceStatistics = ({tips, followers, products, total}) => {
             </Box>
           </CardContent>
         </Card>
-        <Card sx={{width: 300, mr: 2,  ml: 2}}>
+        <Card sx={{ width: 300, mr: 2, ml: 2 }}>
           <CardContent sx={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-around'}}>
+            justifyContent: 'space-around'
+          }}>
             <Box>
-              <img style={{width: 40, height: 40}} src='/images/icons/copper-coin.svg'/>
+              <img style={{ width: 40, height: 40 }} src="/images/icons/copper-coin.svg" />
             </Box>
             <Box>
               <Typography variant={'h5'}>{tips}</Typography>
@@ -84,10 +94,10 @@ export const FinanceStatistics = ({tips, followers, products, total}) => {
             </Box>
           </CardContent>
         </Card>
-        <Card sx={{width: 300, mr: 2,  ml: 2}}>
-          <CardContent sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
+        <Card sx={{ width: 300, mr: 2, ml: 2 }}>
+          <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
             <Box>
-              <img src='/images/icons/crown.svg'/>
+              <img src="/images/icons/crown.svg" />
             </Box>
             <Box>
               <Typography variant={'h5'}>{followers}</Typography>
@@ -95,10 +105,10 @@ export const FinanceStatistics = ({tips, followers, products, total}) => {
             </Box>
           </CardContent>
         </Card>
-        <Card sx={{width: 300, mr: 2,  ml: 2}}>
-          <CardContent sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
+        <Card sx={{ width: 300, mr: 2, ml: 2 }}>
+          <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
             <Box>
-              <img src='/images/icons/store.svg'/>
+              <img src="/images/icons/store.svg" />
             </Box>
             <Box>
               <Typography variant={'h5'}>{products}</Typography>

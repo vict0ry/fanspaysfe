@@ -5,7 +5,6 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import { OrdersTab } from './ordersTab'
 import { CreditTab } from './creditTab'
-import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props

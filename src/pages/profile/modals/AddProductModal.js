@@ -7,13 +7,8 @@ import TextField from '@mui/material/TextField'
 import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@mui/material/Grid'
 import axios from 'axios'
-import Card from '@mui/material/Card'
-import Typography from '@mui/material/Typography'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { beURL } from '../../../config'
 import { ProductCart } from './ProductCart'
 
 const style = {
@@ -30,7 +25,7 @@ const style = {
 
 export default function AddProductModal() {
   const dispatch = useDispatch()
-  const profile = useSelector(state => state.profile.profile);
+  const profile = useSelector(state => state.profile.profile)
   const [open, setOpen] = useState(false)
   const [products, setProducts] = useState([])
   const handleOpen = () => setOpen(true)
@@ -109,7 +104,7 @@ export default function AddProductModal() {
               <input
                 type="file"
                 multiple
-                accept='.png,.jpg,.jpeg'
+                accept=".png,.jpg,.jpeg"
                 onChange={onFileUploadChange}
                 ref={inputFile} style={{ display: 'none' }}
               />

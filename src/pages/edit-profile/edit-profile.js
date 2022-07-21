@@ -17,7 +17,6 @@ import { EasyDatePicker } from './components/easyDatePicker'
 import { TabContacts } from '../../components/TabContacts'
 import { loadProfile } from '../../redux/actions/profile.action'
 import { beURL } from '../../config'
-import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props
@@ -57,8 +56,8 @@ export function EditProfile(props) {
     birthDate: '',
     profilePic: ''
   })
-  const [email, setEmail] = useState(profileUser.email);
-  const [checkboxes, setCheckboxes] = useState({});
+  const [email, setEmail] = useState(profileUser.email)
+  const [checkboxes, setCheckboxes] = useState({})
 
   useEffect(() => {
     setUserForm(profileUser)
@@ -101,10 +100,10 @@ export function EditProfile(props) {
       description
     } = event.target.elements
 
-    const checked = [];
+    const checked = []
     Object.keys(checkboxes).forEach(tag => {
-      if(checkboxes[tag]){
-        checked.push(tag);
+      if (checkboxes[tag]) {
+        checked.push(tag)
       }
     })
 
@@ -144,7 +143,7 @@ export function EditProfile(props) {
 
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: 2 }}>
         <Tabs
-          style={{background:'white'}}
+          style={{ background: 'white' }}
           orientation="vertical"
           variant="scrollable"
           value={value}
@@ -152,14 +151,19 @@ export function EditProfile(props) {
           aria-label="Vertical tabs example"
           sx={{ borderRight: 1, borderColor: 'divider' }}
         >
-          <Tab label={<div><img src="/images/icons/user.svg" alt="about me" /> {t('COMMON.ABOUT_ME')}</div>} {...a11yProps(0)} />
-          <Tab label={<div><img src="/images/icons/currency-dollar.svg" alt="price settings" /> {t('COMMON.PRICE_SETTINGS')}</div>} {...a11yProps(1)} />
-          <Tab label={<div><img src="/images/icons/settings.svg" alt="price settings" /> {t('COMMON.PARAMETERS')}</div>} {...a11yProps(2)} />
-          <Tab label={<div><img src="/images/icons/bank-card.svg" alt="price settings" /> {t('PROFILE.CREDIT_CARDS')}</div>} {...a11yProps(3)} />
-          <Tab label={<div><img src="/images/icons/account.svg" alt="price settings" />{t('COMMON.CONTACTS')}</div>} {...a11yProps(4)} />
+          <Tab label={<div><img src="/images/icons/user.svg" alt="about me" /> {t('COMMON.ABOUT_ME')}
+          </div>} {...a11yProps(0)} />
+          <Tab label={<div><img src="/images/icons/currency-dollar.svg"
+                                alt="price settings" /> {t('COMMON.PRICE_SETTINGS')}</div>} {...a11yProps(1)} />
+          <Tab label={<div><img src="/images/icons/settings.svg" alt="price settings" /> {t('COMMON.PARAMETERS')}
+          </div>} {...a11yProps(2)} />
+          <Tab label={<div><img src="/images/icons/bank-card.svg" alt="price settings" /> {t('PROFILE.CREDIT_CARDS')}
+          </div>} {...a11yProps(3)} />
+          <Tab label={<div><img src="/images/icons/account.svg" alt="price settings" />{t('COMMON.CONTACTS')}
+          </div>} {...a11yProps(4)} />
 
         </Tabs>
-        <div style={{background: 'white'}}>
+        <div style={{ background: 'white' }}>
           <TabPanel value={value} index={0}>
             <Box component="form" noValidate onSubmit={submitForm} sx={{ mt: 3 }}>
               <Grid container spacing={2}>

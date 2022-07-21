@@ -1,16 +1,16 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
+import * as React from 'react'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import CssBaseline from '@mui/material/CssBaseline'
+import Drawer from '@mui/material/Drawer'
+import IconButton from '@mui/material/IconButton'
+import MenuIcon from '@mui/icons-material/Menu'
+import Toolbar from '@mui/material/Toolbar'
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
 
-export default function ResponsiveDrawer({window, children}) {
+export default function ResponsiveDrawer({ window, children }) {
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -19,7 +19,7 @@ export default function ResponsiveDrawer({window, children}) {
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          ml: { sm: `${drawerWidth}px` }
         }}
       >
         <Toolbar>
@@ -46,11 +46,11 @@ export default function ResponsiveDrawer({window, children}) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true // Better open performance on mobile.
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
           }}
         >
           {drawer}
@@ -59,7 +59,7 @@ export default function ResponsiveDrawer({window, children}) {
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
           }}
           open
         >
@@ -73,5 +73,5 @@ export default function ResponsiveDrawer({window, children}) {
         {children}
       </Box>
     </Box>
-  );
+  )
 }

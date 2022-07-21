@@ -40,14 +40,14 @@ export default function ProfileCard({ profileUser, myProfile }) {
   return (
     <Card sx={{
       maxWidth: { xs: 500, md: 500 },
-      ml:{
+      ml: {
         xs: 5,
         md: 0
       },
       height: 'fit-content'
     }}>
       <Box sx={{
-        padding: "16px"
+        padding: '16px'
       }}>
         <CardMedia
           component="img"
@@ -56,11 +56,12 @@ export default function ProfileCard({ profileUser, myProfile }) {
           image={avatar(profileUser?.profilePic)}
           alt="Avatar"
           sx={{
-            borderRadius: "8px",
+            borderRadius: '8px'
           }}
         />
       </Box>
-      <CardActions sx={{ justifyContent: ' space-around', display: ' flex', flexDirection: ' column', paddingTop: 0 }} disableSpacing>
+      <CardActions sx={{ justifyContent: ' space-around', display: ' flex', flexDirection: ' column', paddingTop: 0 }}
+                   disableSpacing>
         <Box sx={{
           // marginTop: '5px'
         }}>
@@ -69,7 +70,7 @@ export default function ProfileCard({ profileUser, myProfile }) {
         {!myProfile ? <div><Box sx={{ marginTop: '15px' }}>
           <Link to={'/messages/' + profileUser?._id}>
             <Button
-              sx={{width: 180}}
+              sx={{ width: 180 }}
               variant="contained">{t('COMMON.SEND_MESSAGE')}
             </Button>
           </Link>
@@ -79,7 +80,8 @@ export default function ProfileCard({ profileUser, myProfile }) {
           <Divider sx={{ pt: 2 }} />
           <Box sx={{ marginTop: '5px', color: '#626d7a' }}>
             <SendTipModal recipient={profileUser}>
-              <Box sx={{ display: 'flex',
+              <Box sx={{
+                display: 'flex',
                 justifyAlign: 'center',
                 alignItems: 'center',
                 cursor: 'pointer',
@@ -89,19 +91,21 @@ export default function ProfileCard({ profileUser, myProfile }) {
                 borderImage: 'linear-gradient(to right, #4776E6, #8E54E9) 1',
                 pl: 4,
                 color: 'black',
-                height: 40}}
+                height: 40
+              }}
               >
-                <img src='/images/icons/copper-coin.svg'/> <span style={{marginLeft: 10}}>Send tip</span>
+                <img src="/images/icons/copper-coin.svg" /> <span style={{ marginLeft: 10 }}>Send tip</span>
               </Box>
             </SendTipModal>
           </Box>
-        </div>  : <Link to={'/edit'}><Button style={{marginTop: '10px'}} variant={'contained'}>{t('Edit profile')}</Button></Link> }
+        </div> : <Link to={'/edit'}><Button style={{ marginTop: '10px' }}
+                                            variant={'contained'}>{t('Edit profile')}</Button></Link>}
 
         <Box sx={{ width: 180, display: 'flex', justifyContent: 'space-between', mt: 2, pl: 2, pr: 2 }}>
-          <img src='/images/icons/twitter.svg'/>
-          <img src='/images/icons/instagram.svg'/>
-          <img src='/images/icons/youtube.svg'/>
-          <img src='/images/icons/facebook.svg'/>
+          <img src="/images/icons/twitter.svg" />
+          <img src="/images/icons/instagram.svg" />
+          <img src="/images/icons/youtube.svg" />
+          <img src="/images/icons/facebook.svg" />
         </Box>
       </CardActions>
     </Card>

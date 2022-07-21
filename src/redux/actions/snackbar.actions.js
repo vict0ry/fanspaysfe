@@ -1,11 +1,11 @@
 export const showSuccessSnackbar = message => {
   return dispatch => {
-    dispatch({ type: "SNACKBAR_SUCCESS", message });
-  };
-};
+    dispatch({ type: 'SNACKBAR_SUCCESS', message })
+  }
+}
 
 export const clearSnackbar = () => {
   return dispatch => {
-    dispatch({ type: "SNACKBAR_CLEAR" });
-  };
-};
+    dispatch({ type: 'SNACKBAR_CLEAR' })
+  }
+}

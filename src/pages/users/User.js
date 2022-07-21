@@ -7,38 +7,38 @@ import { beURL } from '../../config'
 
 const stylesGrid = {
   card: {
-    display: "flex",
-    flexDirection: "column",
-    background: "#fff",
+    display: 'flex',
+    flexDirection: 'column',
+    background: '#fff',
     padding: 8,
     borderRadius: 8,
-    alignItems: "center",
-    cursor: "pointer",
-    overflow: "hidden",
+    alignItems: 'center',
+    cursor: 'pointer',
+    overflow: 'hidden'
     // maxWidth: "163px"
   },
   image: {
     width: 146,
     height: 156,
     borderRadius: 8,
-    position: "relative",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 8,
-    overflow: "hidden"
+    overflow: 'hidden'
   },
   subscribers: {
-    position: "absolute",
+    position: 'absolute',
     right: 4,
     top: 4,
     borderRadius: 50,
-    background: "#fff",
+    background: '#fff',
     padding: 4,
-    color: "#8E54E9",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    color: '#8E54E9',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     fontSize: 8,
     fontWeight: 700
   },
@@ -46,49 +46,56 @@ const stylesGrid = {
     fontSize: 16,
     fontWeight: 700,
     marginBottom: 4,
-    color: "#000"
+    color: '#000'
   },
   role: {
-    color: "#5D5E65",
+    color: '#5D5E65',
     fontSize: 10,
     fontWeight: 400,
     marginBottom: 8
   },
   button: {
-    padding: "8px 16px",
-    background: "#4776E6",
-    color: "#fff",
+    padding: '8px 16px',
+    background: '#4776E6',
+    color: '#fff',
     fontSize: 12,
     fontWeight: 700,
     borderRadius: 8,
-    textTransform: "none"
+    textTransform: 'none'
   }
 }
 
-const User = ({users}) => {
+const User = ({ users }) => {
 
   const compressionFollowers = (followers) => {
-    if(followers >= 1000000){
-      return Math.round(followers/1000000) + "M";
-    } else if(followers >= 1000){
-      return Math.round(followers/1000) + "K";
+    if (followers >= 1000000) {
+      return Math.round(followers / 1000000) + 'M'
+    } else if (followers >= 1000) {
+      return Math.round(followers / 1000) + 'K'
     } else {
-      return followers;
+      return followers
     }
   }
 
-  return(
-    <Grid container rowSpacing={{xs: 2, md: 6}} columnSpacing={2} sx={{justifyContent: "center"}}>
+  return (
+    <Grid container rowSpacing={{ xs: 2, md: 6 }} columnSpacing={2} sx={{ justifyContent: 'center' }}>
 
       {users?.data?.map((user) => {
         const profileLink = `/profile/${user.username}`
-        return(
-          <Grid item xs={6} md={4} lg={3} >
+        return (
+          <Grid item xs={6} md={4} lg={3}>
             <Link to={profileLink} style={stylesGrid.card}>
               <Box style={stylesGrid.image}>
-                <img style={{width: "100%"}} src={beURL + user.profilePic} alt="" />
+                <img style={{ width: '100%' }} src={beURL + user.profilePic} alt="" />
                 <div style={stylesGrid.subscribers}>
-                  <div style={{width: 8, height: 8, marginRight: 2, display: "flex", justifyContent: "center", alignItems: "center"}}>
+                  <div style={{
+                    width: 8,
+                    height: 8,
+                    marginRight: 2,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}>
                     <Icon name="crown"></Icon>
                   </div>
                   {compressionFollowers(user.followers.length)}
@@ -105,14 +112,14 @@ const User = ({users}) => {
               </Box>
 
               <Button style={stylesGrid.button}>
-                {t("USERS.GO_TO_BLOG")}
+                {t('USERS.GO_TO_BLOG')}
               </Button>
             </Link>
           </Grid>
-        );
+        )
       })}
     </Grid>
-  );
+  )
 }
 
-export {User};
+export { User }

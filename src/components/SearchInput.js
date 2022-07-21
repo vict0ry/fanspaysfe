@@ -1,6 +1,6 @@
 import SearchIcon from '@mui/icons-material/Search'
 import * as React from 'react'
-import { alpha, styled } from '@mui/material/styles'
+import { styled } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -31,7 +31,7 @@ const Search = styled('div')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   backgroundColor: 'rgba(247, 245, 249, 1)',
   '&:hover': {
-    backgroundColor: 'rgba(247, 245, 249, 1)',
+    backgroundColor: 'rgba(247, 245, 249, 1)'
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,

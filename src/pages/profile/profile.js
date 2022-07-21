@@ -4,7 +4,6 @@ import AboutCard from '../../layout/about-card'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { Posts } from './components/post/Posts'
-import Paper from '@mui/material/Paper'
 import { useDispatch, useSelector } from 'react-redux'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
@@ -32,10 +31,10 @@ export const NotSubscribed = () => {
     justifyContent: 'center',
     flexDirection: 'column'
   }}>
-    <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
+    <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
       <img src="/images/icons/lock.svg" alt="locked" />
-      <br/>
-      <div style={{maxWidth: '70%', textAlign: 'center'}}>{t('COMMON.SUBSCRIBE_TO_SEE')}</div>
+      <br />
+      <div style={{ maxWidth: '70%', textAlign: 'center' }}>{t('COMMON.SUBSCRIBE_TO_SEE')}</div>
     </div>
     <SubscribeButton />
   </Box>
@@ -46,21 +45,21 @@ export function Profile(props) {
   const loggedUser = useSelector(state => state.user)
   const username = useParams().username || loggedUser?.userData?._id
   const dispatch = useDispatch()
-  const [wishes, setWishes] = useState();
+  const [wishes, setWishes] = useState()
 
   const posts = useSelector(state => state.posts.posts)
   const user = useSelector(state => state.profile.profile)
 
   const myProfile = () => {
-    return !useParams().username || useParams().username === loggedUser?.userData?.username;
+    return !useParams().username || useParams().username === loggedUser?.userData?.username
   }
   const loadWishes = () => {
     axios.get('/api/wish/' + user?.profileUser?._id).then(wishes => {
-      setWishes(wishes.data);
+      setWishes(wishes.data)
     })
   }
   useEffect(() => {
-    loadWishes();
+    loadWishes()
     dispatch(loadProfile(username))
   }, [])
   const handleChange = (event, newValue) => {
@@ -96,44 +95,48 @@ export function Profile(props) {
         display: 'none'
       }}>
         <Box sx={{
-          width: "312px",
-          display: "flex",
-          flexDirection: "column"
+          width: '312px',
+          display: 'flex',
+          flexDirection: 'column'
         }}>
           <ProfileCard
             myProfile={myProfile()}
             profileUser={user?.profileUser}
           />
-          { !wishes?.length && !myProfile() ? '' :
-            <Card sx={{  p: {xs: 2},
-            maxWidth: { xs: 500, md: 500 },
-            ml:{xs: 5, md: 0},
-            mt: {xs: 2}, height: 'fit-content' }}>
-              <div style={{display: 'flex',
+          {!wishes?.length && !myProfile() ? '' :
+            <Card sx={{
+              p: { xs: 2 },
+              maxWidth: { xs: 500, md: 500 },
+              ml: { xs: 5, md: 0 },
+              mt: { xs: 2 }, height: 'fit-content'
+            }}>
+              <div style={{
+                display: 'flex',
                 marginBottom: '10px',
-                justifyContent: "space-between", alignItems: 'center', alignContent: 'center'}}>
-                <div style={{fontSize: '18px', margin:'0', fontWeight: 'bold'}}>
+                justifyContent: 'space-between', alignItems: 'center', alignContent: 'center'
+              }}>
+                <div style={{ fontSize: '18px', margin: '0', fontWeight: 'bold' }}>
                   {t('Wishes')}
                 </div>
                 <div>
                   <img src="/images/icons/edit-button.svg" alt="" />
                 </div>
               </div>
-            <Divider style={{marginBottom: '10px'}} />
-            { wishes?.length ? wishes.map((wish, i, wishes) => {
-              return <div>
-                <Wish
-                  title={wish.name}
-                  id={wish._id}
-                  from={wish?.collected?.map(i => i.amount).reduce((a,b) => a+b,0)}
-                  recipient={user?.profileUser}
-                  myProfile={myProfile()}
-                  to={wish.amount} style={{margin: '10px 0'}} />
-                { i + 1 !== wishes.length ? <Divider style={{margin: '10px 0'}} /> : '' }
-              </div>
-            }) : '' }
-              <AddWishModal change={() => loadWishes() } myProfile={myProfile()}></AddWishModal>
-          </Card> }
+              <Divider style={{ marginBottom: '10px' }} />
+              {wishes?.length ? wishes.map((wish, i, wishes) => {
+                return <div>
+                  <Wish
+                    title={wish.name}
+                    id={wish._id}
+                    from={wish?.collected?.map(i => i.amount).reduce((a, b) => a + b, 0)}
+                    recipient={user?.profileUser}
+                    myProfile={myProfile()}
+                    to={wish.amount} style={{ margin: '10px 0' }} />
+                  {i + 1 !== wishes.length ? <Divider style={{ margin: '10px 0' }} /> : ''}
+                </div>
+              }) : ''}
+              <AddWishModal change={() => loadWishes()} myProfile={myProfile()}></AddWishModal>
+            </Card>}
         </Box>
         <Box>
           <AboutCard
@@ -149,7 +152,7 @@ export function Profile(props) {
               </Tabs>
             </Box>
             <TabPanel value={selectedTab} index={0}>
-                <Posts posts={posts} profileUser={user?.profileUser} />
+              <Posts posts={posts} profileUser={user?.profileUser} />
             </TabPanel>
             <TabPanel value={selectedTab} index={1}>
               <AddProductModal />

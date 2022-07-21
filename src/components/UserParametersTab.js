@@ -8,9 +8,9 @@ import React, { useState } from 'react'
 import { t } from 'i18next'
 import axios from 'axios'
 
-export const UserParametersTab = ({user, email, setEmail, checkboxes, setCheckboxes}) => {
-  const [oldPassword, setOldPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+export const UserParametersTab = ({ user, email, setEmail, checkboxes, setCheckboxes }) => {
+  const [oldPassword, setOldPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
 
   console.log(user)
 
@@ -18,7 +18,7 @@ export const UserParametersTab = ({user, email, setEmail, checkboxes, setCheckbo
     const data = {
       oldPassword: oldPassword,
       newPassword: newPassword
-    };
+    }
 
     return axios.put('/api/users/updatePassword', data).then((res) => {
       alert(res)
@@ -34,7 +34,7 @@ export const UserParametersTab = ({user, email, setEmail, checkboxes, setCheckbo
         <Grid item xs={12} sm={12}>
           <TextField
             sx={{
-              marginBottom: "8px"
+              marginBottom: '8px'
             }}
             required
             fullWidth
@@ -42,12 +42,12 @@ export const UserParametersTab = ({user, email, setEmail, checkboxes, setCheckbo
             type="password"
             value={oldPassword}
             onChange={(e) => {
-             setOldPassword(e.target.value);
+              setOldPassword(e.target.value)
             }}
           />
           <TextField
             sx={{
-              marginBottom: "8px"
+              marginBottom: '8px'
             }}
             required
             fullWidth
@@ -55,14 +55,14 @@ export const UserParametersTab = ({user, email, setEmail, checkboxes, setCheckbo
             type="password"
             value={newPassword}
             onChange={(e) => {
-              setNewPassword(e.target.value);
+              setNewPassword(e.target.value)
             }}
           />
           <Button
             variant={'blue'}
             onClick={changePassword}
           >
-            <img style={{paddingRight: '10px'}} src="/images/icons/key-alt.svg" alt="change pass" />
+            <img style={{ paddingRight: '10px' }} src="/images/icons/key-alt.svg" alt="change pass" />
             Change password
           </Button>
         </Grid>
@@ -76,13 +76,13 @@ export const UserParametersTab = ({user, email, setEmail, checkboxes, setCheckbo
             type="email"
             value={email}
             onChange={(e) => {
-              setEmail(e.target.value);
+              setEmail(e.target.value)
             }}
           />
         </Grid>
 
         <Grid item xs={12} sm={12}>
-          <div style={{display: 'flex', flexDirection: 'column'}}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
             <FormControlLabel
               control={
                 <Checkbox
@@ -91,7 +91,7 @@ export const UserParametersTab = ({user, email, setEmail, checkboxes, setCheckbo
                     setCheckboxes({
                       ...checkboxes,
                       [e.target.name]: e.target.checked
-                    });
+                    })
                   }}
                 />
               }
@@ -105,7 +105,7 @@ export const UserParametersTab = ({user, email, setEmail, checkboxes, setCheckbo
                     setCheckboxes({
                       ...checkboxes,
                       [e.target.name]: e.target.checked
-                    });
+                    })
                   }}
                 />
               }
@@ -119,7 +119,7 @@ export const UserParametersTab = ({user, email, setEmail, checkboxes, setCheckbo
                     setCheckboxes({
                       ...checkboxes,
                       [e.target.name]: e.target.checked
-                    });
+                    })
                   }}
                 />
               }
@@ -129,7 +129,7 @@ export const UserParametersTab = ({user, email, setEmail, checkboxes, setCheckbo
         </Grid>
         <Grid item xs={12} sm={12}>
           <Button variant={'red'}>
-            <img style={{paddingRight: '10px'}} src="/images/icons/user-x.svg" alt="change pass" />
+            <img style={{ paddingRight: '10px' }} src="/images/icons/user-x.svg" alt="change pass" />
             Deactivate profile
           </Button>
         </Grid>

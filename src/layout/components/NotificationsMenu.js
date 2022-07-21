@@ -1,6 +1,5 @@
 import IconButton from '@mui/material/IconButton'
 import Badge from '@mui/material/Badge'
-import NotificationsIcon from '@mui/icons-material/Notifications'
 import Popover from '@mui/material/Popover'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
@@ -13,7 +12,7 @@ export const UserNotification = ({ user, type }) => {
   let description
   if (type === 'commentLike') {
     description = 'vam lajknul comment'
-  } else if(type === 'postLike') {
+  } else if (type === 'postLike') {
     description = 'vame lajknul post'
   } else {
     description = 'ERROR_EVENT'
@@ -65,7 +64,7 @@ export const NotificationsMenu = () => {
       aria-label="show 17 new notifications"
     >
       <Badge badgeContent={notifications.length} color="error">
-        <img src='/images/icons/notification.svg'/>
+        <img src="/images/icons/notification.svg" />
       </Badge>
     </IconButton>
     <Popover
