@@ -8,6 +8,7 @@ import React, { useState } from 'react'
 import Modal from '@mui/material/Modal'
 import Payment from './payment'
 import axios from 'axios'
+import { t } from 'i18next'
 
 
 export const NewFounds = ({balance}) => {
@@ -37,18 +38,18 @@ export const NewFounds = ({balance}) => {
       <Box>
         <Card>
           <CardContent sx={{display: 'flex'}}>
-            <Typography variant={'h5'}>Balance:</Typography>
+            <Typography variant={'h5'}>{t('COMMON.BALANCE')}:</Typography>
             <Typography sx={{mt: 0.8, ml: 1}} variant={'body1'}>{balance}</Typography>
           </CardContent>
           <CardActions>
-            <Button sx={{background: '#4776E6'}} variant={'contained'}>Deposit</Button>
+            <Button sx={{background: '#4776E6'}} variant={'contained'}>{t('COMMON.DEPOSIT')}</Button>
           </CardActions>
         </Card>
       </Box>
       <Box sx={{width: {md: '65%', xs: '100%'}}}>
         <Card>
           <CardContent sx={{display: 'flex'}}>
-            <Typography sx={{fontWeight: 'bold'}} variant={'h6'}>You should to add the deposit method</Typography>
+            <Typography sx={{fontWeight: 'bold'}} variant={'h6'}>{t('FINANCE.CHOOSE_PAYMENT_METHOD')}</Typography>
           </CardContent>
           <CardActions>
             <Button onClick={handleOpen} sx={{

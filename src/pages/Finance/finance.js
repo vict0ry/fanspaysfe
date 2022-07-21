@@ -1,4 +1,3 @@
-import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
 import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card';
@@ -50,9 +49,9 @@ export const Finance = () => {
         <Box>
           <FinanceStatistics tips={incomeStatistic.tips} followers={incomeStatistic.followers}
                              products={incomeStatistic.products} total={incomeStatistic.total} />
-            <Typography sx={{mt: 10}} variant={'h5'}>Add new funds</Typography>
+            <Typography sx={{mt: 10}} variant={'h5'}>{t('FINANCE.ADD_NEW_FUNDS')}</Typography>
           <NewFounds balance={balance}/>
-          <Typography sx={{mt: 8}} variant={'h5'}>Incoming Analytics</Typography>
+          <Typography sx={{mt: 8}} variant={'h5'}>{t('FINANCE.INCOMING_ANALYTICS')}</Typography>
           <Box sx={{mt: 2, mb: 10, display: 'flex', justifyContent: 'space-between', flexDirection: {xs: 'column', md: 'row'}}}>
             <FinanceChart />
             <Box style={{marginLeft: '10px'}}>

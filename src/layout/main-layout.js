@@ -26,7 +26,9 @@ const MainLayout = ({ props }) => {
         <Outlet />
       </Box>
     </Container>
-    <StickyFooter />
+      <div style={{marginTop: '20px'}}>
+        <StickyFooter />
+      </div>
       <SuccessSnackbar />
       <SubscribeDialog />
     </div>)

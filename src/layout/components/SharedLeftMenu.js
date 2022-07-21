@@ -32,7 +32,8 @@ export const SharedLeftMenu = () => {
     <Box sx={{ minWidth: "300px", display: { xs: 'none', lg: 'flex' }, flexDirection: 'column', color: 'black' }}>
       <Box style={{ marginBottom: '10px' }}>
         <MiniUser user={user} />
-        <span style={{fontSize: "18px", fontWeight: 700, color: "#1A051D"}}>{t('COMMON.BALANCE')}:</span>
+        <Link to={'/finance'}>
+          <span style={{fontSize: "18px", fontWeight: 700, color: "#1A051D"}}>{t('COMMON.BALANCE')}:</span>
         <span style={balanceStyles}>
           <span style={{
             background: "-webkit-linear-gradient(94.04deg, #4776E6 10.41%, #8E54E9 77.48%)",
@@ -44,6 +45,7 @@ export const SharedLeftMenu = () => {
             $ {balance}
           </span>
         </span>
+        </Link>
       </Box>
       <div className="link">
         <img style={iconStyle} src="/images/icons/user.svg" alt="my page" />
@@ -61,10 +63,10 @@ export const SharedLeftMenu = () => {
         <img style={iconStyle} src="/images/icons/chat-circle-dots.svg" alt="queries" />
         <Link style={linkStyles} to={'/'}>{t('USERMENU.QUERIES')}</Link>
       </div>
-      <div className="link">
-        <img style={iconStyle} src="/images/icons/speakerphone.svg" alt="feeds" />
-        <Link style={linkStyles} to={'/'}>{t('USERMENU.FEEDS')}</Link>
-      </div>
+      {/*<div className="link">*/}
+      {/*  <img style={iconStyle} src="/images/icons/speakerphone.svg" alt="feeds" />*/}
+      {/*  <Link style={linkStyles} to={'/'}>{t('USERMENU.FEEDS')}</Link>*/}
+      {/*</div>*/}
       {/*<div className="link">*/}
       {/*  <img style={iconStyle} src="/images/icons/pencil.svg" alt="" />*/}
       {/*  <Link style={linkStyles} to={'/edit'}>{t('USERMENU.EDIT_PROFILE')}</Link>*/}
