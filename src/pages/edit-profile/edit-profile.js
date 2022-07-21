@@ -57,6 +57,8 @@ export function EditProfile(props) {
     birthDate: '',
     profilePic: ''
   })
+  const [email, setEmail] = useState(profileUser.email);
+  const [checkboxes, setCheckboxes] = useState({});
 
   useEffect(() => {
     setUserForm(profileUser)
@@ -98,12 +100,22 @@ export function EditProfile(props) {
       lastName,
       description
     } = event.target.elements
+
+    const checked = [];
+    Object.keys(checkboxes).forEach(tag => {
+      if(checkboxes[tag]){
+        checked.push(tag);
+      }
+    })
+
     const data = {
       username: username.value,
       firstName: firstName.value,
       lastName: lastName.value,
       description: description.value,
-      birthDate: birthDate
+      birthDate: birthDate,
+      email: email,
+      checkboxes: checked
     }
     return axios.put('/api/users/updateprofile', data).then(() => {
       console.log('done')
@@ -123,7 +135,7 @@ export function EditProfile(props) {
       data: formData,
       headers: { 'Content-Type': 'multipart/form-data' }
     }, () => {
-      console.log('avatr uploaded')
+      console.log('avatar uploaded')
     })
   }
 
@@ -238,7 +250,13 @@ export function EditProfile(props) {
             <UserPricesFormTab />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <UserParametersTab />
+            <UserParametersTab
+              user={profileUser}
+              email={email}
+              setEmail={setEmail}
+              checkboxes={checkboxes}
+              setCheckboxes={setCheckboxes}
+            />
           </TabPanel>
           <TabPanel value={value} index={3}>
             <AddCreditCard />
