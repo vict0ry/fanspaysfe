@@ -29,7 +29,7 @@ export const SharedLeftMenu = () => {
     return state.user.userData;
   })
   return (
-    <Box sx={{ minWidth: "300px", display: { xs: 'none', lg: 'flex' }, flexDirection: 'column', color: 'black' }}>
+    <Box sx={{ minWidth: "300px", display: { xs: 'flex', lg: 'flex' }, flexDirection: 'column', color: 'black' }}>
       <Box style={{ marginBottom: '10px' }}>
         <MiniUser user={user} />
         <Link to={'/finance'}>

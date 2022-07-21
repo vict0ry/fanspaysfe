@@ -28,9 +28,21 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import LanguageIcon from '@mui/icons-material/Language';
 import { makeStyles } from '@material-ui/styles';
+import Drawer from '@mui/material/Drawer'
+import MenuIcon from '@mui/icons-material/Menu'
+import { SharedLeftMenu } from './components/SharedLeftMenu'
+const drawerWidth = 240;
 
 
-export default function SearchBar() {
+export default function SearchBar({window}) {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const container = window !== undefined ? () => window().document.body : undefined;
+
 
   let connected = false
   const dispatch = useDispatch()
@@ -192,11 +204,26 @@ export default function SearchBar() {
 
   return (
     <>
+      <Drawer
+        container={container}
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        sx={{
+          display: { xs: 'block', sm: 'none' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+        }}
+      >
+        <div style={{padding: '10px'}}>
+          <SharedLeftMenu />
+        </div>
+      </Drawer>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
             <Toolbar>
               <Box
                 component="img"
+                onClick={handleDrawerToggle}
                 sx={{
                   content: {
                     xs: `url('/mobileLogo.svg')`, //img src from xs up to md

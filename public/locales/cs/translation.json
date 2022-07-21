@@ -73,7 +73,9 @@
     "EDIT_PROFILE": "Upravit profil",
     "MESSAGES": "Zpravy",
     "MARKETPLACE": "Marketplace",
-    "TRANSACTIONS": "Transakce"
+    "TRANSACTIONS": "Transakce",
+    "SETTINGS": "Nastaveni",
+    "QUERIES": "Pozadavky"
   },
   "NAVBAR": {
     "HOME_PAGE": "Hlavní stranka",

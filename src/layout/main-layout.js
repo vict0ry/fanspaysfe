@@ -8,21 +8,26 @@ import SuccessSnackbar from '../components/SuccessSnackbar'
 import { SubscribeDialog } from '../components/SubscribeDialog'
 import { SharedLeftMenu } from './components/SharedLeftMenu'
 import Box from '@mui/material/Box'
-
+import { Drawer } from '@material-ui/core'
+const isLoggedIn = localStorage.getItem('user');
 const MainLayout = ({ props }) => {
   return (
     <div>
     <SearchBar />
     <Container maxWidth="lg">
       <Box sx={{
-        // display: 'grid',
         display: "flex",
         minHeight: 'calc(100vh - 176px)',
-        gridTemplateColumns: '1fr 3fr',
+        gridTemplateColumns: {
+          sm: '1fr 3fr',
+          xs: '1fr'
+        },
         width: '100%',
         marginTop: '40px'
       }}>
-        <SharedLeftMenu />
+        {isLoggedIn ?  <Box  sx={{ display: { xs: 'none', md: 'block' } }}>
+          <SharedLeftMenu />
+        </Box> : ''}
         <Outlet />
       </Box>
     </Container>
