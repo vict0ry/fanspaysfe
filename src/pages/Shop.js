@@ -24,7 +24,7 @@ import { ClickAwayListener } from '@mui/base'
 const calcPriceBasket = (basket) => {
   let price = 0;
   basket.forEach(product => {
-    price += product.price;
+    price += product.product.price;
   })
 
   return price;
@@ -50,8 +50,6 @@ export const Shop = () => {
 
 
   const [shopItems, setShopItems] = useState([]);
-
-  console.log(shopItems)
 
   const [fromAge, setFromAge] = useState(21)
   const [upToAge, setUpToAge] = useState(21)
@@ -240,7 +238,17 @@ export const Shop = () => {
                             }}
                             onClick={(e) => {
                               e.stopPropagation();
-                              setBasket([...basket, product]);
+
+                              const indexProduct = basket.findIndex(productBasket => product["_id"] === productBasket.product["_id"]);
+
+                              if(indexProduct === -1){
+                                setBasket([...basket, {product: product, amount: 1}]);
+                              } else {
+                                const copyBasket = basket;
+                                copyBasket[indexProduct].amount++;
+                                setBasket([...copyBasket]);
+                              }
+
                               setBasketOpen(true);
                             }}
                           ><span style={{lineHeight: "16px"}}>{t("SHOP.BUY")}</span></Button>
@@ -297,8 +305,9 @@ export const Shop = () => {
                     Корзина
                   </Box>
                   <Box sx={{
-                    maxHeight: "200px",
+                    maxHeight: "205px",
                     overflowY: "auto",
+                    overflowX: "hidden",
                     '&::-webkit-scrollbar-track': {
                       background: "#ECE9F1",
                       border: "8px solid transparent",
@@ -321,26 +330,63 @@ export const Shop = () => {
                             marginTop: index !== 0 ? "16px" : 0
                           }}
                         >
-                          <Button
-                            sx={{
-                              minWidth: 0,
-                              minHeight: 0,
-                              position: "absolute",
-                              top: 0,
-                              right: 0
-                            }}
-                            onClick={() => {
-                              setBasket([...basket.slice(0, index), ...basket.slice(index+1, basket.length)]);
-                            }}
-                          >
-                            <Icon name="x" />
-                          </Button>
+                          <Box sx={{
+                            fontSize: "12px",
+                            fontWeight: 700,
+                            position: "absolute",
+                            top: 0,
+                            right: 0,
+                            display: "flex",
+                            alignItems: "center",
+                            borderRadius: "8px",
+                            background: "rgba(255, 255, 255, 0.9)"
+                          }}>
+                            <Button
+                              sx={{
+                                padding: 0,
+                                minWidth: 0,
+                                minHeight: 0,
+                                marginTop: "2px"
+                              }}
+                              onClick={() => {
+                                if(product.amount > 1){
+                                  const copyBasket = basket;
+                                  copyBasket[index].amount--;
+                                  setBasket([...copyBasket]);
+                                } else {
+                                  setBasket([...basket.slice(0, index), ...basket.slice(index + 1, basket.length)]);
+                                }
+                              }}
+                            >
+                              <Icon name="x" />
+                            </Button>
+                            <Box sx={{
+                              marginRight: "8px",
+                              marginLeft: "8px"
+                            }}>
+                              {product.amount}
+                            </Box>
+                            <Button
+                              sx={{
+                                minWidth: 0,
+                                minHeight: 0,
+                                padding: 0
+                              }}
+                              onClick={() => {
+                                const copyBasket = basket;
+                                copyBasket[index].amount++;
+                                setBasket([...copyBasket]);
+                              }}
+                            >
+                              <span style={{transform: "rotate(45deg)"}}><Icon name="x" /></span>
+                            </Button>
+                          </Box>
 
                           <Box sx={{
                             width: "56px",
                             height: "56px",
                             marginRight: "8px",
-                            backgroundImage: `url('${beURL + product.pictures[0]}')`,
+                            backgroundImage: `url('${beURL + product.product.pictures[0]}')`,
                             backgroundSize: "contain",
                             borderRadius: "8px"
                           }}>
@@ -356,14 +402,14 @@ export const Shop = () => {
                               fontWeight: 700,
                               marginBottom: "8px"
                             }}>
-                              {product.name}
+                              {product.product.name}
                             </Box>
                             <Box sx={{
                               color: "#1A051D",
                               fontSize: "14px",
                               fontWeight: 700,
                             }}>
-                              $ {product.price}
+                              $ {product.product.price}
                             </Box>
                           </Box>
                         </Box>
