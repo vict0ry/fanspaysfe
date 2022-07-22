@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from 'react'
 import { changePost } from '../../../../redux/actions/posts.action'
 import { useDispatch } from 'react-redux'
 import ImageIcon from '@mui/icons-material/Image'
+import axios from 'axios'
 
 const PostMenuPopup = ({postId, setOpenPostEditor, legacyPictures, legacyContent}) => {
   const [content, setContent] = useState("");
@@ -13,7 +14,8 @@ const PostMenuPopup = ({postId, setOpenPostEditor, legacyPictures, legacyContent
 
   const inputFile = useRef(null);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+
   const handleChangePost = () => {
     let formData = new FormData();
 
@@ -26,7 +28,16 @@ const PostMenuPopup = ({postId, setOpenPostEditor, legacyPictures, legacyContent
       console.log(pair[0]+ ', ' + pair[1]);
     }
 
-    dispatch(changePost(postId, formData));
+      return axios({
+        method: 'post',
+        url: '/api/posts/' + postId + '/update',
+        data: formData,
+        headers: { 'Content-Type': 'multipart/form-data' }
+      }).then(post => {
+        console.log(post)
+      })
+
+    // dispatch(changePost(postId, formData));
   }
 
   useEffect(() => {
@@ -38,8 +49,6 @@ const PostMenuPopup = ({postId, setOpenPostEditor, legacyPictures, legacyContent
         });
       }));
     }, [])
-
-  console.log(pictures)
 
   return(
     <Box
@@ -113,7 +122,7 @@ const PostMenuPopup = ({postId, setOpenPostEditor, legacyPictures, legacyContent
                   position: "relative"
                 }} xs={4} sm={4}>
                   <img src={
-                    picture.isExist ? beURL + picture.src : picture.src
+                    picture.isExist ? beURL + picture.src : URL.createObjectURL(picture.src)
                   } alt={index} style={{maxWidth: "100%"}}/>
                   <Button
                     sx={{
@@ -161,9 +170,9 @@ const PostMenuPopup = ({postId, setOpenPostEditor, legacyPictures, legacyContent
               accept='.png,.jpg,.jpeg'
               onChange={(e) => {
                 setPictures([...pictures, ...[...e.target.files].map((file) => {
-                  console.log(URL.createObjectURL(file))
                   return({
-                    src: URL.createObjectURL(file),
+                    // src: URL.createObjectURL(file),
+                    src: file,
                     isExist: false
                   });
                 })]);

@@ -16,7 +16,6 @@ export const removePost = (postId) => {
   }
 }
 export const changePost = (postId, formData) => {
-  console.log(formData)
   return (dispatch) => {
     return axios({
       method: 'post',

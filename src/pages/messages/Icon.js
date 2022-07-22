@@ -212,6 +212,13 @@ export const Icon = ({name, color}) => {
                     <path d="M17 7L7 17" stroke="#1A051D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
             break;
+        case "X_Small":
+            image =
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.6665 4.66699L11.3332 11.3337" stroke="#5D5E65" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M11.3335 4.66699L4.66683 11.3337" stroke="#5D5E65" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
         case "hashtag":
             image =
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -219,6 +226,17 @@ export const Icon = ({name, color}) => {
                     <path d="M16 4L14 20" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M5 9H19" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M5 15H19" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            break;
+        case "basket":
+            image =
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 16.667H35" stroke="#4776E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M33.3334 16.667L31.6667 33.3337H8.33341L6.66675 16.667" stroke="#4776E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.3335 23.333V26.6663" stroke="#4776E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20 23.333V26.6663" stroke="#4776E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M26.6665 23.333V26.6663" stroke="#4776E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M28.3332 16.6667V13.3333C28.3332 8.73096 24.6022 5 19.9998 5C15.3975 5 11.6665 8.73096 11.6665 13.3333V16.6667" stroke="#4776E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             break;
 

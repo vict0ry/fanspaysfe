@@ -18,6 +18,17 @@ import useWindowDimensions from '../useWindowDimensions'
 import { ProductCart } from './profile/modals/ProductCart'
 import axios from 'axios'
 import { beURL } from '../config'
+import { Icon } from './messages/Icon'
+import { ClickAwayListener } from '@mui/base'
+
+const calcPriceBasket = (basket) => {
+  let price = 0;
+  basket.forEach(product => {
+    price += product.price;
+  })
+
+  return price;
+}
 
 const categories = [
   "Футболки",
@@ -50,6 +61,9 @@ export const Shop = () => {
   const [checkedTags, setCheckedTags] = useState({});
   const [findNickname, setFindNickname] = useState("");
   const [findProducts, setFindProducts] = useState("");
+
+  const [basket, setBasket] = useState([]);
+  const [basketOpen, setBasketOpen] = useState(true);
 
   const {width, height} = useWindowDimensions();
 
@@ -155,8 +169,6 @@ export const Shop = () => {
               setFindNickname={setFindNickname}
             />
 
-            {console.log(findProducts)}
-
 
             <div style={{ marginTop: 10 }}>
               {shopItems.data?.length ? <div>
@@ -214,17 +226,24 @@ export const Shop = () => {
                           marginTop: "16px"
                         }}>
                           <span style={{fontSize: "18px", fontWeight: 700, color: "#1A051D"}}>$ {product.price}</span>
-                          <Button sx={{
-                            minWidth: 0,
-                            minHeight: 0,
-                            color: "#fff",
-                            fontSize: 14,
-                            fontWeight: 700,
-                            padding: "8px 24px",
-                            borderRadius: "8px",
-                            background: "linear-gradient(94.04deg, #4776E6 10.41%, #8E54E9 77.48%)",
-                            textTransform: "none",
-                          }}><span style={{lineHeight: "16px"}}>{t("SHOP.BUY")}</span></Button>
+                          <Button
+                            sx={{
+                              minWidth: 0,
+                              minHeight: 0,
+                              color: "#fff",
+                              fontSize: 14,
+                              fontWeight: 700,
+                              padding: "8px 24px",
+                              borderRadius: "8px",
+                              background: "linear-gradient(94.04deg, #4776E6 10.41%, #8E54E9 77.48%)",
+                              textTransform: "none",
+                            }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setBasket([...basket, product]);
+                              setBasketOpen(true);
+                            }}
+                          ><span style={{lineHeight: "16px"}}>{t("SHOP.BUY")}</span></Button>
                         </Box>
 
                       </Box>
@@ -235,6 +254,201 @@ export const Shop = () => {
               </div> : t('COMMON.NOTHING_HERE_YET')}
             </div>
 
+            {basketOpen &&
+              <ClickAwayListener onClickAway={() => setBasketOpen(false)}>
+                <Box sx={{
+                  padding: "16px",
+                  paddingBottom: "24px",
+                  borderRadius: "8px",
+                  background: "#fff",
+                  display: "flex",
+                  flexDirection: "column",
+                  position: "fixed",
+                  right: "100px",
+                  bottom: "80px",
+                  width: "240px",
+                  zIndex: 1
+                }}>
+                  <Box
+                    sx={{
+                      fontSize: "16px",
+                      fontWeight: 700,
+                      color: "#1A051D",
+                      textAlign: "center",
+                      marginBottom: "16px",
+                      position: "relative"
+                    }}
+                  >
+                    <Button
+                      sx={{
+                        position: "absolute",
+                        left: "-8px",
+                        top: 0,
+                        minWidth: 0,
+                        minHeight: 0,
+                        height: "100%"
+                      }}
+                      onClick={() => {
+                        setBasketOpen(false);
+                      }}
+                    >
+                      <Icon name="X_Small" />
+                    </Button>
+                    Корзина
+                  </Box>
+                  <Box sx={{
+                    maxHeight: "200px",
+                    overflowY: "auto",
+                    '&::-webkit-scrollbar-track': {
+                      background: "#ECE9F1",
+                      border: "8px solid transparent",
+                      backgroundClip: "content-box",
+                      borderRadius: 3
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                      backgroundColor: '#4776E6',
+                      borderRadius: 3,
+                      border: "8px solid transparent",
+                      backgroundClip: "content-box"
+                    }
+                  }}>
+                    {basket.map((product, index) => {
+                      return(
+                        <Box
+                          sx={{
+                            display: "flex",
+                            position: "relative",
+                            marginTop: index !== 0 ? "16px" : 0
+                          }}
+                        >
+                          <Button
+                            sx={{
+                              minWidth: 0,
+                              minHeight: 0,
+                              position: "absolute",
+                              top: 0,
+                              right: 0
+                            }}
+                            onClick={() => {
+                              setBasket([...basket.slice(0, index), ...basket.slice(index+1, basket.length)]);
+                            }}
+                          >
+                            <Icon name="x" />
+                          </Button>
+
+                          <Box sx={{
+                            width: "56px",
+                            height: "56px",
+                            marginRight: "8px",
+                            backgroundImage: `url('${beURL + product.pictures[0]}')`,
+                            backgroundSize: "contain",
+                            borderRadius: "8px"
+                          }}>
+                          </Box>
+
+                          <Box sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                          }}>
+                            <Box sx={{
+                              color: "#1A051D",
+                              fontSize: "10px",
+                              fontWeight: 700,
+                              marginBottom: "8px"
+                            }}>
+                              {product.name}
+                            </Box>
+                            <Box sx={{
+                              color: "#1A051D",
+                              fontSize: "14px",
+                              fontWeight: 700,
+                            }}>
+                              $ {product.price}
+                            </Box>
+                          </Box>
+                        </Box>
+                      );
+                    })}
+                  </Box>
+
+
+                  <Box sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "16px",
+                    marginBottom: "24px",
+                    fontSize: "14px",
+                    fontWeight: 700,
+                    color: "#1A051D"
+                  }}>
+                    <Box>
+                      Всего:
+                    </Box>
+                    <Box sx={{
+                      color: "#4776E6"
+                    }}>
+                      $ {calcPriceBasket(basket)}
+                    </Box>
+                  </Box>
+
+                  <Box sx={{
+                    display: "flex",
+                    justifyContent: "center"
+                  }}>
+                    <Button sx={{
+                      minWidth: 0,
+                      minHeight: 0,
+                      background: "linear-gradient(94.04deg, #4776E6 10.41%, #8E54E9 77.48%)",
+                      color: "#fff",
+                      fontSize: "14px",
+                      fontWeight: 700,
+                      padding: "10px 24px",
+                      textTransform: "none",
+                      borderRadius: "8px"
+                    }}>
+                      Перейти к оплате
+                    </Button>
+                  </Box>
+                </Box>
+              </ClickAwayListener>
+            }
+
+            {!basketOpen && <Button
+              onClick={() => {
+                setBasketOpen(true)
+              }}
+              sx={{
+                minWidth: 0,
+                minHeight: 0,
+                padding: "20px",
+                borderRadius: "50%",
+                position: "fixed",
+                right: "100px",
+                bottom: "80px",
+                cursor: "pointer",
+                background: "#fff",
+                zIndex: 1
+              }}
+            >
+              <Icon name="basket" />
+              <Box sx={{
+                width: "32px",
+                height: "32px",
+                color: "#fff",
+                background: "linear-gradient(94.04deg, #4776E6 10.41%, #8E54E9 77.48%)",
+                borderRadius: "50%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "18px",
+                fontWeight: 400,
+                position: "fixed",
+                right: "98px",
+                bottom: "130px"
+              }}>
+                {basket.length}
+              </Box>
+            </Button>}
 
 
             <PagesController count={shopItems.pages} currentPageCallback={(currentPage) => {

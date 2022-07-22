@@ -57,6 +57,11 @@ export default function AddPostModal() {
     state.forEach(file => {
       formData.append('images[]', file.img)
     })
+
+    for(let pair of formData.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]);
+    }
+
     return axios({
       method: 'post',
       url: '/api/posts',
