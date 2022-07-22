@@ -25,6 +25,7 @@ import FormControl from '@mui/material/FormControl'
 import LanguageIcon from '@mui/icons-material/Language'
 import Drawer from '@mui/material/Drawer'
 import { SharedLeftMenu } from './components/SharedLeftMenu'
+import { Container } from '@material-ui/core'
 
 const drawerWidth = 240
 
@@ -215,6 +216,7 @@ export default function SearchBar({ window }) {
       </Drawer>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
+          <Container component="main" maxWidth="lg">
           <Toolbar>
             <Box
               component="img"
@@ -250,20 +252,19 @@ export default function SearchBar({ window }) {
               </FormControl>
             </Box>
             <Box sx={{ flexGrow: 1 }} />
-            {!loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-              <Link to={'/register'}>{t('NAVBAR.REGISTER')}</Link>
-            </Box> : ''}
             <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
               <Link to={'/'}>{t('NAVBAR.HOME_PAGE')}</Link>
             </Box>
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+            {!loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+              <Link to={'/register'}>{t('NAVBAR.REGISTER')}</Link>
+            </Box> : ''}
+            {loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
               <Link to={'/users'}>{t('NAVBAR.USERS')}</Link>
-            </Box>
+            </Box> : '' }
             {!loggedUser.userData ? <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
               <Link to={'/login'}>{t('NAVBAR.LOGIN')}</Link>
             </Box> : ''}
-            <MessagesMenu />
-            <NotificationsMenu />
+            {loggedUser.userData ? <Box sx={{display: 'flex'}}><MessagesMenu /> <NotificationsMenu /></Box> : '' }
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <Typography sx={{ color: 'black' }} variant={'h6'}>{loggedUser?.userData?.username}</Typography>
             </Box>
@@ -301,7 +302,7 @@ export default function SearchBar({ window }) {
               </IconButton>
             </Box>
           </Toolbar>
-
+          </Container>
         </AppBar>
         {renderMobileMenu}
         {renderMenu}

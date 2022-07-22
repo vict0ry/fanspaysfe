@@ -9,6 +9,7 @@ import { NewFounds } from './new-founds'
 import axios from 'axios'
 import { t } from 'i18next'
 import { beURL } from '../../config'
+import { SavedCards } from './SavedCards'
 
 
 export const Finance = () => {
@@ -31,7 +32,7 @@ export const Finance = () => {
         tips: filterByCategory('TIP'),
         followers: filterByCategory('followers'),
         products: filterByCategory('products'),
-        total: data.income.map(i => i.amount).reduce((a, b) => a + b)
+        total: data?.income?.map(i => i.amount)?.reduce((a, b) => a + b, 0)
       })
     })
   }, [])
@@ -96,6 +97,7 @@ export const Finance = () => {
           </Box>
         </Box>
       </Box>
+      <SavedCards expiered={'22/11'} number={'4395'} type={'VISA'} />
     </Box>
   </>
 }
