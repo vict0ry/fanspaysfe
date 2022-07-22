@@ -81,6 +81,34 @@ export default function AddPostModal() {
     })
     setState([...state, ...objectUrlImgs])
   }
+
+  const ImageGrid = ({s, index}) => {
+    return <Grid item xs={4} sm={4} sx={{
+      position: "relative"
+    }}>
+      <Button
+        sx={{
+          minWidth: 0,
+          minHeight: 0,
+          position: "absolute",
+          right: "0",
+          top: "0",
+          background: "#fff",
+          zIndex: 1,
+          "&:hover": {
+            backgroundColor: "#E7E7E7"
+          }
+        }}
+        onClick={() => {
+          setState([...state.slice(0, index), ...state.slice(index+1, state.length)])
+        }}
+      >
+        <Icon name="x" />
+      </Button>
+      {s.img.type === "video/mp4" ? <video width="100%" src={URL.createObjectURL(s?.img)}></video> : <img style={{ maxWidth: '100%' }} src={URL.createObjectURL(s?.img)} />}
+    </Grid>
+  }
+
   return (
     <div>
       {isAllowed() ?
@@ -99,32 +127,7 @@ export default function AddPostModal() {
                      sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label="Message"
                      variant="outlined" />
           <Grid sx={{ maxHeight: '500px', overflowY: 'scroll', marginTop: '20px' }} container spacing={1}>
-            {state?.map((s, index) => {
-              return <Grid item xs={4} sm={4} sx={{
-                position: "relative"
-              }}>
-                <Button
-                  sx={{
-                    minWidth: 0,
-                    minHeight: 0,
-                    position: "absolute",
-                    right: "0",
-                    top: "0",
-                    background: "#fff",
-                    zIndex: 1,
-                    "&:hover": {
-                      backgroundColor: "#E7E7E7"
-                    }
-                  }}
-                  onClick={() => {
-                    setState([...state.slice(0, index), ...state.slice(index+1, state.length)])
-                  }}
-                >
-                  <Icon name="x" />
-                </Button>
-                <img style={{ maxWidth: '100%' }} src={URL.createObjectURL(s?.img)} />
-              </Grid>
-            })}
+            {state?.map((s, index) => <ImageGrid s={s} index={index} />)}
           </Grid>
 
           <div className="action" style={{ marginTop: 10 }}>
@@ -134,7 +137,7 @@ export default function AddPostModal() {
             <input
               type="file"
               multiple
-              accept='.png,.jpg,.jpeg'
+              accept='.png,.jpg,.jpeg,.mp4'
               onChange={onFileUploadChange}
               ref={inputFile} style={{ display: 'none' }}
             />

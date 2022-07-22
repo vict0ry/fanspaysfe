@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Modal from './Modal'
 import Grid from '@mui/material/Grid'
 import { t } from 'i18next'
+import { Player } from 'video-react';
 
 export default class Images extends Component {
   static defaultProps = {
