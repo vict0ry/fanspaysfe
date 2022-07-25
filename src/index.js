@@ -30,11 +30,18 @@ import { ThemeProvider } from '@mui/material'
 import { CustomThemeConfig } from './themeConfig'
 import PaymentStatus from './pages/Finance/Paymentstatus'
 import { HomeNotLogged } from './pages/home-not-logged/home-not-logged'
+import { showAttachCardDialog } from './redux/actions/attachCardDialog.action'
 
 const target = document.querySelector('#root')
 axios.defaults.baseURL = beURL
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('user')
 axios.defaults.headers.post['Content-Type'] = 'application/json'
+axios.interceptors.response.use(  function(res) {
+  if (res?.data?.error?.message === 'INSUFFICIENT_BALANCE') {
+    store.dispatch(showAttachCardDialog())
+  }
+  return res;
+})
 
 const root = ReactDOMClient.createRoot(target)
 const PrivateWrapper = () => {

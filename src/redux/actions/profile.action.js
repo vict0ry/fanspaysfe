@@ -12,12 +12,9 @@ export const loadProfile = (username) => {
 }
 export const toggleSubscribe = (id) => {
   return dispatch => axios.put(`/api/users/${id}/follow`).then(({ data }) => {
-    if (data?.error?.message === 'INSUFFICIENT_BALANCE') {
-      dispatch(showAttachCardDialog())
-    } else {
+    if (data?.error?.message !== 'INSUFFICIENT_BALANCE') {
       dispatch(profileSubscribed(data.followers))
     }
-
   })
 }
 export const profileLoaded = (data) => {

@@ -10,10 +10,13 @@ import axios from 'axios'
 import { t } from 'i18next'
 import { beURL } from '../../config'
 import { SavedCards } from './SavedCards'
+import { useSelector } from 'react-redux'
 
 
 export const Finance = () => {
-
+  const user = useSelector(state => {
+    return state.user.userData
+  })
   const [transactions, setTransactions] = useState([])
   const [incomeStatistic, setIncomeStatistic] = useState({
     tips: 0,
@@ -26,13 +29,15 @@ export const Finance = () => {
     axios.get('/api/credit').then(({ data }) => {
       setTransactions(data.transactions)
       setBalance(data.total)
-      const filterByCategory = filterName => data.income.filter(i => i.category === filterName).map(i => i.amount).reduce((a, b) => a + b, 0)
+      const filterByCategory = filterName => data.transactions
+        .filter(i => i.category === filterName)
+        .map(i => i.amount).filter(amount => amount > 0).reduce((a, b) => a + b, 0)
       setIncomeStatistic({
         ...incomeStatistic,
         tips: filterByCategory('TIP'),
         followers: filterByCategory('followers'),
         products: filterByCategory('products'),
-        total: data?.income?.map(i => i.amount)?.reduce((a, b) => a + b, 0)
+        total: data?.total
       })
     })
   }, [])
@@ -64,9 +69,12 @@ export const Finance = () => {
             <Box style={{ marginLeft: '10px' }}>
               <Card sx={{ height: '322px' }}>
                 <CardActions sx={{ display: 'flex', flexDirection: 'column' }}>
-                  <Typography sx={{ fontSize: '20px', fontWeight: 'bold' }}>Transactions</Typography>
-                  <div style={{ display: 'flex', flexDirection: 'column', overflow: 'scroll' }}>
-                    {transactions?.map(i => {
+                  <Typography sx={{ fontSize: '20px', fontWeight: 'bold' }}>{t('USERMENU.TRANSACTIONS')}</Typography>
+                  <div style={{ maxHeight: '282px', display: 'flex', flexDirection: 'column', overflow: 'scroll' }}>
+                    {transactions.filter(i => {
+                      debugger;
+                      return i?.recipient?._id === user?._id;
+                    })?.map(i => {
                       return i ? <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', gap: 2 }}>
                         <Box>
                           <img
@@ -74,7 +82,7 @@ export const Finance = () => {
                             src={beURL + i.sender?.profilePic} alt="" />
                         </Box>
                         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                          <strong style={{ fontWeight: 'bold' }}>{i.sender.firstName}</strong>
+                          <strong style={{ fontWeight: 'bold' }}>{i.sender?.firstName}</strong>
                           <span>
                            {
                              i.category === 'SUBSCRIPTION' ?

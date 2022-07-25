@@ -79,6 +79,11 @@ export const UserParametersTab = ({ user, email, setEmail, checkboxes, setCheckb
               setEmail(e.target.value)
             }}
           />
+          <Button onClick={() => {
+            axios.put('/api/users/updateEmail', {
+              email: email
+            })
+          }} style={{marginTop: '10px'}} variant={'blue'}>{t('COMMON.SAVE')}</Button>
         </Grid>
 
         <Grid item xs={12} sm={12}>
