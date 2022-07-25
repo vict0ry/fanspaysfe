@@ -1,0 +1,29 @@
+diff --git a/node_modules/react-video-thumbnail-image/src/components/VideoImageThumbnail.js b/node_modules/react-video-thumbnail-image/src/components/VideoImageThumbnail.js
+index f1ba9dd..99063ca 100644
+--- a/node_modules/react-video-thumbnail-image/src/components/VideoImageThumbnail.js
++++ b/node_modules/react-video-thumbnail-image/src/components/VideoImageThumbnail.js
+@@ -10,10 +10,13 @@ import './video-image-thumbnail.css';
+  * Simple component that renders thumbnail url
+  * @param {string} snapshot
+  */
+-const ThumbnailImage = ({ snapshot, alt, className }) => {
++const ThumbnailImage = ({ snapshot, alt, classNam }) => {
+     return (
+         <div className="react-video-thumbnail-image" >
+-            <img src={snapshot} alt={alt} className={className} />
++            <img src={snapshot} alt={alt} className={className} style={{
++                width: "100px",
++                height: "100px"
++            }} />
+         </div>
+     );
+ }
+@@ -61,7 +64,7 @@ export default class VideoImageThumbnail extends React.Component {
+             )
+         } else {
+             if (renderThumbnailHtml) {
+-                return <ThumbnailImage snapshot={snapshot} alt={alt} className={className} />;
++                return <ThumbnailImage snapshot={snapshot} alt={alt} className={className} width={props.width} height={props.height} />;
+             } else {
+                 return snapshot;
+             }

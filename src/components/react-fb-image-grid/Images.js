@@ -1,10 +1,58 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useRef, useState } from 'react'
 import Modal from './Modal'
 import Grid from '@mui/material/Grid'
 import { t } from 'i18next'
 import { Player } from 'video-react';
 
+const RenderVideo = (videoSrc, images, countFrom, overlay) => {
+  const video = useRef(null);
+  const canvas = useRef(null);
+
+  useEffect(() => {
+    if(video.current.videoWidth && video.current.videoHeight){
+      canvas.current.width = video.current.videoWidth;
+      canvas.current.height = video.current.videoHeight;
+
+      const context = canvas.current.getContext("2d");
+      context.drawImage(video.current, 0, 0, video.current.videoWidth, video.current.videoHeight);
+    }
+  })
+
+    return (
+      <Grid item xs={12} md={12} className={`border height-one background`}
+            style={{
+              background: canvas.current ? `url(${canvas.current.toDataURL()})` : "none"
+            }}>
+        <video
+          ref={video}
+          style={{
+            // display: "none",
+            // position: "absolute",
+            // zIndex: -1,
+            // opacity: 0,
+            width: 0,
+            height: 0
+          }}
+          src={videoSrc.images[0]}
+        />
+        <canvas
+          // width={500}
+          // height={500}
+          style={{
+            // width: "100%",
+
+          }}
+          // style={{display: "none"}}
+          ref={canvas}></canvas>
+        {overlay}
+      </Grid>
+    );
+}
+
+
+
 export default class Images extends Component {
+
   static defaultProps = {
     images: [],
     hideOverlay: false,
@@ -52,10 +100,20 @@ export default class Images extends Component {
 
     return <Grid container sx={{ position: 'relative' }}>
       <Grid container>
-        <Grid item xs={12} md={12} className={`border height-one background`} onClick={this.openModal.bind(this, 0)}
-              style={{ background: `url(${images[0]})` }}>
-          {overlay}
-        </Grid>
+        { images[0].split(".")[1] === "mp4" &&
+          <RenderVideo
+            videoSrc={images[0]}
+            images={images}
+            countFrom={countFrom}
+            overlay={overlay}
+          />
+        }
+        {images[0].split(".")[1] !== "mp4" &&
+          <Grid item xs={12} md={12} className={`border height-one background`} onClick={this.openModal.bind(this, 0)}
+                style={{ background: `url(${images[0]})` }}>
+            {overlay}
+          </Grid>
+        }
       </Grid>
     </Grid>
   }
