@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { t } from 'i18next'
 import moment from 'moment'
 import { getZodiac } from '../helper'
+import useWindowDimensions from '../useWindowDimensions'
 
 const ProfileStatistics = ({ followers = 0, following = 0, posts = 0, products = 0, video = 0, likes = 0 }) => {
   const TextNumber = ({ number, text }) => {
@@ -55,10 +56,35 @@ export default function AboutCard({ user, postsLength, disable }) {
   const parsedMonth = parsedDate.format('MMMM')
   const parsedYear = parsedDate.get('year')
 
+  const {width, height} = useWindowDimensions();
 
   return (<div>
       <Card sx={{ maxWidth: '1fr',width: { md: '590px', xs: '390px' }, gridColumn: 'unset' }}>
-        <div style={{ padding: 10, float: 'right', color: 'green', cursor: 'pointer' }}>{t('COMMON.ONLINE')}</div>
+        {/*<div style={{ padding: 10, float: 'right', color: 'green', cursor: 'pointer' }}>{t('COMMON.ONLINE')}</div>*/}
+        <Box style={{height: "100%", width: "80px", float: "right", margin: 10, cursor: "pointer"}}>
+          <Box style={{
+            padding: "2px 8px",
+            borderRadius: 10,
+            fontSize: 14,
+            fontWeight: 600,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "#1FCC64",
+            background: "#EBFEF9",
+            marginLeft: 8
+          }}>
+            <span style={{marginRight: 8}}>{t("MESSAGES.ONLINE")}</span>
+            <Box
+              style={{
+                width: 8,
+                height: 8,
+                background: "#1FCC64",
+                borderRadius: "50%"
+              }}></Box>
+          </Box>
+        </Box>
+
         <CardHeader subheader={
           <div>{'@' + user?.username}
             <Box sx={{ textAlign: 'left', marginTop: 2 }}>

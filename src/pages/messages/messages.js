@@ -23,7 +23,6 @@ import useWindowDimensions from '../../useWindowDimensions'
 import { loadChatMessages, loadChats, sendMessage } from '../../redux/actions/messages.action'
 
 
-
 export function Messages() {
   const dispatch = useDispatch()
   const { userid } = useParams()
