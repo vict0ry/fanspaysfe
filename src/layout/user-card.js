@@ -40,10 +40,10 @@ export default function ProfileCard({ profileUser, myProfile }) {
   return (
     <Card sx={{
       maxWidth: { xs: 500, md: 500 },
-      ml:{
-        xs: 5,
-        md: 0
-      },
+      // ml:{
+      //   xs: 5,
+      //   md: 0
+      // },
       height: 'fit-content'
     }}>
       <Box sx={{

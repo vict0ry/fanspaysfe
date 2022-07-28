@@ -20,7 +20,9 @@ import Card from '@mui/material/Card'
 import axios from 'axios'
 import { AddWishModal } from '../../components/AddWishModal'
 import AddDemandModal from './modals/AddDemandModal'
-
+import { Button } from '@material-ui/core'
+import { Icon } from '../messages/Icon'
+import useWindowDimensions from '../../useWindowDimensions'
 
 export const NotSubscribed = () => {
   return <Box sx={{
@@ -79,6 +81,14 @@ export function Profile(props) {
 
   const [selectedTab, setSelectedTab] = React.useState(0)
 
+  const {width, height} = useWindowDimensions();
+
+  const [pageOffset, setPageOffset] = useState(0);
+
+  window.addEventListener("scroll", () => {
+    setPageOffset(window.pageYOffset);
+  })
+
   return <div>
     <Box sx={{
       // 'mt': 2
@@ -96,7 +106,14 @@ export function Profile(props) {
         display: 'none'
       }}>
         <Box sx={{
-          width: "312px",
+          paddingRight: {
+            xs: '16px',
+            sm: 0
+          },
+          width: {
+            xs: "100%",
+            sm: "312px"
+          },
           display: "flex",
           flexDirection: "column"
         }}>
@@ -107,7 +124,7 @@ export function Profile(props) {
           { !wishes?.length && !myProfile() ? '' :
             <Card sx={{  p: {xs: 2},
             maxWidth: { xs: 500, md: 500 },
-            ml:{xs: 5, md: 0},
+            // ml:{xs: 5, md: 0},
             mt: {xs: 2}, height: 'fit-content' }}>
               <div style={{display: 'flex',
                 marginBottom: '10px',
@@ -159,6 +176,32 @@ export function Profile(props) {
             </TabPanel>
           </div>
         </Box>
+
+        {width > 600 &&
+        pageOffset > height &&
+          <Button
+            style={{
+              position: "fixed",
+              bottom: "20%",
+              left: "100px",
+              padding: "10px",
+              background: "#fff",
+              color: "#000",
+              minWidth: 0,
+              minHeight: 0,
+              borderRadius: "50%",
+              width: "40px",
+              height: "40px",
+              transform: "rotate(90deg)"
+            }}
+            onClick={() => {
+              window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+            }}
+          >
+            <Icon name="arrowLeft" />
+          </Button>
+        }
+
 
       </Box>
     </Box>
