@@ -243,7 +243,8 @@ export function Messages() {
     transformOrigin: "center",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    margin: "0 0 0 -20px"
   }
 
   if(folderListOpen){
@@ -261,8 +262,12 @@ export function Messages() {
 
     return(
       <Paper
-        style={{
-          width: 600,
+        sx={{
+          flexGrow: 1,
+          width: {
+            // md: "600px",
+            xs: "100%"
+          },
           display: "flex",
           flexDirection: "column",
           height: "100%"
@@ -276,7 +281,7 @@ export function Messages() {
         >
           <Box style={styles.headerLeft}>
 
-            {width < 600 && <Button
+            {width < 900 && <Button
               style={openFolderList}
               onClick={() => {
                 setFolderListOpen(!folderListOpen);
@@ -307,7 +312,7 @@ export function Messages() {
             {true &&
             <Box style={{height: "100%"}}>
               <Box style={styles.status}>
-                {width > 600 &&
+                {width > 900 &&
                 <span style={{marginRight: 8}}>{t("MESSAGES.ONLINE")}</span>
                 }
                 <Box style={styles.statusCircle}></Box>
@@ -546,35 +551,35 @@ export function Messages() {
     )
   }
 
-
-
   return (
     <div
       // style={{ display: 'grid', marginTop: 20, gridTemplateColumns: '1fr 1fr 3fr' }}
       style={{
         ...{
           display: "flex",
-          marginTop: 20,
+          width: "100%"
         },
-        ...folderListOpen && width < 600 ? {
-          flexDirection: "column"
+        ...folderListOpen && width < 900 ? {
+          flexDirection: "column",
+          width: "100%"
         } : {},
-        ...width < 600 ? {
-          height: "90vh"
+        ...width < 900 ? {
+          height: "90vh",
+          width: "100%"
         }: {},
       }}
     >
-      {folderListOpen && width < 600 &&
+      {folderListOpen && width < 900 &&
         <FolderList setFolderListOpen={setFolderListOpen} />
       }
-      {!folderListOpen && width < 600 &&
+      {!folderListOpen && width < 900 &&
         <MessagesCont></MessagesCont>
       }
 
-      {width >= 600 &&
+      {width >= 900 &&
         <FolderList setFolderListOpen={setFolderListOpen} />
       }
-      {width >= 600 &&
+      {width >= 900 &&
         <MessagesCont></MessagesCont>
       }
     </div>

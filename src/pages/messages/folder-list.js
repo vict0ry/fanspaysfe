@@ -55,9 +55,7 @@ export const FolderList = ({setFolderListOpen}) => {
 
 
   return (
-    <Paper
-      width
-    >
+    <Paper>
 
       <List style={listStyles}>
         <ListItem style={listItemStyles}>

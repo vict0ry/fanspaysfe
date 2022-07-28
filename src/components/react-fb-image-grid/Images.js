@@ -21,7 +21,7 @@ const RenderVideo = (videoSrc, images, countFrom, overlay) => {
     return (
       <Grid item xs={12} md={12} className={`border height-one background`}
             style={{
-              background: canvas.current ? `url(${canvas.current.toDataURL()})` : "none"
+              // background: canvas.current ? `url(${canvas.current.toDataURL()})` : "none"
             }}>
         <video
           ref={video}
@@ -100,20 +100,19 @@ export default class Images extends Component {
 
     return <Grid container sx={{ position: 'relative' }}>
       <Grid container>
-        { images[0].split(".")[1] === "mp4" &&
-          <RenderVideo
-            videoSrc={images[0]}
-            images={images}
-            countFrom={countFrom}
-            overlay={overlay}
-          />
-        }
-        {images[0].split(".")[1] !== "mp4" &&
-          <Grid item xs={12} md={12} className={`border height-one background`} onClick={this.openModal.bind(this, 0)}
-                style={{ background: `url(${images[0]})` }}>
-            {overlay}
-          </Grid>
-        }
+        {/*{ images[0].split(".")[1] === "mp4" &&*/}
+        {/*  <RenderVideo*/}
+        {/*    videoSrc={images[0]}*/}
+        {/*    images={images}*/}
+        {/*    countFrom={countFrom}*/}
+        {/*    overlay={overlay}*/}
+        {/*  />*/}
+        {/*}*/}
+
+        <Grid item xs={12} md={12} className={`border height-one background`} onClick={this.openModal.bind(this, 0)}
+              style={{ background: `url(${images[0]})` }}>
+          {overlay}
+        </Grid>
       </Grid>
     </Grid>
   }
