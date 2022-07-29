@@ -147,6 +147,7 @@ function Register(props) {
               <Grid item xs={12}>
                 <TextField
                   required
+                  type={'email'}
                   fullWidth
                   onChange={(e) => {
                     handleValidateEmail(e.target.value)

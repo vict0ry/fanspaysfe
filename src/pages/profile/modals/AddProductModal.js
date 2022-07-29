@@ -10,6 +10,7 @@ import axios from 'axios'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { ProductCart } from './ProductCart'
+import { Icon } from '../../messages/Icon'
 
 const style = {
   position: 'absolute',
@@ -109,6 +110,34 @@ export default function AddProductModal() {
                 ref={inputFile} style={{ display: 'none' }}
               />
             </Button>
+          </Grid>
+          <Grid sx={{ maxHeight: '500px', overflowY: 'scroll', marginTop: '20px' }} container spacing={1}>
+            {state?.map((s, index) => {
+              return <Grid item xs={4} sm={4} sx={{
+                position: 'relative'
+              }}>
+                <Button
+                  sx={{
+                    minWidth: 0,
+                    minHeight: 0,
+                    position: 'absolute',
+                    right: '0',
+                    top: '0',
+                    background: '#fff',
+                    zIndex: 1,
+                    '&:hover': {
+                      backgroundColor: '#E7E7E7'
+                    }
+                  }}
+                  onClick={() => {
+                    setState([...state.slice(0, index), ...state.slice(index + 1, state.length)])
+                  }}
+                >
+                  <Icon name="x" />
+                </Button>
+                <img style={{ maxWidth: '100%' }} src={URL.createObjectURL(s?.img)} />
+              </Grid>
+            })}
           </Grid>
           <Grid item xs={12}>
             <TextField

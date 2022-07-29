@@ -136,8 +136,6 @@ export const Posts = ({ profileUser, posts, disableAdd = false }) => {
               </div>
             </CardActions> : ''}
             {!message?.likes?.length ? t('BE_THE_FIRST_ONE') : message?.likes?.length + ' likes'} - {message?.comments?.length} comments
-            - 100kč
-            dýško
             {!message.not_subscribed ? <div>
               <Box sx={{ marginTop: 5, display: isHidden ? 'none' : 'block', maxHeight: '300px', overflowY: 'scroll' }}>
                 <Divider />
