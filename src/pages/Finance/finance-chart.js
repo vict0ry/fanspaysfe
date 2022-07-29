@@ -60,20 +60,33 @@ export const data = {
 
 export const FinanceChart =  () =>  {
   return (
-    <Box sx={{width: '60%'}}>
-      <Card>
-        <CardActions sx={{display: 'flex', justifyContent: 'space-between'}}>
-          <Typography variant={'h6'}>Incoming Funds</Typography>
-          <Box>
+    <Box
+      sx={{
+        flexGrow: 1,
+        alignSelf: "stretch"
+      }}
+    >
+      <Card sx={{padding: "16px", borderRadius: "8px", height: "100%"}}>
+        <CardActions sx={{display: 'flex', justifyContent: 'space-between', padding: 0}}>
+          <Typography sx={{fontSize: "20px", fontWeight: 700}}>Incoming Funds</Typography>
+          <Box sx={{marginTop: "-16px"}}>
             <FormControl fullWidth>
               <InputLabel sx={{mt: 0.5}} id="weeks-id">
                 <img style={{paddingRight: 10, marginTop: 0, width: 21, height: 21}} src='/images/icons/calendar.svg'/>Weeks</InputLabel>
-              <Select labelId={"weeks-id"} sx={{width: 150, height: 30, mt: 2, background:"white"}}>
-              </Select>
+              <Select labelId={"weeks-id"} sx={{
+                width: 120,
+                height: 30,
+                mt: 2,
+                background:"#E8EFFF",
+                borderRadius: "8px",
+                '& .css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                  border: "none"
+                }
+              }} />
             </FormControl>
           </Box>
         </CardActions>
-        <CardContent>
+        <CardContent sx={{mt: "16px"}}>
           <Line options={options} data={data} />
         </CardContent>
       </Card>

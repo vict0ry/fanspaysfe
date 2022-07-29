@@ -8,9 +8,13 @@ import React, { useState } from 'react'
 import Modal from '@mui/material/Modal'
 import Payment from './payment'
 import axios from 'axios'
+import masterCard from './masterCard.svg'
 
 
 export const NewFounds = ({balance}) => {
+  const [withdrawalOpen, setWithdrawalOpen] = useState(true);
+
+
   const [openPaymentModal, setPaymentModal] = useState(false);
   const handleOpen = () => setPaymentModal(true);
   const handleClose = () => setPaymentModal(false);
@@ -27,53 +31,169 @@ export const NewFounds = ({balance}) => {
     p: 4,
   };
   return(
-    <Box sx={{mt: 5,
+    <Box sx={{
+      // mt: 5,
       ml: {xs: 0},
-      alignItems: 'center',
-      height:{xs: '17%'},
+      alignItems: {
+        sm: 'center'
+      },
+      // height:{xs: '17%'},
       display: 'flex',
-      flexDirection:{xs:'column', md:'row'},
-      justifyContent: 'space-between'}}>
-      <Box>
-        <Card>
-          <CardContent sx={{display: 'flex'}}>
-            <Typography variant={'h5'}>Balance:</Typography>
-            <Typography sx={{mt: 0.8, ml: 1}} variant={'body1'}>{balance}</Typography>
+      flexDirection:{xs:'column', sm:'row'},
+      justifyContent: 'space-between',
+      marginTop: "24px"
+    }}>
+      <Box sx={{flexGrow: 1, minWidth: "30%"}}>
+        <Card
+          sx={{
+            borderRadius: "8px",
+            padding: "24px",
+            marginRight: {
+              sm: "24px"
+            },
+            marginBottom: {
+              xs: "24px",
+              sm: 0
+            }
+          }}
+        >
+          <CardContent sx={{display: 'flex', alignItems: {md: "center"}, padding: 0, flexDirection: { md: "row", sm: "column"}}}>
+            <Typography sx={{fontSize: "20px", fontWeight: 700}}>Balance:</Typography>
+            <Typography
+              sx={{
+                ml: {
+                  md: 1,
+                  xs: 1,
+                  sm: 0
+                },
+                background: "linear-gradient(94.04deg, #4776E6 10.41%, #8E54E9 77.48%)",
+                webkitBackgroundClip: "text",
+                webkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                textFillColor: "transparent",
+                fontWeight: 700,
+                fontSize: "20px",
+              }}
+            >$ {balance}</Typography>
           </CardContent>
-          <CardActions>
-            <Button sx={{background: '#4776E6'}} variant={'contained'}>Deposit</Button>
+          <CardActions sx={{padding: 0, marginTop: "16px", display: "flex", justifyContent: {xs: "center", md: "start"}}}>
+            <Button sx={{background: '#4776E6', borderRadius: "8px", lineHeight: "20px", minWidth: 0, minHeight: 0, padding: "10px 24px", fontSize: "14px", fontWeight: 700}} variant={'contained'}>Deposit</Button>
           </CardActions>
         </Card>
       </Box>
-      <Box sx={{width: {md: '65%', xs: '100%'}}}>
-        <Card>
-          <CardContent sx={{display: 'flex'}}>
-            <Typography sx={{fontWeight: 'bold'}} variant={'h6'}>You should to add the deposit method</Typography>
-          </CardContent>
-          <CardActions>
-            <Button onClick={handleOpen} sx={{
-              width: '50%',
-              background: '#E8EFFF',
-              color: '#4776E6',
-              fontWeight: 'bold'}} variant={'outlined'}>Add method</Button>
-            <Typography sx={{ml: 1}} variant={'caption'}>Funds are withdrawn automatically once a week if the balance is more than $ 50.
-              The service takes a commission of 15%</Typography>
-              <Modal
-                open={openPaymentModal}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-              >
-                <Box sx={style}>
-                  <Button onClick={() => {
-                    axios.post("/api/stripe/pay").then(res => {
-                      return res;
-                    })
-                  }}>Pay me</Button>
 
-                  <Payment/>
+      <Box sx={{width: {md: '65%', xs: '100%'}, flexGrow: 1}}>
+        <Card sx={{borderRadius: "8px", padding: "24px"}}>
+          <CardContent sx={{display: 'flex', padding: 0, marginBottom: "16px"}}>
+            <Typography sx={{fontSize: "20px", fontWeight: 700}} variant={'h6'}>You should to add the deposit method</Typography>
+          </CardContent>
+          <CardActions sx={{padding: 0}}>
+            <Button
+              onClick={handleOpen}
+              sx={{
+                minWidth: 0,
+                minHeight: 0,
+                borderRadius: "8px",
+                padding: "10px 36px",
+                background: '#E8EFFF',
+                color: '#4776E6',
+                textTransform: "none",
+                fontSize: "14px",
+                fontWeight: 700,
+                whiteSpace: "nowrap",
+                lineHeight: "20px"
+              }}
+            >Add method</Button>
+            <Typography sx={{ml: 1, fontSize: "12px", fontWeight: 600, color: "#5D5E65"}} variant={'caption'}>Funds are withdrawn automatically once a week if the balance is more than $ 50.
+              The service takes a commission of 15%
+            </Typography>
+            {withdrawalOpen &&
+              <Box sx={{
+                position: "fixed",
+                left: 0,
+                top: 0,
+                width: "100vw",
+                height: "100vh",
+                backdropFilter: "blur(8px)",
+                zIndex: 2,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+              onClick={() => {
+                setWithdrawalOpen(false)
+              }}>
+                <Box sx={{
+                  borderRadius: "8px",
+                  background: "#fff",
+                  width: "700px",
+                  height: "500px",
+                  display: "flex",
+                  flexDirection: "column",
+                  padding: "24px 36px 32px 36px"
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}>
+                  <Box sx={{display: "flex", justifyContent: "center", marginBottom: "16px"}}>
+                    <Box sx={{
+                      background: "linear-gradient(94.04deg, #4776E6 10.41%, #8E54E9 77.48%)",
+                      webkitBackgroundClip: "text",
+                      webkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                      textFillColor: "transparent",
+                      fontSize: "24px",
+                      fontWeight: 700
+                    }}>
+                      Withdrawals
+                    </Box>
+                  </Box>
+
+                  <Box sx={{}}>
+                    <Box sx={{
+                      fontSize: "18px",
+                      fontWeight: 600,
+                      marginBottom: "28px"
+                    }}>
+                      Choose a withdrawal method
+                    </Box>
+                    <Box sx={{
+                      display: "flex"
+                    }}>
+                      <Box sx={{
+                        width: "160px",
+                        height: "40px",
+                        display: "flex",
+                        justifyContent: "center"
+                      }}>
+                        <img src={masterCard} alt="" />
+                      </Box>
+                    </Box>
+                  </Box>
                 </Box>
-              </Modal>
+              </Box>
+            }
+
+
+              {/*<Modal*/}
+              {/*  open={openPaymentModal}*/}
+              {/*  onClose={handleClose}*/}
+              {/*  aria-labelledby="modal-modal-title"*/}
+              {/*  aria-describedby="modal-modal-description"*/}
+              {/*>*/}
+              {/*  <Box sx={style}>*/}
+              {/*    <Button*/}
+              {/*      sx={{textTransform: "none"}}*/}
+              {/*      onClick={() => {*/}
+              {/*        axios.post("/api/stripe/pay").then(res => {*/}
+              {/*          return res;*/}
+              {/*        })*/}
+              {/*      }}*/}
+              {/*    >Pay me</Button>*/}
+
+              {/*    <Payment/>*/}
+              {/*  </Box>*/}
+              {/*</Modal>*/}
           </CardActions>
         </Card>
       </Box>
