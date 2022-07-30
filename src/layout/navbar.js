@@ -12,7 +12,6 @@ import AccountCircle from '@mui/icons-material/AccountCircle'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import { Link } from 'react-router-dom'
-import { SearchInput } from '../components/SearchInput'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { NotificationsMenu } from './components/NotificationsMenu'
@@ -26,11 +25,24 @@ import LanguageIcon from '@mui/icons-material/Language'
 import Drawer from '@mui/material/Drawer'
 import { SharedLeftMenu } from './components/SharedLeftMenu'
 import { Container } from '@material-ui/core'
+import axios from 'axios'
+import { Autocomplete, TextField } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import { useNavigate } from 'react-router'
 
 const drawerWidth = 240
 
 
 export default function SearchBar({ window }) {
+  const SearchIconWrapper = styled('div')(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }))
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   const handleDrawerToggle = () => {
@@ -76,6 +88,8 @@ export default function SearchBar({ window }) {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+  const navigate = useNavigate();
+
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget)
@@ -192,10 +206,21 @@ export default function SearchBar({ window }) {
   )
   const { i18n } = useTranslation()
   const [language, setLanguage] = useState('EN')
+  const [options, setOptions] = useState([]);
 
   const handleChangeLanguage = (evt) => {
     const lang = evt.target.value
     i18n.changeLanguage(lang)
+  }
+
+  const handleInputChange = (e) => {
+    return axios.get('/api/users/search/' + e.target.value).then(({data}) => {
+      setOptions(data);
+    });
+  }
+
+  const handleSearchChange = (e) => {
+    document.location.replace('/profile/'+e.target.textContent);
   }
 
   return (
@@ -233,8 +258,16 @@ export default function SearchBar({ window }) {
               }}
               alt="Logo"
             />
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-              <SearchInput />
+            <Box sx={{ marginLeft: '10px', display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+              <Autocomplete
+                onInputChange={handleInputChange}
+                onChange={handleSearchChange}
+                disablePortal
+                id="combo-box-demo"
+                options={options}
+                sx={{ width: 300 }}
+                renderInput={(params) => <TextField {...params} label="Users" />}
+              />
             </Box>
             <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
               <FormControl fullWidth>

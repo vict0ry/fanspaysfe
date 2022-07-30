@@ -133,7 +133,7 @@ export default function AddPostModal() {
               onChange={onFileUploadChange}
               ref={inputFile} style={{ display: 'none' }}
             />
-            <PollIcon style={{ color: '#5c9edf', cursor: 'pointer' }} />
+            {/*<PollIcon style={{ color: '#5c9edf', cursor: 'pointer' }} />*/}
 
             <Button
               onClick={() => handleAddMessage()}
