@@ -72,7 +72,6 @@ export const Finance = () => {
                   <Typography sx={{ fontSize: '20px', fontWeight: 'bold' }}>{t('USERMENU.TRANSACTIONS')}</Typography>
                   <div style={{ maxHeight: '282px', display: 'flex', flexDirection: 'column', overflow: 'scroll' }}>
                     {transactions.filter(i => {
-                      debugger;
                       return i?.recipient?._id === user?._id;
                     })?.map(i => {
                       return i ? <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', gap: 2 }}>

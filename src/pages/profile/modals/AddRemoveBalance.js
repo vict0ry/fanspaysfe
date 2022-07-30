@@ -58,7 +58,7 @@ export default function AddRemoveBalance({ recipient, children }) {
       sender: loggedUser.userData._id
     }).then(_ => {
       handleClose()
-      dispatch(showSuccessSnackbar('Success!'))
+      dispatch(showSuccessSnackbar(t('COMMON.SUCCESS')));
     })
   }
 

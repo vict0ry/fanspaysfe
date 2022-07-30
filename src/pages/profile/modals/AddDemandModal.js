@@ -52,15 +52,19 @@ export default function AddDemandModal() {
       description: description.value,
       recipient: user.profileUser._id
     }).then(demands => {
-      handleClose()
-      dispatch(showSuccessSnackbar('Success!'))
+      loadDemands();
+      handleClose();
+      dispatch(showSuccessSnackbar(t('COMMON.SUCCESS')));
     })
+  }
+  const loadDemands = () => {
+    axios.get('/api/demands/' + user.profileUser._id).then(({ data }) => {
+      setDemands(data)
+    });
   }
   const [demands, setDemands] = useState([])
   useEffect(() => {
-    axios.get('/api/demands/' + user.profileUser._id).then(({ data }) => {
-      setDemands(data)
-    })
+    loadDemands();
   }, [])
   const handleDemandAction = (action, demandId) => {
     axios.put('/api/demands/change-status', {
@@ -146,7 +150,7 @@ export default function AddDemandModal() {
                   }}>{demand.price} CZK
                   </div>
                   <div>
-                    {!isMyProfile() ? <div>
+                    {!isMyProfile() && demand.status === 'request' ? <div>
                       <Button onClick={() => handleDemandAction('accepted', demand._id)} variant={'success'}>
                         <img src="/images/icons/accept.svg" style={{ marginRight: '10px' }} alt="" />
                         {t('COMMON.ACCEPT')}
@@ -159,7 +163,7 @@ export default function AddDemandModal() {
                     </div> : <div style={{
                       background: demand.status === 'request' ? 'dark-yellow' : 'green',
                       padding: '5px 10px',
-                      color: 'black',
+                      color: demand.status === 'request' ? 'black' : 'white',
                       borderRadius: '5px'
                     }}>{demand.status}</div>}
 

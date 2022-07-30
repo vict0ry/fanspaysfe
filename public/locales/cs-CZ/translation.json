@@ -63,7 +63,9 @@
     "LIKES": "lajku",
     "PRODUCTS": "Produkty",
     "UPLOAD_AVATAR": "Nahrát avatar",
-    "WISHES": "Přání"
+    "WISHES": "Přání",
+    "OFFERED_AMOUNT": "Nabízená částka",
+    "OFFERED_MESSAGE": "Co nejpodrobneji popiste co byste chtel za nabizenou castku"
   },
   "USERMENU": {
     "MY_PAGE": "Moje stranka",

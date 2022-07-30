@@ -14,6 +14,7 @@ import { loadChatMessages, loadChats } from '../../redux/actions/messages.action
 export const FolderList = ({ setFolderListOpen }) => {
   const socket = useContext(SocketContext)
   const dispatch = useDispatch()
+  const loggedUser = useSelector(state => state.user.userData);
   useEffect(() => {
     dispatch(loadChats())
   }, [])
@@ -65,6 +66,9 @@ export const FolderList = ({ setFolderListOpen }) => {
         </ListItem>
 
         {chatList?.map(({ users, latestMessage, _id }, index) => {
+          debugger;
+          const sender = users.filter(i => i._id !== loggedUser._id)[0];
+          debugger;
 
           if (selectedChatId === _id) {
             bgListItem.background = '#ECF0F1'
@@ -84,13 +88,14 @@ export const FolderList = ({ setFolderListOpen }) => {
               <Box style={{ display: 'flex' }}>
                 <ListItemIcon>
                   <img style={{ borderRadius: '50%' }}
-                       src="https://demo.youdate.website/content/cache/1/HYBzfofXl4m5Phvb0AfJZP_Tvw16XXWz.jpg/e5e917eef160043206fdd306dabfb4d9.jpg"
+                       src={sender.profilePic}
+                       style={{maxWidth: '50px'}}
                        alt="" />
                 </ListItemIcon>
                 <Box>
-                  <Box style={userNameStyle}>{users[0].firstName + ' ' + users[0].lastName}</Box>
+                  <Box style={userNameStyle}>{sender.firstName + ' ' + sender.lastName}</Box>
                   <Box style={usernameStyle}>
-                    @{users[0].username}
+                    @{sender.username}
                   </Box>
                 </Box>
               </Box>

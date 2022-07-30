@@ -73,10 +73,10 @@ export const SharedLeftMenu = () => {
       {/*  <img style={iconStyle} src="/images/icons/pencil.svg" alt="" />*/}
       {/*  <Link style={linkStyles} to={'/edit'}>{t('USERMENU.EDIT_PROFILE')}</Link>*/}
       {/*</div>*/}
-      <div className="link">
-        <img style={iconStyle} src="/images/icons/shopping-cart.svg" alt="" />
-        <Link style={linkStyles} to={'/shop/'}>{t('USERMENU.MARKETPLACE')}</Link>
-      </div>
+      {/*<div className="link">*/}
+      {/*  <img style={iconStyle} src="/images/icons/shopping-cart.svg" alt="" />*/}
+      {/*  <Link style={linkStyles} to={'/shop/'}>{t('USERMENU.MARKETPLACE')}</Link>*/}
+      {/*</div>*/}
       {/*<div className="link">*/}
       {/*  <img style={iconStyle} src="/images/icons/money.svg" alt="" />*/}
       {/*  <Link style={linkStyles} to={'/customer'}>{t('USERMENU.TRANSACTIONS')}</Link>*/}

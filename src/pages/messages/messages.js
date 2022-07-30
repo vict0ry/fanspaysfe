@@ -25,7 +25,14 @@ export function Messages() {
   const chatList = useSelector(state => state.messages.chatList)
   const chatMessages = useSelector(state => state.messages.selectedChatMessages)
   const loggedUser = useSelector(state => state.user)
-  const selectedChatId = userid || useSelector(state => state.messages.selectedChatId)
+  let selectedChatId = useSelector(state => state.messages.selectedChatId);
+  if (!selectedChatId) {
+    selectedChatId = chatList[0]._id;
+  }
+  const oppositeUser = chatList.find(list => list._id === selectedChatId).users.filter(i => i._id !== loggedUser.userData._id)[0];
+
+  debugger;
+
 
   const socket = useContext(SocketContext)
   useEffect(() => {
@@ -294,9 +301,9 @@ export function Messages() {
 
             <Box style={styles.nameInfo}>
               <Box style={styles.fullName}>
-                <span>Аня</span> <span>Кошкина</span>
+                <span>{oppositeUser.firstName}</span> <span>{oppositeUser.lastName}</span>
               </Box>
-              <Box style={styles.nickname}>@anncatjoy</Box>
+              <Box style={styles.nickname}>@{oppositeUser.username}</Box>
             </Box>
             {true &&
               <Box style={{ height: '100%' }}>
@@ -366,28 +373,6 @@ export function Messages() {
           <List style={styles.messages_cont}>
 
             {chatMessages.length ? chatMessages.map((i, id) => {
-              // const now = new Date();
-              // const date = new Date(i.createdAt);
-
-
-              // if (
-              //   !isTodayRendered &&
-              //   now.getFullYear() === date.getFullYear() &&
-              //   now.getMonth() === date.getMonth() &&
-              //   now.getDate() === date.getDate()
-              // ){
-              //   setIsTodayRendered(true);
-
-              //   return (
-              //       <ListItem style={{display: "flex", alignItems: "center", width: "100%", height: "50px", border: "1px solid #000"}}>
-              //         <div style={{flexGrow: 1, height: 1, color: "#ECE9F1"}}></div>
-              //         <div style={{fontSize: 14, fontWeight: 700}}>Сегодня</div>
-              //         <div style={{flexGrow: 1, height: 1, color: "#ECE9F1"}}></div>
-              //       </ListItem>
-              //       // <Message i={i} id={id} isSender={isSender} />
-
-              //   )
-              // }
 
               return (
                 <Message i={i} id={id} isSender={isSender} />
@@ -419,8 +404,6 @@ export function Messages() {
                       <Button
                         style={styles.chatControllerOpenItem}
                         onClick={(e) => {
-                          // e.stopPropagation();
-                          // console.log(fileInput)
                           fileInput.current.click()
                         }}
                       >

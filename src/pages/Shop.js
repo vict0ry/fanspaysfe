@@ -53,12 +53,9 @@ export const Shop = () => {
   }
   const [currentPage, setCurrentPage] = useState(0)
   const loadShopData = () => {
-    debugger;
     axios.get('/api/shop').then(res => {
-      debugger;
       setShopItems(res.data)
     })
-    debugger;
   }
 
   return (

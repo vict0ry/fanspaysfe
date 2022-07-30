@@ -9,13 +9,6 @@ const Message = ({ i, id, isSender }) => {
   const message = React.useRef(null)
   const messageInfo = React.useRef(null)
 
-  // React.useEffect(() => {
-  //     if(message.current.offsetWidth < 190){
-  //         const flexDirectionColumn = {flexDirection: "column", marginBottom: 8};
-  //         messageInfo.current.style = {...stylesMessage.messageInfo, ...flexDirectionColumn, ...isSender(i) ? stylesMessage.alignItemsEnd: stylesMessage.alignItemsStart}
-  //     }
-  // }, [message.current])
-
   return (
     <ListItem
       style={{ ...stylesMessage.messageCont, ...isSender(i) ? stylesMessage.myMessageCont : stylesMessage.anotherMessageCont }}

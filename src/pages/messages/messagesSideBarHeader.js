@@ -83,7 +83,7 @@ export const HeaderSideBar = ({ amountMessages }) => {
       </Box>
 
       <div style={styles.header}>
-        <SearchInput name="search" placeholder="Поиск" />
+        <SearchInput name="search" placeholder={t('COMMON.SEARCH')} />
       </div>
 
       {/*buttons for creating group and mailing*/}

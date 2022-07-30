@@ -46,7 +46,7 @@ export const AddWishModal = ({ myProfile, change }) => {
     }).then(i => {
       change()
       handleClose()
-      dispatch(showSuccessSnackbar('Success!'))
+      dispatch(showSuccessSnackbar(t('COMMON.SUCCESS')));
     })
   }
 
