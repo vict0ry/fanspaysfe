@@ -222,24 +222,44 @@ export const Icon = ({name, color}) => {
         case "hashtag":
             image =
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 4L8 20" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M16 4L14 20" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M5 9H19" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M5 15H19" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 4L8 20" stroke="#B3B3B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M16 4L14 20" stroke="#B3B3B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M5 9H19" stroke="#B3B3B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M5 15H19" stroke="#B3B3B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
             break;
         case "basket":
             image =
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 16.667H35" stroke="#4776E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M33.3334 16.667L31.6667 33.3337H8.33341L6.66675 16.667" stroke="#4776E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M13.3335 23.333V26.6663" stroke="#4776E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M20 23.333V26.6663" stroke="#4776E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M26.6665 23.333V26.6663" stroke="#4776E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M28.3332 16.6667V13.3333C28.3332 8.73096 24.6022 5 19.9998 5C15.3975 5 11.6665 8.73096 11.6665 13.3333V16.6667" stroke="#4776E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5 16.667H35" stroke="#4776E6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M33.3334 16.667L31.6667 33.3337H8.33341L6.66675 16.667" stroke="#4776E6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M13.3335 23.333V26.6663" stroke="#4776E6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M20 23.333V26.6663" stroke="#4776E6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M26.6665 23.333V26.6663" stroke="#4776E6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M28.3332 16.6667V13.3333C28.3332 8.73096 24.6022 5 19.9998 5C15.3975 5 11.6665 8.73096 11.6665 13.3333V16.6667" stroke="#4776E6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
             break;
-
+        case "refresh":
+            image =
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 11.0002C19.7554 9.24041 18.9391 7.60985 17.6766 6.35969C16.4142 5.10953 14.7758 4.30911 13.0137 4.08175C11.2516 3.85438 9.46362 4.21268 7.9252 5.10144C6.38678 5.9902 5.18325 7.36013 4.5 9.00019" stroke="#5D5E65" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M4 5V9H8" stroke="#5D5E65" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M4 13C4.24456 14.7598 5.06093 16.3903 6.32336 17.6405C7.58579 18.8907 9.22424 19.6911 10.9863 19.9184C12.7484 20.1458 14.5364 19.7875 16.0748 18.8988C17.6132 18.01 18.8168 16.6401 19.5 15" stroke="#5D5E65" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M20 19V15H16" stroke="#5D5E65" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
+        case "chevronRight":
+            image =
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 18L15 12L9 6" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
+        case "chevronLeft":
+            image =
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
 
       default:
             image = <svg></svg>
