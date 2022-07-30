@@ -1,6 +1,5 @@
 import IconButton from '@mui/material/IconButton'
 import Badge from '@mui/material/Badge'
-import MailIcon from '@mui/icons-material/Mail'
 import Popover from '@mui/material/Popover'
 import * as React from 'react'
 import { useEffect } from 'react'
@@ -62,7 +61,7 @@ export const MessagesMenu = () => {
       aria-label="show 17 new mesages"
     >
       <Badge badgeContent={chatList.length} color="error">
-        <img src='/images/icons/message.svg'/>
+        <img src="/images/icons/message.svg" />
       </Badge>
     </IconButton>
     <Popover

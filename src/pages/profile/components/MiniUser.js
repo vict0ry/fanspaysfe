@@ -5,7 +5,7 @@ export const MiniUser = ({ user }) => {
   return <Link to={'/profile/' + user?.username}>
     <div style={{ display: 'flex', marginBottom: 20 }} className="user-info">
       <div className="avatar-wrapper" style={{ marginRight: '5px' }}>
-        {user.profilePic && <img
+        {user?.profilePic && <img
           style={{ borderRadius: '100%' }}
           src={beURL + user?.profilePic}
           alt=""

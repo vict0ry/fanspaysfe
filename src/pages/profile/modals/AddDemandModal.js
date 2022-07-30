@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal'
@@ -12,19 +12,11 @@ import FormControl from '@mui/material/FormControl'
 import { FormGroup } from '@material-ui/core'
 import { showSuccessSnackbar } from '../../../redux/actions/snackbar.actions'
 import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
-import PostMenu from '../components/post/PostMenu'
 import Avatar from '@mui/material/Avatar'
 import { beURL } from '../../../config'
 import { Link } from 'react-router-dom'
 import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
-import { NotSubscribed } from '../profile'
-import FbImageLibrary from '../../../components/react-fb-image-grid'
 import CardActions from '@mui/material/CardActions'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import CommentIcon from '@mui/icons-material/Comment'
-import SendTipModal from './SendTipModal'
 import Card from '@mui/material/Card'
 import moment from 'moment'
 
@@ -50,8 +42,8 @@ export default function AddDemandModal() {
   const isMyProfile = () => {
     return !(!username || username === loggedUser?.userData?.username)
   }
-  const user = useSelector(state => state.profile.profile);
-  const dispatch = useDispatch();
+  const user = useSelector(state => state.profile.profile)
+  const dispatch = useDispatch()
   const submitForm = (event) => {
     event.preventDefault()
     const { price, description } = event.target.elements
@@ -60,20 +52,20 @@ export default function AddDemandModal() {
       description: description.value,
       recipient: user.profileUser._id
     }).then(demands => {
-      handleClose();
-      dispatch(showSuccessSnackbar("Success!"));
+      handleClose()
+      dispatch(showSuccessSnackbar('Success!'))
     })
   }
-  const [demands, setDemands] = useState([]);
+  const [demands, setDemands] = useState([])
   useEffect(() => {
     axios.get('/api/demands/' + user.profileUser._id).then(({ data }) => {
-      setDemands(data);
+      setDemands(data)
     })
-  }, []);
+  }, [])
   const handleDemandAction = (action, demandId) => {
     axios.put('/api/demands/change-status', {
       demandId, action
-    }).then(console.log);
+    }).then(console.log)
   }
 
 
@@ -117,7 +109,7 @@ export default function AddDemandModal() {
       </Modal>
       {
         demands.map(demand => {
-          return <div style={{marginTop: '20px'}}>
+          return <div style={{ marginTop: '20px' }}>
             <div>
               <Card>
                 <CardHeader
@@ -127,8 +119,9 @@ export default function AddDemandModal() {
                     </Avatar>
                   }
                   title={
-                    <div style={{display: 'flex', justifyContent: "space-between"}}>
-                      <Link to={'/profile/' + demand.postedBy.username}>{demand.postedBy.firstName + ' ' + demand.postedBy.lastName}</Link>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <Link
+                        to={'/profile/' + demand.postedBy.username}>{demand.postedBy.firstName + ' ' + demand.postedBy.lastName}</Link>
                       {moment(demand.createdAt).fromNow()}
                     </div>
                   }
@@ -136,12 +129,12 @@ export default function AddDemandModal() {
                 >
                 </CardHeader>
                 <CardContent>
-                  <div style={{fontSize: '24px', fontWeight: 'bold'}}>
+                  <div style={{ fontSize: '24px', fontWeight: 'bold' }}>
                     {demand.description}
                   </div>
                 </CardContent>
 
-                <CardActions sx={{display: 'flex', justifyContent: 'space-between'}}>
+                <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <div style={{
                     background: 'linear-gradient(94.04deg, #4776E6 10.41%, #8E54E9 77.48%)',
                     '-webkit-background-clip': 'text',
@@ -150,15 +143,17 @@ export default function AddDemandModal() {
                     'text-fill-color': 'transparent',
                     fontWeight: 'bold',
                     fontSize: '24px'
-                  }}>{demand.price} CZK</div>
+                  }}>{demand.price} CZK
+                  </div>
                   <div>
-                    { !isMyProfile() ? <div>
+                    {!isMyProfile() ? <div>
                       <Button onClick={() => handleDemandAction('accepted', demand._id)} variant={'success'}>
-                        <img src="/images/icons/accept.svg" style={{marginRight: '10px'}} alt="" />
+                        <img src="/images/icons/accept.svg" style={{ marginRight: '10px' }} alt="" />
                         {t('COMMON.ACCEPT')}
                       </Button>
-                      <Button onClick={() => handleDemandAction('declined', demand._id)} variant={'cancel'} sx={{marginLeft: '10px'}}>
-                        <img src="/images/icons/remove.svg" style={{marginRight: '10px'}} alt="" />
+                      <Button onClick={() => handleDemandAction('declined', demand._id)} variant={'cancel'}
+                              sx={{ marginLeft: '10px' }}>
+                        <img src="/images/icons/remove.svg" style={{ marginRight: '10px' }} alt="" />
                         {t('COMMON.REFUSE')}
                       </Button>
                     </div> : <div style={{
@@ -166,7 +161,7 @@ export default function AddDemandModal() {
                       padding: '5px 10px',
                       color: 'black',
                       borderRadius: '5px'
-                    }}>{demand.status}</div> }
+                    }}>{demand.status}</div>}
 
                   </div>
                 </CardActions>

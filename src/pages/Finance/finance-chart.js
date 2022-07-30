@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 import {
-  Chart as ChartJS,
   CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
+  Chart as ChartJS,
   Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip
+} from 'chart.js'
+import { Line } from 'react-chartjs-2'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import Typography from '@mui/material/Typography'
@@ -28,7 +28,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend
-);
+)
 
 export const options = {
   responsive: true,
@@ -39,12 +39,12 @@ export const options = {
     title: {
 
       display: false,
-      text: 'Chart.js Line Chart',
-    },
-  },
-};
+      text: 'Chart.js Line Chart'
+    }
+  }
+}
 
-const labels = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+const labels = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']
 
 export const data = {
   labels,
@@ -53,22 +53,23 @@ export const data = {
       label: 'Dataset 2',
       data: ['100', '200', '300', '400', '200', '300', '400'],
       borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
+      backgroundColor: 'rgba(53, 162, 235, 0.5)'
+    }
+  ]
+}
 
-export const FinanceChart =  () =>  {
+export const FinanceChart = () => {
   return (
-    <Box sx={{width: '60%'}}>
+    <Box sx={{ width: '60%' }}>
       <Card>
-        <CardActions sx={{display: 'flex', justifyContent: 'space-between'}}>
+        <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant={'h6'}>Incoming Funds</Typography>
           <Box>
             <FormControl fullWidth>
-              <InputLabel sx={{mt: 0.5}} id="weeks-id">
-                <img style={{paddingRight: 10, marginTop: 0, width: 21, height: 21}} src='/images/icons/calendar.svg'/>Weeks</InputLabel>
-              <Select labelId={"weeks-id"} sx={{width: 150, height: 30, mt: 2, background:"white"}}>
+              <InputLabel sx={{ mt: 0.5 }} id="weeks-id">
+                <img style={{ paddingRight: 10, marginTop: 0, width: 21, height: 21 }}
+                     src="/images/icons/calendar.svg" />Weeks</InputLabel>
+              <Select labelId={'weeks-id'} sx={{ width: 150, height: 30, mt: 2, background: 'white' }}>
               </Select>
             </FormControl>
           </Box>
@@ -78,5 +79,5 @@ export const FinanceChart =  () =>  {
         </CardContent>
       </Card>
     </Box>
-    );
+  )
 }

@@ -40,28 +40,28 @@ function Register(props) {
     event.preventDefault()
     const data = {}
     new FormData(event.currentTarget).forEach((value, key) => (data[key] = value))
-    data.birthDate = age;
+    data.birthDate = age
     props.loginUser(data)
   }
 
-  const [validUsername, setValidUsername] = useState(true);
-  const [validEmail, setValidEmail] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [age, setAge] = useState();
+  const [validUsername, setValidUsername] = useState(true)
+  const [validEmail, setValidEmail] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
+  const [age, setAge] = useState()
 
 
   const handleValidateUsername = (username) => {
-    axios.get('/validations/username/' + username).then(({data}) => {
+    axios.get('/validations/username/' + username).then(({ data }) => {
       setValidUsername(data)
     })
   }
   const handleValidateEmail = (email) => {
-    axios.get('/validations/email/' + email).then(({data}) => {
+    axios.get('/validations/email/' + email).then(({ data }) => {
       setValidEmail(data)
     })
   }
   const chosenAgeCallback = (age) => {
-    setAge(age);
+    setAge(age)
   }
 
   return (
@@ -108,13 +108,13 @@ function Register(props) {
                 />
               </Grid>
               <Grid item xs={12}>
-                { !validUsername ? <Alert severity="warning">This username is already in use</Alert> : '' }
+                {!validUsername ? <Alert severity="warning">This username is already in use</Alert> : ''}
                 <TextField
                   required
                   fullWidth
                   id="username"
                   onChange={(e) => {
-                    handleValidateUsername(e.target.value);
+                    handleValidateUsername(e.target.value)
                   }}
                   name="username"
                   inputProps={{ minLength: 3 }}
@@ -123,10 +123,10 @@ function Register(props) {
                 />
               </Grid>
               <Grid item xs={12}>
-                <p style={{marginTop: 0}}>
+                <p style={{ marginTop: 0 }}>
                   Choose your age:
                 </p>
-                <EasyDatePicker chosenAgeCallback={chosenAgeCallback.bind(this)}  />
+                <EasyDatePicker chosenAgeCallback={chosenAgeCallback.bind(this)} />
               </Grid>
               <Grid item xs={12}>
                 <FormControl>
@@ -143,13 +143,14 @@ function Register(props) {
                   </RadioGroup>
                 </FormControl>
               </Grid>
-              { !validEmail ? <Alert severity="warning">This email is already in use</Alert> : '' }
+              {!validEmail ? <Alert severity="warning">This email is already in use</Alert> : ''}
               <Grid item xs={12}>
                 <TextField
                   required
+                  type={'email'}
                   fullWidth
                   onChange={(e) => {
-                    handleValidateEmail(e.target.value);
+                    handleValidateEmail(e.target.value)
                   }}
                   id="email"
                   label={t('COMMON.EMAIL')}
@@ -181,7 +182,7 @@ function Register(props) {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              { isLoading ? <CircularProgress style={{marginRight: '10px'}} /> : '' }
+              {isLoading ? <CircularProgress style={{ marginRight: '10px' }} /> : ''}
               {t('COMMON.SIGNUP')}
             </Button>
             <Grid container justifyContent="flex-end">

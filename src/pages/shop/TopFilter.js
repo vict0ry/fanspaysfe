@@ -1,4 +1,4 @@
-import { Box, ButtonBase, InputBase } from '@mui/material'
+import { Box, ButtonBase } from '@mui/material'
 import { SearchInput } from './SearchInput'
 import { ClickAwayListener } from '@mui/base'
 import React from 'react'
@@ -9,83 +9,96 @@ import { t } from 'i18next'
 const styles = {
   mainCont: {
     marginBottom: 24,
-    display: "flex",
-    flexDirection: "column"
+    display: 'flex',
+    flexDirection: 'column'
   },
   filterCont: {
-    width: "238px",
-    height: "40px",
-    background: "#fff",
-    display: "flex",
-    borderRadius: "8px",
-    border: "1px solid #ECE9F1",
-    justifyContent: "start",
+    width: '238px',
+    height: '40px',
+    background: '#fff',
+    display: 'flex',
+    borderRadius: '8px',
+    border: '1px solid #ECE9F1',
+    justifyContent: 'start'
     // position: "relative"
   },
   filterListCont: {
     borderRadius: 8,
-    background: "#fff",
-    display: "flex",
-    flexDirection: "column",
-    position: "absolute",
-    top: "120%",
+    background: '#fff',
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'absolute',
+    top: '120%',
     right: 0,
     zIndex: 2,
-    boxShadow: "0px 2px 8px rgba(26, 5, 29, 0.1)"
+    boxShadow: '0px 2px 8px rgba(26, 5, 29, 0.1)'
   },
   filterIcon: {
     minWidth: 0,
     minHeight: 0,
-    width: "38px",
-    height: "38px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRight: "1px solid #ECE9F1",
+    width: '38px',
+    height: '38px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRight: '1px solid #ECE9F1',
     borderRadius: 0,
-    background: "#fff"
+    background: '#fff'
   },
   filterIcon2: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginRight: 12,
-    transition: "200ms"
+    transition: '200ms'
   },
   tag: {
-    padding: "4px 8px",
-    background: "#E8EFFF",
+    padding: '4px 8px',
+    background: '#E8EFFF',
     borderRadius: 4,
     marginRight: 8,
-    color: "#4776E6",
+    color: '#4776E6',
     fontSize: 12,
     fontWeight: 600,
-    display: "flex",
+    display: 'flex',
     marginBottom: 8
   }
-};
+}
 
-const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, setCheckedTags, setLeftMenuOpen, leftMenuOpen, findProducts, setFindProducts, findNickname, setFindNickname}) => {
-  const {width, height} = useWindowDimensions();
+const TopFilter = ({
+                     sortByOpen,
+                     setSortByOpen,
+                     setSortBy,
+                     sortBy,
+                     checkedTags,
+                     setCheckedTags,
+                     setLeftMenuOpen,
+                     leftMenuOpen,
+                     findProducts,
+                     setFindProducts,
+                     findNickname,
+                     setFindNickname
+                   }) => {
+  const { width, height } = useWindowDimensions()
 
-  return(
+  return (
     <Box style={styles.mainCont}>
       <Box sx={{
-        display: "flex",
+        display: 'flex',
         flexDirection: {
-          xs: "column",
-          sm: "row"
+          xs: 'column',
+          sm: 'row'
         }
       }}>
         <Box sx={{
           flexGrow: 1,
           marginRight: {
-            sm: "16px",
+            sm: '16px',
             xs: 0
           },
           marginBottom: {
             sm: 0,
-            xs: "8px"
+            xs: '8px'
           }
         }}>
           {/*<SearchInput*/}
@@ -125,26 +138,26 @@ const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, s
             sx={{
               ...styles.filterIcon,
               borderRadius: {
-                xs: "50%",
+                xs: '50%',
                 sm: 0
               },
               borderRight: {
-                xs: "0",
-                sm: "1px solid #ECE9F1"
+                xs: '0',
+                sm: '1px solid #ECE9F1'
               },
               position: {
-                xs: "absolute",
-                sm: "relative"
+                xs: 'absolute',
+                sm: 'relative'
               },
               right: {
-                xs: "16px",
+                xs: '16px',
                 sm: 0
               },
               borderTopLeftRadius: {
-                sm: "8px"
+                sm: '8px'
               },
               borderBottomLeftRadius: {
-                sm: "8px"
+                sm: '8px'
               }
             }}
             onClick={() => {
@@ -153,63 +166,69 @@ const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, s
           >
             <Icon
               name="filter"
-              color={width > 900 ? "#B3B3B3": "#000"}
+              color={width > 900 ? '#B3B3B3' : '#000'}
             />
           </ButtonBase>
 
           <ButtonBase
-            style={{display: "flex", justifyContent: "space-between", flexGrow: 1, paddingLeft: 8, position: "relative"}}
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              flexGrow: 1,
+              paddingLeft: 8,
+              position: 'relative'
+            }}
             onClick={() => {
               setSortByOpen(!sortByOpen)
             }}
           >
             {sortByOpen &&
-            <ClickAwayListener
-              onClickAway={() => {
-                setSortByOpen(false)
-              }}
-            >
-              <Box style={styles.filterListCont}>
-                <ButtonBase
-                  style={{padding: 8, justifyContent: "start"}}
-                  onClick={() => {
-                    setSortBy(t("SHOP.DESCENDING") + " ↓")
-                    setSortByOpen(!sortByOpen)
-                  }}
-                >{t("SHOP.DESCENDING")} ↓</ButtonBase>
-                <ButtonBase
-                  style={{padding: 8, justifyContent: "start"}}
-                  onClick={() => {
-                    setSortBy(t("SHOP.ASCENDING") + " ↑")
-                    setSortByOpen(!sortByOpen)
-                  }}
-                >{t("SHOP.ASCENDING")} ↑</ButtonBase>
-                <ButtonBase
-                  style={{padding: 8, justifyContent: "start"}}
-                  onClick={() => {
-                    setSortBy(t(t("SHOP.NEW")) + " 🔥")
-                    setSortByOpen(!sortByOpen)
-                  }}
-                >{t("SHOP.NEW")} 🔥️</ButtonBase>
-                <ButtonBase
-                  style={{padding: 8, justifyContent: "start"}}
-                  onClick={() => {
-                    setSortBy(t("SHOP.POPULAR") + " ⭐")
-                    setSortByOpen(!sortByOpen)
-                  }}
-                >{t("SHOP.POPULAR")} ⭐</ButtonBase>
-              </Box>
-            </ClickAwayListener>
+              <ClickAwayListener
+                onClickAway={() => {
+                  setSortByOpen(false)
+                }}
+              >
+                <Box style={styles.filterListCont}>
+                  <ButtonBase
+                    style={{ padding: 8, justifyContent: 'start' }}
+                    onClick={() => {
+                      setSortBy(t('SHOP.DESCENDING') + ' ↓')
+                      setSortByOpen(!sortByOpen)
+                    }}
+                  >{t('SHOP.DESCENDING')} ↓</ButtonBase>
+                  <ButtonBase
+                    style={{ padding: 8, justifyContent: 'start' }}
+                    onClick={() => {
+                      setSortBy(t('SHOP.ASCENDING') + ' ↑')
+                      setSortByOpen(!sortByOpen)
+                    }}
+                  >{t('SHOP.ASCENDING')} ↑</ButtonBase>
+                  <ButtonBase
+                    style={{ padding: 8, justifyContent: 'start' }}
+                    onClick={() => {
+                      setSortBy(t(t('SHOP.NEW')) + ' 🔥')
+                      setSortByOpen(!sortByOpen)
+                    }}
+                  >{t('SHOP.NEW')} 🔥️</ButtonBase>
+                  <ButtonBase
+                    style={{ padding: 8, justifyContent: 'start' }}
+                    onClick={() => {
+                      setSortBy(t('SHOP.POPULAR') + ' ⭐')
+                      setSortByOpen(!sortByOpen)
+                    }}
+                  >{t('SHOP.POPULAR')} ⭐</ButtonBase>
+                </Box>
+              </ClickAwayListener>
             }
 
-            <Box style={{fontSize: 12, fontWeight: 700, color: "#5D5E65"}}>
+            <Box style={{ fontSize: 12, fontWeight: 700, color: '#5D5E65' }}>
               {sortBy}
             </Box>
 
             <Box
               style={{
                 ...styles.filterIcon2,
-                ...sortByOpen ? { transform: "rotate(-180deg)" } : { transform: "rotate(0deg)" }
+                ...sortByOpen ? { transform: 'rotate(-180deg)' } : { transform: 'rotate(0deg)' }
               }}>
               <Icon
                 name="triangle"
@@ -219,21 +238,21 @@ const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, s
         </Box>
       </Box>
 
-      <Box style={{display: "flex", marginTop: 8, zIndex: 1, flexWrap: "wrap"}}>
+      <Box style={{ display: 'flex', marginTop: 8, zIndex: 1, flexWrap: 'wrap' }}>
         {findNickname &&
           <Box style={styles.tag}>
-            <span style={{marginRight: 2, color: "#8E54E9"}}>
+            <span style={{ marginRight: 2, color: '#8E54E9' }}>
               @{findNickname}
             </span>
             <ButtonBase onClick={() => {
-              setFindNickname("");
+              setFindNickname('')
             }}>
               <Icon name="x" />
             </ButtonBase>
           </Box>
         }
         {Object.keys(checkedTags).map((tag, index) => {
-          if(checkedTags[tag]) {
+          if (checkedTags[tag]) {
             return (
               <Box key={index} style={styles.tag}>
                 <span style={{ marginRight: 2 }}>
@@ -243,17 +262,17 @@ const TopFilter = ({sortByOpen, setSortByOpen, setSortBy, sortBy, checkedTags, s
                   setCheckedTags({
                     ...checkedTags,
                     [tag]: false
-                  });
+                  })
                 }}>
                   <Icon name="x" />
                 </ButtonBase>
               </Box>
-            );
+            )
           }
         })}
       </Box>
     </Box>
-  );
+  )
 }
 
-export {TopFilter};
+export { TopFilter }

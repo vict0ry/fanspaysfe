@@ -1,5 +1,8 @@
 {
   "BE_THE_FIRST_ONE": "Buďte první",
+  "FINANCE": {
+    "ADD_NEW_FUNDS": "Pridat prostredky"
+  },
   "COMMON": {
     "SEX": "Pohlaví",
     "ACCEPT": "Přijmout",
@@ -70,7 +73,9 @@
     "EDIT_PROFILE": "Upravit profil",
     "MESSAGES": "Zpravy",
     "MARKETPLACE": "Marketplace",
-    "TRANSACTIONS": "Transakce"
+    "TRANSACTIONS": "Transakce",
+    "SETTINGS": "Nastaveni",
+    "QUERIES": "Pozadavky"
   },
   "NAVBAR": {
     "HOME_PAGE": "Hlavní stranka",

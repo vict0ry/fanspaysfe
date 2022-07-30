@@ -6,13 +6,9 @@ import TextField from '@mui/material/TextField'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import IconButton from '@mui/material/IconButton'
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
-import { MiniUser } from '../components/MiniUser'
 import axios from 'axios'
-import { t } from 'i18next'
 import { showSuccessSnackbar } from '../../../redux/actions/snackbar.actions'
 
 const style = {
@@ -30,7 +26,7 @@ const style = {
 
 export default function AddRemoveBalance({ recipient, children }) {
   const [open, setOpen] = useState(false)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
   const { username } = useParams()
@@ -38,8 +34,9 @@ export default function AddRemoveBalance({ recipient, children }) {
   const { t } = useTranslation()
   const isAllowed = () => {
     if (loggedUser.userData.role === 'admin') {
-      return true;
-    } return false;
+      return true
+    }
+    return false
   }
   const submitForm = (event) => {
     event.preventDefault()
@@ -60,19 +57,21 @@ export default function AddRemoveBalance({ recipient, children }) {
       recipient: recipient._id,
       sender: loggedUser.userData._id
     }).then(_ => {
-      handleClose();
-      dispatch(showSuccessSnackbar("Success!"));
+      handleClose()
+      dispatch(showSuccessSnackbar('Success!'))
     })
   }
 
   return (
     <div>
       {isAllowed() ?
-        <Box sx={{ display: 'flex',
+        <Box sx={{
+          display: 'flex',
           flexDirection: 'column',
-          marginTop: '10px', justifyAlign: 'center', alignItems: 'center', cursor: 'pointer' }}>
+          marginTop: '10px', justifyAlign: 'center', alignItems: 'center', cursor: 'pointer'
+        }}>
           <Button onClick={handleOpen} variant="contained">{t('ADD / Remove balance')}</Button>
-          <Button style={{margin: '10px 0', background: 'red'}} variant="contained">{t('Block user')}</Button>
+          <Button style={{ margin: '10px 0', background: 'red' }} variant="contained">{t('Block user')}</Button>
         </Box> : ''}
       <Modal
         open={open}
@@ -84,13 +83,14 @@ export default function AddRemoveBalance({ recipient, children }) {
           <TextField
             name={'amount'}
             type={'number'}
-            sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('PROFILE.TIP_AMOUNT')} required />
+            sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('PROFILE.TIP_AMOUNT')}
+            required />
           <Divider />
           <TextField style={{ marginTop: 10 }}
                      name={'description'}
                      multiline
                      minRows={2}
-                     sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('COMMON.MESSAGE')}/>
+                     sx={{ width: '100%', padding: '0', margin: 0 }} id="outlined-basic" label={t('COMMON.MESSAGE')} />
 
           <Button onClick={() => handleAddRemoveCredit(recipient)}
                   disabled={!formData.amount}

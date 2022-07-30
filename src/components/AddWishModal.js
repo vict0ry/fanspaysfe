@@ -3,11 +3,12 @@ import TextField from '@mui/material/TextField'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import { useState } from 'react'
 import { showSuccessSnackbar } from '../redux/actions/snackbar.actions'
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -20,10 +21,10 @@ const style = {
   boxShadow: 24,
   p: 4
 }
-export const AddWishModal = ({myProfile, change}) => {
+export const AddWishModal = ({ myProfile, change }) => {
   const [open, setOpen] = useState(false)
   const handleClose = () => setOpen(false)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const { t } = useTranslation()
 
   const submitForm = (event) => {
@@ -41,13 +42,14 @@ export const AddWishModal = ({myProfile, change}) => {
   function handleWishCreate() {
     axios.post('/api/wish/add', {
       name: formData.name,
-      amount: +formData.amount,
+      amount: +formData.amount
     }).then(i => {
-      change();
-      handleClose();
-      dispatch(showSuccessSnackbar("Success!"));
+      change()
+      handleClose()
+      dispatch(showSuccessSnackbar('Success!'))
     })
   }
+
   return <div>
     <Modal
       open={open}
@@ -56,7 +58,7 @@ export const AddWishModal = ({myProfile, change}) => {
       aria-describedby="modal-modal-description"
     >
       <Box component={'form'} onChange={formChange} onSubmit={submitForm} sx={style}>
-        <h3 style={{fontSize: '24px'}}>Add wish</h3>
+        <h3 style={{ fontSize: '24px' }}>Add wish</h3>
         <TextField
           name={'name'}
           type={'text'}
@@ -75,13 +77,15 @@ export const AddWishModal = ({myProfile, change}) => {
 
       </Box>
     </Modal>
-    {myProfile ? <div onClick={() => setOpen(true)} style={{background: '#E8EFFF',
+    {myProfile ? <div onClick={() => setOpen(true)} style={{
+      background: '#E8EFFF',
       marginTop: '10px',
       maxWidth: '204px',
       textAlign: 'center',
-      padding: '5px 10px', borderRadius: '10px', border: '1px dashed #4776E6'}}>
+      padding: '5px 10px', borderRadius: '10px', border: '1px dashed #4776E6'
+    }}>
       <img src="/images/icons/plus.svg" alt="add" />
-      <span style={{color: '#4776E6', marginLeft: '5px'}}>{t('Add new')}</span>
-    </div> : '' }
+      <span style={{ color: '#4776E6', marginLeft: '5px' }}>{t('Add new')}</span>
+    </div> : ''}
   </div>
 }

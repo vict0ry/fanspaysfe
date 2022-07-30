@@ -31,7 +31,7 @@ const Login = (props) => {
       const user = decodeToken(token.data)
       return dispatch(userLoggedIn(user))
     }).then(i => {
-      window.location.replace("/profile");
+      window.location.replace('/profile')
     })
   }
 
@@ -89,7 +89,7 @@ const Login = (props) => {
               {/*  </Link>*/}
               {/*</Grid>*/}
               <Grid item>
-                <Link to={"/register"} variant="body2">
+                <Link to={'/register'} variant="body2">
                   {'Don\'t have an account? Sign Up'}
                 </Link>
               </Grid>

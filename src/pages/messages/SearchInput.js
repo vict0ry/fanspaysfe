@@ -15,7 +15,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }))
 
 const Search = styled('div')(({ theme }) => ({
-  color: "#000",
+  color: '#000',
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -28,9 +28,9 @@ const Search = styled('div')(({ theme }) => ({
   }
 }))
 
-export const SearchInput = ({name, placeholder, styles, state, setState}) => {
+export const SearchInput = ({ name, placeholder, styles, state, setState }) => {
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    background: "#F7F5F9",
+    background: '#F7F5F9',
     borderRadius: 8,
     color: 'inherit',
     '& .MuiInputBase-input': {
@@ -47,7 +47,7 @@ export const SearchInput = ({name, placeholder, styles, state, setState}) => {
     ...styles
   }))
 
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState('')
 
   return (
     <Search>
@@ -60,7 +60,7 @@ export const SearchInput = ({name, placeholder, styles, state, setState}) => {
         inputProps={{ 'aria-label': 'search' }}
         onChange={(e) => {
           console.log(e.target.value)
-          setValue(e.target.value);
+          setValue(e.target.value)
         }}
         // value={value}
       />

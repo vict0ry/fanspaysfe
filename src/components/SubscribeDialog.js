@@ -5,24 +5,24 @@ import React, { forwardRef } from 'react'
 import { hideAttachCardDialog } from '../redux/actions/attachCardDialog.action'
 import Payment from '../pages/Finance/payment'
 
-  const Transition = forwardRef(function Transition(
-    props,
-    ref
-  ) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
+const Transition = forwardRef(function Transition(
+  props,
+  ref
+) {
+  return <Slide direction="up" ref={ref} {...props} />
+})
 
 export const SubscribeDialog = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const user = useSelector(state => state.user.userData)
   const isOpen = useSelector(
     state => {
-      return state?.uiReducer?.subscribeInsufficientAmountDialog;
+      return state?.uiReducer?.subscribeInsufficientAmountDialog
     }
-  );
+  )
   const handleClose = () => {
-    dispatch(hideAttachCardDialog());
-  };
+    dispatch(hideAttachCardDialog())
+  }
 
   return (
     <div>
@@ -38,7 +38,7 @@ export const SubscribeDialog = () => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            <Payment/>
+            <Payment />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -47,5 +47,5 @@ export const SubscribeDialog = () => {
         </DialogActions>
       </Dialog>
     </div>
-  );
+  )
 }

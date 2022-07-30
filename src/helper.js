@@ -1,5 +1,5 @@
 export const getZodiac = (day, month) => {
-  month = month.toLowerCase();
+  month = month.toLowerCase()
   {
     let astro_sign = ''
     if (month === 'december') {
