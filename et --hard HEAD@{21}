@@ -1,0 +1,53 @@
+[33mf3ee4d7[m[33m ([m[1;36mHEAD -> [m[1;32mdanish2[m[33m, [m[1;31morigin/danish2[m[33m)[m HEAD@{0}: pull: Fast-forward
+[33m95647c4[m HEAD@{1}: commit: finance page
+[33mf76b477[m HEAD@{2}: commit: changes
+[33m1c7dcb0[m HEAD@{3}: commit: scroll to top
+[33m7cd1be1[m HEAD@{4}: commit: adaptive
+[33m3ca2bb7[m HEAD@{5}: checkout: moving from danish2 to danish2
+[33m3ca2bb7[m HEAD@{6}: commit: video displaying
+[33mfde15bf[m HEAD@{7}: commit: video uploading
+[33m2bb67d4[m HEAD@{8}: commit: fix busket
+[33mf4b8856[m HEAD@{9}: commit: basket in shop page
+[33mc006bd2[m HEAD@{10}: commit: change password
+[33mf794172[m HEAD@{11}: commit: fix bags and adaptation
+[33mdea6753[m HEAD@{12}: commit: some changes with translation
+[33md27d235[m HEAD@{13}: pull: Fast-forward
+[33meb0b9f3[m HEAD@{14}: commit: shop page
+[33m2fdca81[m HEAD@{15}: commit: shop page
+[33m29f8ff1[m HEAD@{16}: pull: Fast-forward
+[33m59c1f0e[m HEAD@{17}: commit: start market page
+[33mad0fac6[m HEAD@{18}: commit: updates
+[33md0fc5f8[m HEAD@{19}: commit: translated main page
+[33mbb29f63[m HEAD@{20}: pull: Fast-forward
+[33m688b324[m HEAD@{21}: commit: some fix
+[33m2055d7a[m HEAD@{22}: checkout: moving from master to danish2
+[33m7cdde4d[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{23}: pull: Fast-forward
+[33m08b48fe[m HEAD@{24}: checkout: moving from danish2 to master
+[33m2055d7a[m HEAD@{25}: commit: transfer styles to module css at main page
+[33m1f2300f[m HEAD@{26}: commit: translate user and messages pages
+[33m7cdde4d[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{27}: commit: add function deleting image aAddPostModal
+[33mb4beb47[m HEAD@{28}: commit: update change post
+[33m08f4a01[m HEAD@{29}: commit: add change post function
+[33mbb02a3b[m HEAD@{30}: pull: Merge made by the 'recursive' strategy.
+[33m81c4e20[m HEAD@{31}: commit: changes and apative
+[33maec580e[m HEAD@{32}: commit: modifying and adaptation
+[33m6ba4d5e[m HEAD@{33}: commit: modify
+[33m25085de[m HEAD@{34}: pull: Fast-forward
+[33m4b3c13c[m HEAD@{35}: commit: aaa
+[33m8cf3476[m HEAD@{36}: checkout: moving from danish1 to danish2
+[33m95517b2[m[33m ([m[1;32mdanish1[m[33m)[m HEAD@{37}: checkout: moving from danish2 to danish1
+[33m8cf3476[m HEAD@{38}: checkout: moving from danish2 to danish2
+[33m8cf3476[m HEAD@{39}: commit: changes
+[33m08b48fe[m HEAD@{40}: checkout: moving from danish1 to danish2
+[33m95517b2[m[33m ([m[1;32mdanish1[m[33m)[m HEAD@{41}: checkout: moving from danish2 to danish1
+[33m08b48fe[m HEAD@{42}: checkout: moving from master to danish2
+[33m08b48fe[m HEAD@{43}: pull: Fast-forward
+[33m01f55bc[m HEAD@{44}: checkout: moving from danish1 to master
+[33m95517b2[m[33m ([m[1;32mdanish1[m[33m)[m HEAD@{45}: commit: modify users page
+[33m32b3cd2[m HEAD@{46}: commit: modified users page
+[33m62a2387[m[33m ([m[1;32mdanish[m[33m)[m HEAD@{47}: checkout: moving from danish to danish1
+[33m62a2387[m[33m ([m[1;32mdanish[m[33m)[m HEAD@{48}: commit: usersPage modified 1
+[33mb4aa2b3[m HEAD@{49}: commit: some changes and start apatation
+[33md127aec[m HEAD@{50}: commit: replaced with material ui components
+[33m834e6cd[m HEAD@{51}: checkout: moving from master to danish
+[33m01f55bc[m HEAD@{52}: clone: from https://github.com/vict0ry/fanspaysfe.git
