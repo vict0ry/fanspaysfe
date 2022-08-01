@@ -60,7 +60,8 @@
     "VIDEO": "Video",
     "LIKES": "Likes",
     "PRODUCTS": "Products",
-    "UPLOAD_AVATAR": "Upload avatar"
+    "UPLOAD_AVATAR": "Upload avatar",
+    "DELETE_AVATAR": "Delete photo"
   },
   "USERMENU": {
     "MY_PAGE": "My page",

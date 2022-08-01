@@ -19,6 +19,23 @@ import { loadProfile } from '../../redux/actions/profile.action'
 import { beURL } from '../../config'
 import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
 
+const tabStyles = {
+  padding: "12px",
+  '&.Mui-selected': {
+    color: '#4776E6'
+  },
+  fontSize: "16px",
+  fontWeight: 600,
+  textTransform: "none",
+  color: "#5D5E65"
+}
+
+const tabStylesDiv = {
+  width: "100%",
+  display: "flex",
+  alignItems: "center"
+}
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props
 
@@ -63,7 +80,7 @@ export function EditProfile(props) {
   useEffect(() => {
     setUserForm(profileUser)
     if (profileUser.profilePic) {
-      setAvatar({ img: beURL + '/' + profileUser.profilePic })
+      setAvatar({ img: beURL + profileUser.profilePic })
     }
   }, [])
   const handleFormChange = (evt) => {
@@ -92,7 +109,35 @@ export function EditProfile(props) {
     setBirthDate(dateIsoString)
   }
 
+
+  const [avatar, setAvatar] = useState({ img: '/noavatar.png' })
+  const [fileAvatar, setFileAvatar] = useState([]);
+
+
+  function handleImageChange(event) {
+    setAvatar({ img: URL.createObjectURL(event.target.files[0]) })
+    setFileAvatar(event.target.files);
+  }
+
   const submitForm = (event) => {
+    //uploading photo
+
+    if(avatar.img !== beURL + profileUser.profilePic) {
+      const formData = new FormData()
+      formData.append('croppedImage', fileAvatar[0])
+
+      axios({
+        method: 'post',
+        url: '/api/users/profilePicture',
+        data: formData,
+        headers: { 'Content-Type': 'multipart/form-data' }
+      }, () => {
+        console.log('avatar uploaded')
+      })
+    }
+
+    //uploading other data
+
     event.preventDefault()
     const {
       username,
@@ -121,121 +166,279 @@ export function EditProfile(props) {
       console.log('done')
     })
   }
-  const [avatar, setAvatar] = useState({ img: '/noavatar.png' })
-
-
-  function handleImageChange(event) {
-    setAvatar({ img: URL.createObjectURL(event.target.files[0]) })
-    const formData = new FormData()
-    formData.append('croppedImage', event.target.files[0])
-
-    axios({
-      method: 'post',
-      url: '/api/users/profilePicture',
-      data: formData,
-      headers: { 'Content-Type': 'multipart/form-data' }
-    }, () => {
-      console.log('avatar uploaded')
-    })
-  }
 
   return <div>
-    <Box sx={{ 'mt': 2 }}>
+    <Box>
 
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: 2 }}>
-        <Tabs
-          style={{background:'white'}}
-          orientation="vertical"
-          variant="scrollable"
-          value={value}
-          onChange={handleChange}
-          aria-label="Vertical tabs example"
-          sx={{ borderRight: 1, borderColor: 'divider' }}
-        >
-          <Tab label={<div><img src="/images/icons/user.svg" alt="about me" /> {t('COMMON.ABOUT_ME')}</div>} {...a11yProps(0)} />
-          <Tab label={<div><img src="/images/icons/currency-dollar.svg" alt="price settings" /> {t('COMMON.PRICE_SETTINGS')}</div>} {...a11yProps(1)} />
-          <Tab label={<div><img src="/images/icons/settings.svg" alt="price settings" /> {t('COMMON.PARAMETERS')}</div>} {...a11yProps(2)} />
-          <Tab label={<div><img src="/images/icons/bank-card.svg" alt="price settings" /> {t('PROFILE.CREDIT_CARDS')}</div>} {...a11yProps(3)} />
-          <Tab label={<div><img src="/images/icons/account.svg" alt="price settings" />{t('COMMON.CONTACTS')}</div>} {...a11yProps(4)} />
+        <Box sx={{
+          display: "flex",
+          flexDirection: "column",
+          background: "#fff",
+          minWidth: "200px"
+        }}>
+          <Box sx={{
+            margin: "16px 0 12px 12px",
+            fontSize: "20px",
+            fontWeight: 700
+          }}>{t("USERMENU.SETTINGS")}</Box>
+          <Tabs
+            style={{
+              flexGrow: 1
+            }}
+            orientation="vertical"
+            variant="scrollable"
+            value={value}
+            onChange={handleChange}
+            aria-label="Vertical tabs example"
+            sx={{ borderRight: 1, borderColor: 'divider' }}
+          >
+            <Tab
+              sx={tabStyles}
+              label={
+                <div style={tabStylesDiv}>
+                  <img style={{marginRight: "14px"}}
+                       src="/images/icons/user.svg"
+                       alt="about me"
+                  />
+                  {t('COMMON.ABOUT_ME')}
+                </div>}
+              {...a11yProps(0)}
+            />
+            <Tab
+              sx={tabStyles}
+              label={
+                <div style={tabStylesDiv}>
+                  <img style={{marginRight: "14px"}}
+                       src="/images/icons/currency-dollar.svg"
+                       alt="price settings"
+                  />
+                  {t('COMMON.PRICE_SETTINGS')}
+                </div>}
+              {...a11yProps(1)}
+            />
+            <Tab
+              sx={tabStyles}
+              label={
+                <div style={tabStylesDiv}>
+                  <img
+                    style={{marginRight: "14px"}}
+                    src="/images/icons/settings.svg"
+                    alt="price settings"
+                  />
+                  {t('COMMON.PARAMETERS')}
+                </div>}
+              {...a11yProps(2)}
+            />
+            <Tab
+              sx={tabStyles}
+              label={
+                <div style={tabStylesDiv}>
+                  <img
+                    style={{marginRight: "14px"}}
+                    src="/images/icons/bank-card.svg"
+                    alt="price settings" />
+                  {t('PROFILE.CREDIT_CARDS')}
+                </div>}
+              {...a11yProps(3)}
+            />
+            <Tab
+              sx={tabStyles}
+              label={
+                <div style={tabStylesDiv}>
+                  <img
+                    style={{marginRight: "14px"}}
+                    src="/images/icons/account.svg"
+                    alt="price settings" />
+                  {t('COMMON.CONTACTS')}
+                </div>}
+              {...a11yProps(4)}
+            />
+          </Tabs>
+        </Box>
 
-        </Tabs>
-        <div style={{background: 'white'}}>
+        <div style={{background: '#fff'}}>
           <TabPanel value={value} index={0}>
-            <Box component="form" noValidate onSubmit={submitForm} sx={{ mt: 3 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={12}>
-                  <img style={{ width: 100, marginRight: 20 }}
-                       src={avatar.img}
-                       alt="" />
-                  <Button
-                    variant="contained"
-                    component="label"
-                  >
-                    {t('PROFILE.UPLOAD_AVATAR')}
-                    <input
-                      onChange={handleImageChange}
-                      type="file"
-                      hidden
+            <Box component="form" noValidate onSubmit={submitForm} sx={{}}>
+              <Box>
+                <Box sx={{display: "flex", alignItems: "center", marginBottom: "24px"}} item xs={12} sm={12}>
+                  <Box sx={{
+                    width: "112px",
+                    height: "128px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    overflow: "hidden",
+                    borderRadius: "8px",
+                    marginRight: "32px"
+                  }}>
+                    <img style={{ width: "100%"}} src={avatar.img} alt="" />
+                  </Box>
+                  <Box sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "start"
+                  }}>
+                    <Button
+                      variant="contained"
+                      component="label"
+                      sx={{
+                        marginBottom: "16px",
+                        background: "#4776E6",
+                        color: "#fff",
+                        fontSize: "14px",
+                        fontWeight: 700,
+                        padding: "10px 24px",
+                        lineHeight: "20px",
+                        borderRadius: "8px"
+                      }}
+                    >
+                      {t('PROFILE.UPLOAD_AVATAR')}
+                      <input
+                        onChange={handleImageChange}
+                        type="file"
+                        hidden
+                      />
+                    </Button>
+
+                    <Button
+                      variant="contained"
+                      sx={{
+                        background: "#E8EFFF",
+                        color: "#4776E6",
+                        fontSize: "14px",
+                        fontWeight: 700,
+                        padding: "10px 24px",
+                        lineHeight: "20px",
+                        borderRadius: "8px"
+                      }}
+                    >
+                      {t('PROFILE.DELETE_AVATAR')}
+                    </Button>
+                  </Box>
+                </Box>
+                <Box sx={{display: "flex", marginBottom: "24px"}}>
+                  <Box sx={{marginRight: "24px", flexGrow: 1}}>
+                    <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('COMMON.FIRST_NAME')}</Box>
+                    <TextField
+                      sx={{
+                        '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                          border: "1px solid #ECE9F1",
+                          borderRadius: "8px"
+                        },
+                        '& .css-jx703g-MuiInputBase-root-MuiOutlinedInput-root': {
+                          fontSize: "16px",
+                          fontWeight: 600
+                        },
+                        '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
+                          padding: "10px 12px"
+                        }
+                      }}
+                      autoComplete="given-name"
+                      name="firstName"
+                      required
+                      fullWidth
+                      value={userForm.firstName}
+                      onChange={handleFormChange}
+                      id="firstName"
+                      autoFocus
                     />
-                  </Button>
-                </Grid>
-                <Grid item xs={12} sm={6}>
+                  </Box>
+                  <Box sx={{flexGrow: 2}}>
+                    <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('COMMON.LAST_NAME')}</Box>
+                    <TextField
+                      sx={{
+                        '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                          border: "1px solid #ECE9F1",
+                          borderRadius: "8px",
+                        },
+                        '& .css-jx703g-MuiInputBase-root-MuiOutlinedInput-root': {
+                          fontSize: "16px",
+                          fontWeight: 600
+                        },
+                        '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
+                          padding: "10px 12px"
+                        }
+                      }}
+                      required
+                      fullWidth
+                      id="lastName"
+                      onChange={handleFormChange}
+                      value={userForm.lastName}
+                      name="lastName"
+                      autoComplete="family-name"
+                    />
+                  </Box>
+                </Box>
+                <Box sx={{marginBottom: "24px"}}>
+                  <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('COMMON.USERNAME')}</Box>
                   <TextField
-                    autoComplete="given-name"
-                    name="firstName"
-                    required
-                    fullWidth
-                    value={userForm.firstName}
-                    onChange={handleFormChange}
-                    id="firstName"
-                    label={t('COMMON.FIRST_NAME')}
-                    autoFocus
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="lastName"
-                    label={t('COMMON.LAST_NAME')}
-                    onChange={handleFormChange}
-                    value={userForm.lastName}
-                    name="lastName"
-                    autoComplete="family-name"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
+                    sx={{
+                      '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                        border: "1px solid #ECE9F1",
+                        borderRadius: "8px",
+                      },
+                      '& .css-jx703g-MuiInputBase-root-MuiOutlinedInput-root': {
+                        fontSize: "16px",
+                        fontWeight: 600
+                      },
+                      '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
+                        padding: "10px 12px"
+                      }
+                    }}
                     required
                     fullWidth
                     id="username"
-                    label={t('COMMON.USERNAME')}
                     value={userForm.username}
                     onChange={handleFormChange}
                     name="username"
                     autoComplete="username"
                   />
-                </Grid>
-                <Grid item xs={12}>
+                </Box>
+                <Box sx={{marginBottom: "24px"}}>
+                  <Box sx={{
+                    marginBottom: "8px",
+                    fontSize: "14px",
+                    fontWeight: 700,
+                    color: "#5D5E65",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center"
+                  }}>
+                    {t('COMMON.DESCRIPTION')}
+                    <Box sx={{color: "#B3B3B3", fontSize: "14px", fontWeight: 500}}>{userForm.description.length}/200</Box>
+                  </Box>
                   <TextField
+                    sx={{
+                      '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                        border: "1px solid #ECE9F1",
+                        borderRadius: "8px",
+                      },
+                      '& .css-1cicz4d-MuiInputBase-root-MuiOutlinedInput-root': {
+                        fontSize: "16px",
+                        fontWeight: 600,
+                        padding: "10px 12px"
+                      }
+                    }}
                     multiline
                     required
                     fullWidth
                     id="description"
-                    label={t('COMMON.DESCRIPTION')}
-                    onChange={handleFormChange}
+                    onChange={(e) => {
+                      e.target.value.length <= 200 ? handleFormChange(e) : null
+                    }}
                     value={userForm.description}
                     name="description"
                     minRows={3}
                     autoComplete="description"
                   />
-                </Grid>
+                </Box>
                 <Grid item xs={12}>
                   <EasyDatePicker
                     valueDate={userForm.birthDate}
                     chosenAgeCallback={chosenAgeCallback.bind(this)} />
                 </Grid>
-              </Grid>
+              </Box>
               <Button
                 type="submit"
                 fullWidth
