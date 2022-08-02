@@ -30,3 +30,16 @@ a:-webkit-any-link {
     cursor: pointer;
 }
 
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper::-webkit-scrollbar-track {
+   background: #ECE9F1;
+   border: 8px solid transparent;
+   background-clip: content-box;
+   border-radius: 10px;
+}
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper::-webkit-scrollbar-thumb {
+    background-color: #4776E6;
+    border-radius: 10px;
+    border: 8px solid transparent;
+    background-clip: content-box;
+}
+

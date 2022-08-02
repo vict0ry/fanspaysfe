@@ -18,6 +18,8 @@ import { TabContacts } from '../../components/TabContacts'
 import { loadProfile } from '../../redux/actions/profile.action'
 import { beURL } from '../../config'
 import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
+import MenuItem from '@mui/material/MenuItem'
+import { Select } from '@mui/material'
 
 const tabStyles = {
   padding: "12px",
@@ -76,6 +78,8 @@ export function EditProfile(props) {
   })
   const [email, setEmail] = useState(profileUser.email);
   const [checkboxes, setCheckboxes] = useState({});
+
+  console.log(userForm)
 
   useEffect(() => {
     setUserForm(profileUser)
@@ -170,12 +174,13 @@ export function EditProfile(props) {
   return <div>
     <Box>
 
-      <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: 2 }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 3fr', borderRadius: "8px", overflow: "hidden"}}>
         <Box sx={{
           display: "flex",
           flexDirection: "column",
           background: "#fff",
-          minWidth: "200px"
+          minWidth: "200px",
+          borderRight: "1px solid #ECE9F1"
         }}>
           <Box sx={{
             margin: "16px 0 12px 12px",
@@ -191,7 +196,6 @@ export function EditProfile(props) {
             value={value}
             onChange={handleChange}
             aria-label="Vertical tabs example"
-            sx={{ borderRight: 1, borderColor: 'divider' }}
           >
             <Tab
               sx={tabStyles}
@@ -257,7 +261,7 @@ export function EditProfile(props) {
           </Tabs>
         </Box>
 
-        <div style={{background: '#fff'}}>
+        <div style={{background: '#fff', maxHeight: "70vh", overflowY: "scroll"}}>
           <TabPanel value={value} index={0}>
             <Box component="form" noValidate onSubmit={submitForm} sx={{}}>
               <Box>
@@ -302,7 +306,7 @@ export function EditProfile(props) {
                     </Button>
 
                     <Button
-                      variant="contained"
+                      // variant="contained"
                       sx={{
                         background: "#E8EFFF",
                         color: "#4776E6",
@@ -310,7 +314,8 @@ export function EditProfile(props) {
                         fontWeight: 700,
                         padding: "10px 24px",
                         lineHeight: "20px",
-                        borderRadius: "8px"
+                        borderRadius: "8px",
+                        textTransform: "none"
                       }}
                     >
                       {t('PROFILE.DELETE_AVATAR')}
@@ -433,17 +438,149 @@ export function EditProfile(props) {
                     autoComplete="description"
                   />
                 </Box>
-                <Grid item xs={12}>
+                <Box sx={{marginBottom: "24px"}}>
+                  <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('COMMON.LOCATION')}</Box>
+                  <TextField
+                    sx={{
+                      '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                        border: "1px solid #ECE9F1",
+                        borderRadius: "8px",
+                      },
+                      '& .css-jx703g-MuiInputBase-root-MuiOutlinedInput-root': {
+                        fontSize: "16px",
+                        fontWeight: 600
+                      },
+                      '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
+                        padding: "10px 12px"
+                      }
+                    }}
+                    required
+                    fullWidth
+                    id="username"
+                    value="Praha, Czech"
+                    // onChange={handleFormChange}
+                  />
+                </Box>
+                <Box sx={{marginBottom: "24px"}}>
+                  <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('PROFILE.BIRTH_DATE')}</Box>
                   <EasyDatePicker
                     valueDate={userForm.birthDate}
-                    chosenAgeCallback={chosenAgeCallback.bind(this)} />
-                </Grid>
+                    chosenAgeCallback={chosenAgeCallback.bind(this)}
+                  />
+                </Box>
+                <Box sx={{marginBottom: "24px"}}>
+                  <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('COMMON.SEX')}</Box>
+                  <Box sx={{
+                    width: '240px',
+                    height: '40px',
+                    borderRadius: '8px',
+                    overflow: 'hidden',
+                    border: '1px solid #ECE9F1',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}>
+                    <Select
+                      value="Female"
+                      // onChange={(e) => handleChange('YEAR', e.target.value)}
+                      sx={{
+                        width: '240px',
+                        height: '38px',
+                        fontSize: "16px",
+                        fontWeight: 600,
+                        color: "#1A051D",
+                        '& .css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                          border: "none"
+                        },
+                        '& svg': {
+                          display: "none"
+                        },
+                      }}
+                      MenuProps={{
+                        PaperProps: {
+                          style: {
+                            maxHeight: "124px",
+                            borderRadius: "8px",
+                            overflowY: "auto"
+                          }
+                        }
+                      }}
+                      variant="outlined"
+                    >
+                      <MenuItem sx={{fontSize: "14px", fontWeight: 700}} value="Female">Female</MenuItem>
+                      <MenuItem sx={{fontSize: "14px", fontWeight: 700}} value="Male">Male</MenuItem>
+                      <MenuItem sx={{fontSize: "14px", fontWeight: 700}} value="Other">Other</MenuItem>
+                    </Select>
+                  </Box>
+                </Box>
+
+                <Box sx={{marginBottom: "24px"}}>
+                  <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('COMMON.PERSONAL_SITE')}</Box>
+                    <TextField
+                      sx={{
+                        '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                          border: "1px solid #ECE9F1",
+                          borderRadius: "8px",
+                        },
+                        '& .css-jx703g-MuiInputBase-root-MuiOutlinedInput-root': {
+                          fontSize: "16px",
+                          fontWeight: 600
+                        },
+                        '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
+                          padding: "10px 12px"
+                        }
+                      }}
+                      required
+                      fullWidth
+                      id="username"
+                      value="cbdsvet.cz"
+                      // onChange={handleFormChange}
+                    />
+                </Box>
+
+                <Box sx={{marginBottom: "24px"}}>
+                  <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('COMMON.SOCIAL_NETWORKS')}</Box>
+                  <TextField
+                    sx={{
+                      '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                        border: "1px solid #ECE9F1",
+                        borderRadius: "8px",
+                      },
+                      '& .css-jx703g-MuiInputBase-root-MuiOutlinedInput-root': {
+                        fontSize: "16px",
+                        fontWeight: 600
+                      },
+                      '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
+                        padding: "10px 12px"
+                      },
+                      marginBottom: "8px"
+                    }}
+                    required
+                    fullWidth
+                    value="twitter.com/anncatjoy"
+                    // onChange={handleFormChange}
+                  />
+
+                  <Button sx={{
+                    minWidth: 0,
+                    minHeight: 0,
+                    padding: 0,
+                    color: "#4776E6",
+                    background: "#fff",
+                    fontSize: "16px",
+                    fontWeight: 700,
+                    textDecoration: "underline",
+                    textTransform: "none"
+                  }}>{t("COMMON.ADD_MORE")}</Button>
+                </Box>
+
               </Box>
+
+
               <Button
                 type="submit"
-                fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ background: "#4776E6", color: "#fff", textTransform: "none", padding: "10px 24px", lineHeight: "20px" }}
               >
                 {t('COMMON.SAVE')}
               </Button>

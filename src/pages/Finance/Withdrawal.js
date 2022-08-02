@@ -350,7 +350,10 @@ const Withdrawal = ({setWithdrawalOpen}) => {
                     onChange={e => setExpireDate([e.target.value, expireDate[1]])}
                     sx={{
                       width: '80px',
-                      height: '50px'
+                      height: '50px',
+                      '& .css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                        border: "none"
+                      }
                     }}
                   >
                     {months.map(month => {
@@ -375,7 +378,10 @@ const Withdrawal = ({setWithdrawalOpen}) => {
                     onChange={e => setExpireDate([expireDate[0], e.target.value])}
                     sx={{
                       width: '80px',
-                      height: '50px'
+                      height: '50px',
+                      '& .css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                        border: "none"
+                      }
                     }}
                   >
                     {years.map(year => {

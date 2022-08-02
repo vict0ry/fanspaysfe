@@ -1,7 +1,9 @@
 {
   "BE_THE_FIRST_ONE": "Be first",
   "COMMON": {
-    "SEX": "sex",
+    "ADD_MORE": "Add more",
+    "SOCIAL_NETWORKS": "Social networks",
+    "SEX": "Sex",
     "FIRST_NAME": "Frist name",
     "PREVIEW_IMAGE": "Image preview",
     "BALANCE": "Balance",
@@ -34,6 +36,7 @@
     "FOLLOWING": "Following",
     "PRICE_SETTINGS": "Price settings",
     "PRICE": "Price",
+    "PERSONAL_SITE": "Personal site",
     "ABOUT_ME": "About me",
     "PARAMETERS": "Parameters",
     "DESCRIPTION": "Description",
@@ -44,7 +47,8 @@
     "UNSUBSCRIBE": "Unsubscribe",
     "SEND_TIP": "Send tip",
     "CONTACTS": "Contacts",
-    "BECAME_FUN": "BECAME FUN"
+    "BECAME_FUN": "BECAME FUN",
+    "LOCATION": "Location"
   },
   "SHOP": {
     "ADD_PRODUCT_IMAGE": "Add product image",
