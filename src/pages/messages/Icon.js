@@ -260,6 +260,57 @@ export const Icon = ({name, color}) => {
                     <path d="M15 18L9 12L15 6" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
             break;
+        case "location":
+            image =
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12.75C13.6569 12.75 15 11.4069 15 9.75C15 8.09315 13.6569 6.75 12 6.75C10.3431 6.75 9 8.09315 9 9.75C9 11.4069 10.3431 12.75 12 12.75Z" stroke="#B3B3B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M20 9.69231C20 16.6154 12 22 12 22C12 22 4 16.6154 4 9.69231C4 7.65218 4.84285 5.69561 6.34315 4.25302C7.84344 2.81044 9.87827 2 12 2C14.1217 2 16.1566 2.81044 17.6569 4.25302C19.1571 5.69561 20 7.65218 20 9.69231V9.69231Z" stroke="#B3B3B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
+        case "Female":
+            image =
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12.0071" cy="8.5" r="6.5" stroke="#B3B3B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M12 15V23" stroke="#B3B3B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M7 19H17" stroke="#B3B3B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
+        case "Male":
+            image =
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17 14.5C17 18.0899 14.0899 21 10.5 21C6.91015 21 4 18.0899 4 14.5C4 10.9101 6.91015 8 10.5 8C12.2949 8 13.9199 8.72754 15.0962 9.90381C16.2725 11.0801 17 12.7051 17 14.5Z" stroke="#B3B3B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M21 4L15.0962 9.90381" stroke="#B3B3B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M15 4H21V10" stroke="#B3B3B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
+        case "Other":
+            image =
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="9" stroke="#B3B3B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
+        case "female":
+            image =
+                <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="8.00472" cy="5.66732" r="4.33333" stroke="#1A051D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M8 10V15.3333" stroke="#1A051D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M4.66675 12.666H11.3334" stroke="#1A051D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
+        case "male":
+            image =
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.3334 9.66732C11.3334 12.0606 9.39332 14.0007 7.00008 14.0007C4.60685 14.0007 2.66675 12.0606 2.66675 9.66732C2.66675 7.27408 4.60685 5.33398 7.00008 5.33398C8.1967 5.33398 9.28003 5.81901 10.0642 6.60319C10.8484 7.38737 11.3334 8.4707 11.3334 9.66732Z" stroke="#1A051D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14.0001 2.66602L10.0642 6.60189" stroke="#1A051D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M10 2.66602H14V6.66602" stroke="#1A051D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
+        case "other":
+            image =
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="8.33333" cy="8.33333" r="4.33333" stroke="#1A051D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
 
       default:
             image = <svg></svg>

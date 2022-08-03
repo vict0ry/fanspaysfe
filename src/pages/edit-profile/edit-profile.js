@@ -20,6 +20,8 @@ import { beURL } from '../../config'
 import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
 import MenuItem from '@mui/material/MenuItem'
 import { Select } from '@mui/material'
+import { Icon } from '../messages/Icon'
+import {SearchInput} from './components/SearchInput'
 
 const tabStyles = {
   padding: "12px",
@@ -59,6 +61,9 @@ function TabPanel(props) {
 }
 
 export function EditProfile(props) {
+  const [socialNetworks, setSocialNetworks] = useState(["twitter.com/anncatjoy", "vk.com/anncatjoy"]);
+  const [sex, setSex] = useState("Female");
+
   const loggedUser = useSelector(state => state.user)
 
   const username = useParams().username || loggedUser?.userData?._id
@@ -79,8 +84,6 @@ export function EditProfile(props) {
   const [email, setEmail] = useState(profileUser.email);
   const [checkboxes, setCheckboxes] = useState({});
 
-  console.log(userForm)
-
   useEffect(() => {
     setUserForm(profileUser)
     if (profileUser.profilePic) {
@@ -88,6 +91,7 @@ export function EditProfile(props) {
     }
   }, [])
   const handleFormChange = (evt) => {
+    console.log(profileUser)
     const value = evt.target.value
     setUserForm({
       ...userForm,
@@ -114,7 +118,7 @@ export function EditProfile(props) {
   }
 
 
-  const [avatar, setAvatar] = useState({ img: '/noavatar.png' })
+  const [avatar, setAvatar] = useState({ img: beURL + '/uploads/images/camera.png' })
   const [fileAvatar, setFileAvatar] = useState([]);
 
 
@@ -125,6 +129,8 @@ export function EditProfile(props) {
 
   const submitForm = (event) => {
     //uploading photo
+
+    console.log(avatar.img, beURL + profileUser.profilePic)
 
     if(avatar.img !== beURL + profileUser.profilePic) {
       const formData = new FormData()
@@ -274,9 +280,12 @@ export function EditProfile(props) {
                     alignItems: "center",
                     overflow: "hidden",
                     borderRadius: "8px",
-                    marginRight: "32px"
+                    marginRight: "32px",
+                    background: "#E8EFFF"
                   }}>
-                    <img style={{ width: "100%"}} src={avatar.img} alt="" />
+                    <img style={{
+                      width: avatar.img !== beURL + '/uploads/images/camera.png' ? "100%" : "initial",
+                    }} src={avatar.img} alt="" />
                   </Box>
                   <Box sx={{
                     display: "flex",
@@ -317,6 +326,9 @@ export function EditProfile(props) {
                         borderRadius: "8px",
                         textTransform: "none"
                       }}
+                      onClick={() => {
+                        setAvatar({ img: beURL + '/uploads/images/camera.png' })
+                      }}
                     >
                       {t('PROFILE.DELETE_AVATAR')}
                     </Button>
@@ -351,53 +363,22 @@ export function EditProfile(props) {
                   </Box>
                   <Box sx={{flexGrow: 2}}>
                     <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('COMMON.LAST_NAME')}</Box>
-                    <TextField
-                      sx={{
-                        '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
-                          border: "1px solid #ECE9F1",
-                          borderRadius: "8px",
-                        },
-                        '& .css-jx703g-MuiInputBase-root-MuiOutlinedInput-root': {
-                          fontSize: "16px",
-                          fontWeight: 600
-                        },
-                        '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
-                          padding: "10px 12px"
-                        }
-                      }}
-                      required
-                      fullWidth
-                      id="lastName"
-                      onChange={handleFormChange}
+                    <SearchInput
+                      setValue={handleFormChange}
                       value={userForm.lastName}
                       name="lastName"
-                      autoComplete="family-name"
+                      other={{autoComplete: "family-name"}}
                     />
                   </Box>
                 </Box>
                 <Box sx={{marginBottom: "24px"}}>
                   <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('COMMON.USERNAME')}</Box>
-                  <TextField
-                    sx={{
-                      '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
-                        border: "1px solid #ECE9F1",
-                        borderRadius: "8px",
-                      },
-                      '& .css-jx703g-MuiInputBase-root-MuiOutlinedInput-root': {
-                        fontSize: "16px",
-                        fontWeight: 600
-                      },
-                      '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
-                        padding: "10px 12px"
-                      }
-                    }}
-                    required
-                    fullWidth
-                    id="username"
+                  <SearchInput
                     value={userForm.username}
-                    onChange={handleFormChange}
+                    setValue={handleFormChange}
                     name="username"
-                    autoComplete="username"
+                    icon="at"
+                    other={{autoComplete: "username"}}
                   />
                 </Box>
                 <Box sx={{marginBottom: "24px"}}>
@@ -413,52 +394,22 @@ export function EditProfile(props) {
                     {t('COMMON.DESCRIPTION')}
                     <Box sx={{color: "#B3B3B3", fontSize: "14px", fontWeight: 500}}>{userForm.description.length}/200</Box>
                   </Box>
-                  <TextField
-                    sx={{
-                      '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
-                        border: "1px solid #ECE9F1",
-                        borderRadius: "8px",
-                      },
-                      '& .css-1cicz4d-MuiInputBase-root-MuiOutlinedInput-root': {
-                        fontSize: "16px",
-                        fontWeight: 600,
-                        padding: "10px 12px"
-                      }
-                    }}
-                    multiline
-                    required
-                    fullWidth
-                    id="description"
-                    onChange={(e) => {
+                  <SearchInput
+                    setValue={(e) => {
                       e.target.value.length <= 200 ? handleFormChange(e) : null
                     }}
                     value={userForm.description}
                     name="description"
-                    minRows={3}
-                    autoComplete="description"
+                    other={{multiline: true, minRows:3, autoComplete: "description"}}
                   />
                 </Box>
                 <Box sx={{marginBottom: "24px"}}>
                   <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('COMMON.LOCATION')}</Box>
-                  <TextField
-                    sx={{
-                      '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
-                        border: "1px solid #ECE9F1",
-                        borderRadius: "8px",
-                      },
-                      '& .css-jx703g-MuiInputBase-root-MuiOutlinedInput-root': {
-                        fontSize: "16px",
-                        fontWeight: 600
-                      },
-                      '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
-                        padding: "10px 12px"
-                      }
-                    }}
-                    required
-                    fullWidth
-                    id="username"
+                  <SearchInput
                     value="Praha, Czech"
-                    // onChange={handleFormChange}
+                    setValue={handleFormChange}
+                    name="location"
+                    icon="location"
                   />
                 </Box>
                 <Box sx={{marginBottom: "24px"}}>
@@ -478,11 +429,25 @@ export function EditProfile(props) {
                     border: '1px solid #ECE9F1',
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    paddingLeft: "16px",
+                    position: "relative"
                   }}>
+                    <Box sx={{
+                      position: "absolute",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "100%",
+                      top: 0,
+                      left: 0,
+                      width: "36px"
+                    }}>
+                      <Icon name={sex} />
+                    </Box>
                     <Select
-                      value="Female"
-                      // onChange={(e) => handleChange('YEAR', e.target.value)}
+                      value={sex}
+                      onChange={e => setSex(e.target.value)}
                       sx={{
                         width: '240px',
                         height: '38px',
@@ -499,17 +464,18 @@ export function EditProfile(props) {
                       MenuProps={{
                         PaperProps: {
                           style: {
-                            maxHeight: "124px",
+                            maxHeight: "128px",
                             borderRadius: "8px",
-                            overflowY: "auto"
+                            overflowY: "auto",
+                            padding: 0
                           }
                         }
                       }}
                       variant="outlined"
                     >
-                      <MenuItem sx={{fontSize: "14px", fontWeight: 700}} value="Female">Female</MenuItem>
-                      <MenuItem sx={{fontSize: "14px", fontWeight: 700}} value="Male">Male</MenuItem>
-                      <MenuItem sx={{fontSize: "14px", fontWeight: 700}} value="Other">Other</MenuItem>
+                      <MenuItem sx={{fontSize: "14px", fontWeight: 700, padding: "8px"}} value="Female"><Icon name="female" /><span style={{marginLeft: 8}}>Female</span></MenuItem>
+                      <MenuItem sx={{fontSize: "14px", fontWeight: 700, padding: "8px"}} value="Male"><Icon name="male" /><span style={{marginLeft: 8}}>Male</span></MenuItem>
+                      <MenuItem sx={{fontSize: "14px", fontWeight: 700, padding: "8px"}} value="Other"><Icon name="other" /><span style={{marginLeft: 8}}>Other</span></MenuItem>
                     </Select>
                   </Box>
                 </Box>
@@ -532,7 +498,6 @@ export function EditProfile(props) {
                       }}
                       required
                       fullWidth
-                      id="username"
                       value="cbdsvet.cz"
                       // onChange={handleFormChange}
                     />
@@ -540,27 +505,40 @@ export function EditProfile(props) {
 
                 <Box sx={{marginBottom: "24px"}}>
                   <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('COMMON.SOCIAL_NETWORKS')}</Box>
-                  <TextField
-                    sx={{
-                      '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
-                        border: "1px solid #ECE9F1",
-                        borderRadius: "8px",
-                      },
-                      '& .css-jx703g-MuiInputBase-root-MuiOutlinedInput-root': {
-                        fontSize: "16px",
-                        fontWeight: 600
-                      },
-                      '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
-                        padding: "10px 12px"
-                      },
-                      marginBottom: "8px"
-                    }}
-                    required
-                    fullWidth
-                    value="twitter.com/anncatjoy"
-                    // onChange={handleFormChange}
-                  />
-
+                  {socialNetworks.map((item, i) => {
+                    return(
+                      <TextField
+                        autoFocus={item === ""}
+                        onBlur={() => {
+                          if(socialNetworks[i] === ""){
+                            const temp = socialNetworks;
+                            temp.splice(i, 1);
+                            setSocialNetworks([...temp])
+                          }
+                        }}
+                        sx={{
+                          '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                            border: "1px solid #ECE9F1",
+                            borderRadius: "8px",
+                          },
+                          '& .css-jx703g-MuiInputBase-root-MuiOutlinedInput-root': {
+                            fontSize: "16px",
+                            fontWeight: 600
+                          },
+                          '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
+                            padding: "10px 12px"
+                          },
+                          marginBottom: "8px"
+                        }}
+                        required
+                        fullWidth
+                        value={item}
+                        onChange={(e) => {
+                          setSocialNetworks([...socialNetworks.slice(0, i), e.target.value, ...socialNetworks.slice(i+1, socialNetworks.length)])
+                        }}
+                      />
+                    );
+                  })}
                   <Button sx={{
                     minWidth: 0,
                     minHeight: 0,
@@ -571,7 +549,13 @@ export function EditProfile(props) {
                     fontWeight: 700,
                     textDecoration: "underline",
                     textTransform: "none"
-                  }}>{t("COMMON.ADD_MORE")}</Button>
+                  }}
+                  onClick={() => {
+                    if(socialNetworks[socialNetworks.length-1] !== "") {
+                      setSocialNetworks([...socialNetworks, ""])
+                    }
+                  }}
+                  >{t("COMMON.ADD_MORE")}</Button>
                 </Box>
 
               </Box>
