@@ -61,9 +61,9 @@ const Deposit = ({setDepositOpen}) => {
         padding: '24px 36px 32px 36px',
         position: "relative"
       }}
-           onClick={(e) => {
-             e.stopPropagation()
-           }}
+       onClick={(e) => {
+         e.stopPropagation()
+       }}
       >
         <Button sx={{
           minWidth: 0,
@@ -73,9 +73,9 @@ const Deposit = ({setDepositOpen}) => {
           top: "24px",
           padding: 0
         }}
-                onClick={() => {
-                  setDepositOpen(false)
-                }}
+          onClick={() => {
+            setDepositOpen(false)
+          }}
         >
           <Icon name="X" />
         </Button>

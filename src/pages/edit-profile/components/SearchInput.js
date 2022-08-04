@@ -3,7 +3,7 @@ import { Icon } from '../../messages/Icon'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 
-export const SearchInput = ({icon, value, setValue, name, autoComplete, other}) => {
+export const SearchInput = ({icon, value, setValue, name, other}) => {
   return (
     <Box sx={{
       position: "relative"
@@ -42,11 +42,9 @@ export const SearchInput = ({icon, value, setValue, name, autoComplete, other}) 
         }}
         required
         fullWidth
-        // id="username"
         value={value}
         onChange={setValue}
         name={name}
-        // autoComplete="username"
         {...other}
       />
     </Box>

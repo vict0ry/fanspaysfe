@@ -130,8 +130,6 @@ export function EditProfile(props) {
   const submitForm = (event) => {
     //uploading photo
 
-    console.log(avatar.img, beURL + profileUser.profilePic)
-
     if(avatar.img !== beURL + profileUser.profilePic) {
       const formData = new FormData()
       formData.append('croppedImage', fileAvatar[0])
@@ -269,9 +267,9 @@ export function EditProfile(props) {
 
         <div style={{background: '#fff', maxHeight: "70vh", overflowY: "scroll"}}>
           <TabPanel value={value} index={0}>
-            <Box component="form" noValidate onSubmit={submitForm} sx={{}}>
+            <Box component="form" noValidate onSubmit={submitForm}>
               <Box>
-                <Box sx={{display: "flex", alignItems: "center", marginBottom: "24px"}} item xs={12} sm={12}>
+                <Box sx={{display: "flex", alignItems: "center", marginBottom: "24px"}}>
                   <Box sx={{
                     width: "112px",
                     height: "128px",
@@ -337,28 +335,15 @@ export function EditProfile(props) {
                 <Box sx={{display: "flex", marginBottom: "24px"}}>
                   <Box sx={{marginRight: "24px", flexGrow: 1}}>
                     <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('COMMON.FIRST_NAME')}</Box>
-                    <TextField
-                      sx={{
-                        '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
-                          border: "1px solid #ECE9F1",
-                          borderRadius: "8px"
-                        },
-                        '& .css-jx703g-MuiInputBase-root-MuiOutlinedInput-root': {
-                          fontSize: "16px",
-                          fontWeight: 600
-                        },
-                        '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
-                          padding: "10px 12px"
-                        }
-                      }}
-                      autoComplete="given-name"
+                    <SearchInput
                       name="firstName"
-                      required
-                      fullWidth
                       value={userForm.firstName}
-                      onChange={handleFormChange}
-                      id="firstName"
-                      autoFocus
+                      setValue={handleFormChange}
+                      other={{
+                        id: "firstName",
+                        autoFocus: true,
+                        autoComplete: "given-name"
+                      }}
                     />
                   </Box>
                   <Box sx={{flexGrow: 2}}>
@@ -482,61 +467,34 @@ export function EditProfile(props) {
 
                 <Box sx={{marginBottom: "24px"}}>
                   <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('COMMON.PERSONAL_SITE')}</Box>
-                    <TextField
-                      sx={{
-                        '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
-                          border: "1px solid #ECE9F1",
-                          borderRadius: "8px",
-                        },
-                        '& .css-jx703g-MuiInputBase-root-MuiOutlinedInput-root': {
-                          fontSize: "16px",
-                          fontWeight: 600
-                        },
-                        '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
-                          padding: "10px 12px"
-                        }
-                      }}
-                      required
-                      fullWidth
-                      value="cbdsvet.cz"
-                      // onChange={handleFormChange}
-                    />
+                  <SearchInput
+                    value="cbdsvet.cz"
+                    // onChange={handleFormChange}
+                  />
                 </Box>
 
                 <Box sx={{marginBottom: "24px"}}>
                   <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>{t('COMMON.SOCIAL_NETWORKS')}</Box>
                   {socialNetworks.map((item, i) => {
                     return(
-                      <TextField
-                        autoFocus={item === ""}
-                        onBlur={() => {
-                          if(socialNetworks[i] === ""){
-                            const temp = socialNetworks;
-                            temp.splice(i, 1);
-                            setSocialNetworks([...temp])
-                          }
-                        }}
-                        sx={{
-                          '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
-                            border: "1px solid #ECE9F1",
-                            borderRadius: "8px",
-                          },
-                          '& .css-jx703g-MuiInputBase-root-MuiOutlinedInput-root': {
-                            fontSize: "16px",
-                            fontWeight: 600
-                          },
-                          '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
-                            padding: "10px 12px"
-                          },
-                          marginBottom: "8px"
-                        }}
-                        required
-                        fullWidth
-                        value={item}
-                        onChange={(e) => {
-                          setSocialNetworks([...socialNetworks.slice(0, i), e.target.value, ...socialNetworks.slice(i+1, socialNetworks.length)])
-                        }}
-                      />
+                      <Box sx={{marginBottom: "8px"}}>
+                        <SearchInput
+                          value={item}
+                          onChange={(e) => {
+                            setSocialNetworks([...socialNetworks.slice(0, i), e.target.value, ...socialNetworks.slice(i+1, socialNetworks.length)])
+                          }}
+                          other={{
+                            autoFocus: item === "",
+                            onBlur: () => {
+                              if(socialNetworks[i] === ""){
+                                const temp = socialNetworks;
+                                temp.splice(i, 1);
+                                setSocialNetworks([...temp])
+                              }
+                            }
+                          }}
+                        />
+                      </Box>
                     );
                   })}
                   <Button sx={{

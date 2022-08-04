@@ -212,5 +212,16 @@
       "PLACEHOLDER": "Введите E-mail",
       "BUTTON": "Войти"
     }
+  },
+  "EDIT": {
+    "SUBSCRIPTION_LEVELS": "Subscription levels",
+    "WISHES": "Wishes",
+    "SUB_PRICE": "Subscription price",
+    "COVER": "Cover",
+    "HEADER": "Header",
+    "BENEFITS": "Benefits",
+    "DESCRIPTION": "Description",
+    "SAVE": "Save",
+    "CANCEL": "Cancel"
   }
 }
