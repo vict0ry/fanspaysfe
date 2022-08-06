@@ -10,6 +10,7 @@ import { AddWishModal } from './AddWishModal'
 import { useSelector } from 'react-redux'
 import { Icon } from '../pages/messages/Icon'
 import { AddLevel } from '../pages/edit-profile/components/AddLevel'
+import { WishModal} from '../pages/edit-profile/components/WishModal'
 
 export const SubscriptionSettingsCard = ({level, price, date, accesses, subscribers}) => {
   const editText = useRef(null);
@@ -139,6 +140,7 @@ export const SubscriptionSettingsCard = ({level, price, date, accesses, subscrib
 
 export const UserPricesFormTab = () => {
   const [addLevelOpen, setAddLevelOpen] = useState(false);
+  const [addWishOpen, setAddWishOpen] = useState(false);
 
   const [wishes, setWishes] = useState();
 
@@ -292,27 +294,39 @@ export const UserPricesFormTab = () => {
                     </Box>
                   </Box>
                 </Grid>
-              }) : <div><p>
-                {t('CONFIG.SETUP_WISH')}
-              </p></div>
+              }) : <Grid item sx={{fontSize: "16px", fontWeight: 600, marginTop: "-8px"}}>
+                You don't have any desires yet. Open the collection for your dream 💫
+              </Grid>
             }
           {/*<Grid item xs={3} sm={3}>*/}
           {/*  <AddWishModal myProfile={true}/>*/}
           {/*</Grid>*/}
         </Grid>
-        <Button sx={{
-          background: '#E8EFFF',
-          padding: '12px 24px',
-          borderRadius: '8px',
-          border: '1px dashed #4776E6',
-          textTransform: 'none',
-          fontSize: "14px",
-          fontWeight: 700,
-          lineHeight: "20px",
-          marginTop: "24px"
-        }}>
+        <Button
+          sx={{
+            background: '#E8EFFF',
+            padding: '12px 24px',
+            borderRadius: '8px',
+            border: '1px dashed #4776E6',
+            textTransform: 'none',
+            fontSize: "14px",
+            fontWeight: 700,
+            lineHeight: "20px",
+            marginTop: "24px"
+          }}
+          onClick={() => {
+            setAddWishOpen(true);
+          }}
+        >
           <img style={{marginRight: "8px"}} src="/images/icons/plus.svg" alt="add" />
           <span style={{color: '#4776E6', marginLeft: '5px'}}>Add wish</span>
+
+          {/*Modal*/}
+          {addWishOpen &&
+            <WishModal
+              setAddWishOpen={setAddWishOpen}
+            />
+          }
         </Button>
       </Box>
     </Box>

@@ -7,6 +7,8 @@ import { beURL } from '../../../config'
 import { Icon } from '../../messages/Icon'
 import {Select} from '@mui/material'
 import MenuItem from '@mui/material/MenuItem'
+import Chip from '@mui/material/Chip';
+import { BenefitModal} from './BenefitModal'
 
 export const AddLevel = ({setAddLevelOpen, isEdit=false}) => {
   const file = useRef(null);
@@ -19,9 +21,18 @@ export const AddLevel = ({setAddLevelOpen, isEdit=false}) => {
 
   const [openBenefitModal, setOpenBenefitModal] = useState(true);
   const [nameBenefit, setNameBenefit] = useState("");
-  const [categoryBenefit, setCategoryBenefit] = useState("");
+  const [categoryBenefit, setCategoryBenefit] = useState([]);
 
-
+  const benefits = [
+    "Доступ к публикациям",
+    "Доступ к фото и видео",
+    "Онлайн-общение",
+    "Онлайн-встреча",
+    "VIP-cобытие в прямом эфире",
+    "Доступ к live-трансляциям",
+    "Участие в голосованиях",
+    "Групповое или персональное обучение"
+  ];
 
   return (
     <Box>
@@ -129,7 +140,7 @@ export const AddLevel = ({setAddLevelOpen, isEdit=false}) => {
           }}
           sx={{
             background: '#E8EFFF',
-            padding: '12px 24px',
+            padding: '10px 24px',
             borderRadius: '8px',
             border: '1px dashed #4776E6',
             textTransform: 'none',
@@ -148,119 +159,14 @@ export const AddLevel = ({setAddLevelOpen, isEdit=false}) => {
 
           {/*modal*/}
           {openBenefitModal &&
-            <Box
-              onClick={e => {
-                e.stopPropagation();
-                setOpenBenefitModal(false);
-              }}
-              sx={{
-                position: "fixed",
-                width: "100vw",
-                height: "100vh",
-                backdropFilter: "blur(4px)",
-                zIndex: 2,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                cursor: "initial",
-                top: 0,
-                left: 0
-              }}
-            >
-              <Box
-                onClick={e => {
-                  e.stopPropagation();
-                }}
-                sx={{
-                  background: "#fff",
-                  borderRadius: "8px",
-                  width: "500px",
-                  height: "350px",
-                  padding: "24px 48px",
-                  cursor: "initial",
-                  position: "relative"
-                }}
-              >
-                <Button
-                  sx={{
-                    minWidth: 0,
-                    minHeight: 0,
-                    position: "absolute",
-                    right: "24px",
-                    top: "24px",
-                    padding: 0
-                  }}
-                  onClick={() => {
-                    setOpenBenefitModal(false)
-                  }}
-                >
-                  <Icon name="X" />
-                </Button>
-
-                <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
-                  <Box sx={{
-                    // background: 'linear-gradient(94.04deg, #4776E6 10.41%, #8E54E9 77.48%)',
-                    // webkitBackgroundClip: 'text',
-                    // webkitTextFillColor: 'transparent',
-                    // backgroundClip: 'text',
-                    // textFillColor: 'transparent',
-                    color: "#8E54E9",
-                    fontSize: '24px',
-                    fontWeight: 700
-                  }}>
-                    Adding a benefit
-                  </Box>
-                </Box>
-
-                <Box sx={{marginBottom: "24px"}}>
-                  <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>Name</Box>
-                  <SearchInput
-                    value={nameBenefit}
-                    setValue={e => setNameBenefit(e.target.value)}
-                    other={{
-                      placeholder: "Benefit name"
-                    }}
-                  />
-                </Box>
-
-                <Box sx={{marginBottom: "24px"}}>
-                  <Box sx={{marginBottom: "8px", fontSize: "14px", fontWeight: 700, color: "#5D5E65"}}>Category</Box>
-                  <Select
-                    fullWidth
-                    value={categoryBenefit}
-                    onChange={e => setCategoryBenefit(e.target.value)}
-                    sx={{
-                      width: '100%',
-                      height: '38px',
-                      fontSize: "16px",
-                      fontWeight: 600,
-                      color: "#1A051D",
-                      borderRadius: "8px",
-                      border: "1px solid #ECE9F1",
-                      '& .css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
-                        border: "none"
-                      }
-                    }}
-                    MenuProps={{
-                      PaperProps: {
-                        style: {
-                          maxHeight: "128px",
-                          borderRadius: "8px",
-                          overflowY: "auto",
-                          padding: 0
-                        }
-                      }
-                    }}
-                    variant="outlined"
-                  >
-                    <MenuItem sx={{fontSize: "14px", fontWeight: 700, padding: "8px"}} value="Female">Доступ к публикациям</MenuItem>
-                    <MenuItem sx={{fontSize: "14px", fontWeight: 700, padding: "8px"}} value="Male">Доступ к фото и видео</MenuItem>
-                    <MenuItem sx={{fontSize: "14px", fontWeight: 700, padding: "8px"}} value="Other">Онлайн-общение</MenuItem>
-                  </Select>
-                </Box>
-
-              </Box>
-            </Box>
+            <BenefitModal
+              setOpenBenefitModal={setOpenBenefitModal}
+              nameBenefit={nameBenefit}
+              setNameBenefit={setNameBenefit}
+              benefits={benefits}
+              categoryBenefit={categoryBenefit}
+              setCategoryBenefit={setCategoryBenefit}
+            />
           }
         </Button>
       </Box>
