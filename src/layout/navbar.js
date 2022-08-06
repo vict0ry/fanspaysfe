@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -29,6 +29,7 @@ import axios from 'axios'
 import { Autocomplete, TextField } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { useNavigate } from 'react-router'
+import { SocketContext } from '../context/socket'
 
 const drawerWidth = 240
 
@@ -56,18 +57,20 @@ export default function SearchBar({ window }) {
   const dispatch = useDispatch()
   const loggedUser = useSelector(state => state.user)
   const { t } = useTranslation()
+  const socket = useContext(SocketContext)
 
 
   useEffect(() => {
-    const io = require('socket.io-client')
-    const socket = io(beURL)
     socket.on('connect', () => {
       console.log(socket.id)
-    })
+    });
     socket.emit('pikachu', 'ahoj')
-    socket.emit('setup', loggedUser)
+    socket.emit('setup', loggedUser.userData)
 
-    socket.on('connected', () => connected = true)
+    socket.on('connected', (data) => {
+      console.log('connected : ', data);
+      connected = true
+    })
     socket.on('message received', (newMessage) => {
       console.log(newMessage)
     })
@@ -79,7 +82,6 @@ export default function SearchBar({ window }) {
 
 
     function emitNotification(userId) {
-
       socket.emit('notification received', userId)
     }
   }, [])

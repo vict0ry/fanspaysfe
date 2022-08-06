@@ -30,10 +30,12 @@ export const loadChatMessages = (chatId) => {
 export const sendMessage = (message) => {
   return (dispatch, getState) => {
     const chatId = getState().messages.selectedChatId
-    return axios.post('/api/messages', {
-      content: message,
-      chatId
-    }).then(_ => dispatch(loadChatMessages(chatId)))
+    if (chatId) {
+      return axios.post('/api/messages', {
+        content: message,
+        chatId
+      }).then(_ => dispatch(loadChatMessages(chatId)))
+    }
   }
 }
 export const messagesLoaded = ({ data, chatId }) => {

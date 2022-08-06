@@ -26,15 +26,21 @@ export function Messages() {
   const chatMessages = useSelector(state => state.messages.selectedChatMessages)
   const loggedUser = useSelector(state => state.user)
   let selectedChatId = useSelector(state => state.messages.selectedChatId);
-  if (!selectedChatId) {
+  debugger;
+  if (!selectedChatId && chatList && chatList.length) {
     selectedChatId = chatList[0]._id;
   }
-  const oppositeUser = chatList.find(list => list._id === selectedChatId).users.filter(i => i._id !== loggedUser.userData._id)[0];
+
+
+    const oppositeUser = chatList?.find(list => list._id === selectedChatId).users.filter(i => i._id !== loggedUser.userData._id)[0];
 
   debugger;
 
 
   const socket = useContext(SocketContext)
+  socket.on('sendMsg', (data) => {
+    console.log('socket ? ', data);
+  })
   useEffect(() => {
     socket.on('notification received', () => onNotificationRecieve())
   }, [])
@@ -58,11 +64,12 @@ export function Messages() {
   function handleAddMessage() {
     dispatch(sendMessage(userMessage)).then(scrollMessagesDown)
     setUserMessage('')
+    socket.emit('message_sent', {userId: oppositeUser?._id, message: userMessage });
     socket.emit('notification received', selectedChatId)
   }
 
   const scrollMessagesDown = () => {
-    messageElement.current.scrollTop = messageElement.current.scrollHeight
+    // messageElement.current.scrollTop = messageElement.current.scrollHeight
   }
 
   const [userMessage, setUserMessage] = useState('')
@@ -76,7 +83,8 @@ export function Messages() {
   const [folderListOpen, setFolderListOpen] = useState(true)
 
 
-  function handleMessageOnKeyDown(value) {
+  const handleMessageOnKeyDown = (value) => {
+    console.log(value)
     setUserMessage(value)
   }
 
@@ -301,9 +309,9 @@ export function Messages() {
 
             <Box style={styles.nameInfo}>
               <Box style={styles.fullName}>
-                <span>{oppositeUser.firstName}</span> <span>{oppositeUser.lastName}</span>
+                <span>{oppositeUser?.firstName}</span> <span>{oppositeUser?.lastName}</span>
               </Box>
-              <Box style={styles.nickname}>@{oppositeUser.username}</Box>
+              <Box style={styles.nickname}>@{oppositeUser?.username}</Box>
             </Box>
             {true &&
               <Box style={{ height: '100%' }}>
@@ -469,10 +477,13 @@ export function Messages() {
 
 
             <TextField onChange={() => handleMessageOnKeyDown(event.target.value)}
-                       variant="standard"
-                       value={userMessage}
+                       fullWidth
                        InputProps={{ disableUnderline: true }}
                        hiddenLabel
+                       autoFocus="autoFocus"
+                       autofocus
+                       type={'text'}
+                       value={userMessage}
                        sx={{ width: '100%', padding: '0', marginLeft: 0, border: '0' }}
                        id="outlined-basic"
             />

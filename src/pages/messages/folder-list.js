@@ -70,10 +70,6 @@ export const FolderList = ({ setFolderListOpen }) => {
           const sender = users.filter(i => i._id !== loggedUser._id)[0];
           debugger;
 
-          if (selectedChatId === _id) {
-            bgListItem.background = '#ECF0F1'
-          }
-
           return (
             <ListItem
               onClick={() => {
@@ -81,7 +77,7 @@ export const FolderList = ({ setFolderListOpen }) => {
                 socket.emit('join room', _id)
                 setFolderListOpen(false)
               }}
-              style={listItemStyles}
+              style={{ background: selectedChatId === _id ? 'red' : 'white'}}
               button
               key={index}
             >
