@@ -22,6 +22,9 @@ import MenuItem from '@mui/material/MenuItem'
 import { Select } from '@mui/material'
 import { Icon } from '../messages/Icon'
 import {SearchInput} from './components/SearchInput'
+import { WishModal } from './components/WishModal'
+import { AddProduct } from './components/AddProduct'
+import { Products } from './components/Products'
 
 const tabStyles = {
   padding: "12px",
@@ -64,6 +67,7 @@ export function EditProfile(props) {
   const [socialNetworks, setSocialNetworks] = useState(["twitter.com/anncatjoy", "vk.com/anncatjoy"]);
   const [sex, setSex] = useState("Female");
 
+
   const loggedUser = useSelector(state => state.user)
 
   const username = useParams().username || loggedUser?.userData?._id
@@ -91,7 +95,6 @@ export function EditProfile(props) {
     }
   }, [])
   const handleFormChange = (evt) => {
-    console.log(profileUser)
     const value = evt.target.value
     setUserForm({
       ...userForm,
@@ -229,6 +232,21 @@ export function EditProfile(props) {
               sx={tabStyles}
               label={
                 <div style={tabStylesDiv}>
+                  <Box sx={{marginRight: "14px"}}>
+                    <Icon
+                      name="Basket"
+                      color="#5D5E65"
+                    />
+                  </Box>
+                  {t('COMMON.PRODUCTS')}
+                </div>
+              }
+              {...a11yProps(2)}
+            />
+            <Tab
+              sx={tabStyles}
+              label={
+                <div style={tabStylesDiv}>
                   <img
                     style={{marginRight: "14px"}}
                     src="/images/icons/settings.svg"
@@ -236,7 +254,7 @@ export function EditProfile(props) {
                   />
                   {t('COMMON.PARAMETERS')}
                 </div>}
-              {...a11yProps(2)}
+              {...a11yProps(3)}
             />
             <Tab
               sx={tabStyles}
@@ -248,7 +266,7 @@ export function EditProfile(props) {
                     alt="price settings" />
                   {t('PROFILE.CREDIT_CARDS')}
                 </div>}
-              {...a11yProps(3)}
+              {...a11yProps(4)}
             />
             <Tab
               sx={tabStyles}
@@ -260,12 +278,15 @@ export function EditProfile(props) {
                     alt="price settings" />
                   {t('COMMON.CONTACTS')}
                 </div>}
-              {...a11yProps(4)}
+              {...a11yProps(5)}
             />
           </Tabs>
         </Box>
 
-        <div style={{background: '#fff', maxHeight: "70vh", overflowY: "scroll"}}>
+        <div style={{background: '#fff',
+          // maxHeight: "70vh",
+          height: "70vh",
+          overflowY: "auto"}}>
           <TabPanel value={value} index={0}>
             <Box component="form" noValidate onSubmit={submitForm}>
               <Box>
@@ -532,6 +553,12 @@ export function EditProfile(props) {
             <UserPricesFormTab />
           </TabPanel>
           <TabPanel value={value} index={2}>
+
+            <Products
+
+            />
+          </TabPanel>
+          <TabPanel value={value} index={3}>
             <UserParametersTab
               user={profileUser}
               email={email}
@@ -540,10 +567,10 @@ export function EditProfile(props) {
               setCheckboxes={setCheckboxes}
             />
           </TabPanel>
-          <TabPanel value={value} index={3}>
+          <TabPanel value={value} index={4}>
             <AddCreditCard />
           </TabPanel>
-          <TabPanel value={value} index={4}>
+          <TabPanel value={value} index={5}>
             <TabContacts />
           </TabPanel>
         </div>

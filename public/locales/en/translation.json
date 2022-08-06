@@ -36,6 +36,7 @@
     "FOLLOWING": "Following",
     "PRICE_SETTINGS": "Price settings",
     "PRICE": "Price",
+    "PRODUCTS": "Products",
     "PERSONAL_SITE": "Personal site",
     "ABOUT_ME": "About me",
     "PARAMETERS": "Parameters",
@@ -223,6 +224,9 @@
     "DESCRIPTION": "Description",
     "SAVE": "Save",
     "CANCEL": "Cancel",
-    "ADD": "Add"
+    "ADD": "Add",
+    "TAGS": "Tags",
+    "ADD_PRODUCT": "Add product",
+    "PRICE": "Price"
   }
 }

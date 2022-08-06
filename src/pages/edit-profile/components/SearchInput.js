@@ -20,6 +20,7 @@ export const SearchInput = ({icon, value, setValue, name, other}) => {
       }}>
         <Icon name={icon} />
       </Box>}
+
       <TextField
         sx={{
           '.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {

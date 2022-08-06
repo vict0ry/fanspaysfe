@@ -183,7 +183,7 @@ export const AddLevel = ({setAddLevelOpen, isEdit=false}) => {
           value={description}
           other={{
             multiline: true,
-            minRows:3,
+            minRows: 3,
             autoComplete: "description",
             placeholder: "A short captivating description of the subscription level"
           }}

@@ -214,7 +214,7 @@ export const UserPricesFormTab = () => {
           onClick={() => setAddLevelOpen(true)}
           sx={{
             background: '#E8EFFF',
-            padding: '12px 24px',
+            padding: '10px 24px',
             borderRadius: '8px',
             border: '1px dashed #4776E6',
             textTransform: 'none',
@@ -305,7 +305,7 @@ export const UserPricesFormTab = () => {
         <Button
           sx={{
             background: '#E8EFFF',
-            padding: '12px 24px',
+            padding: '10px 24px',
             borderRadius: '8px',
             border: '1px dashed #4776E6',
             textTransform: 'none',
