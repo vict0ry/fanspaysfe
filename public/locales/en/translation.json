@@ -227,6 +227,23 @@
     "ADD": "Add",
     "TAGS": "Tags",
     "ADD_PRODUCT": "Add product",
-    "PRICE": "Price"
+    "PRICE": "Price",
+    "BUY": "Buy",
+    "PRODUCTS": "Products",
+    "PARAMETERS": "Parameters",
+    "EMAIL": "Email",
+    "EMAIL_NOTIFICATIONS": "Email notifications",
+    "PUSH_NOTIFICATIONS": "Push notifications",
+    "NEWS": "Service news",
+    "INFORMATION": "Information notices",
+    "PERSONAL": "Notifications for new subscriptions, purchases",
+    "BLACK_LIST": "Black list",
+    "NEW_MESSAGES": "New messages",
+    "BLOCKED_USERS": "Blocked users",
+    "DEACTIVATE" : "Deactivate profile",
+    "PASSWORD_CHANGE": "Password change",
+    "INPUT_NEW_PASSWORD": "Enter a new password",
+    "CONFIRM_PASSWORD": "Confirm the password",
+    "PASSWORD": "Password"
   }
 }

@@ -553,10 +553,7 @@ export function EditProfile(props) {
             <UserPricesFormTab />
           </TabPanel>
           <TabPanel value={value} index={2}>
-
-            <Products
-
-            />
+            <Products />
           </TabPanel>
           <TabPanel value={value} index={3}>
             <UserParametersTab

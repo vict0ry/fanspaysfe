@@ -338,6 +338,43 @@ export const Icon = ({name, color}) => {
                     <path d="M17 10V8C17 5.23858 14.7614 3 12 3C9.23858 3 7 5.23858 7 8V10" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
             break;
+        case "longLeft":
+            image =
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 12L4 12" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M10 18L4 12L10 6" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
+        case "longRight":
+            image =
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 12L20 12" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M14 18L20 12L14 6" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
+        case "littleRight": 
+            image =
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 12L10 8L6 4" stroke="#1A051D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
+        case "circle_forbid": 
+            image =
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="8" cy="8" r="6" stroke="#1A051D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M5.66663 5.66602L10.3333 10.3327" stroke="#1A051D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
+        case "deactivate":
+            image =
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.2992 3.04883L16.9508 5.70048" stroke="#E64747" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.9508 3.04883L14.2992 5.70048" stroke="#E64747" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14.6915 9.23303C14.3573 10.1354 13.7696 10.9221 12.9991 11.4987C12.2286 12.0752 11.3081 12.417 10.348 12.483C9.38797 12.549 8.42929 12.3364 7.58713 11.8708C6.74498 11.4052 6.05517 10.7063 5.60058 9.85813C5.14599 9.00997 4.94595 8.04859 5.02449 7.0895C5.10303 6.1304 5.45682 5.21438 6.04334 4.45148C6.62987 3.68857 7.42419 3.11124 8.33088 2.78883C9.23757 2.46642 10.2181 2.41265 11.1546 2.63397" stroke="#E64747" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2.5 16.6665C3.26039 15.3997 4.35376 14.3477 5.67025 13.6163C6.98675 12.885 8.48002 12.5 10 12.5C11.5201 12.5 13.0133 12.8851 14.3298 13.6164C15.6463 14.3478 16.7396 15.3998 17.5 16.6667" stroke="#E64747" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            break;
+
 
       default:
             image = <svg></svg>
