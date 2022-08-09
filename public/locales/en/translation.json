@@ -241,9 +241,32 @@
     "NEW_MESSAGES": "New messages",
     "BLOCKED_USERS": "Blocked users",
     "DEACTIVATE" : "Deactivate profile",
+    "DEACTIVATION": {
+      "TITLE": "Profile deactivation",
+      "HEADER": "Your profile will be deactivated",
+      "CONTENT": "You are about to deactivate your profile. Your name, @nickname and public profile will not be displayed on fanspays.com.",
+      "ADD_INFO": "Additional Information",
+      "ADD_INFO1": "You can restore your accidentally or mistakenly deactivated profile within 30 days after deactivation.",
+      "ADD_INFO2": "Some data may be available on search engines such as Google.",
+      "ADD_INFO3": "If you just want to change your nickname, you don't need to deactivate your profile - change it in the settings."
+    },
     "PASSWORD_CHANGE": "Password change",
     "INPUT_NEW_PASSWORD": "Enter a new password",
     "CONFIRM_PASSWORD": "Confirm the password",
-    "PASSWORD": "Password"
+    "PASSWORD": "Password",
+    "UNBLOCK": "Unblock",
+    "BLOCK": "Block",
+    "BACK_TO_MENU": "Back to menu",
+    "REPLENISHMENT": "Replenishment of the balance",
+    "WITHDRAWAL": "Withdrawal of funds",
+    "BALANCE": "Balance",
+    "TOP_UP": "Top up",
+    "LINK_CARD": "Link card",
+    "LINK_CARDS": "Linked cards",
+    "LINK_MORE": "Link more",
+    "SET_UP_WITHDRAWAL": "Set up withdrawal method",
+    "NO_OUTPUT_METHOD": "You have not added an output method",
+    "ADD_METHOD": "Add method",
+    "ADD_METHOD_PROMPT": "Funds are withdrawn automatically once a week if the balance is more than $ 50. The service takes a commission of 15%"
   }
 }

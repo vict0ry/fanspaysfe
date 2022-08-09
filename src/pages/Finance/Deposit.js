@@ -8,6 +8,7 @@ import paypal from './paypal.svg'
 import bitcoin from './bitcoin.svg'
 import { MenuItem, Select, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { SearchInput } from '../edit-profile/components/SearchInput'
 
 const Deposit = ({setDepositOpen}) => {
   const [depositMethod, setDepositMethod] = useState(0)
@@ -34,22 +35,23 @@ const Deposit = ({setDepositOpen}) => {
   }, [])
 
   return(
-    <Box sx={{
-      position: 'fixed',
-      left: 0,
-      top: 0,
-      width: '100vw',
-      height: '100vh',
-      backdropFilter: 'blur(4px)',
-      zIndex: 2,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: "8px"
-    }}
-         onClick={() => {
-           setDepositOpen(false)
-         }}
+    <Box
+      sx={{
+        position: 'fixed',
+        left: 0,
+        top: 0,
+        width: '100vw',
+        height: '100vh',
+        backdropFilter: 'blur(4px)',
+        zIndex: 2,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: "8px"
+      }}
+       onClick={() => {
+         setDepositOpen(false)
+       }}
     >
       <Box sx={{
         borderRadius: '8px',
@@ -221,11 +223,11 @@ const Deposit = ({setDepositOpen}) => {
               }}
             >
               {depositMethod === 2 &&
-              <img style={{
-                position: 'absolute',
-                right: '-12px',
-                top: '-12px'
-              }} src={circleCheck} alt="" />
+                <img style={{
+                  position: 'absolute',
+                  right: '-12px',
+                  top: '-12px'
+                }} src={circleCheck} alt="" />
               }
               <Box sx={{
                 width: '100%',
@@ -268,17 +270,25 @@ const Deposit = ({setDepositOpen}) => {
             }}>
               <Box sx={{ color: '#5D5E65', fontSize: '14px', fontWeight: 700, marginBottom: '8px' }}>RECEIVER NAME</Box>
               <Box sx={{ height: '40px' }}>
-                <TextField
-                  fullWidth
-                  sx={{
-                    '& .MuiInputBase-input': {
-                      padding: '0 12px',
-                      height: '40px'
-                    }
-                  }}
+                <SearchInput
                   value={nameReceiver}
-                  onChange={e => setNameReceiver(e.target.value)}
+                  setValue={e => setNameReceiver(e.target.value)}
+                  icon="user"
+                  other={{
+                    placeholder: "Name Surname"
+                  }}
                 />
+                {/*<TextField*/}
+                {/*  fullWidth*/}
+                {/*  sx={{*/}
+                {/*    '& .MuiInputBase-input': {*/}
+                {/*      padding: '0 12px',*/}
+                {/*      height: '40px'*/}
+                {/*    }*/}
+                {/*  }}*/}
+                {/*  value={nameReceiver}*/}
+                {/*  onChange={e => setNameReceiver(e.target.value)}*/}
+                {/*/>*/}
               </Box>
             </Box>
             <Box sx={{
@@ -286,17 +296,10 @@ const Deposit = ({setDepositOpen}) => {
             }}>
               <Box sx={{ color: '#5D5E65', fontSize: '14px', fontWeight: 700, marginBottom: '8px' }}>CARD NUMBER</Box>
               <Box sx={{ height: '40px' }}>
-                <TextField
-                  placeholder="5645 6783 2571 0984"
-                  fullWidth
-                  sx={{
-                    '& .MuiInputBase-input': {
-                      padding: '0 12px',
-                      height: '40px'
-                    }
-                  }}
+                <SearchInput
+                  icon="bank_card"
                   value={cardNumber}
-                  onChange={e => {
+                  setValue={e => {
                     const value = e.target.value;
 
                     if (!isNaN(Number(value[value.length-1])) && value.length <= 19) {
@@ -311,7 +314,36 @@ const Deposit = ({setDepositOpen}) => {
                       setCardNumber('')
                     }
                   }}
+                  other={{
+                    placeholder: "5645 6783 2571 0984"
+                  }}
                 />
+                {/*<TextField*/}
+                {/*  placeholder="5645 6783 2571 0984"*/}
+                {/*  fullWidth*/}
+                {/*  sx={{*/}
+                {/*    '& .MuiInputBase-input': {*/}
+                {/*      padding: '0 12px',*/}
+                {/*      height: '40px'*/}
+                {/*    }*/}
+                {/*  }}*/}
+                {/*  value={cardNumber}*/}
+                {/*  onChange={e => {*/}
+                {/*    const value = e.target.value;*/}
+
+                {/*    if (!isNaN(Number(value[value.length-1])) && value.length <= 19) {*/}
+                {/*      if((value.length - value.split(" ").length-1) % 4 === 2 && value.split(" ").length-1 < 3 && value.length > cardNumber.length){*/}
+                {/*        setCardNumber(value + " ")*/}
+                {/*      } else {*/}
+                {/*        setCardNumber(value)*/}
+                {/*      }*/}
+
+                {/*    }*/}
+                {/*    if (value === '') {*/}
+                {/*      setCardNumber('')*/}
+                {/*    }*/}
+                {/*  }}*/}
+                {/*/>*/}
               </Box>
             </Box>
           </Box>
