@@ -389,6 +389,14 @@ export const Icon = ({name, color}) => {
                     <path d="M3 19.9998C3.91247 18.4796 5.22451 17.2172 6.8043 16.3396C8.3841 15.462 10.176 15 12.0001 15C13.8241 15 15.616 15.4621 17.1958 16.3397C18.7756 17.2174 20.0876 18.4797 21 20" stroke="#5D5E65" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
             break;
+        case "little_info":
+            image =
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="8" cy="8" r="6" stroke="#1FCC64" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M8 8V10.6667" stroke="#1FCC64" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M8 5.33398H8.00667" stroke="#1FCC64" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            break;
 
 
       default:

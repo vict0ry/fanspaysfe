@@ -182,7 +182,7 @@ export const UserPricesFormTab = () => {
         {/*  }} variant={'outlined'}>Save</Button>*/}
         {/*</Box>*/}
         <Grid container spacing={2}>
-          <Grid item xs={4} sm={4}>
+          <Grid item xs={12} md={4}>
             <SubscriptionSettingsCard
               level="Start level"
               price={5}
@@ -191,7 +191,7 @@ export const UserPricesFormTab = () => {
               subscribers={0}
             />
           </Grid>
-          <Grid item xs={4} sm={4}>
+          <Grid item xs={12} md={4}>
             <SubscriptionSettingsCard
               level="Advanced level"
               price={10}
@@ -200,7 +200,7 @@ export const UserPricesFormTab = () => {
               subscribers={52}
             />
           </Grid>
-          <Grid item xs={4} sm={4}>
+          <Grid item xs={12} md={4}>
             <SubscriptionSettingsCard
               level="VIP level"
               price={15}
@@ -233,7 +233,7 @@ export const UserPricesFormTab = () => {
           <Grid container spacing={2}>
             {
               wishes?.length ? wishes.map(wish => {
-                return <Grid item xs={6} sm={6}>
+                return <Grid item xs={12} md={6}>
                   <Box sx={{
                     padding: "16px 8px",
                     border: "1px solid #ECE9F1",

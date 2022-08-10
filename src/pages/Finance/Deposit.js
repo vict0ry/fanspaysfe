@@ -278,17 +278,6 @@ const Deposit = ({setDepositOpen}) => {
                     placeholder: "Name Surname"
                   }}
                 />
-                {/*<TextField*/}
-                {/*  fullWidth*/}
-                {/*  sx={{*/}
-                {/*    '& .MuiInputBase-input': {*/}
-                {/*      padding: '0 12px',*/}
-                {/*      height: '40px'*/}
-                {/*    }*/}
-                {/*  }}*/}
-                {/*  value={nameReceiver}*/}
-                {/*  onChange={e => setNameReceiver(e.target.value)}*/}
-                {/*/>*/}
               </Box>
             </Box>
             <Box sx={{
@@ -318,32 +307,6 @@ const Deposit = ({setDepositOpen}) => {
                     placeholder: "5645 6783 2571 0984"
                   }}
                 />
-                {/*<TextField*/}
-                {/*  placeholder="5645 6783 2571 0984"*/}
-                {/*  fullWidth*/}
-                {/*  sx={{*/}
-                {/*    '& .MuiInputBase-input': {*/}
-                {/*      padding: '0 12px',*/}
-                {/*      height: '40px'*/}
-                {/*    }*/}
-                {/*  }}*/}
-                {/*  value={cardNumber}*/}
-                {/*  onChange={e => {*/}
-                {/*    const value = e.target.value;*/}
-
-                {/*    if (!isNaN(Number(value[value.length-1])) && value.length <= 19) {*/}
-                {/*      if((value.length - value.split(" ").length-1) % 4 === 2 && value.split(" ").length-1 < 3 && value.length > cardNumber.length){*/}
-                {/*        setCardNumber(value + " ")*/}
-                {/*      } else {*/}
-                {/*        setCardNumber(value)*/}
-                {/*      }*/}
-
-                {/*    }*/}
-                {/*    if (value === '') {*/}
-                {/*      setCardNumber('')*/}
-                {/*    }*/}
-                {/*  }}*/}
-                {/*/>*/}
               </Box>
             </Box>
           </Box>

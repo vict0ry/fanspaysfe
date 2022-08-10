@@ -267,6 +267,14 @@
     "SET_UP_WITHDRAWAL": "Set up withdrawal method",
     "NO_OUTPUT_METHOD": "You have not added an output method",
     "ADD_METHOD": "Add method",
-    "ADD_METHOD_PROMPT": "Funds are withdrawn automatically once a week if the balance is more than $ 50. The service takes a commission of 15%"
+    "ADD_METHOD_PROMPT": "Funds are withdrawn automatically once a week if the balance is more than $ 50. The service takes a commission of 15%",
+    "CONTACT_INFO": {
+      "TITLE": "Contact Information",
+      "PROMPT": "This data is only visible to you",
+      "FIRST_NAME": "First name (in documents)",
+      "LAST_NAME": "Last name (in documents)",
+      "LOCATION": "Place of residence",
+      "BIRTH_DATE": "Birth date (in documents)"
+    }
   }
 }

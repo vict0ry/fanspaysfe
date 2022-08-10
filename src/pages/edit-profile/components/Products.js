@@ -77,7 +77,7 @@ export const Products = () => {
     )
   } else {
     return(
-      <Box>
+      <Box sx={{maxWidth: "100%"}}>
         <Box sx={{color: "#5D5E65", fontSize: "18px", fontWeight: 700, marginBottom: "16px"}}>{t("EDIT.PRODUCTS")}</Box>
         <Box
           ref={productsBox}
@@ -85,7 +85,7 @@ export const Products = () => {
             display: "flex",
             columnGap: "24px",
             marginBottom: "24px",
-            overflow: "hidden",
+            overflow: "hidden"
             // boxShadow: "inset -24px 0px 23px -10px #FFFFFF"
           }}
         >

@@ -242,7 +242,20 @@ export const AddCreditCard = ({user}) => {
           {t("EDIT.NO_OUTPUT_METHOD")}
         </Box>
       }
-      <Box sx={{display: "flex", alignItems: "center"}}>
+      <Box sx={{
+        display: "flex",
+        alignItems: {
+          sm: "center"
+        },
+        flexDirection: {
+          xs: "column",
+          sm: "row"
+        },
+        rowGap: {
+          xs: "8px",
+          sm: "0"
+        }
+      }}>
         {!withdrawMethod.length &&
           <Button
             sx={{
@@ -297,7 +310,17 @@ export const AddCreditCard = ({user}) => {
           </Box>
         {/*}*/}
 
-        <Box sx={{fontSize: "12px", fontWeight: 600, color: "#5D5E65", lineHeight: "16px", flexGrow: 1, width: "340px"}}>
+        <Box
+          sx={{
+            fontSize: "12px",
+            fontWeight: 600,
+            color: "#5D5E65",
+            lineHeight: "16px",
+            flexGrow: 1,
+            width: "340px",
+            maxWidth: "100%"
+          }}
+        >
           {t("EDIT.ADD_METHOD_PROMPT")}
         </Box>
 

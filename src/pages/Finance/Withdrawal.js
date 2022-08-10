@@ -8,6 +8,7 @@ import paypal from './paypal.svg'
 import bitcoin from './bitcoin.svg'
 import { MenuItem, Select, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { SearchInput } from '../edit-profile/components/SearchInput'
 
 const Withdrawal = ({setWithdrawalOpen}) => {
   const [withdrawalMethod, setWithdrawalMethod] = useState(0)
@@ -268,16 +269,10 @@ const Withdrawal = ({setWithdrawalOpen}) => {
             }}>
               <Box sx={{ color: '#5D5E65', fontSize: '14px', fontWeight: 700, marginBottom: '8px' }}>RECEIVER NAME</Box>
               <Box sx={{ height: '40px' }}>
-                <TextField
-                  fullWidth
-                  sx={{
-                    '& .MuiInputBase-input': {
-                      padding: '0 12px',
-                      height: '40px'
-                    }
-                  }}
+                <SearchInput
                   value={nameReceiver}
-                  onChange={e => setNameReceiver(e.target.value)}
+                  setValue={e => setNameReceiver(e.target.value)}
+                  icon="user"
                 />
               </Box>
             </Box>
@@ -286,17 +281,9 @@ const Withdrawal = ({setWithdrawalOpen}) => {
             }}>
               <Box sx={{ color: '#5D5E65', fontSize: '14px', fontWeight: 700, marginBottom: '8px' }}>CARD NUMBER</Box>
               <Box sx={{ height: '40px' }}>
-                <TextField
-                  placeholder="5645 6783 2571 0984"
-                  fullWidth
-                  sx={{
-                    '& .MuiInputBase-input': {
-                      padding: '0 12px',
-                      height: '40px'
-                    }
-                  }}
+                <SearchInput
                   value={cardNumber}
-                  onChange={e => {
+                  setValue={e => {
                     const value = e.target.value;
 
                     if (!isNaN(Number(value[value.length-1])) && value.length <= 19) {
@@ -311,6 +298,10 @@ const Withdrawal = ({setWithdrawalOpen}) => {
                       setCardNumber('')
                     }
                   }}
+                  other={{
+                    placeholder: "5645 6783 2571 0984"
+                  }}
+                  icon="bank_card"
                 />
               </Box>
             </Box>
