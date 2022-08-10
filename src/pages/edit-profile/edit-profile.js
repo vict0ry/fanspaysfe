@@ -596,27 +596,13 @@ export function EditProfile(props) {
                           }}
                           value={location}
                           setValue={e => {
-
                             if(e.target.value.length > 2){
                               setOpenLocations(true)
                             }
-
-                            // if(e.target.value[e.target.value.length-1] === ","){
-                            //   setCountryLocation(e.target.value.slice(0, e.target.value.length-1));
-                            // }
-
-                            // if(location.includes(", ")){
-                            //   setCityLocation(location.slice(location.indexOf(" ")+1, location.length));
-                            // } else {
-                            //   setCountryLocation(e.target.value.replace(/[^a-zа-я0-9]+/g, ""));
-                            // }
-
                             if(e.target.value[e.target.value.length-1] !== "," || e.target.value.length < location.length) {
                               setLocation(e.target.value);
                             }
-
                           }}
-                          // name="location"
                           icon="location"
                         />
 
@@ -647,33 +633,27 @@ export function EditProfile(props) {
                             backgroundClip: "content-box"
                           },
                         }}>
-                          {/*<MenuList*/}
-                          {/*  onChange={e => {*/}
-                          {/*    // console.log(e.target);*/}
-                          {/*  }}*/}
-                          {/*>*/}
-                            {filteredCountries.map(country => {
-                              return(
-                                <MenuItem
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    if(countryLocation){
-                                      setCityLocation(country)
-                                      setLocation(countryLocation.name + ", " + country.name)
-                                    } else {
-                                      setCountryLocation(country)
-                                      setLocation(country.name + ", ")
-                                    }
+                          {filteredCountries.map(country => {
+                            return(
+                              <MenuItem
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  if(countryLocation){
+                                    setCityLocation(country)
+                                    setLocation(countryLocation.name + ", " + country.name)
+                                  } else {
+                                    setCountryLocation(country)
+                                    setLocation(country.name + ", ")
+                                  }
 
-                                    setFilteredCountries([]);
-                                    setOpenLocations(false)
-                                  }}
-                                >
-                                  {country.name}
-                                </MenuItem>
-                              );
-                            })}
-                          {/*</MenuList>*/}
+                                  setFilteredCountries([]);
+                                  setOpenLocations(false)
+                                }}
+                              >
+                                {country.name}
+                              </MenuItem>
+                            );
+                          })}
                         </Box>}
 
                       </Box>
