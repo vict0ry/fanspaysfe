@@ -32,7 +32,6 @@ export const TabContacts = () => {
     const cities = [...new Set(getCitiesById(stateId))]
       .map((city) => ({ label: city.name, value: city.id, ...city }))
     return cities
-
   }
 
   const [country, setCountry] = useState('')

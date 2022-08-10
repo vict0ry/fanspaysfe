@@ -133,12 +133,12 @@ export const UserParametersTab = ({user,
 
   // console.log(checkboxes)
 
-  console.log(changePasswordOpen)
-  console.log(user)
+  console.log(changePasswordOpen, blackListOpen, blackListOpen)
+  // console.log(user)
 
   return(
     <Box>
-      {!blackListOpen && !changePasswordOpen && deactivationOpen &&
+      {(!blackListOpen && !changePasswordOpen && deactivationOpen) &&
         <Box>
           <Box sx={{
             color: "#5D5E65",
@@ -205,27 +205,54 @@ export const UserParametersTab = ({user,
             <Box>{t("EDIT.DEACTIVATION.ADD_INFO3")}</Box>
           </Box>
 
-          <Button
-            sx={{
-              padding: "10px 24px",
-              borderRadius: "8px",
-              color: "#E64747",
-              background: "#FFEDED",
-              fontSize: "14px",
-              fontWeight: 700,
-              lineHeight: "20px",
-              textTransform: "none",
-              display: "flex",
-              alignItems: "center"
-            }}
-          >
-            <Icon name="deactivate" />
-            <span style={{ marginLeft: "10px" }}>{t("EDIT.DEACTIVATE")}</span>
-          </Button>
+          <Box sx={{
+            display: "flex",
+            columnGap: "24px"
+          }}>
+            <Button
+              sx={{
+                padding: "10px 24px",
+                borderRadius: "8px",
+                color: "#E64747",
+                background: "#FFEDED",
+                fontSize: "14px",
+                fontWeight: 700,
+                lineHeight: "20px",
+                textTransform: "none",
+                display: "flex",
+                alignItems: "center"
+              }}
+              onClick={() => {
+
+              }}
+            >
+              <Icon name="deactivate" />
+              <span style={{ marginLeft: "10px" }}>{t("EDIT.DEACTIVATE")}</span>
+            </Button>
+            <Button
+              sx={{
+                minWidth: 0,
+                minHeight: 0,
+                background: "#E8EFFF",
+                color: "#4776E6",
+                fontSize: "14px",
+                fontWeight: 700,
+                lineHeight: "20px",
+                borderRadius: "8px",
+                padding: "10px 24px",
+                textTransform: "none"
+              }}
+              onClick={() => {
+                setDeactivationOpen(false);
+              }}
+            >
+              {t("EDIT.CANCEL")}
+            </Button>
+          </Box>
         </Box>
       }
 
-      {blackListOpen && !changePasswordOpen && !deactivationOpen &&
+      {(blackListOpen && !changePasswordOpen && !deactivationOpen) &&
         <BlockedUsers
           blackList={blackList}
           setBlackList={setBlackList}
@@ -233,7 +260,7 @@ export const UserParametersTab = ({user,
         />
       }
 
-      {!blackListOpen && changePasswordOpen && !deactivationOpen &&
+      {(!blackListOpen && changePasswordOpen && !deactivationOpen) &&
         <ChangePassword
           confirmPassword={confirmPassword}
           setConfirmPassword={setConfirmPassword}
@@ -243,7 +270,7 @@ export const UserParametersTab = ({user,
         />
       }
 
-      {!blackListOpen && !changePasswordOpen && !deactivationOpen &&
+      {(!blackListOpen && !changePasswordOpen && !deactivationOpen) &&
         <Box
           component="form"
           noValidate
@@ -263,7 +290,7 @@ export const UserParametersTab = ({user,
 
           <Button
             // variant={'blue'}
-            // onClick={setChangePasswordOpen(true)}
+            onClick={e => setChangePasswordOpen(true)}
             sx={{
               padding: "10px 24px",
               display: "flex",
@@ -373,9 +400,11 @@ export const UserParametersTab = ({user,
                 fontWeight: 700,
                 display: "flex",
                 alignItems: "center",
-                padding: 0
+                padding: 0,
+                textTransform: "none",
+                color: "#000"
               }}
-              // onClick={setBlackListOpen(true)}
+              onClick={e => setBlackListOpen(true)}
             >
               <Icon name="circle_forbid" color="#1A051D" />
               <span style={{ margin: "0 8px" }}>{t("EDIT.BLOCKED_USERS")}</span>
@@ -396,6 +425,7 @@ export const UserParametersTab = ({user,
               display: "flex",
               alignItems: "center"
             }}
+            onClick={e => setDeactivationOpen(true)}
           >
             <Icon name="deactivate" />
             <span style={{ marginLeft: "10px" }}>{t("EDIT.DEACTIVATE")}</span>
@@ -404,187 +434,6 @@ export const UserParametersTab = ({user,
       }
     </Box>
   );
-
-
-  if(blackListOpen){
-    return(
-      <BlockedUsers
-        blackList={blackList}
-        setBlackList={setBlackList}
-        setBlackListOpen={setBlackListOpen}
-      />
-    );
-  } else if(changePasswordOpen){
-    return(
-      <ChangePassword
-        confirmPassword={confirmPassword}
-        setConfirmPassword={setConfirmPassword}
-        setNewPassword={setNewPassword}
-        newPassword={newPassword}
-        setChangePasswordOpen={setChangePasswordOpen}
-      />
-    );
-  } else {
-    return (
-      <Box
-        component="form"
-        noValidate
-        onSubmit={() => {
-
-        }}
-        sx={{}}
-      >
-        <Box sx={{
-          color: "#5D5E65",
-          fontSize: "18px",
-          fontWeight: 700,
-          marginBottom: "16px"
-        }}>{t("EDIT.PARAMETERS")}</Box>
-
-        <Button
-          // variant={'blue'}
-          // onClick={setChangePasswordOpen(true)}
-          sx={{
-            padding: "10px 24px",
-            display: "flex",
-            alignItems: "center",
-            background: "#E8EFFF",
-            borderRadius: "8px",
-            color: "#4776E6",
-            fontSize: "14px",
-            fontWeight: 700,
-            lineHeight: "20px",
-            textTransform: "none",
-            marginBottom: "24px"
-          }}
-        >
-          <img style={{ paddingRight: '10px' }} src="/images/icons/key-alt.svg" alt="change pass" />
-          Change password
-        </Button>
-
-        <Box sx={{ marginBottom: "24px" }}>
-          <Box sx={{ color: "#5D5E65", fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>{t("EDIT.EMAIL")}</Box>
-          <SearchInput
-            value={email}
-            setValue={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-        </Box>
-
-        <Box sx={{ marginBottom: "24px" }}>
-          <Box sx={{
-            color: "#5D5E65",
-            fontSize: "14px",
-            fontWeight: 700,
-            marginBottom: "8px"
-          }}>{t("EDIT.EMAIL_NOTIFICATIONS")}</Box>
-          <Box>
-            <FormGroup sx={{ display: "flex", flexDirection: "column", rowGap: "8px" }}>
-              {Object.keys(notifications).map((type, i) => {
-                return (
-                  <FormControlLabel key={type}
-                    control={
-                      <Checkbox
-                        icon={<BpIcon />}
-                        checkedIcon={<BpCheckedIcon />}
-                        name={type}
-                        onChange={(e) => {
-                          const temp = { ...notifications }
-                          temp[type] = e.target.checked
-                          setNotifications(temp);
-                        }}
-                      />
-                    }
-                    checked={notifications[type]}
-                    label={t("EDIT." + type.toUpperCase())}
-                    sx={FormControlLabelStyles}
-                  />
-                );
-              })}
-            </FormGroup>
-          </Box>
-        </Box>
-
-        <Box sx={{ marginBottom: "24px" }}>
-          <Box sx={{
-            color: "#5D5E65",
-            fontSize: "14px",
-            fontWeight: 700,
-            marginBottom: "8px"
-          }}>{t("EDIT.PUSH_NOTIFICATIONS")}</Box>
-          <Box>
-            <FormGroup sx={{ display: "flex", flexDirection: "column", rowGap: "8px" }}>
-              {Object.keys(push).map((type, i) => {
-                return (
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        icon={<BpIcon />}
-                        checkedIcon={<BpCheckedIcon />}
-                        name={type}
-                        onChange={(e) => {
-                          const temp = { ...push }
-                          temp[type] = e.target.checked
-                          setPush(temp);
-                        }}
-                      />
-                    }
-                    checked={push[type]}
-                    label={t("EDIT." + type.toUpperCase())}
-                    sx={FormControlLabelStyles}
-                  />
-                );
-              })}
-            </FormGroup>
-          </Box>
-        </Box>
-
-        <Box sx={{ marginBottom: "32px" }}>
-          <Box sx={{
-            color: "#5D5E65",
-            fontSize: "14px",
-            fontWeight: 700,
-            marginBottom: "8px"
-          }}>{t("EDIT.BLACK_LIST")}</Box>
-          <Button
-            sx={{
-              fontSize: "12px",
-              fontWeight: 700,
-              display: "flex",
-              alignItems: "center",
-              padding: 0,
-              textTransform: "none",
-              color: "#1A051D"
-            }}
-            onClick={setBlackListOpen(true)}
-          >
-            <Icon name="circle_forbid" color="#1A051D" />
-            <span style={{ margin: "0 8px" }}>{t("EDIT.BLOCKED_USERS")}</span>
-            <Icon name="littleRight" />
-          </Button>
-        </Box>
-
-        <Button
-          sx={{
-            padding: "10px 24px",
-            borderRadius: "8px",
-            color: "#E64747",
-            background: "#FFEDED",
-            fontSize: "14px",
-            fontWeight: 700,
-            lineHeight: "20px",
-            textTransform: "none",
-            display: "flex",
-            alignItems: "center"
-          }}
-        >
-          <Icon name="deactivate" />
-          <span style={{ marginLeft: "10px" }}>{t("EDIT.DEACTIVATE")}</span>
-        </Button>
-
-
-
 
 
         {/*<Box>*/}
@@ -699,7 +548,5 @@ export const UserParametersTab = ({user,
         {/*>*/}
         {/*  {t('COMMON.SAVE')}*/}
         {/*</Button>*/}
-      </Box>
-    );
-  }
+
 }

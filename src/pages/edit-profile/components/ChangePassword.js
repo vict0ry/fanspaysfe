@@ -10,6 +10,7 @@ import React, { useState } from 'react'
 
 export const ChangePassword = ({newPassword, setNewPassword, confirmPassword, setConfirmPassword, setChangePasswordOpen}) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
   return(
     <Box>
@@ -70,24 +71,24 @@ export const ChangePassword = ({newPassword, setNewPassword, confirmPassword, se
               padding: "12px"
             },
             '& svg:not([fill])': {
-              fill: showPassword ? "#383838" : "#B3B3B3"
+              fill: showPasswordConfirm ? "#383838" : "#B3B3B3"
             },
             fontSize: "16px",
             fontWeight: 600
           }}
           placeholder={t("EDIT.PASSWORD")}
-          type={showPassword ? 'text' : 'password'}
+          type={showPasswordConfirm ? 'text' : 'password'}
           value={confirmPassword}
           onChange={e => setConfirmPassword(e.target.value)}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
                 aria-label="toggle password visibility"
-                onClick={e => setShowPassword(!showPassword)}
+                onClick={e => setShowPasswordConfirm(!showPasswordConfirm)}
                 // onMouseDown={handleMouseDownPassword}
                 edge="end"
               >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
+                {showPasswordConfirm ? <VisibilityOff /> : <Visibility />}
               </IconButton>
             </InputAdornment>
           }

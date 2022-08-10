@@ -19,13 +19,17 @@ import { loadProfile } from '../../redux/actions/profile.action'
 import { beURL } from '../../config'
 import { SharedLeftMenu } from '../../layout/components/SharedLeftMenu'
 import MenuItem from '@mui/material/MenuItem'
-import { Select } from '@mui/material'
+import { MenuList, Select } from '@mui/material'
 import { Icon } from '../messages/Icon'
 import {SearchInput} from './components/SearchInput'
 import { WishModal } from './components/WishModal'
 import { AddProduct } from './components/AddProduct'
 import { Products } from './components/Products'
 import useWindowDimensions from '../../useWindowDimensions'
+import FormControl from '@mui/material/FormControl'
+import Autocomplete from '@mui/material/Autocomplete'
+import { City, Country, State } from 'country-state-city'
+import {ClickAwayListener} from '@mui/material'
 
 const tabStyles = {
   padding: "12px",
@@ -181,9 +185,62 @@ export function EditProfile(props) {
 
   const [openTab, setOpenTab] = useState(false);
   const {width, height} = useWindowDimensions();
-  // console.log(openTab)
 
-  console.log((!openTab && width < 600) || width >= 600);
+  // console.log(City.getAllCities())
+
+  const [location, setLocation] = useState("");
+  const [countryLocation, setCountryLocation] = useState("");
+  const [cityLocation, setCityLocation] = useState("");
+
+  console.log(location, countryLocation, cityLocation)
+  const [openLocations, setOpenLocations] = useState(false);
+
+  const [countries, setCountries] = useState(Country.getAllCountries());
+  const [filteredCountries, setFilteredCountries] = useState([]);
+
+  useEffect(() => {
+    const filtered = [];
+
+    if(location.includes(", ")){
+      const inputCity = location.slice(location.indexOf(", ")+2, location.length);
+      if(inputCity.length > 2) {
+        const cities = City.getCitiesOfCountry(countryLocation.isoCode);
+        cities.forEach(city => {
+          if (city.name.toLowerCase().includes(inputCity.toLowerCase())) {
+            filtered.push(city);
+          }
+        })
+        setFilteredCountries(filtered);
+      }
+    } else {
+      setCityLocation("")
+      setCountryLocation("")
+
+      countries.forEach(country => {
+        if(country.name.toLowerCase().includes(location.toLowerCase())){
+          filtered.push(country);
+        }
+      })
+      setFilteredCountries(filtered);
+    }
+
+  }, [countries, location])
+  // console.log(countries)
+
+  const updatedCountries = countries.map((country) => ({
+    label: country.name,
+    value: country.id,
+    ...country
+  }))
+  const updatedStates = (countryId) =>
+    State.getStatesOfCountry(countryId)
+      .map((state) => ({ label: state.name, value: state.id, ...state }))
+  const updatedCities = (stateId) => {
+    const getCitiesById = City.getCitiesOfCountry
+    const cities = [...new Set(getCitiesById(stateId))]
+      .map((city) => ({ label: city.name, value: city.id, ...city }))
+    return cities
+  }
 
   return <Box sx={{
     width: "100%",
@@ -500,6 +557,7 @@ export function EditProfile(props) {
                         fontWeight: 500
                       }}>{userForm.description.length}/200</Box>
                     </Box>
+
                     <SearchInput
                       setValue={(e) => {
                         e.target.value.length <= 200 ? handleFormChange(e) : null
@@ -509,20 +567,119 @@ export function EditProfile(props) {
                       other={{ multiline: true, minRows: 3, autoComplete: "description" }}
                     />
                   </Box>
-                  <Box sx={{ marginBottom: "24px" }}>
+
+                  <Box
+                    // onFocus={e => setOpenLocations(true)}
+                    sx={{ marginBottom: "24px" }}
+                  >
                     <Box sx={{
                       marginBottom: "8px",
                       fontSize: "14px",
                       fontWeight: 700,
                       color: "#5D5E65"
-                    }}>{t('COMMON.LOCATION')}</Box>
-                    <SearchInput
-                      value="Praha, Czech"
-                      setValue={handleFormChange}
-                      name="location"
-                      icon="location"
-                    />
+                    }}>
+                      {t('COMMON.LOCATION')}
+                    </Box>
+                    <ClickAwayListener
+                      onClickAway={() => {
+                        setOpenLocations(false);
+                      }}
+                    >
+                      <Box sx={{
+                        position: "relative"
+                      }}>
+                        <SearchInput
+                          other={{
+                            // onBlur: () => {
+                            //   setLocation(countryLocation?.name + ", " + cityLocation?.name);
+                            // }
+                          }}
+                          value={location}
+                          setValue={e => {
+
+                            if(e.target.value.length > 2){
+                              setOpenLocations(true)
+                            }
+
+                            // if(e.target.value[e.target.value.length-1] === ","){
+                            //   setCountryLocation(e.target.value.slice(0, e.target.value.length-1));
+                            // }
+
+                            // if(location.includes(", ")){
+                            //   setCityLocation(location.slice(location.indexOf(" ")+1, location.length));
+                            // } else {
+                            //   setCountryLocation(e.target.value.replace(/[^a-zа-я0-9]+/g, ""));
+                            // }
+
+                            if(e.target.value[e.target.value.length-1] !== "," || e.target.value.length < location.length) {
+                              setLocation(e.target.value);
+                            }
+
+                          }}
+                          // name="location"
+                          icon="location"
+                        />
+
+                        {openLocations && <Box sx={{
+                          // border: "1px solid #B3B3B3",
+                          // borderTop: "none",
+                          position: "absolute",
+                          top: "100%",
+                          left: 0,
+                          width: "100%",
+                          maxHeight: "200px",
+                          overflowY: "auto",
+                          zIndex: 1,
+                          background: "#fff",
+                          borderBottomLeftRadius: "8px",
+                          borderBottomRightRadius: "8px",
+                          boxShadow: "0px 14px 12px -4px rgb(0 0 0 / 12%)",
+                          '&::-webkit-scrollbar-track': {
+                            background: "#ECE9F1",
+                            border: "8px solid transparent",
+                            backgroundClip: "content-box",
+                            borderRadius: 3
+                          },
+                          '&::-webkit-scrollbar-thumb': {
+                            backgroundColor: '#4776E6',
+                            borderRadius: 3,
+                            border: "8px solid transparent",
+                            backgroundClip: "content-box"
+                          },
+                        }}>
+                          {/*<MenuList*/}
+                          {/*  onChange={e => {*/}
+                          {/*    // console.log(e.target);*/}
+                          {/*  }}*/}
+                          {/*>*/}
+                            {filteredCountries.map(country => {
+                              return(
+                                <MenuItem
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    if(countryLocation){
+                                      setCityLocation(country)
+                                      setLocation(countryLocation.name + ", " + country.name)
+                                    } else {
+                                      setCountryLocation(country)
+                                      setLocation(country.name + ", ")
+                                    }
+
+                                    setFilteredCountries([]);
+                                    setOpenLocations(false)
+                                  }}
+                                >
+                                  {country.name}
+                                </MenuItem>
+                              );
+                            })}
+                          {/*</MenuList>*/}
+                        </Box>}
+
+                      </Box>
+                    </ClickAwayListener>
                   </Box>
+
                   <Box sx={{ marginBottom: "24px" }}>
                     <Box sx={{
                       marginBottom: "8px",

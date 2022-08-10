@@ -34,7 +34,7 @@ export const BlockedUsers = ({blackList, setBlackList, setBlackListOpen}) => {
         {t("EDIT.BLACK_LIST")}
 
         <Button
-          // onClick={setBlackListOpen(false)}
+          onClick={e => setBlackListOpen(false)}
           sx={{
             display: "flex",
             alignItems: "center",

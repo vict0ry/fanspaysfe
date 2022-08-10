@@ -19,7 +19,7 @@ export const AddLevel = ({setAddLevelOpen, isEdit=false}) => {
   const [header, setHeader] = useState("");
   const [description, setDescription] = useState("");
 
-  const [openBenefitModal, setOpenBenefitModal] = useState(true);
+  const [openBenefitModal, setOpenBenefitModal] = useState(false);
   const [nameBenefit, setNameBenefit] = useState("");
   const [categoryBenefit, setCategoryBenefit] = useState([]);
 
@@ -156,6 +156,7 @@ export const AddLevel = ({setAddLevelOpen, isEdit=false}) => {
             </svg>
           </Box>
           <span style={{color: '#4776E6', marginLeft: '5px'}}>Add benefit</span>
+        </Button>
 
           {/*modal*/}
           {openBenefitModal &&
@@ -168,7 +169,6 @@ export const AddLevel = ({setAddLevelOpen, isEdit=false}) => {
               setCategoryBenefit={setCategoryBenefit}
             />
           }
-        </Button>
       </Box>
 
       <Box sx={{marginBottom: "40px"}}>
